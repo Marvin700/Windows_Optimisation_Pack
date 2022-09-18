@@ -34,7 +34,7 @@ cls
 echo ---------------------------
 echo Schritt 0 - Wiederherstellungspunkt erstellen
 echo ---------------------------
-cmd.exe /k "wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Windows_Optimisation_Pack", 100, 7"
+wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Windows_Optimisation_Pack", 100, 7
 cls
 
 echo ---------------------------
