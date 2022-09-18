@@ -48,7 +48,7 @@ cls
 echo ---------------------------
 echo Schritt 3 - o&oShutup
 echo ---------------------------
-cd "C:\Windows Optimization Pack\_Files\o&oShutup"
+cd "C:\Windows Optimization Pack\_Files\oShutup"
 start OOSU10.exe
 cls
 
