@@ -15,8 +15,8 @@ echo Schritt 0   - Wiederherstellungspunkt erstellen
 echo Schritt 1   - Apps Autostart deaktivieren
 echo Schritt 2   - Autostart bereinigen
 echo Schritt 3   - oShutup
-echo Schritt 4   - Registry Werte ändern (Benutzerkontensteuerung deaktivieren)
-echo Schritt 4   - Registry Werte ändern (Zeiger Beschleunigung deaktivieren)
+echo Schritt 4   - Registry Werte aendern (Benutzerkontensteuerung deaktivieren)
+echo Schritt 4   - Registry Werte aendern (Zeiger Beschleunigung deaktivieren)
 echo Schritt 5   - Schnellstart deaktiveren
 echo Schritt 6   - Performance Counter
 echo Schritt 7   - Winget / Winstall
