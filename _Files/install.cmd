@@ -54,7 +54,7 @@ start Autoruns.exe
 cls
 
 echo ---------------------------
-echo Schritt 3 - o&oShutup
+echo Schritt 3 - oShutup
 echo ---------------------------
 cd "C:\Windows_Optimisation_Pack\_Files\oShutup"
 start OOSU10.exe
