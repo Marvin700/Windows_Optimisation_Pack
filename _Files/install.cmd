@@ -23,6 +23,9 @@ echo Schritt 6.2 - Direct X Installieren
 echo Schritt 6.3 - Alle Programme Updaten
 echo Schritt 6.4 - Nuetzliche Programme installieren
 echo Schritt 7   - Sophia Script
+echo ...
+echo Automatischer start in 30 Sekunden...
+echo ...
 timeout 30
 cls
 
