@@ -21,7 +21,7 @@ echo Schritt 5   - Schnellstart deaktiveren
 echo Schritt 6   - Performance Counter
 echo Schritt 7   - Winget / Winstall
 echo Schritt 7.1 - C++ installieren
-echo Schritt 7.2 - Direct X Installieren
+echo Schritt 7.2 - Direct X Installieren [noch Fehlerhaft]
 echo Schritt 7.3 - Alle Programme Updaten
 echo Schritt 7.4 - Nuetzliche Programme installieren
 echo Schritt 8   - Sophia Script
