@@ -7,9 +7,6 @@ echo Der Ornder Windows_Optimization_Pack muss unter C liegen.
 echo Muss als Admin ausgefuert werden
 echo --- WCHICHTIG ---
 echo ...
-timeout 10
-
-cls
 
 echo ==============================
 echo Windows Optimization Pack
@@ -26,7 +23,7 @@ echo Schritt 6.2 - Direct X Installieren
 echo Schritt 6.3 - Alle Programme Updaten
 echo Schritt 6.4 - Nuetzliche Programme installieren
 echo Schritt 7   - Sophia Script
-pause
+timeout 30
 cls
 
 echo ---------------------------
