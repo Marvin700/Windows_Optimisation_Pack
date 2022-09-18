@@ -91,5 +91,3 @@ echo ---------------------------
 echo Schritt 7 - Sophia Script
 echo ---------------------------
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia Script\Sophia.ps1"
-
-exit
