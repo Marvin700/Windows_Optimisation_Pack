@@ -1,9 +1,9 @@
 @echo off
-cd "C:\Windows_Optimization_Pack"
+cd "C:\Windows_Optimisation_Pack"
 echo ...
 echo --- WCHICHTIG --- 
 echo Bitte erst Windows Updaten
-echo Der Ornder Windows_Optimization_Pack muss unter C liegen.
+echo Der Ornder Windows_Optimisation_Pack muss unter C liegen.
 echo Muss als Admin ausgefuert werden
 echo --- WCHICHTIG ---
 echo ...
@@ -41,21 +41,21 @@ echo Schritt 2 - Autostart bereinigen
 echo ---------------------------
 echo Hier bitte nur Aenderungen durchfüren, wenn das noetige Wissen vorhanden ist.
 echo Ansonsten diesen Schritt bitte überspringen
-cd "C:\Windows_Optimization_Pack\_Files\"
+cd "C:\Windows_Optimisation_Pack\_Files\"
 start Autoruns.exe
 cls
 
 echo ---------------------------
 echo Schritt 3 - o&oShutup
 echo ---------------------------
-cd "C:\Windows_Optimization_Pack\_Files\oShutup"
+cd "C:\Windows_Optimisation_Pack\_Files\oShutup"
 start OOSU10.exe
 cls
 
 echo ---------------------------
 echo Schritt 4 Registry Werte
 echo ---------------------------
-reg import "C:\Windows_Optimization_Pack\_Files\Registry.reg"
+reg import "C:\Windows_Optimisation_Pack\_Files\Registry.reg"
 cls
 
 echo ---------------------------
@@ -90,4 +90,4 @@ cls
 echo ---------------------------
 echo Schritt 7 - Sophia Script
 echo ---------------------------
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimization_Pack\_Files\Sophia Script\Sophia.ps1"
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia Script\Sophia.ps1"
