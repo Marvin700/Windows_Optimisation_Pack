@@ -80,8 +80,6 @@ lodctr /r
 lodctr /r
 cls
 
-
-
 echo ---------------------------
 echo Schritt 7 - Winget installieren
 echo ---------------------------
