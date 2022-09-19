@@ -21,7 +21,7 @@ echo Schritt 4   - Registry Werte aendern (Take Ownership)
 echo Schritt 5   - Schnellstart deaktiveren
 echo Schritt 6   - Performance Counter
 echo Schritt 7   - Winget installieren
-echo Schritt 7.1 - C++ installieren
+echo Schritt 7.1 - C++ 2008-2019 installieren 
 echo Schritt 7.2 - Direct X Installieren
 echo Schritt 7.3 - Net-Framework Installieren
 echo Schritt 7.4 - Alle Programme Updaten
