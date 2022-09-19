@@ -84,7 +84,7 @@ cls
 echo ---------------------------
 echo Schritt 7 - Winget installieren
 echo ---------------------------
-powershell -command Add-AppxPackage “C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle”
+powershell -command Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
 echo ...
 echo ---------------------------
 echo Schritt 7.1 - C++ installieren
