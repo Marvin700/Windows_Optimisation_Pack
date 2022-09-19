@@ -19,7 +19,7 @@ echo Schritt 4   - Registry Werte aendern (Benutzerkontensteuerung deaktivieren)
 echo Schritt 4   - Registry Werte aendern (Zeiger Beschleunigung deaktivieren)
 echo Schritt 5   - Schnellstart deaktiveren
 echo Schritt 6   - Performance Counter
-echo Schritt 7   - Winget / Winstall
+echo Schritt 7   - Winget installieren
 echo Schritt 7.1 - C++ installieren
 echo Schritt 7.2 - Direct X Installieren [noch Fehlerhaft]
 echo Schritt 7.3 - Alle Programme Updaten
@@ -80,6 +80,13 @@ lodctr /r
 lodctr /r
 cls
 
+
+
+echo ---------------------------
+echo Schritt 7 - Winget installieren
+echo ---------------------------
+powershell -command Add-AppxPackage “C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle”
+echo ...
 echo ---------------------------
 echo Schritt 7.1 - C++ installieren
 echo ---------------------------
