@@ -104,7 +104,7 @@ echo ---------------------------
 echo Schritt 7.3 - .Net-Framework Installieren
 echo ---------------------------
 echo nun wird .Net-Framework installiert
-winget install --id=Microsoft.DotNet.SDK.6  -e
+winget install --id=Microsoft.dotNetFramework -e 
 echo ...
 echo ---------------------------
 echo Schritt 7.4 - Alle Programme Updaten
