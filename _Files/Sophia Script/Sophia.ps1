@@ -712,7 +712,7 @@ IPv6Component -Disable
 
 # Override for default input method: English
 # Переопределить метод ввода по умолчанию: английский
-InputMethod -English
+# InputMethod -English
 
 # Override for default input method: use language list (default value)
 # Переопределить метод ввода по умолчанию: использовать список языков (значение по умолчанию)
