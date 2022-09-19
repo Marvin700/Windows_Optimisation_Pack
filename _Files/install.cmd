@@ -22,9 +22,10 @@ echo Schritt 5   - Schnellstart deaktiveren
 echo Schritt 6   - Performance Counter
 echo Schritt 7   - Winget installieren
 echo Schritt 7.1 - C++ installieren
-echo Schritt 7.2 - Direct X Installieren [noch Fehlerhaft]
-echo Schritt 7.3 - Alle Programme Updaten
-echo Schritt 7.4 - Nuetzliche Programme installieren
+echo Schritt 7.2 - Direct X Installieren
+echo Schritt 7.3 - Net-Framework Installieren
+echo Schritt 7.4 - Alle Programme Updaten
+echo Schritt 7.5 - Nuetzliche Programme installieren
 echo Schritt 8   - Sophia Script
 echo ...
 echo ...
@@ -91,7 +92,7 @@ echo Schritt 7.1 - C++ installieren
 echo ---------------------------
 echo Nun wird C++ installiert
 winget source update
-winget install --id=Microsoft.VC++2012Redist-x64 -e  && winget install --id=Microsoft.VC++2012Redist-x86 -e  && winget install --id=Microsoft.VC++2013Redist-x64 -e  && winget install --id=Microsoft.VC++2013Redist-x86 -e  && winget install --id=Microsoft.VC++2015Redist-x64 -e  && winget install --id=Microsoft.VC++2015Redist-x86 -e  && winget install --id=Microsoft.VC++2017Redist-x64 -e  && winget install --id=Microsoft.VC++2017Redist-x86 -e  && winget install --id=Microsoft.VC++2005Redist-x86 -e  && winget install --id=Microsoft.VC++2008Redist-x86 -e  && winget install --id=Microsoft.VC++2015-2019Redist-x64 -e  && winget install --id=Microsoft.VC++2015-2019Redist-x86 -e  && winget install --id=Microsoft.VC++2005Redist-x64 -e  && winget install --id=Microsoft.VC++2008Redist-x64 -e  && winget install --id=Microsoft.VC++2010Redist-x64 -e  && winget install --id=Microsoft.VC++2010Redist-x86 -e
+winget install --id=Microsoft.VC++2008Redist-x86  -e && winget install --id=Microsoft.VC++2008Redist-x64  -e && winget install --id=Microsoft.VC++2010Redist-x86  -e && winget install --id=Microsoft.VC++2010Redist-x64  -e && winget install --id=Microsoft.VC++2012Redist-x86  -e && winget install --id=Microsoft.VC++2012Redist-x64  -e && winget install --id=Microsoft.VC++2013Redist-x86  -e && winget install --id=Microsoft.VC++2013Redist-x64  -e && winget install --id=Microsoft.VC++2015-2019Redist-x86  -e && winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 echo ...
 echo ---------------------------
 echo Schritt 7.2 - Direct X Installieren
@@ -100,13 +101,19 @@ echo nun wird Direct X installiert
 winget install --id=Microsoft.DirectX  -e
 echo ...
 echo ---------------------------
-echo Schritt 7.3 - Alle Programme Updaten
+echo Schritt 7.3 - .Net-Framework Installieren
+echo ---------------------------
+echo nun wird .Net-Framework installiert
+winget install --id=Microsoft.DotNet.SDK.6  -e
+echo ...
+echo ---------------------------
+echo Schritt 7.4 - Alle Programme Updaten
 echo ---------------------------
 echo Nun werden alle Programme auf den aktuellstens stand gebracht
 winget upgrade --all --include-unknown
 echo ...
 echo ---------------------------
-echo Schritt 7.4 - Nuetzliche Programme installieren
+echo Schritt 7.5 - Nuetzliche Programme installieren
 echo ---------------------------
 winget install --id=RARLab.WinRAR -e && winget install --id=VideoLAN.VLC -e  && winget install --id=Notepad++.Notepad++ -e  && winget install --id=Discord.Discord -e  && winget install --id=Valve.Steam -e && winget install --id=REALiX.HWiNFO -e 
 cls
