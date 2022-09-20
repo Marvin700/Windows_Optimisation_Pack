@@ -124,4 +124,4 @@ echo ...
 echo ---------------------------
 echo Schritt 7.5 - Nuetzliche Programme installieren
 echo ---------------------------
-winget install --id=RARLab.WinRAR -e && winget install --id=VideoLAN.VLC -e  && winget install --id=Notepad++.Notepad++ -e  && winget install --id=Discord.Discord -e  && winget install --id=Valve.Steam -e && winget install --id=REALiX.HWiNFO -e 
+winget install --id=RARLab.WinRAR -e && winget install --id=VideoLAN.VLC -e  && winget install --id=Notepad++.Notepad++ -e  && winget install --id=REALiX.HWiNFO -e 
