@@ -1,7 +1,8 @@
 Windows_Optimisation_Pack
 
 Das Pack debloatet und optimiert automatisiert die Windows installation. <BR>
-Die .exe fürt stets die aktuellste Version von Github aus.
+Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeinträchtigt <BR>
+
 
 Inhalt des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
