@@ -4,9 +4,7 @@ Hallo, hier entsteht mein kleines Pack welches automatisiert eine frische Window
 
 Die .exe Datei läd automatisch die aktuellste Verion von Github und fürt diese aus.
 
-<br>
 Inhalt des Packs
-<BR>
 Schritt 0   - Wiederherstellungspunkt erstellen   <br>
 Schritt 1   - Apps Autostart deaktivieren             <br>
 Schritt 2   - Autostart bereinigen              <br>
@@ -23,4 +21,3 @@ Schritt 7.3 - Net-Framework Installieren
 Schritt 7.4 - Alle Programme Updaten                           
 Schritt 7.5 - Nuetzliche Programme installi                   
 Schritt 8   - Sophia Script                                      
-
