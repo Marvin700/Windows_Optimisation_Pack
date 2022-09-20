@@ -20,4 +20,4 @@ Inhalt des Packs :<br>
 - Nuetzliche Programme installieren                 
 - Sophia Script
 
-<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Benutzte-Tools">Benutzte Tools</a>
+<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Genutzte-Tools">Benutzte Tools</a>
