@@ -21,4 +21,4 @@ Schritt 7.4 - Alle Programme Updaten
 Schritt 7.5 - Nuetzliche Programme installieren                 
 Schritt 8   - Sophia Script
 
-<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Quellen">Benutzte Tools</a>.
+<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Benutzte-Tools">Benutzte Tools</a>
