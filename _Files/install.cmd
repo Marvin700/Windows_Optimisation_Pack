@@ -126,4 +126,10 @@ echo ---------------------------
 winget install --id=RARLab.WinRAR -e && winget install --id=VideoLAN.VLC -e  && winget install --id=Notepad++.Notepad++ -e  && winget install --id=REALiX.HWiNFO -e 
 cls
 
+echo ---------------------------
+echo Schritt 9 - Explorer neustarten
+echo ---------------------------
+taskkill /f /im explorer.exe
+start explorer.exe
+
 exit
