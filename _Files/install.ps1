@@ -1,10 +1,4 @@
 Clear-Host
-"--- WCHICHTIG ---"
-"Bitte erst Windows Updaten"
-"Der Ornder Windows_Optimisation_Pack muss unter C liegen."
-"Muss als Admin ausgefuert werden"
-"--- WCHICHTIG ---"
-""
 "==========================="
 "Windows Optimization Pack"
 "==========================="
