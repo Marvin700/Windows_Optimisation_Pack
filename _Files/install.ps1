@@ -12,15 +12,15 @@ Clear-Host
 "Schritt 1   - Autostart und Tasks deaktivieren"
 "Schritt 2   - o&oShutup"
 "Schritt 3   - Registry Werte aendern"
-"Schritt 5   - Schnellstart deaktiveren"
-"Schritt 6   - Performance Counter"
-"Schritt 7   - Winget installieren"
-"Schritt 7.1 - C++ 2008-2019 installieren "
-"Schritt 7.2 - Direct X Installieren"
-"Schritt 7.3 - Net-Framework Installieren"
-"Schritt 7.4 - Alle Programme Updaten"
-"Schritt 7.5 - Nuetzliche Programme installieren"
-"Schritt 8   - Sophia Script"
+"Schritt 4   - Schnellstart deaktiveren"
+"Schritt 5   - Performance Counter"
+"Schritt 6   - Winget installieren"
+"Schritt 6.1 - C++ 2008-2019 installieren "
+"Schritt 6.2 - Direct X Installieren"
+"Schritt 6.3 - Net-Framework Installieren"
+"Schritt 6.4 - Alle Programme Updaten"
+"Schritt 6.5 - Nuetzliche Programme installieren"
+"Schritt 7   - Sophia Script"
 ""
 ""
 "Automatischer start in 30 Sekunden..."
@@ -44,8 +44,8 @@ Clear-Host
 "---------------------------"
 "Schritt 2 - o&oShutup"
 "---------------------------"
-Start-Process "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe
+Start-Process "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
 Clear-Host
 
 "---------------------------"
@@ -81,13 +81,13 @@ winget source update
 Clear-Host
 
 "---------------------------"
-"Schritt 8 - Sophia Script"
+"Schritt 7 - Sophia Script"
 "---------------------------"
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia Script\Sophia.ps1"
 Clear-Host
 
 "---------------------------"
-"Schritt 7.1 - C++ installieren"
+"Schritt 6.1 - C++ installieren"
 "---------------------------"
 "Nun wird C++ installiert"
 winget install --id=Microsoft.VC++2008Redist-x86  -e
@@ -102,25 +102,25 @@ winget install --id=Microsoft.VC++2015-2019Redist-x86  -e
 winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
 "---------------------------"
-"Schritt 7.2 - Direct X Installieren"
+"Schritt 6.2 - Direct X Installieren"
 "---------------------------"
 "nun wird Direct X installiert"
 winget install --id=Microsoft.DirectX  -e
 ""
 "---------------------------"
-"Schritt 7.3 - .Net-Framework Installieren"
+"Schritt 6.3 - .Net-Framework Installieren"
 "---------------------------"
 "nun wird .Net-Framework installiert"
 winget install --id=Microsoft.dotNetFramework -e 
 ""
 "---------------------------"
-"Schritt 7.4 - Alle Programme Updaten"
+"Schritt 6.4 - Alle Programme Updaten"
 "---------------------------"
 "Nun werden alle Programme auf den aktuellstens stand gebracht"
 winget upgrade --all --include-unknown
 ""
 "---------------------------"
-"Schritt 7.5 - Nuetzliche Programme installieren"
+"Schritt 6.5 - Nuetzliche Programme installieren"
 "---------------------------"
 winget install --id=RARLab.WinRAR -e
 winget install --id=VideoLAN.VLC -e
@@ -129,7 +129,7 @@ winget install --id=REALiX.HWiNFO -e
 Clear-Host
 
 "---------------------------"
-"Schritt 9 - Explorer neustarten"
+"Schritt 8 - Explorer neustarten"
 "---------------------------"
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
