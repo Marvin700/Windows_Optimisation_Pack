@@ -133,6 +133,9 @@ if ($Functions)
 CreateRestorePoint
 #endregion Protection
 
+# Turn off the diagnostics tracking scheduled tasks
+# Отключить задачи диагностического отслеживания
+ScheduledTasks -Disable
 
 #region UWP apps
 <#
@@ -213,10 +216,6 @@ FeedbackFrequency -Never
 # Change the feedback frequency to "Automatically" (default value)
 # Изменить частоту формирования отзывов на "Автоматически" (значение по умолчанию)
 # FeedbackFrequency -Automatically
-
-# Turn off the diagnostics tracking scheduled tasks
-# Отключить задачи диагностического отслеживания
-ScheduledTasks -Disable
 
 # Turn on the diagnostics tracking scheduled tasks (default value)
 # Включить задачи диагностического отслеживания (значение по умолчанию)
