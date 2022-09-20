@@ -1,7 +1,7 @@
 Windows_Optimisation_Pack
 
-Hier gibt mein kleines Pack, welches automatisiert Windows debloatet und optimiert. <BR>
-Die .exe Datei läd automatisch die aktuellste Version von Github und fürt diese aus.
+Das Pack debloatet und optimiert automatisiert die Windows installation. <BR>
+Die .exe fürt stets die aktuellste Version von Github aus.
 
 Inhalt des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
