@@ -19,7 +19,7 @@ Schritt 4   - Registry Werte aendern (Benutzerkontensteuerung deaktivieren) <br>
 Schritt 4   - Registry Werte aendern (Zeiger Beschleunigung deaktivieren) <br>
 Schritt 4   - Registry Werte aendern (Take Ownership)   <br>
 Schritt 5   - Schnellstart deaktiveren    <br>
-Schritt 6   - Performance Counter                <br>              
+Schritt 6   - Performance Counter                      
 Schritt 7   - Winget installieren                    <br>                 
 Schritt 7.1 - C++ 2008-2019 installieren          <br>                    
 Schritt 7.2 - Direct X Installieren                  <br>          
