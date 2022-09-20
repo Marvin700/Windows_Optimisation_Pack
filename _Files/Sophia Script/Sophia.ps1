@@ -1399,7 +1399,6 @@ Errors
 	Перезапустить меню "Пуск"
 	Пожалуйста, не комментируйте данную функцию
 #>
-RefreshEnvironment
 
 # SIG # Begin signature block
 # MIIbmwYJKoZIhvcNAQcCoIIbjDCCG4gCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
