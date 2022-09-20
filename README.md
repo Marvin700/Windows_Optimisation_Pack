@@ -5,8 +5,7 @@ Die .exe Datei läd automatisch die aktuellste Version von Github und fürt dies
 
 Inhalt des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
-- Apps Autostart deaktivieren             <br>
-- Autostart bereinigen              <br>
+- Autostart und Tasks deaktivieren             <br>
 - o&oShutup      <br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
