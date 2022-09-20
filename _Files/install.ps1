@@ -37,7 +37,6 @@ Clear-Host
 "Schritt 1 - Autostart und Tasks deaktivieren"
 "---------------------------"
 Start-Process ms-settings:startupapps
-Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile C:\Windows_Optimisation_Pack\_Files\Autoruns.exe
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
@@ -45,6 +44,7 @@ Clear-Host
 "Schritt 2 - o&oShutup"
 "---------------------------"
 Start-Process "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
+Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe
 Clear-Host
 
 "---------------------------"
