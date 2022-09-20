@@ -130,7 +130,7 @@ if ($Functions)
 
 # Create a restore point
 # Создать точку восстановления
-CreateRestorePoint
+# CreateRestorePoint
 #endregion Protection
 
 # Turn off the diagnostics tracking scheduled tasks
