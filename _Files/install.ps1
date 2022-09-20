@@ -37,6 +37,7 @@ Clear-Host
 "Schritt 1 - Autostart und Tasks deaktivieren"
 "---------------------------"
 Start-Process ms-settings:startupapps
+Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile C:\Windows_Optimisation_Pack\_Files\Autoruns.exe
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
