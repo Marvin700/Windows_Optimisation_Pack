@@ -8,9 +8,9 @@ echo Muss als Admin ausgefuert werden
 echo --- WCHICHTIG ---
 echo ...
 
-echo ==============================
+echo ===========================
 echo Windows Optimization Pack
-echo ==============================
+echo ===========================
 echo Schritt 0   - Wiederherstellungspunkt erstellen
 echo Schritt 1   - Apps Autostart deaktivieren
 echo Schritt 2   - Autostart bereinigen
