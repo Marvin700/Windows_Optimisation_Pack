@@ -87,6 +87,14 @@ echo Schritt 7 - Winget installieren
 echo ---------------------------
 powershell -command Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
 powershell -command Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
+
+
+echo ---------------------------
+echo Schritt 8 - Sophia Script
+echo ---------------------------
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia Script\Sophia.ps1"
+
+
 echo ...
 echo ---------------------------
 echo Schritt 7.1 - C++ installieren
@@ -118,8 +126,3 @@ echo Schritt 7.5 - Nuetzliche Programme installieren
 echo ---------------------------
 winget install --id=RARLab.WinRAR -e && winget install --id=VideoLAN.VLC -e  && winget install --id=Notepad++.Notepad++ -e  && winget install --id=Discord.Discord -e  && winget install --id=Valve.Steam -e && winget install --id=REALiX.HWiNFO -e 
 cls
-
-echo ---------------------------
-echo Schritt 8 - Sophia Script
-echo ---------------------------
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia Script\Sophia.ps1"
