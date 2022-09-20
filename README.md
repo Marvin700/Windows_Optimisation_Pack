@@ -4,13 +4,9 @@ Hallo, hier entsteht mein kleines Pack welches automatisiert eine frische Window
 
 Die .exe Datei läd automatisch die aktuellste Verion von Github und fürt diese aus.
 
-
-
-
-
-
-
-
+<br>
+Inhalt des Packs
+<BR>
 Schritt 0   - Wiederherstellungspunkt erstellen   <br>
 Schritt 1   - Apps Autostart deaktivieren             <br>
 Schritt 2   - Autostart bereinigen              <br>
