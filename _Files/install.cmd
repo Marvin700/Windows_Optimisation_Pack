@@ -87,7 +87,8 @@ echo Schritt 7 - Winget installieren
 echo ---------------------------
 powershell -command Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
 powershell -command Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
-
+winget source update
+cls
 
 echo ---------------------------
 echo Schritt 8 - Sophia Script
@@ -100,7 +101,6 @@ echo ---------------------------
 echo Schritt 7.1 - C++ installieren
 echo ---------------------------
 echo Nun wird C++ installiert
-winget source update
 winget install --id=Microsoft.VC++2008Redist-x86  -e && winget install --id=Microsoft.VC++2008Redist-x64  -e && winget install --id=Microsoft.VC++2010Redist-x86  -e && winget install --id=Microsoft.VC++2010Redist-x64  -e && winget install --id=Microsoft.VC++2012Redist-x86  -e && winget install --id=Microsoft.VC++2012Redist-x64  -e && winget install --id=Microsoft.VC++2013Redist-x86  -e && winget install --id=Microsoft.VC++2013Redist-x64  -e && winget install --id=Microsoft.VC++2015-2019Redist-x86  -e && winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 echo ...
 echo ---------------------------
@@ -125,4 +125,3 @@ echo ---------------------------
 echo Schritt 7.5 - Nuetzliche Programme installieren
 echo ---------------------------
 winget install --id=RARLab.WinRAR -e && winget install --id=VideoLAN.VLC -e  && winget install --id=Notepad++.Notepad++ -e  && winget install --id=Discord.Discord -e  && winget install --id=Valve.Steam -e && winget install --id=REALiX.HWiNFO -e 
-cls
