@@ -9,7 +9,6 @@ Inhalt des Packs :<br>
 - o&oShutup      <br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
-- Take Ownership installieren
 - Schnellstart deaktiveren    <br>
 - Performance Counter                      
 - Winget installieren                                 
