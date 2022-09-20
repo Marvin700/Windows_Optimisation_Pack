@@ -133,6 +133,48 @@ if ($Functions)
 CreateRestorePoint
 #endregion Protection
 
+
+
+<#
+	Disable the Windows features using the pop-up dialog box
+	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not disable the "Media Features" feature
+
+	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не отключайте "Компоненты для работы с медиа"
+	Отключить компоненты Windows, используя всплывающее диалоговое окно
+#>
+WindowsFeatures -Disable
+
+# Enable the Windows features using the pop-up dialog box
+# Включить компоненты Windows, используя всплывающее диалоговое окно
+# WindowsFeatures -Enable
+
+<#
+	Uninstall optional features using the pop-up dialog box
+	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not uninstall the "Media Features" feature
+
+	Удалить дополнительные компоненты, используя всплывающее диалоговое окно
+	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не удаляйте компонент "Компоненты для работы с медиа"
+#>
+WindowsCapabilities -Uninstall
+
+# Install optional features using the pop-up dialog box
+# Установить дополнительные компоненты, используя всплывающее диалоговое окно
+# WindowsCapabilities -Install
+
+#region UWP apps
+<#
+	Uninstall UWP apps using the pop-up dialog box
+	If the "For All Users" is checked apps packages will not be installed for new users
+	The "ForAllUsers" argument sets a checkbox to unistall packages for all users
+
+	Удалить UWP-приложения, используя всплывающее диалоговое окно
+	Пакеты приложений не будут установлены для новых пользователей, если отмечена галочка "Для всех пользователей"
+	Аргумент "ForAllUsers" устанавливает галочку для удаления пакетов для всех пользователей
+#>
+UninstallUWPApps
+
+
+
 #region Privacy & Telemetry
 <#
 	Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
@@ -629,31 +671,6 @@ WindowsManageDefaultPrinter -Disable
 # Разрешать Windows управлять принтером, используемым по умолчанию (значение по умолчанию)
 # WindowsManageDefaultPrinter -Enable
 
-<#
-	Disable the Windows features using the pop-up dialog box
-	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not disable the "Media Features" feature
-
-	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не отключайте "Компоненты для работы с медиа"
-	Отключить компоненты Windows, используя всплывающее диалоговое окно
-#>
-WindowsFeatures -Disable
-
-# Enable the Windows features using the pop-up dialog box
-# Включить компоненты Windows, используя всплывающее диалоговое окно
-# WindowsFeatures -Enable
-
-<#
-	Uninstall optional features using the pop-up dialog box
-	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not uninstall the "Media Features" feature
-
-	Удалить дополнительные компоненты, используя всплывающее диалоговое окно
-	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не удаляйте компонент "Компоненты для работы с медиа"
-#>
-WindowsCapabilities -Uninstall
-
-# Install optional features using the pop-up dialog box
-# Установить дополнительные компоненты, используя всплывающее диалоговое окно
-# WindowsCapabilities -Install
 
 # Receive updates for other Microsoft products
 # Получать обновления для других продуктов Майкрософт
@@ -969,17 +986,7 @@ StartLayout -ShowMorePins
 # StartLayout -ShowMoreRecommendations
 #endregion Start menu
 
-#region UWP apps
-<#
-	Uninstall UWP apps using the pop-up dialog box
-	If the "For All Users" is checked apps packages will not be installed for new users
-	The "ForAllUsers" argument sets a checkbox to unistall packages for all users
 
-	Удалить UWP-приложения, используя всплывающее диалоговое окно
-	Пакеты приложений не будут установлены для новых пользователей, если отмечена галочка "Для всех пользователей"
-	Аргумент "ForAllUsers" устанавливает галочку для удаления пакетов для всех пользователей
-#>
-UninstallUWPApps
 
 <#
 	Restore the default UWP apps using the pop-up dialog box
