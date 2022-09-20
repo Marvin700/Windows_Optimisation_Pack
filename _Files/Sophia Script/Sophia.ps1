@@ -842,11 +842,11 @@ Autoplay -Disable
 
 # Disable thumbnail cache removal
 # Отключить удаление кэша миниатюр
-ThumbnailCacheRemoval -Disable
+# ThumbnailCacheRemoval -Disable
 
 # Enable thumbnail cache removal (default value)
 # Включить удаление кэша миниатюр (значение по умолчанию)
-# ThumbnailCacheRemoval -Enable
+ThumbnailCacheRemoval -Enable
 
 # Automatically saving my restartable apps and restart them when I sign back in
 # Автоматически сохранять мои перезапускаемые приложения из системы и перезапускать их при повторном входе
@@ -903,7 +903,7 @@ DefaultTerminalApp -WindowsTerminal
 
 	https://docs.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist
 #>
-InstallVCRedistx64
+# InstallVCRedistx64
 
 <#
 	Install the latest .NET Desktop Runtime 6 (x86/x64)
@@ -911,7 +911,7 @@ InstallVCRedistx64
 
 	https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60
 #>
-InstallDotNetRuntime6
+# InstallDotNetRuntime6
 
 # Enable proxying only blocked sites from the unified registry of Roskomnadzor. The function will be applied only if the region in Windows is set to "Russia"
 # Включить проксирование только заблокированных сайтов из единого реестра Роскомнадзора. Функция будет применена, только если в Windows установлен регион "Россия"
@@ -946,7 +946,7 @@ InstallDotNetRuntime6
 #region Start menu
 # Unpin all Start apps
 # Открепить все приложения от начального экрана
-# UnpinAllStartApps
+UnpinAllStartApps
 
 # Run the Windows PowerShell shortcut from the Start menu as Administrator
 # Запускать ярлык Windows PowerShell в меню "Пуск" от имени Администратора
@@ -997,7 +997,7 @@ UninstallUWPApps
 	Скачать и установить "Расширения для видео HEVC от производителя устройства", чтобы иметь возможность открывать форматы .heic и .heif
 	Расширение уже установлено в Windows 11 22H2 по умолчанию
 #>
-HEIF -Install
+# HEIF -Install
 
 <#
 	Open Microsoft Store "HEVC Video Extensions from Device Manufacturer" page to install this extension manually to be able to open .heic and .heif formats
@@ -1117,7 +1117,7 @@ TempTask -Register
 
 # Disable Microsoft Defender Exploit Guard network protection (default value)
 # Выключить защиту сети в Microsoft Defender Exploit Guard
-# NetworkProtection -Disable
+NetworkProtection -Disable
 
 # Enable detection for potentially unwanted applications and block them
 # Включить обнаружение потенциально нежелательных приложений и блокировать их
@@ -1125,7 +1125,7 @@ TempTask -Register
 
 # Disable detection for potentially unwanted applications and block them (default value)
 # Выключить обнаружение потенциально нежелательных приложений и блокировать их (значение по умолчанию)
-# PUAppsDetection -Disable
+PUAppsDetection -Disable
 
 # Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
 # Отклонить предложение Microsoft Defender в "Безопасность Windows" о входе в аккаунт Microsoft
@@ -1255,11 +1255,11 @@ CABInstallContext -Show
 
 # Show the "Run as different user" item to the .exe filename extensions context menu
 # Отобразить пункт "Запуск от имени другого пользователя" в контекстное меню .exe файлов
-RunAsDifferentUserContext -Show
+# RunAsDifferentUserContext -Show
 
 # Hide the "Run as different user" item from the .exe filename extensions context menu (default value)
 # Скрыть пункт "Запуск от имени другого пользователя" из контекстное меню .exe файлов (значение по умолчанию)
-# RunAsDifferentUserContext -Hide
+RunAsDifferentUserContext -Hide
 
 # Hide the "Cast to Device" item from the media files and folders context menu
 # Скрыть пункт "Передать на устройство" из контекстного меню медиа-файлов и папок
