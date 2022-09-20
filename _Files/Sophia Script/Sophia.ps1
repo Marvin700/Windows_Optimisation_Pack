@@ -134,6 +134,18 @@ CreateRestorePoint
 #endregion Protection
 
 
+#region UWP apps
+<#
+	Uninstall UWP apps using the pop-up dialog box
+	If the "For All Users" is checked apps packages will not be installed for new users
+	The "ForAllUsers" argument sets a checkbox to unistall packages for all users
+
+	Удалить UWP-приложения, используя всплывающее диалоговое окно
+	Пакеты приложений не будут установлены для новых пользователей, если отмечена галочка "Для всех пользователей"
+	Аргумент "ForAllUsers" устанавливает галочку для удаления пакетов для всех пользователей
+#>
+UninstallUWPApps
+
 
 <#
 	Disable the Windows features using the pop-up dialog box
@@ -161,17 +173,6 @@ WindowsCapabilities -Uninstall
 # Установить дополнительные компоненты, используя всплывающее диалоговое окно
 # WindowsCapabilities -Install
 
-#region UWP apps
-<#
-	Uninstall UWP apps using the pop-up dialog box
-	If the "For All Users" is checked apps packages will not be installed for new users
-	The "ForAllUsers" argument sets a checkbox to unistall packages for all users
-
-	Удалить UWP-приложения, используя всплывающее диалоговое окно
-	Пакеты приложений не будут установлены для новых пользователей, если отмечена галочка "Для всех пользователей"
-	Аргумент "ForAllUsers" устанавливает галочку для удаления пакетов для всех пользователей
-#>
-UninstallUWPApps
 
 
 
