@@ -20,12 +20,11 @@ Schritt 4   - Registry Werte aendern (Zeiger Beschleunigung deaktivieren) <br>
 Schritt 4   - Registry Werte aendern (Take Ownership)   <br>
 Schritt 5   - Schnellstart deaktiveren    <br>
 Schritt 6   - Performance Counter                      
-Schritt 7   - Winget installieren                    <br>                 
-Schritt 7.1 - C++ 2008-2019 installieren          <br>                    
-Schritt 7.2 - Direct X Installieren                  <br>          
-Schritt 7.3 - Net-Framework Installieren          <br>              
-Schritt 7.4 - Alle Programme Updaten             <br>                 
-Schritt 7.5 - Nuetzliche Programme installi <br>                    
-Schritt 8   - Sophia Script                 <br>                       
-dasd <br>
+Schritt 7   - Winget installieren                                 
+Schritt 7.1 - C++ 2008-2019 installieren                         
+Schritt 7.2 - Direct X Installieren                        
+Schritt 7.3 - Net-Framework Installieren                    
+Schritt 7.4 - Alle Programme Updaten                           
+Schritt 7.5 - Nuetzliche Programme installi                   
+Schritt 8   - Sophia Script                                      
 
