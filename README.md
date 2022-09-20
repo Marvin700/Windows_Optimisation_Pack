@@ -7,7 +7,7 @@ Inhalt des Packs <br>
 Schritt 0   - Wiederherstellungspunkt erstellen   <br>
 Schritt 1   - Apps Autostart deaktivieren             <br>
 Schritt 2   - Autostart bereinigen              <br>
-Schritt 3   - oShutup      <br>
+Schritt 3   - o&oShutup      <br>
 Schritt 4   - Registry Werte aendern (Benutzerkontensteuerung deaktivieren) <br>
 Schritt 4   - Registry Werte aendern (Zeiger Beschleunigung deaktivieren) <br>
 Schritt 4   - Registry Werte aendern (Take Ownership)   <br>
