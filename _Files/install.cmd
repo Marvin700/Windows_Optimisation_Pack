@@ -85,6 +85,7 @@ cls
 echo ---------------------------
 echo Schritt 7 - Winget installieren
 echo ---------------------------
+powershell -command Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
 powershell -command Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
 echo ...
 echo ---------------------------
