@@ -23,7 +23,7 @@ Clear-Host
 
 "----------------------------"
 "Schritt 0 - Wiederherstellungspunkt erstellen"
-"-----------------------"
+"----------------------------"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 Clear-Host
