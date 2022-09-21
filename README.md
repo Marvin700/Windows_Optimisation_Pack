@@ -6,8 +6,9 @@ Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeintr√
 
 Inhalt des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
-- Autostart und Tasks deaktivieren             <br>
-- Spy Funktionen deaktivieren <br>
+- Autostart und Tasks deaktivieren     <br>
+- Bloatware entfernen                   <br>
+- Windows Spy Funktionen deaktivieren   <br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
 - Schnellstart deaktiveren    <br>
@@ -19,3 +20,4 @@ Inhalt des Packs :<br>
 - Alle Programme Updaten                           
 - Nuetzliche Programme installieren                 
 - Sophia Script
+- Weitere Windows Tweaks
