@@ -84,14 +84,6 @@ Clear-Host
 "Schritt 6.1 - C++ installieren"
 "---------------------------"
 "Nun wird C++ installiert"
-winget install --id=Microsoft.VC++2008Redist-x86  -e
-winget install --id=Microsoft.VC++2008Redist-x64  -e
-winget install --id=Microsoft.VC++2010Redist-x86  -e
-winget install --id=Microsoft.VC++2010Redist-x64  -e
-winget install --id=Microsoft.VC++2012Redist-x86  -e
-winget install --id=Microsoft.VC++2012Redist-x64  -e
-winget install --id=Microsoft.VC++2013Redist-x86  -e
-winget install --id=Microsoft.VC++2013Redist-x64  -e
 winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
 winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
