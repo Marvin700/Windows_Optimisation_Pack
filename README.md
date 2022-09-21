@@ -7,7 +7,7 @@ Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeintrÃ
 Inhalt des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
 - Autostart und Tasks deaktivieren             <br>
-- o&oShutup      <br>
+- Spy Funktionen deaktivieren <br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
 - Schnellstart deaktiveren    <br>
