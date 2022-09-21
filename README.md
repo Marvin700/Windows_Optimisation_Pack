@@ -13,7 +13,7 @@ Inhalt des Packs :<br>
 - Schnellstart deaktiveren    <br>
 - Performance Counter                      
 - Winget installieren                                 
-- C++ 2008-2019 installieren                         
+- C++ installieren                       
 - Direct X Installieren                        
 - Net-Framework Installieren                    
 - Alle Programme Updaten                           
