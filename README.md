@@ -19,5 +19,5 @@ Inhalt des Packs :<br>
 - Net-Framework Installieren                    
 - Alle Programme Updaten                           
 - Nuetzliche Programme installieren                 
-- Sophia Script
 - Weitere Windows Tweaks
+- Angepasstes Sophia Script 
