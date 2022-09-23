@@ -2,6 +2,7 @@ Windows_Optimisation_Pack
 
 Das Pack debloatet und optimiert automatisiert die Windows installation. <BR>
 Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeinträchtigt <BR>
+Bisher sind alle Funktionen nur unter Windows 11 verfügbar. An einer Windows 10 Version wird bereits gearbeitet <BR>
 
 
 Inhalt des Packs :<br>
