@@ -12,7 +12,7 @@ Inhalt des Packs :<br>
 - Windows Spy Funktionen deaktivieren   <br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
-- Schnellstart deaktiveren    <br>
+- Schnellstart und Ruhezustand deaktivieren  <br>
 - Performance Counter rebuilden                    
 - Winget installieren                                 
 - C++ installieren                       
