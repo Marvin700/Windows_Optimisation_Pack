@@ -4,7 +4,7 @@ Das Pack debloatet und optimiert automatisiert die Windows installation. <BR>
 Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeinträchtigt <BR>
 
 
-Inhalt des Packs :<br>
+Features des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
 - Windows Bloatware entfernen    <br>
 - Autostart und Tasks deaktivieren  <br>
