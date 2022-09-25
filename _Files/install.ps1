@@ -1,30 +1,4 @@
-Clear-Host
-"==========================="
-"Windows Optimization Pack"
-"==========================="
-"Schritt 0   - Wiederherstellungspunkt erstellen"
-"Schritt 1   - Autostart und Tasks deaktivieren"
-"Schritt 2   - o&oShutup"
-"Schritt 3   - Registry Werte aendern"
-"Schritt 4   - Schnellstart deaktiveren"
-"Schritt 5   - Performance Counter"
-"Schritt 6   - Winget installieren"
-"Schritt 6.1 - C++ 2008-2019 installieren "
-"Schritt 6.2 - Direct X Installieren"
-"Schritt 6.3 - Net-Framework Installieren"
-"Schritt 6.4 - Alle Programme Updaten"
-"Schritt 6.5 - Nuetzliche Programme installieren"
-"Schritt 7   - Sophia Script"
-""
-""
-"Automatischer start in 30 Sekunden..."
-timeout 30
-Clear-Host
-
-
-
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-
 
 IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Force -Recurse
@@ -52,7 +26,28 @@ Move-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Destina
 ELSE {
 }
 
-
+Clear-Host
+"==========================="
+"Windows Optimization Pack"
+"==========================="
+"Schritt 0   - Wiederherstellungspunkt erstellen"
+"Schritt 1   - Autostart und Tasks deaktivieren"
+"Schritt 2   - o&oShutup"
+"Schritt 3   - Registry Werte aendern"
+"Schritt 4   - Schnellstart deaktiveren"
+"Schritt 5   - Performance Counter"
+"Schritt 6   - Winget installieren"
+"Schritt 6.1 - C++ 2008-2019 installieren "
+"Schritt 6.2 - Direct X Installieren"
+"Schritt 6.3 - Net-Framework Installieren"
+"Schritt 6.4 - Alle Programme Updaten"
+"Schritt 6.5 - Nuetzliche Programme installieren"
+"Schritt 7   - Sophia Script"
+""
+""
+"Automatischer start in 30 Sekunden..."
+timeout 30
+Clear-Host
 
 "----------------------------"
 "Schritt 0 - Wiederherstellungspunkt erstellen"
