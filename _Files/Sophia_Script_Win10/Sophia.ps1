@@ -119,7 +119,7 @@ if ($Functions)
 	Обязательные проверки. Чтобы выключить предупреждение о необходимости настройки пресет-файла, удалите аргумент "-Warning"
 	Пожалуйста, не комментируйте данную функцию
 #>
-Checkings -Warning
+# Checkings -Warning
 
 <#
 	Enable script logging. Log will be recorded into the script folder
@@ -132,8 +132,48 @@ Checkings -Warning
 
 # Create a restore point
 # Создать точку восстановления
-CreateRestorePoint
+# CreateRestorePoint
 #endregion Protection
+
+# Turn off the diagnostics tracking scheduled tasks
+# Отключить задачи диагностического отслеживания
+ScheduledTasks -Disable
+
+
+<#
+	Uninstall UWP apps using the pop-up dialog box
+	If the "For All Users" is checked apps packages will not be installed for new users
+	The "ForAllUsers" argument sets a checkbox to unistall packages for all users
+
+	Удалить UWP-приложения, используя всплывающее диалоговое окно
+	Пакеты приложений не будут установлены для новых пользователей, если отмечена галочка "Для всех пользователей"
+	Аргумент "ForAllUsers" устанавливает галочку для удаления пакетов для всех пользователей
+#>
+UninstallUWPApps
+
+
+<#
+	Disable the Windows features using the pop-up dialog box
+	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not disable the "Media Features" feature
+
+	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не отключайте "Компоненты для работы с медиа"
+	Отключить компоненты Windows, используя всплывающее диалоговое окно
+#>
+WindowsFeatures -Disable
+
+# Enable the Windows features using the pop-up dialog box
+# Включить компоненты Windows, используя всплывающее диалоговое окно
+# WindowsFeatures -Enable
+
+<#
+	Uninstall optional features using the pop-up dialog box
+	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not uninstall the "Media Features" feature
+
+	Удалить дополнительные компоненты, используя всплывающее диалоговое окно
+	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не удаляйте компонент "Компоненты для работы с медиа"
+#>
+WindowsCapabilities -Uninstall
+
 
 #region Privacy & Telemetry
 <#
@@ -173,9 +213,6 @@ FeedbackFrequency -Never
 # Изменить частоту формирования отзывов на "Автоматически" (значение по умолчанию)
 # FeedbackFrequency -Automatically
 
-# Turn off the diagnostics tracking scheduled tasks
-# Отключить задачи диагностического отслеживания
-ScheduledTasks -Disable
 
 # Turn on the diagnostics tracking scheduled tasks (default value)
 # Включить задачи диагностического отслеживания (значение по умолчанию)
@@ -215,11 +252,11 @@ WindowsWelcomeExperience -Hide
 
 # Get tips, tricks, and suggestions as you use Windows (default value)
 # Получать советы, подсказки и рекомендации при использованию Windows (значение по умолчанию)
-WindowsTips -Enable
+# WindowsTips -Enable
 
 # Do not get tips, tricks, and suggestions as you use Windows
 # Не получать советы, подсказки и рекомендации при использовании Windows
-# WindowsTips -Disable
+WindowsTips -Disable
 
 # Hide from me suggested content in the Settings app
 # Скрывать рекомендуемое содержимое в приложении "Параметры"
@@ -265,11 +302,11 @@ BingSearch -Disable
 #region UI & Personalization
 # Show the "This PC" icon on Desktop
 # Отобразить значок "Этот компьютер" на рабочем столе
-ThisPC -Show
+# ThisPC -Show
 
 # Hide the "This PC" icon on Desktop (default value)
 # Скрыть "Этот компьютер" на рабочем столе (значение по умолчанию)
-# ThisPC -Hide
+ThisPC -Hide
 
 # Do not use item check boxes
 # Не использовать флажки для выбора элементов
@@ -305,7 +342,7 @@ MergeConflicts -Show
 
 # Open File Explorer to "This PC"
 # Открывать проводник для "Этот компьютер"
-OpenFileExplorerTo -ThisPC
+# OpenFileExplorerTo -ThisPC
 
 # Open File Explorer to Quick access (default value)
 # Открывать проводник для "Быстрый доступ" (значение по умолчанию)
@@ -421,11 +458,11 @@ PeopleTaskbar -Hide
 
 # Show seconds on the taskbar clock
 # Отобразить секунды в системных часах на панели задач
-SecondsInSystemClock -Show
+# SecondsInSystemClock -Show
 
 # Hide seconds on the taskbar clock (default value)
 # Скрыть секунды в системных часах на панели задач (значение по умолчанию)
-# SecondsInSystemClock -Hide
+SecondsInSystemClock -Hide
 
 # Hide the Windows Ink Workspace button on the taskbar
 # Скрыть кнопку Windows Ink Workspace на панели задач
@@ -437,11 +474,11 @@ WindowsInkWorkspace -Hide
 
 # Always show all icons in the notification area
 # Всегда отображать все значки в области уведомлений
-NotificationAreaIcons -Show
+# NotificationAreaIcons -Show
 
 # Hide all icons in the notification area (default value)
 # Скрыть все значки в области уведомлений (значение по умолчанию)
-# NotificationAreaIcons -Hide
+NotificationAreaIcons -Hide
 
 # Hide the Meet Now icon in the notification area
 # Скрыть иконку "Провести собрание" в области уведомлений
@@ -465,7 +502,7 @@ UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail
 
 # View the Control Panel icons by large icons
 # Просмотр иконок Панели управления как: крупные значки
-ControlPanelView -LargeIcons
+# ControlPanelView -LargeIcons
 
 # View the Control Panel icons by small icons
 # Просмотр иконок Панели управления как: маленькие значки
@@ -473,7 +510,7 @@ ControlPanelView -LargeIcons
 
 # View the Control Panel icons by category (default value)
 # Просмотр иконок Панели управления как: категория (значение по умолчанию)
-# ControlPanelView -Category
+ControlPanelView -Category
 
 # Set the default Windows mode to dark
 # Установить режим Windows по умолчанию на темный
@@ -549,11 +586,11 @@ PrtScnSnippingTool -Enable
 
 # Let me use a different input method for each app window
 # Позволить выбирать метод ввода для каждого окна
-AppsLanguageSwitch -Enable
+# AppsLanguageSwitch -Enable
 
 # Do not use a different input method for each app window (default value)
 # Не использовать метод ввода для каждого окна (значение по умолчанию)
-# AppsLanguageSwitch -Disable
+AppsLanguageSwitch -Disable
 
 # When I grab a windows's title bar and shake it, minimize all other windows (default value)
 # При захвате заголовка окна и встряхивании сворачиваются все остальные окна (значение по умолчанию)
@@ -567,7 +604,7 @@ AeroShaking -Enable
 #region OneDrive
 # Uninstall OneDrive. The OneDrive user folder won't be removed
 # Удалить OneDrive. Папка пользователя OneDrive не будет удалена
-# OneDrive -Uninstall
+OneDrive -Uninstall
 
 # Install OneDrive 64-bit (default value)
 # Установить OneDrive 64-бит (значение по умолчанию)
@@ -673,27 +710,6 @@ WindowsManageDefaultPrinter -Disable
 # Разрешать Windows управлять принтером, используемым по умолчанию (значение по умолчанию)
 # WindowsManageDefaultPrinter -Enable
 
-<#
-	Disable the Windows features using the pop-up dialog box
-	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not disable the "Media Features" feature
-
-	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не отключайте "Компоненты для работы с медиа"
-	Отключить компоненты Windows, используя всплывающее диалоговое окно
-#>
-WindowsFeatures -Disable
-
-# Enable the Windows features using the pop-up dialog box
-# Включить компоненты Windows, используя всплывающее диалоговое окно
-# WindowsFeatures -Enable
-
-<#
-	Uninstall optional features using the pop-up dialog box
-	If you want to leave "Multimedia settings" element in the advanced settings of Power Options do not uninstall the "Media Features" feature
-
-	Удалить дополнительные компоненты, используя всплывающее диалоговое окно
-	Если вы хотите оставить параметр "Параметры мультимедиа" в дополнительных параметрах схемы управления питанием, не удаляйте компонент "Компоненты для работы с медиа"
-#>
-WindowsCapabilities -Uninstall
 
 # Install optional features using the pop-up dialog box
 # Установить дополнительные компоненты, используя всплывающее диалоговое окно
@@ -714,11 +730,11 @@ UpdateMicrosoftProducts -Enable
 	Установить схему управления питанием на "Высокая производительность"
 	Не рекомендуется включать схему управления питанием "Высокая производительность" для ноутбуков
 #>
-PowerPlan -High
+# PowerPlan -High
 
 # Set power plan on "Balanced" (default value)
 # Установить схему управления питанием на "Сбалансированная" (значение по умолчанию)
-# PowerPlan -Balanced
+PowerPlan -Balanced
 
 # Use the latest installed .NET runtime for all apps
 # Использовать последнюю установленную среду выполнения .NET для всех приложений
@@ -756,7 +772,7 @@ IPv6Component -Disable
 
 # Override for default input method: English
 # Переопределить метод ввода по умолчанию: английский
-InputMethod -English
+# InputMethod -English
 
 # Override for default input method: use language list (default value)
 # Переопределить метод ввода по умолчанию: использовать список языков (значение по умолчанию)
@@ -771,7 +787,7 @@ InputMethod -English
 	Пользовательские файлы и папки не будут перемещены в новое расположение. Переместите их вручную
 	По умолчанию они располагаются в папке %USERPROFILE%
 #>
-SetUserShellFolderLocation -Root
+# SetUserShellFolderLocation -Root
 
 <#
 	Select folders for user folders location manually using a folder browser dialog
@@ -886,19 +902,19 @@ Autoplay -Disable
 
 # Disable thumbnail cache removal
 # Отключить удаление кэша миниатюр
-ThumbnailCacheRemoval -Disable
+# ThumbnailCacheRemoval -Disable
 
 # Enable thumbnail cache removal (default value)
 # Включить удаление кэша миниатюр (значение по умолчанию)
-# ThumbnailCacheRemoval -Enable
+ThumbnailCacheRemoval -Enable
 
 # Automatically saving my restartable apps when signing out and restart them after signing in
 # Автоматически сохранять мои перезапускаемые приложения из системы и перезапускать их при повторном входе
-SaveRestartableApps -Enable
+# SaveRestartableApps -Enable
 
 # Turn off automatically saving my restartable apps when signing out and restart them after signing in (default value)
 # Выключить автоматическое сохранение моих перезапускаемых приложений при выходе из системы и перезапускать их после выхода (значение по умолчанию)
-# SaveRestartableApps -Disable
+SaveRestartableApps -Disable
 
 # Enable "Network Discovery" and "File and Printers Sharing" for workgroup networks
 # Включить сетевое обнаружение и общий доступ к файлам и принтерам для рабочих групп
@@ -950,7 +966,7 @@ UninstallPCHealthCheck
 
 	https://docs.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist
 #>
-InstallVCRedistx64
+# InstallVCRedistx64
 
 <#
 	Install the latest .NET Desktop Runtime 6 (x86/x64)
@@ -958,12 +974,12 @@ InstallVCRedistx64
 
 	https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60
 #>
-InstallDotNetRuntime6
+# InstallDotNetRuntime6
 
 # Enable proxying only blocked sites from the unified registry of Roskomnadzor
 # Включить проксирование только заблокированных сайтов из единого реестра Роскомнадзора
 # https://antizapret.prostovpn.org
-RKNBypass -Enable
+# RKNBypass -Enable
 
 # Disable proxying only blocked sites from the unified registry of Roskomnadzor (default value)
 # Выключить проксирование только заблокированных сайтов из единого реестра Роскомнадзора (значение по умолчанию)
@@ -1014,7 +1030,7 @@ RunPowerShellShortcut -Elevated
 	Закрепить на начальном экране следующие ярлыки: Панель управления, Устройства и принтеры, PowerShell
 	Валидные значения ярлыков: ControlPanel, DevicesPrinters, PowerShell
 #>
-PinToStart -Tiles ControlPanel, DevicesPrinters, PowerShell
+PinToStart -Tiles ControlPanel
 
 # Unpin all tiles first and pin necessary ones
 # Открепить все ярлыки сначала и закрепить необходимые
@@ -1026,16 +1042,7 @@ PinToStart -Tiles ControlPanel, DevicesPrinters, PowerShell
 #endregion Start menu
 
 #region UWP apps
-<#
-	Uninstall UWP apps using the pop-up dialog box
-	If the "For All Users" is checked apps packages will not be installed for new users
-	The "ForAllUsers" argument sets a checkbox to unistall packages for all users
 
-	Удалить UWP-приложения, используя всплывающее диалоговое окно
-	Пакеты приложений не будут установлены для новых пользователей, если отмечена галочка "Для всех пользователей"
-	Аргумент "ForAllUsers" устанавливает галочку для удаления пакетов для всех пользователей
-#>
-UninstallUWPApps
 
 <#
 	Restore the default UWP apps using the pop-up dialog box
@@ -1048,7 +1055,7 @@ UninstallUWPApps
 
 # Download and install "HEVC Video Extensions from Device Manufacturer" to be able to open .heic and .heif formats
 # Скачать и установить "Расширения для видео HEVC от производителя устройства", чтобы иметь возможность открывать форматы .heic и .heif
-HEIF -Install
+# HEIF -Install
 
 <#
 	Open Microsoft Store "HEVC Video Extensions from Device Manufacturer" page to install this extension manually to be able to open .heic and .heif formats
@@ -1104,7 +1111,7 @@ XboxGameTips -Disable
 
 # Choose an app and set the "High performance" graphics performance for it. Only if you have a dedicated GPU
 # Выбрать приложение и установить для него параметры производительности графики на "Высокая производительность". Только при наличии внешней видеокарты
-SetAppGraphicsPerformance
+# SetAppGraphicsPerformance
 
 <#
 	Turn on hardware-accelerated GPU scheduling. Restart needed
@@ -1164,19 +1171,19 @@ TempTask -Register
 #region Microsoft Defender & Security
 # Enable Microsoft Defender Exploit Guard network protection
 # Включить защиту сети в Microsoft Defender Exploit Guard
-NetworkProtection -Enable
+# NetworkProtection -Enable
 
 # Disable Microsoft Defender Exploit Guard network protection (default value)
 # Выключить защиту сети в Microsoft Defender Exploit Guard
-# NetworkProtection -Disable
+NetworkProtection -Disable
 
 # Enable detection for potentially unwanted applications and block them
 # Включить обнаружение потенциально нежелательных приложений и блокировать их
-PUAppsDetection -Enable
+# PUAppsDetection -Enable
 
 # Disable detection for potentially unwanted applications and block them (default value)
 # Выключить обнаружение потенциально нежелательных приложений и блокировать их (значение по умолчанию)
-# PUAppsDetection -Disable
+PUAppsDetection -Disable
 
 <#
 	Enable sandboxing for Microsoft Defender
@@ -1185,7 +1192,7 @@ PUAppsDetection -Enable
 	Включить песочницу для Microsoft Defender
 	В KVM с QEMU присутствует баг: включение этой функции приводит ВМ к зависанию во время загрузки Windows
 #>
-DefenderSandbox -Enable
+# DefenderSandbox -Enable
 
 # Disable sandboxing for Microsoft Defender (default value)
 # Выключить песочницу для Microsoft Defender (значение по умолчанию)
@@ -1306,11 +1313,11 @@ CABInstallContext -Show
 
 # Show the "Run as different user" item to the .exe filename extensions context menu
 # Отобразить пункт "Запуск от имени другого пользователя" в контекстное меню .exe файлов
-RunAsDifferentUserContext -Show
+# RunAsDifferentUserContext -Show
 
 # Hide the "Run as different user" item from the .exe filename extensions context menu (default value)
 # Скрыть пункт "Запуск от имени другого пользователя" из контекстное меню .exe файлов (значение по умолчанию)
-# RunAsDifferentUserContext -Hide
+RunAsDifferentUserContext -Hide
 
 # Hide the "Cast to Device" item from the media files and folders context menu
 # Скрыть пункт "Передать на устройство" из контекстного меню медиа-файлов и папок
@@ -1451,7 +1458,7 @@ Errors
 	Перезапустить меню "Пуск"
 	Пожалуйста, не комментируйте данную функцию
 #>
-RefreshEnvironment
+# RefreshEnvironment
 
 # SIG # Begin signature block
 # MIIbmwYJKoZIhvcNAQcCoIIbjDCCG4gCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
