@@ -1,30 +1,3 @@
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-
-IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Force -Recurse
-}*
-ELSE {
-}
-
-IF($WindowsVersion -eq 'Microsoft Windows 11 Home') {
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Force -Recurse
-}*
-ELSE {
-}
-
-IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script -Force -Recurse
-Move-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
-}*
-ELSE {
-}
-
-IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script -Force -Recurse
-Move-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
-}*
-ELSE {
-}
 
 Clear-Host
 "==========================="
@@ -48,6 +21,9 @@ Clear-Host
 "Automatischer start in 30 Sekunden..."
 timeout 30
 Clear-Host
+
+#Windows Version bestimmen
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
 "----------------------------"
 "Schritt 0 - Wiederherstellungspunkt erstellen"
@@ -105,7 +81,18 @@ Clear-Host
 "---------------------------"
 "Schritt 7 - Sophia Script"
 "---------------------------"
+IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+}
+IF($WindowsVersion -eq 'Microsoft Windows 11 Home') {
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+}
+IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10\Sophia.ps1"
+}
+IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10\Sophia.ps1"
+}
 Clear-Host
 
 "---------------------------"
