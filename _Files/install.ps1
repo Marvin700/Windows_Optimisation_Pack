@@ -1,4 +1,3 @@
-
 Clear-Host
 "==========================="
 "Windows Optimization Pack"
