@@ -15,6 +15,7 @@ Clear-Host
 "Schritt 6.4 - Alle Programme Updaten"
 "Schritt 6.5 - Nuetzliche Programme installieren"
 "Schritt 7   - Sophia Script"
+"Schritt 9 -   Systemdatein überprüfen"
 ""
 ""
 "Automatischer start in 30 Sekunden..."
@@ -133,5 +134,10 @@ Clear-Host
 "---------------------------"
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
+
+"---------------------------"
+"Schritt 9 - Systemdatein überprüfen"
+"---------------------------"
+sfc /scannow
 
 exit
