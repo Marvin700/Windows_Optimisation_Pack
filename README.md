@@ -19,5 +19,6 @@ Inhalt des Packs :<br>
 - Direct X Installieren                        
 - Net-Framework Installieren                    
 - Alle Programme Updaten                           
-- Nuetzliche Programme installieren                 
+- Nuetzliche Programme installieren 
+- Windows Systemdatein prüfen
 - Weitere Windows Tweaks
