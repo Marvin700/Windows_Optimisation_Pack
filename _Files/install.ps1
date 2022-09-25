@@ -21,6 +21,39 @@ Clear-Host
 timeout 30
 Clear-Host
 
+
+
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+
+
+IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Force -Recurse
+}*
+ELSE {
+}
+
+IF($WindowsVersion -eq 'Microsoft Windows 11 Home') {
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Force -Recurse
+}*
+ELSE {
+}
+
+IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script -Force -Recurse
+Move-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
+}*
+ELSE {
+}
+
+IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script -Force -Recurse
+Move-Item -Path C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
+}*
+ELSE {
+}
+
+
+
 "----------------------------"
 "Schritt 0 - Wiederherstellungspunkt erstellen"
 "----------------------------"
