@@ -2,18 +2,18 @@ Windows_Optimisation_Pack
 
 Das Pack debloatet und optimiert automatisiert die Windows installation. <BR>
 Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeinträchtigt <BR>
-Bisher sind alle Funktionen nur unter Windows 11 verfügbar. An einer Windows 10 Version wird bereits gearbeitet <BR>
 
 
 Inhalt des Packs :<br>
 - Wiederherstellungspunkt erstellen   <br>
-- Autostart und Tasks deaktivieren     <br>
-- Bloatware entfernen                   <br>
+- Windows Bloatware entfernen    <br>
+- Autostart und Tasks deaktivieren  <br>
+- Feedback und Reporting Funktionen deaktivieren   <br>
 - Windows Spy Funktionen deaktivieren   <br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
 - Schnellstart deaktiveren    <br>
-- Performance Counter                      
+- Performance Counter rebuilden                    
 - Winget installieren                                 
 - C++ installieren                       
 - Direct X Installieren                        
@@ -21,4 +21,3 @@ Inhalt des Packs :<br>
 - Alle Programme Updaten                           
 - Nuetzliche Programme installieren                 
 - Weitere Windows Tweaks
-- Angepasstes Sophia Script 
