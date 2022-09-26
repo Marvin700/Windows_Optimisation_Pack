@@ -11,6 +11,7 @@ Features des Packs :<br>
 - Autostart und Tasks deaktivieren  <br>
 - Feedback und Reporting Funktionen deaktivieren   <br>
 - Windows Spy Funktionen deaktivieren   <br>
+- Unnötige Dienste deaktivieren <BR>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
 - Schnellstart und Ruhezustand deaktivieren  <br>
