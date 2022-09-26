@@ -15,12 +15,12 @@ Features des Packs :<br>
 - Benutzerkontensteuerung deaktivieren <br>
 - Zeiger Beschleunigung deaktivieren <br>
 - Schnellstart und Ruhezustand deaktivieren  <br>
-- Performance Counter rebuilden                    
-- Winget installieren                                 
-- C++ installieren                       
-- Direct X Installieren                        
-- Net-Framework Installieren                    
-- Alle Programme Updaten                           
-- Nuetzliche Programme installieren 
-- Windows Systemdatein prüfen
+- Performance Counter rebuilden  <BR>                  
+- Winget installieren   <BR>                              
+- C++ installieren      <BR>               
+- Direct X Installieren  <BR>                      
+- Net-Framework Installieren   <BR>                 
+- Alle Programme Updaten     <BR>                      
+- Nuetzliche Programme installieren <BR>
+- Windows Systemdatein prüfen  <BR> 
 - Weitere Windows Tweaks
