@@ -28,6 +28,7 @@ $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 "----------------------------"
 "Schritt 0 - Wiederherstellungspunkt erstellen"
 "----------------------------"
+Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 Clear-Host
