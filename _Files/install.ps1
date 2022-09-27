@@ -18,11 +18,11 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 5   - Sophia Script"
 "Schritt 6   - o&oShutup"
 "Schritt 7   - Performance Counter"
-# "Schritt 8.1 - C++ 2008-2019 installieren"
-# "Schritt 8.2 - Direct X Installieren"
-# "Schritt 8.3 - Net-Framework Installieren"
+"Schritt 8.1 - C++ 2008-2019 installieren"
+"Schritt 8.2 - Direct X Installieren"
+"Schritt 8.3 - Net-Framework Installieren"
 "Schritt 8.4 - Alle Programme Updaten"
-# "Schritt 8.5 - Nuetzliche Programme installieren"
+"Schritt 8.5 - Nuetzliche Programme installieren"
 "Schritt 9   - Explorer neustarten"
 ""
 ""
@@ -109,21 +109,33 @@ lodctr /r
 lodctr /r
 Clear-Host
 
+# Windows 10 ohne winget
+IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
+Clear-Host
+"==========================="
+"Windows Optimization Pack"
+"==========================="
+Write-Warning "Ihr System wurde erforlgreich optimiert"
+Write-Warning "Bitte starten sie ihr windows neu."
+sleep 20
+exit
+}
+
 "---------------------------"
 "Schritt 8.1 - C++ installieren"
 "---------------------------"
-# winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
-# winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
+winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
+winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
 "---------------------------"
 "Schritt 8.2 - Direct X Installieren"
 "---------------------------"
-# winget install --id=Microsoft.DirectX  -e
+winget install --id=Microsoft.DirectX  -e
 ""
 "---------------------------"
 "Schritt 8.3 - .Net-Framework Installieren"
 "---------------------------"
-# winget install --id=Microsoft.dotNetFramework -e 
+winget install --id=Microsoft.dotNetFramework -e 
 ""
 "---------------------------"
 "Schritt 8.4 - Alle Programme Updaten"
@@ -133,11 +145,11 @@ Clear-Host
 "---------------------------"
 "Schritt 8.5 - Nuetzliche Programme installieren"
 "---------------------------"
-# winget install --id=RARLab.WinRAR -e
-# winget install --id=Notepad++.Notepad++ -e
-# winget install --id=REALiX.HWiNFO -e 
-# Stop-Process -Name HWiNFO64
-# winget install --id=VideoLAN.VLC -e
+winget install --id=RARLab.WinRAR -e
+winget install --id=Notepad++.Notepad++ -e
+winget install --id=REALiX.HWiNFO -e 
+Stop-Process -Name HWiNFO64
+winget install --id=VideoLAN.VLC -e
 Clear-Host
 
 "---------------------------"
