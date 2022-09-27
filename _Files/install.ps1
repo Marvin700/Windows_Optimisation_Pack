@@ -24,7 +24,6 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 9.3 - Net-Framework Installieren"
 "Schritt 9.4 - Alle Programme Updaten"
 "Schritt 9.5 - Nuetzliche Programme installieren"
-
 ""
 ""
 "Automatischer start in 30 Sekunden..."
@@ -142,8 +141,7 @@ Clear-Host
 "---------------------------"
 "Schritt 8 - Winget"
 "---------------------------"
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\winget.ps1
-
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\winget.ps1"
 
 "==========================="
 "Windows Optimization Pack"
