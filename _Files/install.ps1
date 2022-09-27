@@ -52,6 +52,8 @@ Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Autoruns.zip -Force -Recur
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
 invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle}'
+sleep 5
+winget install --id=RARLab.WinRAR -e
 Clear-Host
 
 "---------------------------"
@@ -139,7 +141,6 @@ winget upgrade --all --include-unknown
 "---------------------------"
 "Schritt 9.5 - Nuetzliche Programme installieren"
 "---------------------------"
-winget install --id=RARLab.WinRAR -e
 winget install --id=Notepad++.Notepad++ -e
 winget install --id=REALiX.HWiNFO -e 
 Stop-Process -Name HWiNFO64
