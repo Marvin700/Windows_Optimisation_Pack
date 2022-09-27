@@ -43,7 +43,7 @@ Clear-Host
 "Schritt 2 - o&oShutup"
 "---------------------------"
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe
-C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\oShutup\ooshutup10.cfg /quiet
+C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
 #Start-Process "C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe"
 Clear-Host
 
