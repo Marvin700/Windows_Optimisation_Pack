@@ -3,8 +3,6 @@
 
 <BR>
 Features des Packs :<br>
-- Automatische Bestimmung des Betriebssystems <BR>
-- Wiederherstellungspunkt erstellen   <br>
 - Windows Bloatware entfernen    <br>
 - Autostart und Tasks deaktivieren  <br>
 - Feedback und Reporting Funktionen deaktivieren   <br>
