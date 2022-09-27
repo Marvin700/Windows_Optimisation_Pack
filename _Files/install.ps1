@@ -41,14 +41,6 @@ Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
 "---------------------------"
-"Schritt 2 - o&oShutup"
-"---------------------------"
-Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe
-C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
-#Start-Process "C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe"
-Clear-Host
-
-"---------------------------"
 "Schritt 3 Registry Werte ändern"
 "---------------------------"
 reg import "C:\Windows_Optimisation_Pack\_Files\Registry.reg"
@@ -63,21 +55,6 @@ Clear-Host
 "Schritt 5 - Schnellstart deaktiveren"
 "---------------------------"
 powercfg -h off
-Clear-Host
-
-" ---------------------------"
-"Schritt 6 - Performance Counter"
-"---------------------------"
-lodctr /r
-lodctr /r
-Clear-Host
-
-"---------------------------"
-"Schritt 7 - Winget installieren"
-"---------------------------"
-Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
-Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
-winget source update
 Clear-Host
 
 "---------------------------"
@@ -95,6 +72,29 @@ Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack
 IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10\Sophia.ps1"
 }
+Clear-Host
+
+"---------------------------"
+"Schritt 2 - o&oShutup"
+"---------------------------"
+Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe
+C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
+#Start-Process "C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe"
+Clear-Host
+
+" ---------------------------"
+"Schritt 6 - Performance Counter"
+"---------------------------"
+lodctr /r
+lodctr /r
+Clear-Host
+
+"---------------------------"
+"Schritt 7 - Winget installieren"
+"---------------------------"
+Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
+Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
+winget source update
 Clear-Host
 
 "---------------------------"
