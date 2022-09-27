@@ -101,26 +101,22 @@ Clear-Host
 "---------------------------"
 "Schritt 7.1 - C++ installieren"
 "---------------------------"
-"Nun wird C++ installiert"
 winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
 winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
 "---------------------------"
 "Schritt 7.2 - Direct X Installieren"
 "---------------------------"
-"nun wird Direct X installiert"
 winget install --id=Microsoft.DirectX  -e
 ""
 "---------------------------"
 "Schritt 7.3 - .Net-Framework Installieren"
 "---------------------------"
-"nun wird .Net-Framework installiert"
 winget install --id=Microsoft.dotNetFramework -e 
 ""
 "---------------------------"
 "Schritt 7.4 - Alle Programme Updaten"
 "---------------------------"
-"Nun werden alle Programme auf den aktuellstens stand gebracht"
 winget upgrade --all --include-unknown
 ""
 "---------------------------"
