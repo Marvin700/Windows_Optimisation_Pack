@@ -114,8 +114,7 @@ Clear-Host
 "---------------------------"
 Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
 winget source update
-Clear-Host
-
+""
 "---------------------------"
 "Schritt 8.1 - C++ installieren"
 "---------------------------"
