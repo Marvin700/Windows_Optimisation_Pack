@@ -52,7 +52,6 @@ Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Autoruns.zip -Force -Recur
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
 invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle}'
-winget source update
 Clear-Host
 
 "---------------------------"
@@ -109,28 +108,6 @@ lodctr /r
 lodctr /r
 Clear-Host
 
-# Windows 10 ohne winget
-IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
-Clear-Host
-"==========================="
-"Windows Optimization Pack"
-"==========================="
-Write-Warning "Ihr System wurde erforlgreich optimiert"
-Write-Warning "Bitte starten sie ihr windows neu."
-sleep 20
-exit
-}
-IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
-Clear-Host
-"==========================="
-"Windows Optimization Pack"
-"==========================="
-Write-Warning "Ihr System wurde erforlgreich optimiert"
-Write-Warning "Bitte starten sie ihr windows neu."
-sleep 20
-exit
-}
-
 "---------------------------"
 "Schritt 8 - Explorer neustarten"
 "---------------------------"
@@ -141,26 +118,22 @@ Clear-Host
 "---------------------------"
 "Schritt 9.1 - C++ installieren"
 "---------------------------"
-"Nun wird C++ installiert"
 winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
 winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
 "---------------------------"
 "Schritt 9.2 - Direct X Installieren"
 "---------------------------"
-"nun wird Direct X installiert"
 winget install --id=Microsoft.DirectX  -e
 ""
 "---------------------------"
 "Schritt 9.3 - .Net-Framework Installieren"
 "---------------------------"
-"nun wird .Net-Framework installiert"
 winget install --id=Microsoft.dotNetFramework -e 
 ""
 "---------------------------"
 "Schritt 9.4 - Alle Programme Updaten"
 "---------------------------"
-"Nun werden alle Programme auf den aktuellstens stand gebracht"
 winget upgrade --all --include-unknown
 ""
 "---------------------------"
