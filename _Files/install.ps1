@@ -10,15 +10,14 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     sleep 20
     exit
 }
-"Schritt 0   - Download benoetigter Dateien"
-"Schritt 1   - Wiederherstellungspunkt erstellen"
+"Schritt 0   - Wiederherstellungspunkt erstellen"
+"Schritt 1   - Download und installation benoetigter Pekete"
 "Schritt 2   - Autostart und Tasks deaktivieren"
 "Schritt 3   - Schnellstart deaktiveren"
 "Schritt 4   - Registry Werte aendern"
 "Schritt 5   - Sophia Script"
 "Schritt 6   - o&oShutup"
 "Schritt 7   - Performance Counter"
-"Schritt 8   - Winget installieren"
 "Schritt 8.1 - C++ 2008-2019 installieren "
 "Schritt 8.2 - Direct X Installieren"
 "Schritt 8.3 - Net-Framework Installieren"
@@ -31,9 +30,17 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 timeout 30
 Clear-Host
 
+"----------------------------"
+"Schritt 0 - Wiederherstellungspunkt erstellen"
+"----------------------------"
+Enable-ComputerRestore -Drive "C:\"
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
+Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
+Clear-Host
 
 "----------------------------"
-"Schritt 0 - Download benoetigter Dateien"
+"Schritt 1 - Download und installation benoetigter Pekete"
 "----------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
@@ -44,15 +51,8 @@ Expand-Archive 'C:\Windows_Optimisation_Pack\_Files\Autoruns.zip' 'C:\Windows_Op
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Autoruns.zip -Force -Recurse
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
-Clear-Host
-
-"----------------------------"
-"Schritt 1 - Wiederherstellungspunkt erstellen"
-"----------------------------"
-Enable-ComputerRestore -Drive "C:\"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
-Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
+Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
+winget source update
 Clear-Host
 
 "---------------------------"
@@ -78,12 +78,6 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWOR
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
 Clear-Host
-
-"---------------------------"
-"Schritt 8 - Winget installieren"
-"---------------------------"
-Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
-winget source update
 
 "---------------------------"
 "Schritt 5 - Sophia Script"
@@ -114,7 +108,6 @@ Clear-Host
 lodctr /r
 lodctr /r
 Clear-Host
-
 
 "---------------------------"
 "Schritt 8.1 - C++ installieren"
