@@ -22,5 +22,4 @@ Features des Packs :<br>
 - Net-Framework Installieren   <BR>                 
 - Alle Programme Updaten     <BR>                      
 - Nuetzliche Programme installieren <BR>
-- Windows Systemdatein prüfen  <BR> 
 - Weitere Windows Tweaks
