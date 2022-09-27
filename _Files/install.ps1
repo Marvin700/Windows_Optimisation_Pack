@@ -15,7 +15,6 @@ Clear-Host
 "Schritt 7.3 - Net-Framework Installieren"
 "Schritt 7.4 - Alle Programme Updaten"
 "Schritt 7.5 - Nuetzliche Programme installieren"
-"Schritt 8   - Systemdatein überprüfen"
 ""
 ""
 "Automatischer start in 30 Sekunden..."
