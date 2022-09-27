@@ -114,6 +114,11 @@ Clear-Host
 "---------------------------"
 Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
 winget source update
+""
+""
+""
+""
+""
 Clear-Host
 "---------------------------"
 "Schritt 8.1 - C++ installieren"
@@ -135,11 +140,6 @@ winget install --id=Microsoft.dotNetFramework -e
 "Schritt 8.4 - Alle Programme Updaten"
 "---------------------------"
 winget upgrade --all --include-unknown
-""
-""
-""
-""
-""
 Clear-Host
 "---------------------------"
 "Schritt 8.5 - Nuetzliche Programme installieren"
