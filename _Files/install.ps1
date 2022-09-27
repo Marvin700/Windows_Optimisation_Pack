@@ -52,7 +52,7 @@ Expand-Archive 'C:\Windows_Optimisation_Pack\_Files\Autoruns.zip' 'C:\Windows_Op
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Autoruns.zip -Force -Recurse
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
-winget install --id=RARLab.WinRAR -e
+# winget install --id=RARLab.WinRAR -e
 Clear-Host
 
 "---------------------------"
