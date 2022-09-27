@@ -7,7 +7,6 @@
 * Windows Spy Funktionen deaktivieren
 * Zeiger Beschleunigung deaktivieren
 * Schnellstart und Ruhezustand deaktivieren
-* Winget installieren
 * Laufzeitkomponenten installieren (C++, DirectX .Net)
 * Alle Programme Updaten
 * Nuetzliche Programme installieren
