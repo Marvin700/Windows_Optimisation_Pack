@@ -3,14 +3,14 @@
 ## Key Features
 * Windows Bloatware entfernen
 * Autostart und Tasks bereinigen
-* Feedback und Reporting Funktionen deaktivieren
-* Windows Spy Funktionen deaktivieren
+* Feedback und Error Reporting dektivieren
+* Windows Spy Funktionen abschalten 
+* Windows Optimierungem
 * Zeiger Beschleunigung deaktivieren
 * Schnellstart und Ruhezustand deaktivieren
-* Laufzeitkomponenten installieren (C++, DirectX .Net)
+* Laufzeitkomponenten installieren
 * Alle Programme Updaten
-* Nuetzliche Programme installieren
-* Weitere Windows Tweaks
+* Weitere Tweaks
 
 
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/DownloadButton.png"></a>
