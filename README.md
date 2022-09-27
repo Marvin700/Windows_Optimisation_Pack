@@ -1,10 +1,6 @@
 <img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/Titelbild.png">
 
 
-
-Das Pack debloatet und optimiert automatisiert die Windows installation. <BR>
-Im Gegensatz zu den meisten "Tuning Tools" werden hier keine Funktionen beeinträchtigt. <BR>
-
 <BR>
 Features des Packs :<br>
 - Automatische Bestimmung des Betriebssystems <BR>
