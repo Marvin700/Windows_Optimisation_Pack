@@ -1,3 +1,5 @@
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Titelbild.png -Force -Recurse
+
 Clear-Host
 "==========================="
 "Windows Optimization Pack"
