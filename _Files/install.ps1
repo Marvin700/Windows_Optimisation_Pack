@@ -2,6 +2,14 @@ Clear-Host
 "==========================="
 "Windows Optimization Pack"
 "==========================="
+#Administrator Prüfung
+If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{
+	Write-Warning "Keine Admin Rechte vorhanden"
+    write-Warning "Das Script wird in 10 Sekunden beendet"
+    sleep 10
+    exit
+}
 "Schritt 0   - Wiederherstellungspunkt erstellen"
 "Schritt 1   - Autostart und Tasks deaktivieren"
 "Schritt 2   - Schnellstart deaktiveren"
@@ -79,7 +87,6 @@ Clear-Host
 "---------------------------"
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe
 C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
-#Start-Process "C:\Windows_Optimisation_Pack\_Files\oShutup\OOSU10.exe"
 Clear-Host
 
 " ---------------------------"
