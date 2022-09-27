@@ -125,6 +125,7 @@ winget upgrade --all --include-unknown
 winget install --id=RARLab.WinRAR -e
 winget install --id=Notepad++.Notepad++ -e
 winget install --id=REALiX.HWiNFO -e 
+Stop-Process -Name HWiNFO64
 winget install --id=VideoLAN.VLC -e
 Clear-Host
 
@@ -134,9 +135,5 @@ Clear-Host
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
 
-"---------------------------"
-"Schritt 9 - Systemdatein ueberpruefen"
-"---------------------------"
-sfc /scannow
 
 exit
