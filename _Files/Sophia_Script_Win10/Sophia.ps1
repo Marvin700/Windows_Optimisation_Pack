@@ -974,7 +974,7 @@ UninstallPCHealthCheck
 
 	https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60
 #>
-# InstallDotNetRuntime6
+InstallDotNetRuntime6
 
 # Enable proxying only blocked sites from the unified registry of Roskomnadzor
 # Включить проксирование только заблокированных сайтов из единого реестра Роскомнадзора
