@@ -123,9 +123,9 @@ winget upgrade --all --include-unknown
 "Schritt 7.5 - Nuetzliche Programme installieren"
 "---------------------------"
 winget install --id=RARLab.WinRAR -e
-winget install --id=VideoLAN.VLC -e
 winget install --id=Notepad++.Notepad++ -e
 winget install --id=REALiX.HWiNFO -e 
+winget install --id=VideoLAN.VLC -e
 Clear-Host
 
 "---------------------------"
