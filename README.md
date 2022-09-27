@@ -17,9 +17,7 @@ Features des Packs :<br>
 - Schnellstart und Ruhezustand deaktivieren  <br>
 - Performance Counter rebuilden  <BR>                  
 - Winget installieren   <BR>                              
-- C++ installieren      <BR>               
-- Direct X Installieren  <BR>                      
-- Net-Framework Installieren   <BR>                 
+- Laufzeitkomponenten installieren (C++, DirectX .Net)      <BR>                           
 - Alle Programme Updaten     <BR>                      
 - Nuetzliche Programme installieren <BR>
 - Weitere Windows Tweaks
