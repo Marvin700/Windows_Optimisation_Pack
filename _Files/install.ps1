@@ -137,6 +137,7 @@ exit
 "---------------------------"
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
+Clear-Host
 
 "---------------------------"
 "Schritt 9.1 - C++ installieren"
@@ -158,7 +159,7 @@ winget install --id=Microsoft.dotNetFramework -e
 "Schritt 9.4 - Alle Programme Updaten"
 "---------------------------"
 winget upgrade --all --include-unknown
-Clear-Host
+""
 "---------------------------"
 "Schritt 9.5 - Nuetzliche Programme installieren"
 "---------------------------"
