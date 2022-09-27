@@ -5,9 +5,9 @@ Clear-Host
 #Administrator Prüfung
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
-	Write-Warning "Keine Admin Rechte vorhanden"
-    write-Warning "Das Script wird in 60 Sekunden beendet"
-    sleep 60
+	Write-Warning "Keine Benötigten Admin Rechte vorhanden"
+    	Write-Warning "Das Script wird in 20 Sekunden beendet"
+    sleep 20
     exit
 }
 "Schritt 0   - Wiederherstellungspunkt erstellen"
