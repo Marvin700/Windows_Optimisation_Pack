@@ -18,12 +18,13 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 5   - Sophia Script"
 "Schritt 6   - o&oShutup"
 "Schritt 7   - Performance Counter"
-"Schritt 8.1 - C++ 2008-2019 installieren"
-"Schritt 8.2 - Direct X Installieren"
-"Schritt 8.3 - Net-Framework Installieren"
-"Schritt 8.4 - Alle Programme Updaten"
-"Schritt 8.5 - Nuetzliche Programme installieren"
-"Schritt 9   - Explorer neustarten"
+"Schritt 8   - Explorer neustarten"
+"Schritt 9.1 - C++ 2008-2019 installieren"
+"Schritt 9.2 - Direct X Installieren"
+"Schritt 9.3 - Net-Framework Installieren"
+"Schritt 9.4 - Alle Programme Updaten"
+"Schritt 9.5 - Nuetzliche Programme installieren"
+
 ""
 ""
 "Automatischer start in 30 Sekunden..."
@@ -132,28 +133,34 @@ exit
 }
 
 "---------------------------"
-"Schritt 8.1 - C++ installieren"
+"Schritt 8 - Explorer neustarten"
+"---------------------------"
+taskkill /f /im explorer.exe
+Start-Process explorer.exe
+
+"---------------------------"
+"Schritt 9.1 - C++ installieren"
 "---------------------------"
 winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
 winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
 "---------------------------"
-"Schritt 8.2 - Direct X Installieren"
+"Schritt 9.2 - Direct X Installieren"
 "---------------------------"
 winget install --id=Microsoft.DirectX  -e
 ""
 "---------------------------"
-"Schritt 8.3 - .Net-Framework Installieren"
+"Schritt 9.3 - .Net-Framework Installieren"
 "---------------------------"
 winget install --id=Microsoft.dotNetFramework -e 
 ""
 "---------------------------"
-"Schritt 8.4 - Alle Programme Updaten"
+"Schritt 9.4 - Alle Programme Updaten"
 "---------------------------"
 winget upgrade --all --include-unknown
 Clear-Host
 "---------------------------"
-"Schritt 8.5 - Nuetzliche Programme installieren"
+"Schritt 9.5 - Nuetzliche Programme installieren"
 "---------------------------"
 winget install --id=RARLab.WinRAR -e
 winget install --id=Notepad++.Notepad++ -e
@@ -162,13 +169,6 @@ Stop-Process -Name HWiNFO64
 winget install --id=VideoLAN.VLC -e
 Clear-Host
 
-"---------------------------"
-"Schritt 9 - Explorer neustarten"
-"---------------------------"
-taskkill /f /im explorer.exe
-Start-Process explorer.exe
-
-Clear-Host
 "==========================="
 "Windows Optimization Pack"
 "==========================="
