@@ -140,35 +140,10 @@ Start-Process explorer.exe
 Clear-Host
 
 "---------------------------"
-"Schritt 9.1 - C++ installieren"
+"Schritt 8 - Winget"
 "---------------------------"
-winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
-winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
-""
-"---------------------------"
-"Schritt 9.2 - Direct X Installieren"
-"---------------------------"
-winget install --id=Microsoft.DirectX  -e
-""
-"---------------------------"
-"Schritt 9.3 - .Net-Framework Installieren"
-"---------------------------"
-winget install --id=Microsoft.dotNetFramework -e 
-""
-"---------------------------"
-"Schritt 9.4 - Alle Programme Updaten"
-"---------------------------"
-winget upgrade --all --include-unknown
-""
-"---------------------------"
-"Schritt 9.5 - Nuetzliche Programme installieren"
-"---------------------------"
-winget install --id=RARLab.WinRAR -e
-winget install --id=Notepad++.Notepad++ -e
-winget install --id=REALiX.HWiNFO -e 
-Stop-Process -Name HWiNFO64
-winget install --id=VideoLAN.VLC -e
-Clear-Host
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\winget.ps1
+
 
 "==========================="
 "Windows Optimization Pack"
