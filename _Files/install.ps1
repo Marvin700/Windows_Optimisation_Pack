@@ -110,7 +110,17 @@ lodctr /r
 Clear-Host
 
 # Windows 10 ohne winget
-IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
+IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
+Clear-Host
+"==========================="
+"Windows Optimization Pack"
+"==========================="
+Write-Warning "Ihr System wurde erforlgreich optimiert"
+Write-Warning "Bitte starten sie ihr windows neu."
+sleep 20
+exit
+}
+IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
 Clear-Host
 "==========================="
 "Windows Optimization Pack"
