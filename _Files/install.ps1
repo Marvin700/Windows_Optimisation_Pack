@@ -139,7 +139,7 @@ taskkill /f /im explorer.exe
 Start-Process explorer.exe
 
 "---------------------------"
-"Schritt 9 - Systemdatein überprüfen"
+"Schritt 9 - Systemdatein ueberpruefen"
 "---------------------------"
 sfc /scannow
 
