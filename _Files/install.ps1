@@ -154,4 +154,7 @@ taskkill /f /im explorer.exe
 Start-Process explorer.exe
 
 
+Write-Warning "Ihr System wurde erforlgreich optimiert"
+Write-Warning "Bitte starten sie ihr windows neu."
+sleep 20
 exit
