@@ -20,4 +20,4 @@ Features des Packs :<br>
 
 <BR>
 <BR>
-<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest">Download</a>
+<p dir="auto"><a href="hhttps://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/img/SSdownloadbutton.svg" width="220px" height="55px" style="max-width: 100%;"></a></p>
