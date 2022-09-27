@@ -136,6 +136,11 @@ winget install --id=Microsoft.dotNetFramework -e
 "---------------------------"
 winget upgrade --all --include-unknown
 ""
+""
+""
+""
+""
+Clear-Host
 "---------------------------"
 "Schritt 8.5 - Nuetzliche Programme installieren"
 "---------------------------"
