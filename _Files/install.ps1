@@ -80,6 +80,12 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D
 Clear-Host
 
 "---------------------------"
+"Schritt 8 - Winget installieren"
+"---------------------------"
+Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
+winget source update
+
+"---------------------------"
 "Schritt 5 - Sophia Script"
 "---------------------------"
 IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
@@ -109,17 +115,7 @@ lodctr /r
 lodctr /r
 Clear-Host
 
-"---------------------------"
-"Schritt 8 - Winget installieren"
-"---------------------------"
-Add-AppxPackage "C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle"
-winget source update
-""
-""
-""
-""
-""
-Clear-Host
+
 "---------------------------"
 "Schritt 8.1 - C++ installieren"
 "---------------------------"
