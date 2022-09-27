@@ -11,7 +11,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 "Schritt 0   - Wiederherstellungspunkt erstellen"
-"Schritt 1   - Download und installation benoetigter Pekete"
+"Schritt 1   - Download und installation benoetigter Pakete"
 "Schritt 2   - Autostart und Tasks deaktivieren"
 "Schritt 3   - Schnellstart deaktiveren"
 "Schritt 4   - Registry Werte aendern"
@@ -40,7 +40,7 @@ REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V 
 Clear-Host
 
 "----------------------------"
-"Schritt 1 - Download und installation benoetigter Pekete"
+"Schritt 1 - Download und installation benoetigter Pakete"
 "----------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
