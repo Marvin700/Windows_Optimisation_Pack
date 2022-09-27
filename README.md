@@ -1,6 +1,6 @@
 <img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/Titelbild.png"> 
 
-## Features
+## Key Features
 * Windows Bloatware entfernen
 * Autostart und Tasks bereinigen
 * Feedback und Reporting Funktionen deaktivieren
