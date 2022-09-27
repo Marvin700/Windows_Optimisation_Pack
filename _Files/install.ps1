@@ -18,7 +18,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 5   - Sophia Script"
 "Schritt 6   - o&oShutup"
 "Schritt 7   - Performance Counter"
-"Schritt 8.1 - C++ 2008-2019 installieren "
+"Schritt 8.1 - C++ 2008-2019 installieren"
 "Schritt 8.2 - Direct X Installieren"
 "Schritt 8.3 - Net-Framework Installieren"
 "Schritt 8.4 - Alle Programme Updaten"
