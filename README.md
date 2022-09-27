@@ -2,14 +2,11 @@
 
 ## Features
 * Windows Bloatware entfernen
-* Autostart und Tasks deaktivieren
+* Autostart und Tasks bereinigen
 * Feedback und Reporting Funktionen deaktivieren
 * Windows Spy Funktionen deaktivieren
-* Unnötige Dienste deaktivieren
-* Benutzerkontensteuerung deaktivieren
 * Zeiger Beschleunigung deaktivieren
 * Schnellstart und Ruhezustand deaktivieren
-* Performance Counter rebuilden
 * Winget installieren
 * Laufzeitkomponenten installieren (C++, DirectX .Net)
 * Alle Programme Updaten
