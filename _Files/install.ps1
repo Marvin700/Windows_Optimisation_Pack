@@ -220,10 +220,10 @@ $button3.text = "AutoActions installieren"
 $button3.Location = New-Object Drawing.Point 30,100
 $button3.Size = New-Object Drawing.Point 100,35
 
-$button4 = New-Object Windows.Forms.Button
-$button4.text = ""
-$button4.Location = New-Object Drawing.Point 140,100
-$button4.Size = New-Object Drawing.Point 100,35
+# $button4 = New-Object Windows.Forms.Button
+# $button4.text = ""
+# $button4.Location = New-Object Drawing.Point 140,100
+# $button4.Size = New-Object Drawing.Point 100,35
 
 $button1.add_click({
 $Text.Text = "Bitte warten..."
@@ -268,7 +268,7 @@ $form.controls.add($Text)
 $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
-$form.controls.add($button4)
+# $form.controls.add($button4)
 $form.ShowDialog()
 Clear-Host
 
