@@ -236,7 +236,7 @@ $Text.Text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
 winget install --id=ViGEm.ViGEmBus --accept-source-agreements
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
-#Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
+Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
@@ -246,7 +246,16 @@ $button2.text = ""
 })
 
 # $button3.add_click({
-# 
+$Text.Text = "Bitte warten..."
+Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
+Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
+Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
+$Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
+$Shortcut.Save()
+$Text.Text = "AutoActions wurde installiert"
+$button2.text = ""
 # })
 
 # $button4.add_click({
