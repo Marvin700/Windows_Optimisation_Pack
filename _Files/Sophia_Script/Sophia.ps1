@@ -928,7 +928,7 @@ DefaultTerminalApp -WindowsTerminal
 
 	https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60
 #>
-InstallDotNetRuntime6
+# InstallDotNetRuntime6
 
 # Enable proxying only blocked sites from the unified registry of Roskomnadzor. The function will be applied only if the region in Windows is set to "Russia"
 # Включить проксирование только заблокированных сайтов из единого реестра Роскомнадзора. Функция будет применена, только если в Windows установлен регион "Россия"
