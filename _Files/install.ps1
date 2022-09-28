@@ -183,11 +183,80 @@ Remove-Item "$env:temp\WinGet\" -force -Recurse
 Clear-Host
 
 
+[reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
+Clear-Host
+
 "==========================="
 "Windows Optimization Pack"
 "==========================="
-"Ihr System wurde erforlgreich optimiert"
-""
-Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
-sleep 60
-Restart-Computer
+$form = New-Object Windows.Forms.Form
+$form.text = "Windows_Optimisation_Pack"
+
+$Titel = New-Object Windows.Forms.Label
+$Titel.Location = New-Object Drawing.Point 70,25
+$Titel.Size = New-Object Drawing.Point 200,15
+$Titel.text = "Windows Optimisation Pack"
+
+$Text = New-Object Windows.Forms.Label
+$Text.Location = New-Object Drawing.Point 60,170
+$Text.Size = New-Object Drawing.Point 200,15
+$Text.text = ""
+
+$button1 = New-Object Windows.Forms.Button
+$button1.text = "Process Lasso installieren"
+$button1.Location = New-Object Drawing.Point 30,60
+$button1.Size = New-Object Drawing.Point 100,35
+
+$button2 = New-Object Windows.Forms.Button
+$button2.text = "PS4 Controller"
+$button2.Location = New-Object Drawing.Point 140,60
+$button2.Size = New-Object Drawing.Point 100,35
+
+$button3 = New-Object Windows.Forms.Button
+$button3.text = "Button3"
+$button3.Location = New-Object Drawing.Point 30,100
+$button3.Size = New-Object Drawing.Point 100,35
+
+$button4 = New-Object Windows.Forms.Button
+$button4.text = "Button4"
+$button4.Location = New-Object Drawing.Point 140,100
+$button4.Size = New-Object Drawing.Point 100,35
+
+$button1.add_click({
+$Text.Text = "Bitte warten..."
+winget install --id=BitSum.ProcessLasso --accept-source-agreements
+$Text.Text = "Processlasso wurde installiert"
+$button1.text = ""
+})
+
+$button2.add_click({
+$Text.Text = "Bitte warten..."
+winget install --id=ViGEm.ViGEmBus --accept-source-agreements
+Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
+Expand-Archive $env:temp\DS4Windows.zip C:\Programme\
+Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\DS4Windows.lnk")
+$Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
+$Shortcut.Save()
+$Text.Text = "DS4Windows wurde installiert"
+$button2.text = ""
+})
+
+$button3.add_click({
+
+})
+
+$button4.add_click({
+
+})
+
+
+$form.controls.add($Titel)
+$form.controls.add($Text)
+$form.controls.add($button1)
+$form.controls.add($button2)
+$form.controls.add($button3)
+$form.controls.add($button4)
+
+$form.ShowDialog()
