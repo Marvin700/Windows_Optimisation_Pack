@@ -176,4 +176,4 @@ Clear-Host
 "Ihr System wurde erforlgreich optimiert"
 Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 sleep 60
-exit
+Restart-Computer
