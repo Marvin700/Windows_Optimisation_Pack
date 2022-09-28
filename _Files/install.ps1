@@ -62,9 +62,9 @@ Clear-Host
 "-------------------------------------"
 "Schritt 1.1 - Computernamen vergeben"
 "-------------------------------------"
-#$Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
-#Rename-Computer -NewName $Computername
-#Clear-Host
+$Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
+Rename-Computer -NewName $Computername
+Clear-Host
 
 "---------------------------"
 "Schritt 2 - Autostart und Tasks deaktivieren"
