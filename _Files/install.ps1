@@ -163,7 +163,7 @@ Clear-Host
 "==========================="
 "Windows Optimization Pack"
 "==========================="
-Write-Warning "Ihr System wurde erforlgreich optimiert"
-Write-Warning "Bitte starten sie ihr windows neu."
-sleep 20
+"Ihr System wurde erforlgreich optimiert"
+Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!
+sleep 60
 exit
