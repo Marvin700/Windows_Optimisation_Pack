@@ -140,33 +140,43 @@ Clear-Host
 "------------------------------"
 "Schritt 9.1 - C++ installieren"
 "------------------------------"
+""
 winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
+""
 winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-agreements
 ""
 "-----------------------------------"
 "Schritt 9.2 - Direct X Installieren"
 "-----------------------------------"
+""
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 ""
 "-----------------------------------------"
 "Schritt 9.3 - .Net-Framework Installieren"
 "-----------------------------------------"
+""
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
+""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
+""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 ""
 "------------------------------------"
 "Schritt 9.4 - Alle Programme Updaten"
 "------------------------------------"
+""
 winget upgrade --all
 ""
 "-----------------------------------------------"
 "Schritt 9.5 - Nuetzliche Programme installieren"
 "-----------------------------------------------"
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
+""
 winget install --id=Notepad++.Notepad++ --exact --accept-source-agreements
+""
 winget install --id=REALiX.HWiNFO --exact --accept-source-agreements
 Stop-Process -Name HWiNFO64
+""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 Clear-Host
 
