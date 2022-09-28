@@ -182,6 +182,9 @@ winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 Remove-Item "$env:temp\WinGet\" -force -Recurse
 Clear-Host
 
+"-----------------------------"
+"EXTRAS"
+"----------------------------"
 
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
 Clear-Host
@@ -213,12 +216,12 @@ $button2.Location = New-Object Drawing.Point 140,60
 $button2.Size = New-Object Drawing.Point 100,35
 
 $button3 = New-Object Windows.Forms.Button
-$button3.text = "Button3"
+$button3.text = ""
 $button3.Location = New-Object Drawing.Point 30,100
 $button3.Size = New-Object Drawing.Point 100,35
 
 $button4 = New-Object Windows.Forms.Button
-$button4.text = "Button4"
+$button4.text = ""
 $button4.Location = New-Object Drawing.Point 140,100
 $button4.Size = New-Object Drawing.Point 100,35
 
@@ -231,10 +234,10 @@ $button1.text = ""
 
 $button2.add_click({
 $Text.Text = "Bitte warten..."
-winget install --id=ViGEm.ViGEmBus --accept-source-agreements
 Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
-Expand-Archive $env:temp\DS4Windows.zip C:\Programme\
-Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
+winget install --id=ViGEm.ViGEmBus --accept-source-agreements
+Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
+#Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\DS4Windows.lnk")
 $Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
@@ -243,14 +246,13 @@ $Text.Text = "DS4Windows wurde installiert"
 $button2.text = ""
 })
 
-$button3.add_click({
+# $button3.add_click({
+# 
+# })
 
-})
-
-$button4.add_click({
-
-})
-
+# $button4.add_click({
+# 
+# })
 
 $form.controls.add($Titel)
 $form.controls.add($Text)
@@ -258,5 +260,16 @@ $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
 $form.controls.add($button4)
-
 $form.ShowDialog()
+Clear-Host
+
+
+"==========================="
+"Windows Optimization Pack"
+"==========================="
+"Ihr System wurde erforlgreich optimiert"
+""
+Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
+sleep 60
+Restart-Computer
+
