@@ -215,7 +215,7 @@ $button2.Location = New-Object Drawing.Point 140,60
 $button2.Size = New-Object Drawing.Point 100,35
 
 $button3 = New-Object Windows.Forms.Button
-$button3.text = ""
+$button3.text = "AutoActions installieren"
 $button3.Location = New-Object Drawing.Point 30,100
 $button3.Size = New-Object Drawing.Point 100,35
 
@@ -245,7 +245,7 @@ $Text.Text = "DS4Windows wurde installiert"
 $button2.text = ""
 })
 
-# $button3.add_click({
+$button3.add_click({
 $Text.Text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
 Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
