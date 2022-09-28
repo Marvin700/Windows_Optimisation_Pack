@@ -9,6 +9,7 @@
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
 * Weitere Tweaks
+* GUI für weitere Pakete
 
 ## Before running
 > **Note**: <BR> 
