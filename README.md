@@ -8,7 +8,6 @@
 * Autostart und Tasks bereinigen
 * Das Script arbeitet vollautomatisch
 * Zeiger Beschleunigung deaktivieren
-* Schnellstart und Ruhezustand deaktivieren
 * Laufzeitkomponenten installieren
 * Alle Programme Updaten
 * Weitere Tweaks
