@@ -16,10 +16,11 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 "Schritt 0   - Wiederherstellungspunkt erstellen"
 "Schritt 1   - Download und installation benoetigter Pakete"
+"Schritt 1.1 - Computernamen vergeben"
 "Schritt 2   - Autostart und Tasks deaktivieren"
 "Schritt 3   - Sophia Script"
-"Schritt 5   - o&oShutup"
-"Schritt 4   - Registry Werte aendern"
+"Schritt 4   - o&oShutup"
+"Schritt 5   - Registry Werte aendern"
 "Schritt 6   - Dienste deaktivieren"
 "Schritt 7   - Performance Counter"
 "Schritt 8   - Explorer neustarten"
@@ -43,9 +44,9 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
 Clear-Host
 
-"----------------------------"
+"---------------------------------------------------------"
 "Schritt 1 - Download und installation benoetigter Pakete"
-"----------------------------"
+"--------------------------------------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
@@ -56,6 +57,17 @@ Expand-Archive 'C:\Windows_Optimisation_Pack\_Files\Autoruns.zip' 'C:\Windows_Op
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Autoruns.zip -Force -Recurse
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
+Clear-Host
+
+"-------------------------------------"
+"Schritt 1.1 - Computernamen vergeben"
+"-------------------------------------"
+$name = Read-Host
+Rename-Computer -NewName $name
+Echo " Der Computer muss neue gestartet werden!"
+# $Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
+# Rename-Computer -NewName $Computername
+# echo $Computername
 Clear-Host
 
 "---------------------------"
