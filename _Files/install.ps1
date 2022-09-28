@@ -29,6 +29,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 9.3 - Net-Framework Installieren"
 "Schritt 9.4 - Alle Programme Updaten"
 "Schritt 9.5 - Nuetzliche Programme installieren"
+"Schritt 10  - Extras"
 ""
 ""
 "Automatischer start in 30 Sekunden..."
@@ -181,9 +182,9 @@ winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
 Clear-Host
 
-"-----------------------------"
-"EXTRAS"
-"----------------------------"
+"-----------------------------------------------"
+"Schritt 10 - Extras"
+"-----------------------------------------------"
 
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
 Clear-Host
@@ -256,7 +257,7 @@ $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save()
 $Text.Text = "AutoActions wurde installiert"
 $button2.text = ""
-# })
+})
 
 # $button4.add_click({
 # 
