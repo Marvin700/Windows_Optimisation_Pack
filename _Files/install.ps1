@@ -35,9 +35,9 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 timeout 30
 Clear-Host
 
-"----------------------------"
+"---------------------------------------------"
 "Schritt 0 - Wiederherstellungspunkt erstellen"
-"----------------------------"
+"---------------------------------------------"
 Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -46,7 +46,7 @@ Clear-Host
 
 "--------------------------------------------------------"
 "Schritt 1 - Download und installation benoetigter Pakete"
-"-------------------------------------------------------"
+"--------------------------------------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
