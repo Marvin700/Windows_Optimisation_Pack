@@ -13,8 +13,8 @@
 * Weitere Tweaks
 
 ## Before running
-<BR>
-> **Note**: Bitte Windows vorher vollstäntig updaten. Das Script muss als Administrator ausgeführt werden und unter C: abgelegt werden.
+> **Note**: Bitte Windows vorher vollstäntig updaten. <BR>
+  Das Script muss als Administrator ausgeführt werden und unter C: abgelegt werden.
 
 
 
