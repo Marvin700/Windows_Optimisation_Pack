@@ -62,12 +62,8 @@ Clear-Host
 "-------------------------------------"
 "Schritt 1.1 - Computernamen vergeben"
 "-------------------------------------"
-$name = Read-Host
-Rename-Computer -NewName $name
-Echo " Der Computer muss neue gestartet werden!"
-# $Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
-# Rename-Computer -NewName $Computername
-# echo $Computername
+$Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
+Rename-Computer -NewName $Computername
 Clear-Host
 
 "---------------------------"
