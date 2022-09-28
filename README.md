@@ -15,7 +15,7 @@
 
 ## Before running
 > **Note**: <BR> 
-Die frische Windows installation bitte <b>vollstäntig</b> updaten. <BR>
+Die frische Windows installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt und unter C: abgelegt werden. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.
 
