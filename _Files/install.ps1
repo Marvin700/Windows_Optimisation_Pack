@@ -256,7 +256,7 @@ $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
 $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save()
 $Text.Text = "AutoActions wurde installiert"
-$button2.text = ""
+$button3.text = ""
 })
 
 # $button4.add_click({
