@@ -4,7 +4,7 @@
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
 * Feedback und Error Reporting dektivieren
-* Windows Optimierungem
+* Windows Optimierungen
 * Autostart und Tasks bereinigen
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
