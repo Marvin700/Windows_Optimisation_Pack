@@ -20,13 +20,14 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 4   - Registry Werte aendern"
 "Schritt 5   - Sophia Script"
 "Schritt 6   - o&oShutup"
-"Schritt 7   - Performance Counter"
-"Schritt 8   - Explorer neustarten"
-"Schritt 9.1 - C++ 2008-2019 installieren"
-"Schritt 9.2 - Direct X Installieren"
-"Schritt 9.3 - Net-Framework Installieren"
-"Schritt 9.4 - Alle Programme Updaten"
-"Schritt 9.5 - Nuetzliche Programme installieren"
+"Schritt 7   - Dienste deaktivieren"
+"Schritt 8   - Performance Counter"
+"Schritt 9   - Explorer neustarten"
+"Schritt 10.1 - C++ 2008-2019 installieren"
+"Schritt 10.2 - Direct X Installieren"
+"Schritt 10.3 - Net-Framework Installieren"
+"Schritt 10.4 - Alle Programme Updaten"
+"Schritt 10.5 - Nuetzliche Programme installieren"
 ""
 ""
 "Automatischer start in 30 Sekunden..."
@@ -104,43 +105,58 @@ Clear-Host
 C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
 Clear-Host
 
+"---------------------------"
+"Schritt 7 - Dienste deaktivieren"
+"---------------------------"
+Set-Service -Name "SharedRealitySvc" -StartupType Disabled
+Set-Service -Name "Fax" -StartupType Disabled
+Set-Service -Name "autotimesvc" -StartupType Disabled
+Set-Service -Name "wisvc" -StartupType Disabled
+Set-Service -Name "SDRSVC" -StartupType Disabled
+Set-Service -Name "MixedRealityOpenXRSvc" -StartupType Disabled
+Set-Service -Name "WalletService" -StartupType Disabled
+Set-Service -Name "SmsRouter" -StartupType Disabled
+Set-Service -Name "MapsBroker" -StartupType Disabled
+Set-Service -Name "RetailDemo" -StartupType Disabled
+Clear-Host
+
 " ---------------------------"
-"Schritt 7 - Performance Counter"
+"Schritt 8 - Performance Counter"
 "---------------------------"
 lodctr /r
 lodctr /r
 Clear-Host
 
 "---------------------------"
-"Schritt 8 - Explorer neustarten"
+"Schritt 9 - Explorer neustarten"
 "---------------------------"
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
 
 "---------------------------"
-"Schritt 9.1 - C++ installieren"
+"Schritt 10.1 - C++ installieren"
 "---------------------------"
 winget install --id=Microsoft.VC++2015-2019Redist-x86  -e 
 winget install --id=Microsoft.VC++2015-2019Redist-x64  -e
 ""
 "---------------------------"
-"Schritt 9.2 - Direct X Installieren"
+"Schritt 10.2 - Direct X Installieren"
 "---------------------------"
 winget install --id=Microsoft.DirectX  -e
 ""
 "---------------------------"
-"Schritt 9.3 - .Net-Framework Installieren"
+"Schritt 10.3 - .Net-Framework Installieren"
 "---------------------------"
 winget install --id=Microsoft.dotNetFramework -e 
 ""
 "---------------------------"
-"Schritt 9.4 - Alle Programme Updaten"
+"Schritt 10.4 - Alle Programme Updaten"
 "---------------------------"
 winget upgrade --all --include-unknown
 ""
 "---------------------------"
-"Schritt 9.5 - Nuetzliche Programme installieren"
+"Schritt 10.5 - Nuetzliche Programme installieren"
 "---------------------------"
 winget install --id=RARLab.WinRAR -e
 winget install --id=Notepad++.Notepad++ -e
