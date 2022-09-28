@@ -157,7 +157,7 @@ winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact
 ""
 "------------------------------------"
 "Schritt 9.4 - Alle Programme Updaten"
-"------------------------------------
+"------------------------------------"
 winget upgrade --all
 ""
 "-----------------------------------------------"
