@@ -141,7 +141,7 @@ Clear-Host
 "Schritt 9.1 - C++ installieren"
 "---------------------------"
 winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
-winget install --id=Microsoft.VC++2015-2019Redist-x86 --exact --accept-source-agreements
+winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-agreements
 ""
 "---------------------------"
 "Schritt 9.2 - Direct X Installieren"
