@@ -44,9 +44,9 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
 Clear-Host
 
-"---------------------------------------------------------"
-"Schritt 1 - Download und installation benoetigter Pakete"
 "--------------------------------------------------------"
+"Schritt 1 - Download und installation benoetigter Pakete"
+"-------------------------------------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
@@ -59,9 +59,9 @@ Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -D
 Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
 Clear-Host
 
-"-------------------------------------"
+"------------------------------------"
 "Schritt 1.1 - Computernamen vergeben"
-"-------------------------------------"
+"------------------------------------"
 $Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
 Clear-Host
