@@ -2,10 +2,11 @@
 
 ## Key Features
 * Windows Bloatware entfernen
-* Autostart und Tasks bereinigen
-* Feedback und Error Reporting dektivieren
 * Windows Spy Funktionen abschalten 
+* Feedback und Error Reporting dektivieren
 * Windows Optimierungem
+* Autostart und Tasks bereinigen
+* Das Script arbeitet vollautomatisch
 * Zeiger Beschleunigung deaktivieren
 * Schnellstart und Ruhezustand deaktivieren
 * Laufzeitkomponenten installieren
