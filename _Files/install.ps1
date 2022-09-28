@@ -172,7 +172,7 @@ winget upgrade --all
 "-----------------------------------------------"
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 ""
-winget install --id=Notepad++.Notepad++ --exact --accept-source-agreements
+winget install --id=Notepad++.Notepad++ --accept-source-agreements
 ""
 winget install --id=REALiX.HWiNFO --exact --accept-source-agreements
 Stop-Process -Name HWiNFO64
