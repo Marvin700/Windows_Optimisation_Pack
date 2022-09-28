@@ -52,11 +52,11 @@ $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
 invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle;winget source update}'
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe
-Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile C:\Windows_Optimisation_Pack\_Files\Autoruns.zip
-Expand-Archive 'C:\Windows_Optimisation_Pack\_Files\Autoruns.zip' 'C:\Windows_Optimisation_Pack\_Files\Autoruns'
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Autoruns.zip -Force -Recurse
-Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
-Remove-Item "C:\Windows_Optimisation_Pack\_Files\Autoruns\" -force -Recurse
+Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile $env:temp\Autoruns.zip
+Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
+Remove-Item -Path $env:temp\Autoruns.zip -Force -Recurse
+Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
+Remove-Item "$env:temp\Autoruns\" -force -Recurse
 Clear-Host
 
 "------------------------------------"
@@ -178,7 +178,10 @@ winget install --id=REALiX.HWiNFO --exact --accept-source-agreements
 Stop-Process -Name HWiNFO64
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
+""
+Remove-Item "$env:temp\WinGet\" -force -Recurse
 Clear-Host
+
 
 "==========================="
 "Windows Optimization Pack"
