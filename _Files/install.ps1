@@ -17,8 +17,8 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 1   - Download und installation benoetigter Pakete"
 "Schritt 2   - Autostart und Tasks deaktivieren"
 "Schritt 3   - Sophia Script"
-"Schritt 4   - Registry Werte aendern"
 "Schritt 5   - o&oShutup"
+"Schritt 4   - Registry Werte aendern"
 "Schritt 6   - Dienste deaktivieren"
 "Schritt 7   - Performance Counter"
 "Schritt 8   - Explorer neustarten"
@@ -82,7 +82,13 @@ Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack
 Clear-Host
 
 "---------------------------"
-"Schritt 4 Registry Werte aendern"
+"Schritt 4 - o&oShutup"
+"---------------------------"
+C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
+Clear-Host
+
+"---------------------------"
+"Schritt 5 Registry Werte aendern"
 "---------------------------"
 reg import "C:\Windows_Optimisation_Pack\_Files\Registry.reg"
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
@@ -90,13 +96,6 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
-Clear-Host
-
-
-"---------------------------"
-"Schritt 5 - o&oShutup"
-"---------------------------"
-C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
 Clear-Host
 
 "---------------------------"
