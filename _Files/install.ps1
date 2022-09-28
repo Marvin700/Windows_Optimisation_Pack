@@ -102,6 +102,7 @@ Clear-Host
 "---------------------------"
 "Schritt 6 - Dienste deaktivieren"
 "---------------------------"
+Set-Service -Name "WpcMonSvc" -StartupType Disabled
 Set-Service -Name "SharedRealitySvc" -StartupType Disabled
 Set-Service -Name "Fax" -StartupType Disabled
 Set-Service -Name "autotimesvc" -StartupType Disabled
