@@ -156,7 +156,7 @@ winget install --id=Microsoft.dotNetFramework -e
 "---------------------------"
 "Schritt 9.4 - Alle Programme Updaten"
 "---------------------------"
-winget upgrade --all --include-unknown
+winget upgrade --all
 ""
 "---------------------------"
 "Schritt 9.5 - Nuetzliche Programme installieren"
