@@ -179,7 +179,6 @@ Stop-Process -Name HWiNFO64
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
-Remove-Item "$env:temp\WinGet\" -force -Recurse
 Clear-Host
 
 "-----------------------------"
@@ -211,7 +210,7 @@ $button1.Location = New-Object Drawing.Point 30,60
 $button1.Size = New-Object Drawing.Point 100,35
 
 $button2 = New-Object Windows.Forms.Button
-$button2.text = "PS4 Controller"
+$button2.text = "PS4 Controller installieren"
 $button2.Location = New-Object Drawing.Point 140,60
 $button2.Size = New-Object Drawing.Point 100,35
 
@@ -239,7 +238,7 @@ winget install --id=ViGEm.ViGEmBus --accept-source-agreements
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 #Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\DS4Windows.lnk")
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
 $Shortcut.Save()
 $Text.Text = "DS4Windows wurde installiert"
@@ -269,7 +268,7 @@ Clear-Host
 "==========================="
 "Ihr System wurde erforlgreich optimiert"
 ""
+Remove-Item "$env:temp\WinGet\" -force -Recurse
 Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 sleep 60
 Restart-Computer
-
