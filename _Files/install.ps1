@@ -1,3 +1,4 @@
+#Testversion
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Titelbild.png -Force -Recurse
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\DownloadButton.png -Force -Recurse
 
