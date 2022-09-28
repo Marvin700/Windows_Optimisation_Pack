@@ -115,7 +115,7 @@ Set-Service -Name "MapsBroker" -StartupType Disabled
 Set-Service -Name "RetailDemo" -StartupType Disabled
 Clear-Host
 
-" ---------------------------"
+"---------------------------"
 "Schritt 7 - Performance Counter"
 "---------------------------"
 lodctr /r
