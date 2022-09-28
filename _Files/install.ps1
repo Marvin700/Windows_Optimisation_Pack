@@ -235,7 +235,6 @@ $button1.text = ""
 $button2.add_click({
 $Text.Text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
-winget install --id=ViGEm.ViGEmBus --accept-source-agreements
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
