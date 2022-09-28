@@ -8,8 +8,8 @@
 * Autostart und Tasks bereinigen
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
+* GUI für optionale Pakete
 * Weitere Tweaks
-* GUI für weitere Pakete
 
 ## Before running
 > **Note**: <BR> 
