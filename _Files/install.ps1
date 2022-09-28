@@ -130,16 +130,16 @@ lodctr /r
 lodctr /r
 Clear-Host
 
-"---------------------------"
+"-------------------------------"
 "Schritt 8 - Explorer neustarten"
-"---------------------------"
+"-------------------------------"
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
 
-"---------------------------"
+"------------------------------"
 "Schritt 9.1 - C++ installieren"
-"---------------------------"
+"------------------------------"
 winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-agreements
 ""
@@ -150,7 +150,7 @@ winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 ""
 "-----------------------------------------"
 "Schritt 9.3 - .Net-Framework Installieren"
-"-----------------------------------------
+"-----------------------------------------"
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
