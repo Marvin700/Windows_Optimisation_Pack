@@ -101,18 +101,7 @@ Clear-Host
 "---------------------------"
 "Schritt 3 - Sophia Script"
 "---------------------------"
-IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
-}
-IF($WindowsVersion -eq 'Microsoft Windows 11 Home') {
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
-}
-IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10\Sophia.ps1"
-}
-IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script_Win10\Sophia.ps1"
-}
 Clear-Host
 
 "---------------------------"
