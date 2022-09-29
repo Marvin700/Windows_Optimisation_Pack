@@ -54,7 +54,9 @@ Clear-Host
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
-invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle;winget source update}'
+invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle;winget source update;Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\winget.msixbundle -Force -Recurse}'
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\winget.msixbundle -Force -Recurse
+
 
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\OOSU10.exe
 
@@ -71,7 +73,7 @@ Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
 Remove-Item $env:temp\Sophia.zip
 Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
-Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1
+Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1 -Force -Recurse
 }
 
 IF($WindowsVersion -eq 'Microsoft Windows 11 Home') {
@@ -81,7 +83,7 @@ Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path  $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
 Remove-Item $env:temp\Sophia.zip
 Move-Item -Path  C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
-Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1
+Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1 -Force -Recurse
 }
 
 
@@ -121,7 +123,6 @@ Clear-Host
 "Schritt 4 - o&oShutup"
 "---------------------------"
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg
 Clear-Host
 
 "---------------------------"
