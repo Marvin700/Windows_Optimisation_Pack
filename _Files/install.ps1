@@ -121,6 +121,7 @@ Clear-Host
 "Schritt 4 - o&oShutup"
 "---------------------------"
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg
 Clear-Host
 
 "---------------------------"
@@ -160,6 +161,7 @@ Clear-Host
 "-------------------------------"
 "Schritt 8 - Explorer neustarten"
 "-------------------------------"
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
