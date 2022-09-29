@@ -85,7 +85,7 @@ Remove-Item $env:temp\Sophia.zip
 Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
 }
 
-IF($WindowsVersion -eq 'Microsoft Windows 10 Pro') {
+IF($WindowsVersion -eq 'Microsoft Windows 10 Home') {
 Invoke-WebRequest 'https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.10.v5.13.4.zip' -OutFile $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia Script for Windows 10 v5.13.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
