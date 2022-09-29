@@ -3,6 +3,7 @@ Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Titelbild.png -Force -Recu
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\DownloadButton.png -Force -Recurse
 
 Clear-Host
+$Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 "==========================="
 "Windows Optimization Pack"
 "==========================="
