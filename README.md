@@ -8,7 +8,8 @@
 * Autostart und Tasks bereinigen
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
-* Speziell angepasstes Sophia Script
+* Speziell angepasstes <a href="https://github.com/farag2/Sophia-Script-for-Windows/">Sophia Script</a>
+* Angepasstes <a href="https://www.oo-software.com/de/shutup10">O&OShutUp</a> 
 * GUI für optionale Pakete
 * Weitere Tweaks
 
