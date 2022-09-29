@@ -143,7 +143,7 @@ Clear-Host
 "-------------------------------"
 "Schritt 8 - Explorer neustarten"
 "-------------------------------"
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
