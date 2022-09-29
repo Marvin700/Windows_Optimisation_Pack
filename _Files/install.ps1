@@ -68,10 +68,11 @@ IF($WindowsVersion -eq 'Microsoft Windows 11 Pro') {
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
 Invoke-WebRequest 'https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip' -OutFile $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path  $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
+Move-Item -Path $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
 Remove-Item $env:temp\Sophia.zip
-Move-Item -Path  C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
+Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
 Clear-Host
+Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1
 }
 
 IF($WindowsVersion -eq 'Microsoft Windows 11 Home') {
@@ -81,6 +82,7 @@ Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path  $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
 Remove-Item $env:temp\Sophia.zip
 Move-Item -Path  C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
+Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1
 Clear-Host
 }
 
