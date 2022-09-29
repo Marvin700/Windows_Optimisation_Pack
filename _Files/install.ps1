@@ -71,7 +71,6 @@ Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
 Remove-Item $env:temp\Sophia.zip
 Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
-Clear-Host
 Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1
 }
 
@@ -83,9 +82,10 @@ Move-Item -Path  $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:
 Remove-Item $env:temp\Sophia.zip
 Move-Item -Path  C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
 Remove-Item C:\Windows_Optimisation_Pack\_Files\config\Sophia10.ps1
-Clear-Host
 }
 
+
+Clear-Host
 "------------------------------------"
 "Schritt 1.1 - Computernamen vergeben"
 "------------------------------------"
