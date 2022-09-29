@@ -24,7 +24,6 @@ $Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 11 v6.1.4 | Made with $(
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 
-
 Remove-Module -Name PolicyFileEditor -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\bin\PolicyFileEditor\PolicyFileEditor.psd1 -PassThru -Force
 
