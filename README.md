@@ -9,6 +9,7 @@
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
 * GUI für optionale Pakete
+* Speziell angepasstes Sophia Script
 * Weitere Tweaks
 
 ## Before running
