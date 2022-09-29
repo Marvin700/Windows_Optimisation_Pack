@@ -317,7 +317,6 @@ CleanupTask -Register
 # The task will wait until the Windows Updates service finishes running. The task runs every 90 days
 SoftwareDistributionTask -Register
 
-
 # Create the "Temp" scheduled task for cleaning up the %TEMP% folder
 # Only files older than one day will be deleted. The task runs every 60 days
 TempTask -Register
@@ -413,7 +412,6 @@ Windows10ContextMenu -Disable
 
 # Update Local Group Policy Editor (gpedit.msc) to make all manually created policy keys in the registry visible in the snap-in
 UpdateLGPEPolicies
-#endregion Update Policies
 
 # Errors output
 Errors
