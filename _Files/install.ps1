@@ -27,11 +27,9 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 6   - Autostart und Tasks deaktivieren"
 "Schritt 7   - Performance Counter"
 "Schritt 8   - Explorer neustarten"
-"Schritt 9.1 - C++ 2008-2019 installieren"
-"Schritt 9.2 - Direct X Installieren"
-"Schritt 9.3 - Net-Framework Installieren"
-"Schritt 9.4 - Alle Programme Updaten"
-"Schritt 9.5 - Nuetzliche Programme installieren"
+"Schritt 9.1 - Laufzeitkomponenten installieren"
+"Schritt 9.2 - Alle Programme Updaten"
+"Schritt 9.3 - Nuetzliche Programme installieren"
 "Schritt 10  - Extras"
 ""
 ""
@@ -166,22 +164,14 @@ Start-Process explorer.exe
 Clear-Host
 
 " ------------------------------"
-" Schritt 9.1 - C++ installieren"
+" Schritt 9.1 - Laufzeitkomponenten installieren"
 " ------------------------------"
 ""
 winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
 ""
 winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-agreements
 ""
-" -----------------------------------"
-" Schritt 9.2 - Direct X Installieren"
-" -----------------------------------"
-""
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
-""
-" -----------------------------------------"
-" Schritt 9.3 - .Net-Framework Installieren"
-" -----------------------------------------"
 ""
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 ""
@@ -190,13 +180,13 @@ winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 ""
 " ------------------------------------"
-" Schritt 9.4 - Alle Programme Updaten"
+" Schritt 9.2 - Alle Programme Updaten"
 " ------------------------------------"
 ""
 winget upgrade --all
 ""
 " -----------------------------------------------"
-" Schritt 9.5 - Nuetzliche Programme installieren"
+" Schritt 9.3 - Nuetzliche Programme installieren"
 " -----------------------------------------------"
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 ""
