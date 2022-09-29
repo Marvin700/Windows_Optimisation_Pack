@@ -52,7 +52,6 @@ UninstallUWPApps
 # Disable the Windows features using the pop-up dialog box
 WindowsFeatures -Disable
 
-
 # Uninstall optional features using the pop-up dialog box
 WindowsCapabilities -Uninstall
 
