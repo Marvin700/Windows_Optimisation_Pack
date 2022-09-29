@@ -4,9 +4,11 @@ Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\DownloadButton.png -Force 
 
 Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
+
 "==========================="
 "Windows Optimization Pack"
 "==========================="
+
 #Administrator Pruefung
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
@@ -15,6 +17,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     sleep 20
     exit
 }
+
 "Schritt 0   - Wiederherstellungspunkt erstellen"
 "Schritt 1   - Download und installation benoetigter Pakete"
 "Schritt 1.1 - Computernamen vergeben"
