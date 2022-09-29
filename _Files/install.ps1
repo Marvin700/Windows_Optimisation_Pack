@@ -1,6 +1,5 @@
 #Testversion
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\Titelbild.png -Force -Recurse
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\DownloadButton.png -Force -Recurse
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\img\ -Force -Recurse
 
 Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
@@ -56,12 +55,20 @@ Clear-Host
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
 invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle;winget source update}'
-Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe
+Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\OOSU10.exe
 Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile $env:temp\Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
 Remove-Item -Path $env:temp\Autoruns.zip -Force -Recurse
 Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 Remove-Item "$env:temp\Autoruns\" -force -Recurse
+
+Invoke-WebRequest 'https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip' -OutFile $env:temp\Sophia.zip
+Expand-Archive $env:temp\Sophia.zip $env:temp -force
+Move-Item -Path  $env:temp\"Sophia Script for Windows 11 v6.1.4" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
+Remove-Item $env:temp\Sophia.zip
+Move-Item -Path  C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
+
+
 Clear-Host
 
 "------------------------------------"
@@ -98,7 +105,7 @@ Clear-Host
 "---------------------------"
 "Schritt 4 - o&oShutup"
 "---------------------------"
-C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\ooShutup\ooshutup10.cfg /quiet
+C:\Windows_Optimisation_Pack\_Files\ooShutup\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
 Clear-Host
 
 "---------------------------"
