@@ -29,7 +29,6 @@ Import-Module -Name $PSScriptRoot\bin\PolicyFileEditor\PolicyFileEditor.psd1 -Pa
 
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
-
 if ($Functions)
 {
 	Invoke-Command -ScriptBlock {Checkings}
@@ -38,8 +37,6 @@ if ($Functions)
 	{
 		Invoke-Expression -Command $Function
 	}
-
-	# The "RefreshEnvironment" and "Errors" functions will be executed at the end
 	Invoke-Command -ScriptBlock {Errors; RefreshEnvironment}
 
 	exit
