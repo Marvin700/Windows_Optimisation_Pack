@@ -4,9 +4,9 @@ Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\img\ -Force -Recurse
 Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 
-"==========================="
-"Windows Optimization Pack"
-"==========================="
+" ==========================="
+" Windows Optimization Pack"
+" ==========================="
 
 #Administrator Pruefung
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
@@ -39,18 +39,18 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 timeout 30
 Clear-Host
 
-"---------------------------------------------"
-"Schritt 0 - Wiederherstellungspunkt erstellen"
-"---------------------------------------------"
+" ---------------------------------------------"
+" Schritt 0 - Wiederherstellungspunkt erstellen"
+" ---------------------------------------------"
 Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
 Clear-Host
 
-"--------------------------------------------------------"
-"Schritt 1 - Download und installation benoetigter Pakete"
-"--------------------------------------------------------"
+" --------------------------------------------------------"
+" Schritt 1 - Download und installation benoetigter Pakete"
+" --------------------------------------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
@@ -96,28 +96,28 @@ Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1 -Des
 }
 
 Clear-Host
-"------------------------------------"
-"Schritt 1.1 - Computernamen vergeben"
-"------------------------------------"
+" ------------------------------------"
+" Schritt 1.1 - Computernamen vergeben"
+" ------------------------------------"
 $Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
 Clear-Host
 
-"---------------------------"
-"Schritt 2 - Sophia Script"
-"---------------------------"
+" ---------------------------"
+" Schritt 2 - Sophia Script"
+" ---------------------------"
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
 Clear-Host
 
-"---------------------------"
-"Schritt 3 - o&oShutup"
-"---------------------------"
+" ---------------------------"
+" Schritt 3 - o&oShutup"
+" ---------------------------"
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
 Clear-Host
 
-"---------------------------"
-"Schritt 4 Registry Werte aendern"
-"---------------------------"
+" ---------------------------"
+" Schritt 4 Registry Werte aendern"
+" ---------------------------"
 reg import "C:\Windows_Optimisation_Pack\_Files\Registry.reg"
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
@@ -126,9 +126,9 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWOR
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
 Clear-Host
 
-"---------------------------"
-"Schritt 5 - Dienste deaktivieren"
-"---------------------------"
+" ---------------------------"
+" Schritt 5 - Dienste deaktivieren"
+" ---------------------------"
 Set-Service -Name "WpcMonSvc" -StartupType Disabled
 Set-Service -Name "SharedRealitySvc" -StartupType Disabled
 Set-Service -Name "Fax" -StartupType Disabled
@@ -143,45 +143,45 @@ Set-Service -Name "RetailDemo" -StartupType Disabled
 Clear-Host
 
 
-"---------------------------"
-"Schritt 6 - Autostart und Tasks deaktivieren"
-"---------------------------"
+" ---------------------------"
+" Schritt 6 - Autostart und Tasks deaktivieren"
+" ---------------------------"
 #Start-Process ms-settings:startupapps
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
-"---------------------------"
-"Schritt 7 - Performance Counter"
-"---------------------------"
+" ---------------------------"
+" Schritt 7 - Performance Counter"
+" ---------------------------"
 lodctr /r
 lodctr /r
 Clear-Host
 
-"-------------------------------"
-"Schritt 8 - Explorer neustarten"
-"-------------------------------"
+" -------------------------------"
+" Schritt 8 - Explorer neustarten"
+" -------------------------------"
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
 
-"------------------------------"
-"Schritt 9.1 - C++ installieren"
-"------------------------------"
+" ------------------------------"
+" Schritt 9.1 - C++ installieren"
+" ------------------------------"
 ""
 winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
 ""
 winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-agreements
 ""
-"-----------------------------------"
-"Schritt 9.2 - Direct X Installieren"
-"-----------------------------------"
+" -----------------------------------"
+" Schritt 9.2 - Direct X Installieren"
+" -----------------------------------"
 ""
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 ""
-"-----------------------------------------"
-"Schritt 9.3 - .Net-Framework Installieren"
-"-----------------------------------------"
+" -----------------------------------------"
+" Schritt 9.3 - .Net-Framework Installieren"
+" -----------------------------------------"
 ""
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 ""
@@ -189,15 +189,15 @@ winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 ""
-"------------------------------------"
-"Schritt 9.4 - Alle Programme Updaten"
-"------------------------------------"
+" ------------------------------------"
+" Schritt 9.4 - Alle Programme Updaten"
+" ------------------------------------"
 ""
 winget upgrade --all
 ""
-"-----------------------------------------------"
-"Schritt 9.5 - Nuetzliche Programme installieren"
-"-----------------------------------------------"
+" -----------------------------------------------"
+" Schritt 9.5 - Nuetzliche Programme installieren"
+" -----------------------------------------------"
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 ""
 winget install --id=Notepad++.Notepad++ --accept-source-agreements
@@ -209,16 +209,16 @@ winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
 Clear-Host
 
-"-----------------------------------------------"
-"Schritt 10 - Extras"
-"-----------------------------------------------"
+" -----------------------------------------------"
+" Schritt 10 - Extras"
+" -----------------------------------------------"
 
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
 Clear-Host
 
-"==========================="
-"Windows Optimization Pack"
-"==========================="
+" ==========================="
+" Windows Optimization Pack"
+" ==========================="
 $form = New-Object Windows.Forms.Form
 $form.text = "Windows_Optimisation_Pack"
 
@@ -299,10 +299,10 @@ $form.ShowDialog()
 Clear-Host
 
 
-"==========================="
-"Windows Optimization Pack"
-"==========================="
-"Ihr System wurde erforlgreich optimiert"
+" ==========================="
+" Windows Optimization Pack"
+" ==========================="
+" Ihr System wurde erforlgreich optimiert"
 ""
 Remove-Item "$env:temp\WinGet\" -force -Recurse
 Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
