@@ -1,4 +1,4 @@
-<img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/Titelbild.png"> 
+<img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/img/Titelbild.png"> 
 
 ## Key Features
 * Windows Bloatware entfernen
@@ -18,4 +18,4 @@ Die frische Windows installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.
 
-<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/DownloadButton.png"></a>
+<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/img/DownloadButton.png"></a>
