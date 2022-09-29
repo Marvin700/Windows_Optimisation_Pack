@@ -9,6 +9,8 @@
 	https://github.com/Inestic
 #>
 
+Requires -RunAsAdministrator
+
 [CmdletBinding()]
 param
 (
