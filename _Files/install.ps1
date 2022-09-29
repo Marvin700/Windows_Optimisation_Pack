@@ -20,11 +20,11 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 0   - Wiederherstellungspunkt erstellen"
 "Schritt 1   - Download und installation benoetigter Pakete"
 "Schritt 1.1 - Computernamen vergeben"
-"Schritt 2   - Autostart und Tasks deaktivieren"
-"Schritt 3   - Sophia Script"
-"Schritt 4   - o&oShutup"
-"Schritt 5   - Registry Werte aendern"
-"Schritt 6   - Dienste deaktivieren"
+"Schritt 2   - Sophia Script"
+"Schritt 3   - o&oShutup"
+"Schritt 4   - Registry Werte aendern"
+"Schritt 5   - Dienste deaktivieren"
+"Schritt 6   - Autostart und Tasks deaktivieren"
 "Schritt 7   - Performance Counter"
 "Schritt 8   - Explorer neustarten"
 "Schritt 9.1 - C++ 2008-2019 installieren"
@@ -104,26 +104,19 @@ Rename-Computer -NewName $Computername
 Clear-Host
 
 "---------------------------"
-"Schritt 2 - Autostart und Tasks deaktivieren"
-"---------------------------"
-#Start-Process ms-settings:startupapps
-Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
-Clear-Host
-
-"---------------------------"
-"Schritt 3 - Sophia Script"
+"Schritt 2 - Sophia Script"
 "---------------------------"
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
 Clear-Host
 
 "---------------------------"
-"Schritt 4 - o&oShutup"
+"Schritt 3 - o&oShutup"
 "---------------------------"
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
 Clear-Host
 
 "---------------------------"
-"Schritt 5 Registry Werte aendern"
+"Schritt 4 Registry Werte aendern"
 "---------------------------"
 reg import "C:\Windows_Optimisation_Pack\_Files\Registry.reg"
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
@@ -134,7 +127,7 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D
 Clear-Host
 
 "---------------------------"
-"Schritt 6 - Dienste deaktivieren"
+"Schritt 5 - Dienste deaktivieren"
 "---------------------------"
 Set-Service -Name "WpcMonSvc" -StartupType Disabled
 Set-Service -Name "SharedRealitySvc" -StartupType Disabled
@@ -147,6 +140,14 @@ Set-Service -Name "WalletService" -StartupType Disabled
 Set-Service -Name "SmsRouter" -StartupType Disabled
 Set-Service -Name "MapsBroker" -StartupType Disabled
 Set-Service -Name "RetailDemo" -StartupType Disabled
+Clear-Host
+
+
+"---------------------------"
+"Schritt 6 - Autostart und Tasks deaktivieren"
+"---------------------------"
+#Start-Process ms-settings:startupapps
+Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
 "---------------------------"
