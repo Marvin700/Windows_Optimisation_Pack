@@ -53,7 +53,7 @@ Clear-Host
 "--------------------------------------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-#Download und entpacken
+
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
 invoke-expression 'cmd /c start powershell -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle;winget source update;Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\winget.msixbundle -Force -Recurse}'
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\OOSU10.exe
