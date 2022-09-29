@@ -8,8 +8,8 @@
 * Autostart und Tasks bereinigen
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
-* GUI für optionale Pakete
 * Speziell angepasstes Sophia Script
+* GUI für optionale Pakete
 * Weitere Tweaks
 
 ## Before running
