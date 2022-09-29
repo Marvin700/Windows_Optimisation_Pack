@@ -11,8 +11,8 @@ $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 #Administrator Pruefung
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
-	Write-Warning "Keine benoetigten Admin Rechte vorhanden"
-    	Write-Warning "Das Script wird in 20 Sekunden beendet"
+	Write-Warning " Keine benoetigten Admin Rechte vorhanden"
+    	Write-Warning " Das Script wird in 20 Sekunden beendet"
     sleep 20
     exit
 }
@@ -305,6 +305,6 @@ Clear-Host
 " Ihr System wurde erforlgreich optimiert"
 ""
 Remove-Item "$env:temp\WinGet\" -force -Recurse
-Write-Warning "Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
+Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 sleep 60
 Restart-Computer
