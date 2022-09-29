@@ -8,7 +8,7 @@
 * Autostart und Tasks bereinigen
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
-* Configs für Sophia Script & O&OShutUp
+* Sophia Script & O&OShutUp
 * GUI für optionale Pakete
 * Weitere Tweaks
 
