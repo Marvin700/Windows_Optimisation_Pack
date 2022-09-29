@@ -57,7 +57,6 @@ WindowsFeatures -Disable
 #Uninstall optional features using the pop-up dialog box
 WindowsCapabilities -Uninstall
 
-
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
 DiagTrackService -Disable
