@@ -5,7 +5,7 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 
 " ==========================="
-" Windows Optimization Pack"
+"  Windows Optimization Pack"
 " ==========================="
 
 #Administrator Pruefung
@@ -32,10 +32,10 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 9.3 - Nuetzliche Programme installieren"
 "Schritt 10  - Extras"
 ""
-""
 "Automatischer start in 30 Sekunden..."
-timeout 30
+sleep 30
 Clear-Host
+
 
 " ---------------------------------------------"
 " Schritt 0 - Wiederherstellungspunkt erstellen"
