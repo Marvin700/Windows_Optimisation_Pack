@@ -124,9 +124,9 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWOR
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
 Clear-Host
 
-" ---------------------------"
+" --------------------------------"
 " Schritt 5 - Dienste deaktivieren"
-" ---------------------------"
+" --------------------------------"
 Set-Service -Name "WpcMonSvc" -StartupType Disabled
 Set-Service -Name "SharedRealitySvc" -StartupType Disabled
 Set-Service -Name "Fax" -StartupType Disabled
@@ -141,16 +141,16 @@ Set-Service -Name "RetailDemo" -StartupType Disabled
 Clear-Host
 
 
-" ---------------------------"
+" --------------------------------------------"
 " Schritt 6 - Autostart und Tasks deaktivieren"
-" ---------------------------"
+" -------------------------------------------"
 #Start-Process ms-settings:startupapps
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
-" ---------------------------"
+" -------------------------------"
 " Schritt 7 - Performance Counter"
-" ---------------------------"
+" -------------------------------"
 lodctr /r
 lodctr /r
 Clear-Host
@@ -163,9 +163,9 @@ taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
 
-" ------------------------------"
+" ----------------------------------------------"
 " Schritt 9.1 - Laufzeitkomponenten installieren"
-" ------------------------------"
+" ----------------------------------------------"
 ""
 winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
 ""
@@ -197,11 +197,12 @@ Stop-Process -Name HWiNFO64
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
+Remove-Item "$env:temp\WinGet\" -force -Recurse
 Clear-Host
 
-" -----------------------------------------------"
+" ---------------------------"
 " Schritt 10 - Extras"
-" -----------------------------------------------"
+" ---------------------------"
 
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
 Clear-Host
@@ -292,9 +293,9 @@ Clear-Host
 " ==========================="
 " Windows Optimization Pack"
 " ==========================="
+""
 " Ihr System wurde erforlgreich optimiert"
 ""
-Remove-Item "$env:temp\WinGet\" -force -Recurse
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 sleep 60
 Restart-Computer
