@@ -173,8 +173,6 @@ winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-ag
 ""
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 ""
-winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
-""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
