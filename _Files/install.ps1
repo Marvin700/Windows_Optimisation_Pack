@@ -238,10 +238,10 @@ $button3.text = "AutoActions installieren"
 $button3.Location = New-Object Drawing.Point 30,100
 $button3.Size = New-Object Drawing.Point 100,35
 
-# $button4 = New-Object Windows.Forms.Button
-# $button4.text = ""
-# $button4.Location = New-Object Drawing.Point 140,100
-# $button4.Size = New-Object Drawing.Point 100,35
+$button4 = New-Object Windows.Forms.Button
+$button4.text = "DLSS Swapper"
+$button4.Location = New-Object Drawing.Point 140,100
+$button4.Size = New-Object Drawing.Point 100,35
 
 $button1.add_click({
 $Text.Text = "Bitte warten..."
@@ -276,16 +276,19 @@ $Text.Text = "AutoActions wurde installiert"
 $button3.text = ""
 })
 
-# $button4.add_click({
-# 
-# })
+$button4.add_click({
+$Text.Text = "Bitte warten..."
+winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
+$Text.Text = "DLSS Swapper wurde installiert"
+$button3.text = ""
+})
 
 $form.controls.add($Titel)
 $form.controls.add($Text)
 $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
-# $form.controls.add($button4)
+$form.controls.add($button4)
 $form.ShowDialog()
 Clear-Host
 
