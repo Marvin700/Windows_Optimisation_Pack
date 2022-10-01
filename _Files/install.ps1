@@ -18,7 +18,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 "Schritt 0   - Wiederherstellungspunkt erstellen"
-"Schritt 1   - Download und installation benoetigter Pakete"
+"Schritt 1   - Download und Installation benoetigter Pakete"
 "Schritt 1.1 - Computernamen vergeben"
 "Schritt 2   - Sophia Script"
 "Schritt 3   - o&oShutup"
@@ -47,8 +47,8 @@ Clear-Host
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
-Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile C:\Windows_Optimisation_Pack\_Files\winget.msixbundle
-invoke-expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path C:\Windows_Optimisation_Pack\_Files\WinGet.msixbundle;winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\winget.msixbundle -Force -Recurse}'
+Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile $env:temp\winget.msixbundle
+Invoke-expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path $env:temp\winget.msixbundle\WinGet.msixbundle;winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\OOSU10.exe
 Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile $env:temp\Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
@@ -74,7 +74,7 @@ Clear-Host
 " ------------------------------------"
 " Schritt 1.1 - Computernamen vergeben"
 " ------------------------------------"
-$Computername=$(Read-Host -Prompt 'Wie soll der neue Computername lauten')
+$Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
 Clear-Host
 
@@ -122,11 +122,11 @@ Clear-Host
 " ----------------------------------------------"
 " Schritt 7 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
-winget upgrade --all
+Invoke-WebRequest 'https://aka.ms/vs/17/release/VC_redist.x64.exe' -OutFile $env:temp\VC_redist.x64.exe
+Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
 ""
-winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-agreements
-""
-winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-agreements
+Invoke-WebRequest 'https://aka.ms/vs/17/release/VC_redist.x86.exe' -OutFile $env:temp\VC_redist.x86.exe
+Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 ""
@@ -138,6 +138,7 @@ winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
+winget upgrade --all
 Clear-Host
 
 " -------------------------------"
