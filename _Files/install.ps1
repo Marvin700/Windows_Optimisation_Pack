@@ -168,9 +168,9 @@ Clear-Host
 " Schritt 9.1 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
 ""
-winget install --id=Microsoft.VC++2015-2022Redist-x64 --exact --accept-source-agreements
+winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-agreements
 ""
-winget install --id=Microsoft.VC++2015-2022Redist-x86 --exact --accept-source-agreements
+winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-agreements
 ""
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 ""
@@ -198,7 +198,7 @@ winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-
+dism.exe /online /Cleanup-Image /StartComponentCleanup 
 sfc /SCANNOW
 
 Clear-Host
