@@ -247,7 +247,6 @@ WaitNetworkStartup -Enable
 # Do not let Windows manage my default printer
 WindowsManageDefaultPrinter -Disable
 
-
 # Receive updates for other Microsoft products when you update Windows
 UpdateMicrosoftProducts -Enable
 
