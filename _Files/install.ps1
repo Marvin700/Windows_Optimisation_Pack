@@ -48,7 +48,7 @@ Clear-Host
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
 Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile $env:temp\winget.msixbundle
-Invoke-expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path $env:temp\winget.msixbundle\WinGet.msixbundle;winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
+Invoke-expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path $env:temp\winget.msixbundle;winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
 Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\OOSU10.exe
 Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile $env:temp\Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
