@@ -32,7 +32,6 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 9.3 - Nuetzliche Programme installieren"
 "Schritt 10  - Extras"
 ""
-"Automatischer start in 30 Sekunden..."
 timeout 30
 Clear-Host
 
@@ -308,5 +307,5 @@ Clear-Host
 " Ihr System wurde erforlgreich optimiert"
 ""
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
-sleep 60
+timeout 60
 Restart-Computer
