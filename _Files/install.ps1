@@ -193,8 +193,14 @@ Stop-Process -Name HWiNFO64
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
-Remove-Item "$env:temp\WinGet\" -force -Recurse
+
+Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+
 Clear-Host
+
+
 
 " ---------------------------"
 " Schritt 10 - Extras"
@@ -286,6 +292,8 @@ $form.controls.add($button2)
 $form.controls.add($button3)
 $form.controls.add($button4)
 $form.ShowDialog()
+
+Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
 Clear-Host
 
 
