@@ -25,12 +25,10 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 4   - Registry Werte aendern"
 "Schritt 5   - Dienste deaktivieren"
 "Schritt 6   - Autostart und Tasks deaktivieren"
-"Schritt 7   - Performance Counter"
-"Schritt 8   - Explorer neustarten"
-"Schritt 9.1 - Laufzeitkomponenten installieren"
-"Schritt 9.2 - Alle Programme Updaten"
-"Schritt 9.3 - Nuetzliche Programme installieren"
-"Schritt 10  - Extras"
+"Schritt 7.1 - Laufzeitkomponenten installieren"
+"Schritt 7.2 - Nuetzliche Programme installieren"
+"Schritt 8   - Windows Refresh"
+"Schritt 9   - Extras"
 ""
 timeout 30
 Clear-Host
@@ -121,7 +119,6 @@ Set-Service -Name "MapsBroker" -StartupType Disabled
 Set-Service -Name "RetailDemo" -StartupType Disabled
 Clear-Host
 
-
 " --------------------------------------------"
 " Schritt 6 - Autostart und Tasks deaktivieren"
 " -------------------------------------------"
@@ -129,24 +126,10 @@ Clear-Host
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
-" -------------------------------"
-" Schritt 7 - Performance Counter"
-" -------------------------------"
-lodctr /r
-lodctr /r
-Clear-Host
-
-" -------------------------------"
-" Schritt 8 - Explorer neustarten"
-" -------------------------------"
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
-taskkill /f /im explorer.exe
-Start-Process explorer.exe
-Clear-Host
-
 " ----------------------------------------------"
-" Schritt 9.1 - Laufzeitkomponenten installieren"
+" Schritt 7.1 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
+winget upgrade --all
 ""
 winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-agreements
 ""
@@ -158,14 +141,8 @@ winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 ""
-" ------------------------------------"
-" Schritt 9.2 - Alle Programme Updaten"
-" ------------------------------------"
-""
-winget upgrade --all
-""
 " -----------------------------------------------"
-" Schritt 9.3 - Nuetzliche Programme installieren"
+" Schritt 7.3 - Nuetzliche Programme installieren"
 " -----------------------------------------------"
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 ""
@@ -174,11 +151,20 @@ Stop-Process -Name HWiNFO64
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
+Clear-Host
 
+" -------------------------------"
+" Schritt 8 - Windows Refresh"
+" -------------------------------"
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
+gpupdate.exe /force
 Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-
+lodctr /r
+lodctr /r
+taskkill /f /im explorer.exe
+Start-Process explorer.exe
 Clear-Host
 
 
