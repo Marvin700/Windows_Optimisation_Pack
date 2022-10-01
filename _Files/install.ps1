@@ -33,7 +33,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 10  - Extras"
 ""
 "Automatischer start in 30 Sekunden..."
-sleep 30
+timeout 30
 Clear-Host
 
 
