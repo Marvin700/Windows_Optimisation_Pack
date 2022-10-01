@@ -46,7 +46,7 @@ REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V 
 Clear-Host
 
 " --------------------------------------------------------"
-" Schritt 1 - Download und installation benoetigter Pakete"
+" Schritt 1 - Download und Installation benoetigter Pakete"
 " --------------------------------------------------------"
 #Windows Version bestimmen
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
