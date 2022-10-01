@@ -12,6 +12,9 @@
 * Sophia Script & O&OShutUp
 * GUI für optionale Pakete
 * Weitere Tweaks
+<BR>
+<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/img/DownloadButton.png"></a>
+
 
 ## Before running
 > **Note**: <BR> 
@@ -19,4 +22,3 @@ Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.
 
-<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/img/DownloadButton.png"></a>
