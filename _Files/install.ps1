@@ -198,8 +198,6 @@ winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-dism.exe /online /Cleanup-Image /StartComponentCleanup 
-sfc /SCANNOW
 
 Clear-Host
 
