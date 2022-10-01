@@ -22,12 +22,11 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 1.1 - Computernamen vergeben"
 "Schritt 2   - Sophia Script"
 "Schritt 3   - o&oShutup"
-"Schritt 4   - Registry Werte aendern"
-"Schritt 5   - Dienste deaktivieren"
+"Schritt 4   - Windows Optimierungen"
 "Schritt 6   - Autostart und Tasks deaktivieren"
-"Schritt 7   - Laufzeitkomponenten installieren"
-"Schritt 8   - Windows Refresh"
-"Schritt 9   - Extras"
+"Schritt 6   - Laufzeitkomponenten installieren"
+"Schritt 7   - Windows Refresh"
+"Schritt 8   - Extras"
 ""
 timeout 30
 Clear-Host
@@ -70,8 +69,8 @@ Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1 -Des
 }
 
 New-Item -Path "C:\Spiele" -ItemType Directory
-
 Clear-Host
+
 " ------------------------------------"
 " Schritt 1.1 - Computernamen vergeben"
 " ------------------------------------"
@@ -91,20 +90,15 @@ Clear-Host
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
 Clear-Host
 
-" ---------------------------"
-" Schritt 4 Registry Werte aendern"
-" ---------------------------"
-reg import "C:\Windows_Optimisation_Pack\_Files\Registry.reg"
+" -------------------------------"
+" Schritt 4 Windows Optimierungen"
+" -------------------------------"
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
-Clear-Host
 
-" --------------------------------"
-" Schritt 5 - Dienste deaktivieren"
-" --------------------------------"
 Set-Service -Name "WpcMonSvc" -StartupType Disabled
 Set-Service -Name "SharedRealitySvc" -StartupType Disabled
 Set-Service -Name "Fax" -StartupType Disabled
@@ -119,7 +113,7 @@ Set-Service -Name "RetailDemo" -StartupType Disabled
 Clear-Host
 
 " --------------------------------------------"
-" Schritt 6 - Autostart und Tasks deaktivieren"
+" Schritt 5 - Autostart und Tasks deaktivieren"
 " -------------------------------------------"
 #Start-Process ms-settings:startupapps
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
