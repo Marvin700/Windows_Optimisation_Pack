@@ -25,8 +25,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 4   - Registry Werte aendern"
 "Schritt 5   - Dienste deaktivieren"
 "Schritt 6   - Autostart und Tasks deaktivieren"
-"Schritt 7.1 - Laufzeitkomponenten installieren"
-"Schritt 7.2 - Nuetzliche Programme installieren"
+"Schritt 7   - Laufzeitkomponenten installieren"
 "Schritt 8   - Windows Refresh"
 "Schritt 9   - Extras"
 ""
@@ -127,7 +126,7 @@ Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
 " ----------------------------------------------"
-" Schritt 7.1 - Laufzeitkomponenten installieren"
+" Schritt 7 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
 winget upgrade --all
 ""
@@ -135,19 +134,13 @@ winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-ag
 ""
 winget install --id=Microsoft.VC++2015-2019Redist-x64 --exact --accept-source-agreements
 ""
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements
-""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 ""
-" -----------------------------------------------"
-" Schritt 7.3 - Nuetzliche Programme installieren"
-" -----------------------------------------------"
-winget install --id=RARLab.WinRAR --exact --accept-source-agreements
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 ""
-winget install --id=REALiX.HWiNFO --exact --accept-source-agreements
-Stop-Process -Name HWiNFO64
+winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 ""
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
@@ -167,10 +160,8 @@ taskkill /f /im explorer.exe
 Start-Process explorer.exe
 Clear-Host
 
-
-
 " ---------------------------"
-" Schritt 10 - Extras"
+" Schritt 9 - Extras"
 " ---------------------------"
 
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
