@@ -16,6 +16,10 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
 }
 
+function SpieleOrdner{
+New-Item -Path "C:\Spiele" -ItemType Directory
+}
+
 function ComputerName{
 $Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
@@ -79,6 +83,23 @@ lodctr /r
 lodctr /r
 taskkill /f /im explorer.exe
 Start-Process explorer.exe
+}
+
+function Laufzeitkomponentenh{
+# Winget muss vorhanden sein
+Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
+Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Destination "$env:temp\VC_redist.x86.exe"
+Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
+Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements
+winget upgrade --all
+}
+
+function Programme{
+winget install --id=RARLab.WinRAR --exact --accept-source-agreements
+winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 }
 
 function Extras{
@@ -151,8 +172,6 @@ $form.ShowDialog()
 }
 
 
-
-
 " ==========================="
 "  Windows Optimization Pack"
 " ==========================="
@@ -167,46 +186,6 @@ $form.ShowDialog()
 ""
 timeout 30
 Clear-Host
-
-" ---------------------------"
-" Schritt 1 - Vorbereitung"
-" ---------------------------"
-# Download
-
-
-
-Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
-Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Destination "$env:temp\VC_redist.x86.exe"
-Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
-Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
-
-New-Item -Path "C:\Spiele" -ItemType Directory
-Clear-Host
-
-
-
-# Autoruns
-
-Clear-Host
-
-" ----------------------------------------------"
-" Schritt 6 - Laufzeitkomponenten installieren"
-" ----------------------------------------------"
-
-
-""
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
-""
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
-""
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements
-""
-winget install --id=RARLab.WinRAR --exact --accept-source-agreements
-""
-winget install --id=VideoLAN.VLC --exact --accept-source-agreements
-""
-winget upgrade --all
-
 
 
 " Ihr System wurde erforlgreich optimiert"
