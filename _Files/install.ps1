@@ -1,6 +1,83 @@
 #Testversion
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\img\ -Force -Recurse
 
+# Extras
+function Extras{
+[reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
+$form = New-Object Windows.Forms.Form
+$form.text = "Windows_Optimisation_Pack"
+$Titel = New-Object Windows.Forms.Label
+$Titel.Location = New-Object Drawing.Point 70,25
+$Titel.Size = New-Object Drawing.Point 200,15
+$Titel.text = "Windows Optimisation Pack"
+$Text = New-Object Windows.Forms.Label
+$Text.Location = New-Object Drawing.Point 60,170
+$Text.Size = New-Object Drawing.Point 200,15
+$Text.text = ""
+$button1 = New-Object Windows.Forms.Button
+$button1.text = "Process Lasso installieren"
+$button1.Location = New-Object Drawing.Point 30,60
+$button1.Size = New-Object Drawing.Point 100,35
+$button2 = New-Object Windows.Forms.Button
+$button2.text = "PS4 Controller installieren"
+$button2.Location = New-Object Drawing.Point 140,60
+$button2.Size = New-Object Drawing.Point 100,35
+$button3 = New-Object Windows.Forms.Button
+$button3.text = "AutoActions installieren"
+$button3.Location = New-Object Drawing.Point 30,100
+$button3.Size = New-Object Drawing.Point 100,35
+$button4 = New-Object Windows.Forms.Button
+$button4.text = "DLSS Swapper"
+$button4.Location = New-Object Drawing.Point 140,100
+$button4.Size = New-Object Drawing.Point 100,35
+$button1.add_click({
+$Text.Text = "Bitte warten..."
+winget install --id=BitSum.ProcessLasso --accept-source-agreements
+$Text.Text = "Processlasso wurde installiert"
+$button1.text = ""
+})
+$button2.add_click({
+$Text.Text = "Bitte warten..."
+Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
+Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
+Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
+$Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
+$Shortcut.Save()
+$Text.Text = "DS4Windows wurde installiert"
+$button2.text = ""
+})
+$button3.add_click({
+$Text.Text = "Bitte warten..."
+Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
+Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
+Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
+$Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
+$Shortcut.Save()
+$Text.Text = "AutoActions wurde installiert"
+$button3.text = ""
+})
+$button4.add_click({
+$Text.Text = "Bitte warten..."
+winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
+$Text.Text = "DLSS Swapper wurde installiert"
+$button3.text = ""
+})
+$form.controls.add($Titel)
+$form.controls.add($Text)
+$form.controls.add($button1)
+$form.controls.add($button2)
+$form.controls.add($button3)
+$form.controls.add($button4)
+$form.ShowDialog()
+}
+
+
+
+
 Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 
@@ -126,95 +203,7 @@ Clear-Host
 " Schritt 8 - Extras"
 " ---------------------------"
 
-[reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
-Clear-Host
 
-" ==========================="
-" Windows Optimization Pack"
-" ==========================="
-$form = New-Object Windows.Forms.Form
-$form.text = "Windows_Optimisation_Pack"
-
-$Titel = New-Object Windows.Forms.Label
-$Titel.Location = New-Object Drawing.Point 70,25
-$Titel.Size = New-Object Drawing.Point 200,15
-$Titel.text = "Windows Optimisation Pack"
-
-$Text = New-Object Windows.Forms.Label
-$Text.Location = New-Object Drawing.Point 60,170
-$Text.Size = New-Object Drawing.Point 200,15
-$Text.text = ""
-
-$button1 = New-Object Windows.Forms.Button
-$button1.text = "Process Lasso installieren"
-$button1.Location = New-Object Drawing.Point 30,60
-$button1.Size = New-Object Drawing.Point 100,35
-
-$button2 = New-Object Windows.Forms.Button
-$button2.text = "PS4 Controller installieren"
-$button2.Location = New-Object Drawing.Point 140,60
-$button2.Size = New-Object Drawing.Point 100,35
-
-$button3 = New-Object Windows.Forms.Button
-$button3.text = "AutoActions installieren"
-$button3.Location = New-Object Drawing.Point 30,100
-$button3.Size = New-Object Drawing.Point 100,35
-
-$button4 = New-Object Windows.Forms.Button
-$button4.text = "DLSS Swapper"
-$button4.Location = New-Object Drawing.Point 140,100
-$button4.Size = New-Object Drawing.Point 100,35
-
-$button1.add_click({
-$Text.Text = "Bitte warten..."
-winget install --id=BitSum.ProcessLasso --accept-source-agreements
-$Text.Text = "Processlasso wurde installiert"
-$button1.text = ""
-})
-
-$button2.add_click({
-$Text.Text = "Bitte warten..."
-Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
-Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
-Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
-$Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
-$Shortcut.Save()
-$Text.Text = "DS4Windows wurde installiert"
-$button2.text = ""
-})
-
-$button3.add_click({
-$Text.Text = "Bitte warten..."
-Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
-Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
-Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
-$Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
-$Shortcut.Save()
-$Text.Text = "AutoActions wurde installiert"
-$button3.text = ""
-})
-
-$button4.add_click({
-$Text.Text = "Bitte warten..."
-winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
-$Text.Text = "DLSS Swapper wurde installiert"
-$button3.text = ""
-})
-
-$form.controls.add($Titel)
-$form.controls.add($Text)
-$form.controls.add($button1)
-$form.controls.add($button2)
-$form.controls.add($button3)
-$form.controls.add($button4)
-$form.ShowDialog()
-
-Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-Clear-Host
 
 
 " ==========================="
