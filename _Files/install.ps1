@@ -19,7 +19,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "Schritt 2   - Sophia Script"
 "Schritt 3   - o&oShutup"
 "Schritt 4   - Windows Optimierungen"
-"Schritt 6   - Autostart und Tasks deaktivieren"
+"Schritt 5   - Autostart und Tasks deaktivieren"
 "Schritt 6   - Laufzeitkomponenten installieren"
 "Schritt 7   - Windows Refresh"
 "Schritt 8   - Extras"
@@ -85,7 +85,7 @@ Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
 " ----------------------------------------------"
-" Schritt 7 - Laufzeitkomponenten installieren"
+" Schritt 6 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
 Invoke-WebRequest 'https://aka.ms/vs/17/release/VC_redist.x64.exe' -OutFile $env:temp\VC_redist.x64.exe
 Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
@@ -107,7 +107,7 @@ winget upgrade --all
 Clear-Host
 
 " -------------------------------"
-" Schritt 8 - Windows Refresh"
+" Schritt 7 - Windows Refresh"
 " -------------------------------"
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
 gpupdate.exe /force
@@ -121,7 +121,7 @@ Start-Process explorer.exe
 Clear-Host
 
 " ---------------------------"
-" Schritt 9 - Extras"
+" Schritt 8 - Extras"
 " ---------------------------"
 
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
