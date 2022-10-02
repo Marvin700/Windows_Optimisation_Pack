@@ -175,6 +175,7 @@ SystemPunkt
 ComputerName
 Laufzeitkomponenten
 Extras
+SpieleOrdner
 SophiaScript
 Programme
 Autoruns
