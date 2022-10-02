@@ -21,6 +21,7 @@ New-Item -Path "C:\Spiele" -ItemType Directory
 }
 
 function ComputerName{
+Clear-Host
 $Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
 }
@@ -184,11 +185,10 @@ AdminPrüfung
 "Schritt 8   - Extras"
 ""
 timeout 30
-
 SystemPunkt
-ComputerName
 Laufzeitkomponenten
 Extras
+ComputerName
 SpieleOrdner
 SophiaScript
 ooShutup
