@@ -51,9 +51,9 @@ Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip
 Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
 Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
 Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
-New-Item -Path "C:\Spiele" -ItemType Directory
 $Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
+New-Item -Path "C:\Spiele" -ItemType Directory
 Clear-Host
 
 # Sophia Script
