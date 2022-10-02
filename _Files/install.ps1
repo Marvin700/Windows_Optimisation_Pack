@@ -47,6 +47,8 @@ Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
+Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
+Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Destination "$env:temp\VC_redist.x86.exe"
 Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
 Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
 Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
@@ -89,10 +91,7 @@ Clear-Host
 " ----------------------------------------------"
 " Schritt 6 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
-Invoke-WebRequest 'https://aka.ms/vs/17/release/VC_redist.x64.exe' -OutFile $env:temp\VC_redist.x64.exe
-Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
-""
-Invoke-WebRequest 'https://aka.ms/vs/17/release/VC_redist.x86.exe' -OutFile $env:temp\VC_redist.x86.exe
+
 Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
