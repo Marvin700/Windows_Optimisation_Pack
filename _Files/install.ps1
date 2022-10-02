@@ -48,19 +48,15 @@ Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.10.v5.13.4.zip" -Destination "$env:temp\Sophia.zip"
 }}
-Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia Script *" -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\
-Move-Item -Path C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1 -Destination C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1 -force
-
-Invoke-WebRequest 'https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' -OutFile $env:temp\winget.msixbundle
-Invoke-expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path $env:temp\winget.msixbundle;winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
-Invoke-WebRequest 'https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe' -OutFile C:\Windows_Optimisation_Pack\_Files\OOSU10.exe
-Invoke-WebRequest 'https://download.sysinternals.com/files/Autoruns.zip' -OutFile $env:temp\Autoruns.zip
+Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
+Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
+Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
+Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
 Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
 Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
-
-
-
 New-Item -Path "C:\Spiele" -ItemType Directory
 Clear-Host
 
