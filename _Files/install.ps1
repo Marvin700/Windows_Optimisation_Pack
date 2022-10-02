@@ -61,21 +61,13 @@ $Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
 Clear-Host
 
-" ---------------------------"
-" Schritt 2 - Sophia Script"
-" ---------------------------"
+# Sophia Script
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
-Clear-Host
 
-" ---------------------------"
-" Schritt 3 - o&oShutup"
-" ---------------------------"
+# o&oShutup
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
-Clear-Host
 
-" -------------------------------"
-" Schritt 4 Windows Optimierungen"
-" -------------------------------"
+# Windows Optimierungen"
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
@@ -93,12 +85,8 @@ Set-Service -Name "WalletService" -StartupType Disabled
 Set-Service -Name "SmsRouter" -StartupType Disabled
 Set-Service -Name "MapsBroker" -StartupType Disabled
 Set-Service -Name "RetailDemo" -StartupType Disabled
-Clear-Host
 
-" --------------------------------------------"
-" Schritt 5 - Autostart und Tasks deaktivieren"
-" -------------------------------------------"
-#Start-Process ms-settings:startupapps
+# Autoruns
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
 Clear-Host
 
