@@ -71,8 +71,6 @@ $form.controls.add($button4)
 $form.ShowDialog() }
 
 
-
-
 Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 
