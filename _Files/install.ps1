@@ -15,8 +15,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 " ==========================="
 "  Windows Optimization Pack"
 " ==========================="
-"Schritt 0   - Wiederherstellungspunkt erstellen"
-"Schritt 1   - Vorbereitung"
+"Schritt 1   - Vorbereitung der Komponenten"
 "Schritt 2   - Sophia Script"
 "Schritt 3   - o&oShutup"
 "Schritt 4   - Windows Optimierungen"
@@ -31,15 +30,17 @@ Clear-Host
 " ---------------------------------------------"
 " Schritt 0 - Wiederherstellungspunkt erstellen"
 " ---------------------------------------------"
+
+
+" ---------------------------"
+" Schritt 1 - Vorbereitung"
+" ---------------------------"
 Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
 Clear-Host
 
-" ---------------------------"
-" Schritt 1 - Vorbereitung"
-" ---------------------------"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip" -Destination "$env:temp\Sophia.zip"
