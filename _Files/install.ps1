@@ -170,6 +170,20 @@ $form.controls.add($button4)
 $form.ShowDialog()
 }
 
+AdminPrüfung
+SystemPunkt
+ComputerName
+Laufzeitkomponenten
+Extras
+SophiaScript
+Programme
+Autoruns
+ooShutup
+WindowsRefresh
+
+SpieleOrdner
+
+
 
 " ==========================="
 "  Windows Optimization Pack"
