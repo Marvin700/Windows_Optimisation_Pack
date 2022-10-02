@@ -180,14 +180,6 @@ Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Des
 Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
 Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
 
-
-
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
-
-
-
-
-
 New-Item -Path "C:\Spiele" -ItemType Directory
 Clear-Host
 
