@@ -4,11 +4,6 @@ Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\img\ -Force -Recurse
 Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 
-" ==========================="
-"  Windows Optimization Pack"
-" ==========================="
-
-#Administrator Pruefung
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
 	Write-Warning " Keine benoetigten Admin Rechte vorhanden"
@@ -17,6 +12,9 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
+" ==========================="
+"  Windows Optimization Pack"
+" ==========================="
 "Schritt 0   - Wiederherstellungspunkt erstellen"
 "Schritt 1   - Download und Installation benoetigter Pakete"
 "Schritt 1.1 - Computernamen vergeben"
@@ -30,7 +28,6 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 ""
 timeout 30
 Clear-Host
-
 
 " ---------------------------------------------"
 " Schritt 0 - Wiederherstellungspunkt erstellen"
