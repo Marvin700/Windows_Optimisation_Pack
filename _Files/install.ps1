@@ -1,7 +1,86 @@
-#Testversion
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\img\ -Force -Recurse
+$Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
 
-# Extras
+function AdminPrüfung{
+If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{
+	Write-Warning " Keine benoetigten Admin Rechte vorhanden"
+    	Write-Warning " Das Script wird in 20 Sekunden beendet"
+    sleep 20
+    exit
+}}
+
+function SystemPunkt{
+Enable-ComputerRestore -Drive "C:\"
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
+Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
+}
+
+function ComputerName{
+$Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
+Rename-Computer -NewName $Computername
+}
+
+function SophiaScript{
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip" -Destination "$env:temp\Sophia.zip"
+}
+else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.10.v5.13.4.zip" -Destination "$env:temp\Sophia.zip"
+}}
+Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
+Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
+Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force
+#.Net-Framework für Sophia Script
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
+Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
+Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+}
+
+function ooShutup{
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
+C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
+}
+
+function WindowsTweaks{
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
+Set-Service -Name "WpcMonSvc" -StartupType Disabled
+Set-Service -Name "SharedRealitySvc" -StartupType Disabled
+Set-Service -Name "Fax" -StartupType Disabled
+Set-Service -Name "autotimesvc" -StartupType Disabled
+Set-Service -Name "wisvc" -StartupType Disabled
+Set-Service -Name "SDRSVC" -StartupType Disabled
+Set-Service -Name "MixedRealityOpenXRSvc" -StartupType Disabled
+Set-Service -Name "WalletService" -StartupType Disabled
+Set-Service -Name "SmsRouter" -StartupType Disabled
+Set-Service -Name "MapsBroker" -StartupType Disabled
+Set-Service -Name "RetailDemo" -StartupType Disabled
+}
+
+function Autoruns{
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
+Expand-Archive "$env:temp\Autoruns.zip" "$env:temp\Autoruns"
+Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
+Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
+}
+
+function WindowsRefresh{
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
+gpupdate.exe /force
+Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+lodctr /r
+lodctr /r
+taskkill /f /im explorer.exe
+Start-Process explorer.exe
+}
+
 function Extras{
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
 $form = New-Object Windows.Forms.Form
@@ -68,19 +147,11 @@ $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
 $form.controls.add($button4)
-$form.ShowDialog() }
-
-
-Clear-Host
-$Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
-
-If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
-{
-	Write-Warning " Keine benoetigten Admin Rechte vorhanden"
-    	Write-Warning " Das Script wird in 20 Sekunden beendet"
-    sleep 20
-    exit
+$form.ShowDialog()
 }
+
+
+
 
 " ==========================="
 "  Windows Optimization Pack"
@@ -100,70 +171,37 @@ Clear-Host
 " ---------------------------"
 " Schritt 1 - Vorbereitung"
 " ---------------------------"
-# Systemwiederherstellungspunkt
-Enable-ComputerRestore -Drive "C:\"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
-Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
-
 # Download
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip" -Destination "$env:temp\Sophia.zip"
-}
-else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.10.v5.13.4.zip" -Destination "$env:temp\Sophia.zip"
-}}
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
-Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
+
+
+
 Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
 Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Destination "$env:temp\VC_redist.x86.exe"
-Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
-Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
-Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
-Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force
-Expand-Archive "$env:temp\Autoruns.zip" "$env:temp\Autoruns"
-Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
-$Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
-Rename-Computer -NewName $Computername
+Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
+Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
+
+
+
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
+
+
+
+
+
 New-Item -Path "C:\Spiele" -ItemType Directory
 Clear-Host
 
-# Sophia Script
-Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
 
-# o&oShutup
-C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
-
-# Windows Optimierungen"
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
-Set-Service -Name "WpcMonSvc" -StartupType Disabled
-Set-Service -Name "SharedRealitySvc" -StartupType Disabled
-Set-Service -Name "Fax" -StartupType Disabled
-Set-Service -Name "autotimesvc" -StartupType Disabled
-Set-Service -Name "wisvc" -StartupType Disabled
-Set-Service -Name "SDRSVC" -StartupType Disabled
-Set-Service -Name "MixedRealityOpenXRSvc" -StartupType Disabled
-Set-Service -Name "WalletService" -StartupType Disabled
-Set-Service -Name "SmsRouter" -StartupType Disabled
-Set-Service -Name "MapsBroker" -StartupType Disabled
-Set-Service -Name "RetailDemo" -StartupType Disabled
 
 # Autoruns
-Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
+
 Clear-Host
 
 " ----------------------------------------------"
 " Schritt 6 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
 
-Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
-Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
+
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 ""
@@ -176,33 +214,9 @@ winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 ""
 winget upgrade --all
-Clear-Host
-
-" -------------------------------"
-" Schritt 7 - Windows Refresh"
-" -------------------------------"
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
-gpupdate.exe /force
-Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-lodctr /r
-lodctr /r
-taskkill /f /im explorer.exe
-Start-Process explorer.exe
-Clear-Host
-
-" ---------------------------"
-" Schritt 8 - Extras"
-" ---------------------------"
 
 
 
-
-" ==========================="
-" Windows Optimization Pack"
-" ==========================="
-""
 " Ihr System wurde erforlgreich optimiert"
 ""
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
