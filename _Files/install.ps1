@@ -27,11 +27,6 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 timeout 30
 Clear-Host
 
-" ---------------------------------------------"
-" Schritt 0 - Wiederherstellungspunkt erstellen"
-" ---------------------------------------------"
-
-
 " ---------------------------"
 " Schritt 1 - Vorbereitung"
 " ---------------------------"
