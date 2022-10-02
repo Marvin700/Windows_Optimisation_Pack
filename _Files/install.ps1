@@ -182,9 +182,6 @@ Autoruns
 ooShutup
 WindowsRefresh
 
-SpieleOrdner
-
-
 
 " ==========================="
 "  Windows Optimization Pack"
