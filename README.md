@@ -1,6 +1,7 @@
 <img src="https://github.com/Marvin700/Windows_Optimisation_Pack/blob/main/_Files/img/Titelbild.png"> 
 
 ## Key Features
+* Systemwiederherstellungspunkt
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
 * Feedback und Error Reporting dektivieren
