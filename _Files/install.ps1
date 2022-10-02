@@ -16,8 +16,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 "  Windows Optimization Pack"
 " ==========================="
 "Schritt 0   - Wiederherstellungspunkt erstellen"
-"Schritt 1   - Download und Installation benoetigter Pakete"
-"Schritt 1.1 - Computernamen vergeben"
+"Schritt 1   - Vorbereitung"
 "Schritt 2   - Sophia Script"
 "Schritt 3   - o&oShutup"
 "Schritt 4   - Windows Optimierungen"
@@ -38,9 +37,9 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
 Clear-Host
 
-" --------------------------------------------------------"
-" Schritt 1 - Download und Installation benoetigter Pakete"
-" --------------------------------------------------------"
+" ---------------------------"
+" Schritt 1 - Vorbereitung"
+" ---------------------------"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip" -Destination "$env:temp\Sophia.zip"
@@ -58,11 +57,6 @@ Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-Ap
 Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
 Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
 New-Item -Path "C:\Spiele" -ItemType Directory
-Clear-Host
-
-" ------------------------------------"
-" Schritt 1.1 - Computernamen vergeben"
-" ------------------------------------"
 $Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
 Rename-Computer -NewName $Computername
 Clear-Host
