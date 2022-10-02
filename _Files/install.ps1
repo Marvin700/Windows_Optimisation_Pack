@@ -92,6 +92,7 @@ Clear-Host
 " Schritt 6 - Laufzeitkomponenten installieren"
 " ----------------------------------------------"
 
+Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
 Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
 ""
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
