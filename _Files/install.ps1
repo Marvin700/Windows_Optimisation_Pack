@@ -34,8 +34,7 @@ $button1.add_click({
 $Text.Text = "Bitte warten..."
 winget install --id=BitSum.ProcessLasso --accept-source-agreements
 $Text.Text = "Processlasso wurde installiert"
-$button1.text = ""
-})
+$button1.text = "" })
 $button2.add_click({
 $Text.Text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
@@ -46,8 +45,7 @@ $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
 $Shortcut.Save()
 $Text.Text = "DS4Windows wurde installiert"
-$button2.text = ""
-})
+$button2.text = "" })
 $button3.add_click({
 $Text.Text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
@@ -58,22 +56,19 @@ $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
 $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save()
 $Text.Text = "AutoActions wurde installiert"
-$button3.text = ""
-})
+$button3.text = "" })
 $button4.add_click({
 $Text.Text = "Bitte warten..."
 winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
 $Text.Text = "DLSS Swapper wurde installiert"
-$button3.text = ""
-})
+$button3.text = "" })
 $form.controls.add($Titel)
 $form.controls.add($Text)
 $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
 $form.controls.add($button4)
-$form.ShowDialog()
-}
+$form.ShowDialog() }
 
 
 
