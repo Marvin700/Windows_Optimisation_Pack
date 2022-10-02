@@ -170,22 +170,10 @@ $form.controls.add($button4)
 $form.ShowDialog()
 }
 
-AdminPrüfung
-SystemPunkt
-ComputerName
-Laufzeitkomponenten
-Extras
-SpieleOrdner
-SophiaScript
-Programme
-Autoruns
-ooShutup
-WindowsRefresh
-
-
 " ==========================="
 "  Windows Optimization Pack"
 " ==========================="
+AdminPrüfung
 "Schritt 1   - Vorbereitung der Komponenten"
 "Schritt 2   - Sophia Script"
 "Schritt 3   - o&oShutup"
@@ -196,7 +184,19 @@ WindowsRefresh
 "Schritt 8   - Extras"
 ""
 timeout 30
-Clear-Host
+
+SystemPunkt
+ComputerName
+Laufzeitkomponenten
+Extras
+SpieleOrdner
+SophiaScript
+ooShutup
+Autoruns
+Programme
+WindowsRefresh
+
+
 
 
 " Ihr System wurde erforlgreich optimiert"
