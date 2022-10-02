@@ -36,9 +36,6 @@ Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/
 Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
 Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force
-#.Net-Framework für Sophia Script
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
-Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements;winget source update}'
 Powershell.exe -executionpolicy remotesigned -File "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
 }
 
@@ -91,6 +88,9 @@ Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Des
 Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Destination "$env:temp\VC_redist.x86.exe"
 Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
 Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
+Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
+winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
