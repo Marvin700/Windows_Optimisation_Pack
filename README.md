@@ -4,7 +4,7 @@
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
 * Cortana entfernrn
-* Windows Optimierungen
+* Windows optimieren
 * Autostart und Tasks bereinigen
 * Zeiger Beschleunigung deaktivieren
 * Laufzeitkomponenten installieren
@@ -20,4 +20,4 @@
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  <BR>
-Falls Funktionen nicht ggeschwünscht, einfach auskommentieren.
+Falls Funktionen nicht geschwünscht sind, können diese unten im Script auskommentiert werden.
