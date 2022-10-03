@@ -18,6 +18,6 @@
 ## Before running
 > **Note**: <BR> 
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
-Das Script muss als Administrator ausgeführt und unter C: liegen. <BR>
+Das Script muss als Administrator ausgeführt werden und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  <BR>
 Falls Funktionen nicht geschwünscht sind, können diese unten im Script auskommentiert werden.
