@@ -26,10 +26,10 @@ Restart-Computer}
 
 function AdminPrüfung{
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-	Write-Warning " Keine benoetigten Admin Rechte vorhanden"
-    Write-Warning " Das Script wird in 20 Sekunden beendet"
-    sleep 20
-    exit}}
+Write-Warning " Keine benoetigten Admin Rechte vorhanden"
+Write-Warning " Das Script wird in 20 Sekunden beendet"
+sleep 20
+exit}}
 
 function SystemPunkt{
 Enable-ComputerRestore -Drive "C:\"
