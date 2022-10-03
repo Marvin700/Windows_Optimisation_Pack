@@ -96,7 +96,6 @@ Start-Process explorer.exe}
 
 function Laufzeitkomponenten{
 Clear-Host
-""
 " Laufzeitkomponenten installieren..."
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
 Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
@@ -112,7 +111,6 @@ winget upgrade --all --accept-source-agreements}
 
 function Programme{
 Clear-Host
-""
 " Programme installieren..."
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements}
