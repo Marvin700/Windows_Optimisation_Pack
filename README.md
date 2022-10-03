@@ -20,4 +20,4 @@
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  <BR>
-Im unteren Teil die aufgerufenen Funktionen ausdkommentieren, wenn nicht gewollt.
+Falls Funktionen nicht ggeschwünscht, einfach auskommentieren.
