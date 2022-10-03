@@ -1,31 +1,31 @@
-$Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
 
 
-function begruesung{
+function Begruesung{
+Clear-Host
 " ==========================="
 "  Windows Optimization Pack"
 " ==========================="
-"Schritt 1   - Vorbereitung der Komponenten"
-"Schritt 2   - Sophia Script"
-"Schritt 3   - o&oShutup"
-"Schritt 4   - Windows Optimierungen"
-"Schritt 5   - Autostart und Tasks deaktivieren"
-"Schritt 6   - Laufzeitkomponenten installieren"
-"Schritt 7   - Windows Refresh"
-"Schritt 8   - Extras"
+" Schritt 1   - Vorbereitung"
+" Schritt 2   - Laufzeitkomponenten"
+" Schritt 3   - Extras"
+" Schritt 4   - Sophia Script"
+" Schritt 5   - o&oShutup"
+" Schritt 5   - Windows Optimierungen"
+" Schritt 7   - Autostart"
+" Schritt 8   - Windows Refresh"
 ""
 timeout 30
-Clear-Host
 }
 
-function Ende{
+function Restart{
+Clear-Host
 " Ihr System wurde erforlgreich optimiert"
 ""
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 timeout 60
 Restart-Computer
 }
-
 
 function AdminPrüfung{
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
@@ -47,12 +47,6 @@ function SpieleOrdner{
 New-Item -Path "C:\Spiele" -ItemType Directory
 }
 
-function ComputerName{
-Clear-Host
-$Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
-Rename-Computer -NewName $Computername
-}
-
 function SophiaScript{
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
@@ -65,6 +59,7 @@ Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
 Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force
 Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+Clear-Host
 }
 
 function ooShutup{
@@ -111,6 +106,9 @@ Start-Process explorer.exe
 }
 
 function Laufzeitkomponenten{
+Clear-Host
+""
+" Laufzeitkomponenten installieren..."
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
 Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
 Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
@@ -121,10 +119,11 @@ winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements
-winget upgrade --all
+winget upgrade --all --accept-source-agreements
 }
 
 function Programme{
+" Programme installieren..."
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements
 }
@@ -136,11 +135,13 @@ $form.text = "Windows_Optimisation_Pack"
 $Titel = New-Object Windows.Forms.Label
 $Titel.Location = New-Object Drawing.Point 70,25
 $Titel.Size = New-Object Drawing.Point 200,15
-$Titel.text = "Windows Optimisation Pack"
-$Text = New-Object Windows.Forms.Label
-$Text.Location = New-Object Drawing.Point 60,170
-$Text.Size = New-Object Drawing.Point 200,15
-$Text.text = ""
+$Titel.text = "Windows_Optimisation_Pack"
+$Textbox = New-Object System.Windows.Forms.TextBox
+$Textbox.Size = New-Object Drawing.Point 160,20
+$Textbox.location = New-Object Drawing.Point 60,170
+$Textbox.Font = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$Username=[Environment]::UserName
+$TextBox.Text = $Username+"-Computer"
 $button1 = New-Object Windows.Forms.Button
 $button1.text = "Process Lasso installieren"
 $button1.Location = New-Object Drawing.Point 30,60
@@ -157,13 +158,19 @@ $button4 = New-Object Windows.Forms.Button
 $button4.text = "DLSS Swapper"
 $button4.Location = New-Object Drawing.Point 140,100
 $button4.Size = New-Object Drawing.Point 100,35
+$button5 = New-Object Windows.Forms.Button
+$button5.text = "Weiter"
+$button5.Location = New-Object Drawing.Point 80,200
+$button5.Size = New-Object Drawing.Point 110,40
 $button1.add_click({
-$Text.Text = "Bitte warten..."
+$Titel.text = "Bitte warten..."
 winget install --id=BitSum.ProcessLasso --accept-source-agreements
-$Text.Text = "Processlasso wurde installiert"
-$button1.text = "" })
+timeout 2
+$button1.Enabled = $false
+$button1.IsAccessible = $false
+$Titel.text = "Windows_Optimisation_Pack"})
 $button2.add_click({
-$Text.Text = "Bitte warten..."
+$Titel.text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
@@ -171,10 +178,11 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
 $Shortcut.Save()
-$Text.Text = "DS4Windows wurde installiert"
-$button2.text = "" })
+$button2.Enabled = $false
+$button2.IsAccessible = $false
+$Titel.text = "Windows_Optimisation_Pack"})
 $button3.add_click({
-$Text.Text = "Bitte warten..."
+$Titel.text = "Bitte warten..."
 Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
 Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
 Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
@@ -182,41 +190,48 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
 $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save()
-$Text.Text = "AutoActions wurde installiert"
-$button3.text = "" })
+$button3.Enabled = $false
+$button3.IsAccessible = $false
+$Titel.text = "Windows_Optimisation_Pack"})
 $button4.add_click({
-$Text.Text = "Bitte warten..."
+$Titel.text = "Bitte warten..."
 winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
 $Text.Text = "DLSS Swapper wurde installiert"
-$button3.text = "" })
+$button4.Enabled = $false
+$button4.IsAccessible = $false
+$Titel.text = "Windows_Optimisation_Pack"})
+$button5.Add_Click({
+Rename-Computer -NewName $TextBox.Text 
+$Form.Close()})
 $form.controls.add($Titel)
-$form.controls.add($Text)
+$form.controls.add($Textbox)
 $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
 $form.controls.add($button4)
+$form.controls.add($button5)
 $form.ShowDialog()
 }
 
-begruesung
+Begruesung
 AdminPrüfung
 SystemPunkt
 Laufzeitkomponenten
 Extras
-ComputerName
 SpieleOrdner
 SophiaScript
 ooShutup
+WindowsTweaks
 Autoruns
 Programme
 WindowsRefresh
-Ende
+Restart
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdZyA6ku/XLdKNDhVprJm+PDl
-# xiigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUmyOwIeBpWlOFIZazrd6JrXA
+# S6GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -236,11 +251,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUUqK4AVo798b94aFvbjntNxycR6AwDQYJ
-# KoZIhvcNAQEBBQAEggEAvc9xBSMxJoy+I6MkKkxQH768x9F29kuhXwPdz3/kGzH0
-# TUNhL4gYc3GvPkMCypg+qFxsMyg4GgJ5NgU6CKPMXu1Hph5WWfsZiyhf56lD4mML
-# wxtbY7XBOQvEN75vLzhqNXkLWFvZG5ioX5R/Z+Kwgx4xIOCQI+MVywaHf9aDvIx3
-# tRnvUfZUo1kyB2PHH+VOSHD+Jf4e49mDnWNJQqd3ccryEMCZa1+2DNjCTP0eTnPr
-# nsV14hU3oAo/qWxIcgCiv0BrwIzlGTLniz/yo3VA3khnsRKFfi/XQxq6CujKOX/O
-# R1XpYpYUbkQP8ZdOYVp4AT+npDaAKqVNc7Sjvnydhw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUrsr3FDpaz0W2QgE5cmeYxIGMwVcwDQYJ
+# KoZIhvcNAQEBBQAEggEAe2HtIX8R4qqrVfk5Y6E7OU8Iwau6pdEsZvVZDKmfoX6Y
+# GlnsQS9XTQhIP90z67rcRQ0O7J6XS9Te8j641hvZvzzJQmsx83C3yVYiU5ckTZ0k
+# 6UTlRab/Lz+fVK/ExAubiv4wyZUDsOJcH8BUIORcKq0MzF/DBiI2bvkF+RwSyVhR
+# II1vW3/KUHIfJ13WO3mlcxv3WyU6vA6rhEkLaSFudmnEt1pIRxd2JxnmHGbUkqcb
+# vhSyl+CLl74Ax1tVdUyjCEFm8Bxu7B7tGivc6/RKv/NKzfC365BfhuRi4ygACwBd
+# rFIzSxoGfrV/7AaTFMYSxjkMf8TGbC7zQLGwityP6A==
 # SIG # End signature block
