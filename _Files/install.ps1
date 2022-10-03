@@ -1,0 +1,246 @@
+$Host.UI.RawUI.WindowTitle = "Windows Optimization Pack"
+
+
+function begruesung{
+" ==========================="
+"  Windows Optimization Pack"
+" ==========================="
+"Schritt 1   - Vorbereitung der Komponenten"
+"Schritt 2   - Sophia Script"
+"Schritt 3   - o&oShutup"
+"Schritt 4   - Windows Optimierungen"
+"Schritt 5   - Autostart und Tasks deaktivieren"
+"Schritt 6   - Laufzeitkomponenten installieren"
+"Schritt 7   - Windows Refresh"
+"Schritt 8   - Extras"
+""
+timeout 30
+Clear-Host
+}
+
+function Ende{
+" Ihr System wurde erforlgreich optimiert"
+""
+Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
+timeout 60
+Restart-Computer
+}
+
+
+function AdminPrüfung{
+If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{
+	Write-Warning " Keine benoetigten Admin Rechte vorhanden"
+    	Write-Warning " Das Script wird in 20 Sekunden beendet"
+    sleep 20
+    exit
+}}
+
+function SystemPunkt{
+Enable-ComputerRestore -Drive "C:\"
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
+Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
+}
+
+function SpieleOrdner{
+New-Item -Path "C:\Spiele" -ItemType Directory
+}
+
+function ComputerName{
+Clear-Host
+$Computername=$(Read-Host -Prompt ' Wie soll der neue Computername lauten')
+Rename-Computer -NewName $Computername
+}
+
+function SophiaScript{
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.11.v6.1.4.zip" -Destination "$env:temp\Sophia.zip"
+}
+else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.4/Sophia.Script.for.Windows.10.v5.13.4.zip" -Destination "$env:temp\Sophia.zip"
+}}
+Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
+Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
+Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force
+Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+}
+
+function ooShutup{
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
+C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
+}
+
+function WindowsTweaks{
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
+Set-Service -Name "WpcMonSvc" -StartupType Disabled
+Set-Service -Name "SharedRealitySvc" -StartupType Disabled
+Set-Service -Name "Fax" -StartupType Disabled
+Set-Service -Name "autotimesvc" -StartupType Disabled
+Set-Service -Name "wisvc" -StartupType Disabled
+Set-Service -Name "SDRSVC" -StartupType Disabled
+Set-Service -Name "MixedRealityOpenXRSvc" -StartupType Disabled
+Set-Service -Name "WalletService" -StartupType Disabled
+Set-Service -Name "SmsRouter" -StartupType Disabled
+Set-Service -Name "MapsBroker" -StartupType Disabled
+Set-Service -Name "RetailDemo" -StartupType Disabled
+}
+
+function Autoruns{
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
+Expand-Archive "$env:temp\Autoruns.zip" "$env:temp\Autoruns"
+Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
+Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe"
+}
+
+function WindowsRefresh{
+Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
+gpupdate.exe /force
+Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+lodctr /r
+lodctr /r
+taskkill /f /im explorer.exe
+Start-Process explorer.exe
+}
+
+function Laufzeitkomponenten{
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
+Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
+Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
+Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x86.exe" -Destination "$env:temp\VC_redist.x86.exe"
+Start-Process -FilePath "$env:temp\VC_redist.x64.exe" -ArgumentList "/install /passive /norestart" -Wait
+Start-Process -FilePath "$env:temp\VC_redist.x86.exe" -ArgumentList "/install /passive /norestart" -Wait
+winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements
+winget upgrade --all
+}
+
+function Programme{
+winget install --id=RARLab.WinRAR --exact --accept-source-agreements
+winget install --id=VideoLAN.VLC --exact --accept-source-agreements
+}
+
+function Extras{
+[reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
+$form = New-Object Windows.Forms.Form
+$form.text = "Windows_Optimisation_Pack"
+$Titel = New-Object Windows.Forms.Label
+$Titel.Location = New-Object Drawing.Point 70,25
+$Titel.Size = New-Object Drawing.Point 200,15
+$Titel.text = "Windows Optimisation Pack"
+$Text = New-Object Windows.Forms.Label
+$Text.Location = New-Object Drawing.Point 60,170
+$Text.Size = New-Object Drawing.Point 200,15
+$Text.text = ""
+$button1 = New-Object Windows.Forms.Button
+$button1.text = "Process Lasso installieren"
+$button1.Location = New-Object Drawing.Point 30,60
+$button1.Size = New-Object Drawing.Point 100,35
+$button2 = New-Object Windows.Forms.Button
+$button2.text = "PS4 Controller installieren"
+$button2.Location = New-Object Drawing.Point 140,60
+$button2.Size = New-Object Drawing.Point 100,35
+$button3 = New-Object Windows.Forms.Button
+$button3.text = "AutoActions installieren"
+$button3.Location = New-Object Drawing.Point 30,100
+$button3.Size = New-Object Drawing.Point 100,35
+$button4 = New-Object Windows.Forms.Button
+$button4.text = "DLSS Swapper"
+$button4.Location = New-Object Drawing.Point 140,100
+$button4.Size = New-Object Drawing.Point 100,35
+$button1.add_click({
+$Text.Text = "Bitte warten..."
+winget install --id=BitSum.ProcessLasso --accept-source-agreements
+$Text.Text = "Processlasso wurde installiert"
+$button1.text = "" })
+$button2.add_click({
+$Text.Text = "Bitte warten..."
+Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
+Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
+Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
+$Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
+$Shortcut.Save()
+$Text.Text = "DS4Windows wurde installiert"
+$button2.text = "" })
+$button3.add_click({
+$Text.Text = "Bitte warten..."
+Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
+Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
+Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
+$Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
+$Shortcut.Save()
+$Text.Text = "AutoActions wurde installiert"
+$button3.text = "" })
+$button4.add_click({
+$Text.Text = "Bitte warten..."
+winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
+$Text.Text = "DLSS Swapper wurde installiert"
+$button3.text = "" })
+$form.controls.add($Titel)
+$form.controls.add($Text)
+$form.controls.add($button1)
+$form.controls.add($button2)
+$form.controls.add($button3)
+$form.controls.add($button4)
+$form.ShowDialog()
+}
+
+begruesung
+AdminPrüfung
+SystemPunkt
+Laufzeitkomponenten
+Extras
+ComputerName
+SpieleOrdner
+SophiaScript
+ooShutup
+Autoruns
+Programme
+WindowsRefresh
+Ende
+
+# SIG # Begin signature block
+# MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
+# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdZyA6ku/XLdKNDhVprJm+PDl
+# xiigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
+# MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
+# cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+# AMqbrd2/6x589A5LablKK+Ed5zN+CoIBO/0DtWoJ7mxT+4IWA+0d5kWYTUW/MI7Y
+# BHS5r7kuUe1SX2E90CVKVKk7HVrbMCv707M+PWWQs+D0Q9vrXqMEcuEmoRcrQH7j
+# kTzs+Y4kKAkD/8Je1+5uBpyu6H1FTH9290no+h9bgvCp5UrhzzFJkVyRjCXJLlbV
+# NgLEWPDFa0mMEVNoXxa7m9AwnCNSCUMGEVhPzIMameK0W9jEKPTxfPdXhRWTu4lz
+# 7vzp5HBvn3XdutyJhH1+txCgc6uNJe/kxZENvHTObRWxkMotq8x3GqjuvNpY3t3O
+# MndeMCYiI84GBuixSXeaXf0CAwEAAaNGMEQwDgYDVR0PAQH/BAQDAgWgMBMGA1Ud
+# JQQMMAoGCCsGAQUFBwMDMB0GA1UdDgQWBBSOhOkyv1Z+aPC/kWeVNpKwbI3omjAN
+# BgkqhkiG9w0BAQsFAAOCAQEAku31A0acjtrpBqJn7nwifNv5EmiryXeGZm0RCflv
+# /JRIyvjHMDvo7Mb9p4VTRciZt2kyIDzefda1XU597frO4TgNlBgH816TxMJ4qZlb
+# ScZXc/zhBOu51oA53gt641h0zhp5dJpP/gE8VFhBUV0IVTBPnunEK1hpYmGLftAe
+# 3FjiDRQ+b+q/zT0uUbrFdyYHnlyL40bPl3XVDwVaJhDGW7At/s1K4ZA96Xej5Wxa
+# ffqIOiTEjscTmVeXLCf44EiyxZ0vF20BWwvCosONptr1MyQXFI5azArQOU9BfhYL
+# rJXoqIvVp1G2GWcfqZGLAoxnidVEN1ndnbkEFCpWeNcAkzGCAdkwggHVAgEBMDgw
+# JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
+# +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
+# BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUUqK4AVo798b94aFvbjntNxycR6AwDQYJ
+# KoZIhvcNAQEBBQAEggEAvc9xBSMxJoy+I6MkKkxQH768x9F29kuhXwPdz3/kGzH0
+# TUNhL4gYc3GvPkMCypg+qFxsMyg4GgJ5NgU6CKPMXu1Hph5WWfsZiyhf56lD4mML
+# wxtbY7XBOQvEN75vLzhqNXkLWFvZG5ioX5R/Z+Kwgx4xIOCQI+MVywaHf9aDvIx3
+# tRnvUfZUo1kyB2PHH+VOSHD+Jf4e49mDnWNJQqd3ccryEMCZa1+2DNjCTP0eTnPr
+# nsV14hU3oAo/qWxIcgCiv0BrwIzlGTLniz/yo3VA3khnsRKFfi/XQxq6CujKOX/O
+# R1XpYpYUbkQP8ZdOYVp4AT+npDaAKqVNc7Sjvnydhw==
+# SIG # End signature block
