@@ -19,5 +19,5 @@
 > **Note**: <BR> 
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt und unter C: liegen. <BR>
-Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.
-
+Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  <BR>
+Im unteren Teil einfach die Aufgerufenen Funktionen ausdkommentieren, wenn nicht gewollt.
