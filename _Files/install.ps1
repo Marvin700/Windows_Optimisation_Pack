@@ -17,9 +17,6 @@ timeout 30
 Clear-Host}
 
 function Restart{
-Clear-Host
-" Ihr System wurde erforlgreich optimiert"
-""
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 timeout 60
 Restart-Computer}
@@ -95,8 +92,6 @@ taskkill /f /im explorer.exe
 Start-Process explorer.exe}
 
 function Laufzeitkomponenten{
-Clear-Host
-" Laufzeitkomponenten installieren..."
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
 Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
 Start-BitsTransfer -Source "https://aka.ms/vs/17/release/VC_redist.x64.exe" -Destination "$env:temp\VC_redist.x64.exe"
@@ -110,8 +105,6 @@ winget install --id=Microsoft.DirectX --exact --accept-source-agreements
 winget upgrade --all --accept-source-agreements}
 
 function Programme{
-Clear-Host
-" Programme installieren..."
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements
 winget install --id=VideoLAN.VLC --exact --accept-source-agreements}
 
@@ -197,7 +190,6 @@ $form.controls.add($button4)
 $form.controls.add($button5)
 $form.ShowDialog()}
 
-# Ab hier auskommentieren, falls nicht gewuenscht
 Begruesung
 AdminPrüfung
 SystemPunkt
