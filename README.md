@@ -20,3 +20,10 @@
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Das Script muss als Administrator ausgeführt werden und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  <BR>
+
+
+
+
+![Screenshot 2022-10-06 213432](https://user-images.githubusercontent.com/98750428/194408884-3d96b97d-d6b0-4494-9dee-b20a7bb5c05d.png)
+![nachher](https://user-images.githubusercontent.com/98750428/194408890-805e6d54-097e-47b3-8c44-1a3a13f87d5f.png)
+
