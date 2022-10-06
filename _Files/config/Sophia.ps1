@@ -1,6 +1,5 @@
 <#
 	Version: v6.1.4
-	Date: 12.08.2022
 
 	Copyright (c) 2014—2022 farag
 	Copyright (c) 2019—2022 farag & Inestic
