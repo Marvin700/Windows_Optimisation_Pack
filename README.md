@@ -21,4 +21,5 @@ Das Script muss als Administrator ausgeführt werden und unter C: liegen. <BR>
 Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  <BR>
 
 ## Vorher Nachher Vergleich
-https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Vorher-Nachher-Vergleich
+<a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><src="j"></a>
+
