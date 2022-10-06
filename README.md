@@ -22,4 +22,3 @@ Zum starten des Script den Downloader oder die beigelegte Startdatei benutzen.  
 
 ## Vorher Nachher Vergleich
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest">Screenshots</a>
-
