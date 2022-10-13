@@ -59,12 +59,12 @@ $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.5/Sophia.Script.for.Windows.11.v6.1.5.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
-Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.5/Sophia.Script.for.Windows.10.v5.13.5.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
-Move-Item -Path $env:temp\"Sophia Script *" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force} }
 Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
 Clear-Host }
@@ -282,8 +282,8 @@ Restart
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkV7eFDyETiI47+8nZwsSEh4n
-# wOSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeA6ZVjH6BHv8gRaRSKWohAwF
+# yrigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -303,11 +303,11 @@ Restart
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWKTh/ljw4z6wL3wNNEVcTGqOzeEwDQYJ
-# KoZIhvcNAQEBBQAEggEAUBx/SlmOwyHArUjI9XxNqw8LXWyKjNuDZTc4hwR4XY/F
-# DqTvuW3CGAwEoIKBkLwEswkbN/NZdQ5Rty0qbB7c8Y3X8TWa+tXD92+SfI8gRILx
-# GM5F/U9vP4g8bi0xSV/aHdo9UXzYvGT76XraJNuOpK75fkkhWVtEfEaFWkrDCEuF
-# lLiFfE3AZcXYnvd9XftTo47flOHQX5FPo0AWKNEQgkyIkChPRvfUblNJiO512qm3
-# /UwtbjLWw8f42lW14SvfwoR0QXZWdmp7DAgxC+Pwjd12dNT6clRBcHwoXCxBfSE7
-# A5e8nzm1m1GnaQV9I0QIGu375ii84nfowYCTOJy26g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUu3rptF/ZAqADQb6l1ZSmr8ob9QIwDQYJ
+# KoZIhvcNAQEBBQAEggEAw5k+VjuufH64EUTfFwwEee0Cp2iAL2DqVHYNo5BHXTnb
+# Xc7Cok63Y0+wTFOj3ySiBgxwWMFYOT5lkSuNtG95IIH4gqIdmNbyHMCwqYm9hcsc
+# uLIHnyiffMLTXVDyZjMOud3S8XhYpmIv6q2xICK0hoEfCCx0oDoK3O81EXAWnjUW
+# zfaMmTcXVqcTCmB/pxPq3A8D31bG49rFEZgi8HmRiA7O7XbF/gQH5w6MXQLNzCk7
+# n4YoziTk06Fps9h8KRRBrhgQ8PA1FLhTdcrhKR1JKSzDCdXJ+stHuMlobl8/pQqZ
+# CHM0qnUxP3/GsSWJgu7bnhIN55mmjoCdty2q7bIW0g==
 # SIG # End signature block
