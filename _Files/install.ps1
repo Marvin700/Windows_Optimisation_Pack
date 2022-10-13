@@ -174,7 +174,7 @@ function Programme{
 Clear-Host
 ""
 " Programme installieren..."
-winget install --id=VideoLAN.VLC --exact --accept-source-agreements }
+winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Extras{
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
@@ -282,8 +282,8 @@ Restart
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeA6ZVjH6BHv8gRaRSKWohAwF
-# yrigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+4SVi9v+Y6XpBNVVgmy5Cyiv
+# 8rigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -303,11 +303,11 @@ Restart
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUu3rptF/ZAqADQb6l1ZSmr8ob9QIwDQYJ
-# KoZIhvcNAQEBBQAEggEAw5k+VjuufH64EUTfFwwEee0Cp2iAL2DqVHYNo5BHXTnb
-# Xc7Cok63Y0+wTFOj3ySiBgxwWMFYOT5lkSuNtG95IIH4gqIdmNbyHMCwqYm9hcsc
-# uLIHnyiffMLTXVDyZjMOud3S8XhYpmIv6q2xICK0hoEfCCx0oDoK3O81EXAWnjUW
-# zfaMmTcXVqcTCmB/pxPq3A8D31bG49rFEZgi8HmRiA7O7XbF/gQH5w6MXQLNzCk7
-# n4YoziTk06Fps9h8KRRBrhgQ8PA1FLhTdcrhKR1JKSzDCdXJ+stHuMlobl8/pQqZ
-# CHM0qnUxP3/GsSWJgu7bnhIN55mmjoCdty2q7bIW0g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUB3vLkZH7evCNBg0eONGUvpC5qJAwDQYJ
+# KoZIhvcNAQEBBQAEggEAbHHpyVC/tC3e0XYxHSPlWKklkX0XRBGS8giuXimXPRRd
+# 5IQMX1ST+k81NTLXxOWSE9pIAheeaPJE/N+/xmiBoiqZJ9OvA6tKDCNwvRj7J9Vm
+# KCcpMnN7GM4sQ9xeiwl9ADIOiJoZYZzigtjW+NdaCDpAclheEaMVY31DyF2QZebg
+# LifJJ1ff2sxTlbnzCM+3zVeW3IA14IX3nMr5clAeFIxFqTwkrGv8fnmh+0PnGkzL
+# VJTOz5oTVdsYZAaMubOP7/3eRewBcLFyturcZcTZWUtujKew52Zg5/+Ju59Mo/7z
+# xoiy6k8a0RgDmEsFEOrRtMxA/6kFmcrdLrph+tpHHg==
 # SIG # End signature block
