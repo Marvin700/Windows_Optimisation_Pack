@@ -3,7 +3,7 @@
 ## Key Features
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
-* Cortana entfernrn
+* Cortana entfernen
 * Autostart und Tasks bereinigen
 * Laufzeitkomponenten installieren
 * Zeiger Beschleunigung deaktivieren
