@@ -1,0 +1,1 @@
+Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\install.ps1"
