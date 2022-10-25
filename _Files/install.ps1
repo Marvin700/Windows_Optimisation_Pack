@@ -16,7 +16,8 @@ Clear-Host
 timeout 30
 Clear-Host }
 
-function Restart{
+function Ende{
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1
 Clear-Host
 " Ihr System wurde erforlgreich optimiert"
 ""
@@ -39,7 +40,15 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 Write-Warning " Keine benoetigten Admin Rechte vorhanden"
 Write-Warning " Das Script wird in 20 Sekunden beendet"
 Start-Sleep 20
-exit} }
+exit} 
+if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
+Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack optimiert"
+"Moechten sie wirklich fortfahren?"
+$weitermachen = Read-Host "Ja oder Nein ?"
+IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
+Write-Warning " Das Script wird in 20 Sekunden beendet"
+Start-Sleep 20
+exit}} }
 
 function SystemPunkt{
 Enable-ComputerRestore -Drive "C:\"
@@ -48,8 +57,7 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
 
 function SpieleOrdner{
-New-Item -Path "C:\Spiele" -ItemType Directory
-Label C: Windows }
+New-Item -Path "C:\Spiele" -ItemType Directory }
 
 function Festplatten_Name{
 Label C: Windows }
@@ -57,16 +65,17 @@ Label C: Windows }
 function SophiaScript{
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.5/Sophia.Script.for.Windows.11.v6.1.5.zip" -Destination "$env:temp\Sophia.zip"
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.11.v6.2.0.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.1.5/Sophia.Script.for.Windows.10.v5.13.5.zip" -Destination "$env:temp\Sophia.zip"
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.10.v5.14.0.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force} }
 Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWORD /D 1
 Clear-Host }
 
 function ooShutup{
@@ -277,13 +286,13 @@ TakeOwnership
 Autoruns
 Programme
 WindowsRefresh
-Restart
+Ende
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+4SVi9v+Y6XpBNVVgmy5Cyiv
-# 8rigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNF2DgKv1iwOzAvv/PrZ8EuPC
+# 2nKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -303,11 +312,11 @@ Restart
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUB3vLkZH7evCNBg0eONGUvpC5qJAwDQYJ
-# KoZIhvcNAQEBBQAEggEAbHHpyVC/tC3e0XYxHSPlWKklkX0XRBGS8giuXimXPRRd
-# 5IQMX1ST+k81NTLXxOWSE9pIAheeaPJE/N+/xmiBoiqZJ9OvA6tKDCNwvRj7J9Vm
-# KCcpMnN7GM4sQ9xeiwl9ADIOiJoZYZzigtjW+NdaCDpAclheEaMVY31DyF2QZebg
-# LifJJ1ff2sxTlbnzCM+3zVeW3IA14IX3nMr5clAeFIxFqTwkrGv8fnmh+0PnGkzL
-# VJTOz5oTVdsYZAaMubOP7/3eRewBcLFyturcZcTZWUtujKew52Zg5/+Ju59Mo/7z
-# xoiy6k8a0RgDmEsFEOrRtMxA/6kFmcrdLrph+tpHHg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9Tc+XssF4v3TJBvF9cbJ0vThNf4wDQYJ
+# KoZIhvcNAQEBBQAEggEAhpVO0B7/TLc+uGPklqtvACup46A2DLDIh37v/adBLtWe
+# jyRGTGoZVMXMlDda7fYyA3FjEAOyv9UK46OcmbcxjO/20OVyc1T9xX1nMUBHl+lQ
+# wcyAUJp9+c/EwkUwT5/nc7osHp287RYeFDNn+egbmulMfZ4ze84FKpchpye0xf3s
+# IZRXzMrqeTlzN7D0ye2CIDaSAHFXsZ3kr2IhgGILKXNUSZONTe9fnxE+nawrTvkR
+# UYso9cAlm/oTqbzBbGqktXqMT1sWoIAvCkeSI+nCbhflP9jDIlsj5rHQ6Kf4CNhA
+# bMesXGqt3JtK+q9O4MCYBTM4yhMVKtX/WQwDCclaaA==
 # SIG # End signature block
