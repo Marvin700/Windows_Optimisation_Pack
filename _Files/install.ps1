@@ -16,15 +16,6 @@ Clear-Host
 timeout 30
 Clear-Host }
 
-function Ende{
-REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1
-Clear-Host
-" Ihr System wurde erforlgreich optimiert"
-""
-Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
-timeout 60
-Restart-Computer }
-
 function Pruefungen{
 if (!(Test-Path "C:\Windows_Optimisation_Pack")) {
 Write-Warning " Das Script liegt nicht im korrekten Ordner !"
@@ -56,12 +47,6 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "Sy
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
 
-function SpieleOrdner{
-New-Item -Path "C:\Spiele" -ItemType Directory }
-
-function Festplatten_Name{
-Label C: Windows }
-
 function SophiaScript{
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
@@ -75,7 +60,7 @@ Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
 Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force} }
 Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
-REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWORD /D 1
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWORD /D 1 /F
 Clear-Host }
 
 function ooShutup{
@@ -83,34 +68,94 @@ Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet }
 
 function WindowsTweaks_Dienste{
-Set-Service -Name "WpcMonSvc" -StartupType Disabled
-Set-Service -Name "SharedRealitySvc" -StartupType Disabled
-Set-Service -Name "Fax" -StartupType Disabled
-Set-Service -Name "autotimesvc" -StartupType Disabled
-Set-Service -Name "wisvc" -StartupType Disabled
-Set-Service -Name "SDRSVC" -StartupType Disabled
-Set-Service -Name "MixedRealityOpenXRSvc" -StartupType Disabled
-Set-Service -Name "WalletService" -StartupType Disabled
-Set-Service -Name "SmsRouter" -StartupType Disabled
-Set-Service -Name "SharedAccess" -StartupType Disabled
-Set-Service -Name "MapsBroker" -StartupType Disabled
-Set-Service -Name "MNgcSvc" -StartupType Disabled
-Set-Service -Name "NgcCtnrSvc" -StartupType Disabled
-Set-Service -Name "PhoneSvc" -StartupType Disabled
-Set-Service -Name "ScDeviceEnum" -StartupType Disabled
-Set-Service -Name "TabletInputService" -StartupType Disabled
-Set-Service -Name "icssvc" -StartupType Disabled
-Set-Service -Name "edgeupdatem" -StartupType Disabled
-Set-Service -Name "edgeupdate" -StartupType Disabled
-Set-Service -Name "MicrosoftEdgeElevationService" -StartupType Disabled
-Set-Service -Name "RetailDemo" -StartupType Disabled }
+Stop-Service "WpcMonSvc"
+Stop-Service "SharedRealitySvc"
+Stop-Service "Fax"
+Stop-Service "autotimesvc"
+Stop-Service "wisvc"
+Stop-Service "SDRSVC"
+Stop-Service "MixedRealityOpenXRSvc"
+Stop-Service "WalletService"
+Stop-Service "SmsRouter"
+Stop-Service "SharedAccess"
+Stop-Service "MapsBroker"
+Stop-Service "MNgcSvc"
+Stop-Service "NgcCtnrSvc"
+Stop-Service "PhoneSvc"
+Stop-Service "ScDeviceEnum"
+Stop-Service "TabletInputService"
+Stop-Service "icssvc"
+Stop-Service "edgeupdatem"
+Stop-Service "edgeupdate"
+Stop-Service "MicrosoftEdgeElevationService"
+Stop-Service "RetailDemo"
+Stop-Service "UnistoreSvc"
+Stop-Service "OneSyncSvc"
+Stop-Service "DoSvc"
+Stop-Service "wlidsvc"
+Stop-Service "PimIndexMaintenanceSvc"
+Stop-Service "MessagingService"
+Set-Service "WpcMonSvc" -StartupType Disabled
+Set-Service "SharedRealitySvc" -StartupType Disabled
+Set-Service "Fax" -StartupType Disabled
+Set-Service "autotimesvc" -StartupType Disabled
+Set-Service "wisvc" -StartupType Disabled
+Set-Service "SDRSVC" -StartupType Disabled
+Set-Service "MixedRealityOpenXRSvc" -StartupType Disabled
+Set-Service "WalletService" -StartupType Disabled
+Set-Service "SmsRouter" -StartupType Disabled
+Set-Service "SharedAccess" -StartupType Disabled
+Set-Service "MapsBroker" -StartupType Disabled
+Set-Service "MNgcSvc" -StartupType Disabled
+Set-Service "NgcCtnrSvc" -StartupType Disabled
+Set-Service "PhoneSvc" -StartupType Disabled
+Set-Service "ScDeviceEnum" -StartupType Disabled
+Set-Service "TabletInputService" -StartupType Disabled
+Set-Service "icssvc" -StartupType Disabled
+Set-Service "edgeupdatem" -StartupType Disabled
+Set-Service "edgeupdate" -StartupType Disabled
+Set-Service "MicrosoftEdgeElevationService" -StartupType Disabled
+Set-Service "RetailDemo" -StartupType Disabled 
+Set-Service "UnistoreSvc" -StartupType Disabled
+Set-Service "OneSyncSvc" -StartupType Disabled
+Set-Service "DoSvc" -StartupType Disabled
+Set-Service "wlidsvc" -StartupType Disabled
+Set-Service "PimIndexMaintenanceSvc" -StartupType Disabled
+Set-Service "MessagingService" -StartupType Disabled }
 
 function WindowsTweaks_Registry{
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F }
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
+New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient" -Force
+Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
+Write-Output "Disable Insider Preview Builds"
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PreviewBuilds" -Name AllowBuildPreview -Type "DWORD" -Value 0 -Force
+Write-Output "IE Optimizations"
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\PhishingFilter" -Name EnabledV9 -Type "DWORD" -Value 0 -Force
+New-Item -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\" -Name "Geolocation" -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\Geolocation" -Name PolicyDisableGeolocation -Type "DWORD" -Value 1 -Force
+New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\CurrentVersion\Explorer\" -Name "AutoComplete" -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete" -Name AutoSuggest -Type "String" -Value no -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer" -Name AllowServicePoweredQSA -Type "DWORD" -Value 0 -Force
+New-Item -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\" -Name "Suggested Sites" -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\Suggested Sites" -Name Enabled -Type "DWORD" -Value 0 -Force
+New-Item -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\" -Name "FlipAhead" -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\FlipAhead" -Name Enabled -Type "DWORD" -Value 0 -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds" -Name BackgroundSyncStatus -Type "DWORD" -Value 0 -Force
+Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name AllowOnlineTips -Type "DWORD" -Value 0 -Force 
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\AppPrivacy" -Name LetAppsRunInBackground -Type "DWORD" -Value 2 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\FindMyDevice" -Name AllowFindMyDevice -Type "DWORD" -Value 0 -Force }
+
+function WindowsTweaks_Tasks{
+Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue 
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask }
 
 function WindowsTweaks_Index{
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
@@ -133,11 +178,22 @@ Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Opt
 Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" }
 
 function WindowsRefresh{
+Clear-Host
 gpupdate.exe /force
+Cmd.exe /c Cleanmgr /sagerun:65535
+Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -ErrorAction SilentlyContinue
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse
+Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse
 Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
-Get-ChildItem -Path "C:\Windows\Prefetch" *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path "$ENV:userprofile\AppData\Local\Temp" *.* -Recurse | Remove-Item -Force -Recurse
+Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportArchive\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportQueue\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue
+Clear-BCCache -Force -ErrorAction SilentlyContinue
+reg delete "HKCU\Software\Microsoft\Direct3D\MostRecentApplication" /va /f
+vssadmin delete shadows /all /quiet
 lodctr /r
 lodctr /r
 taskkill /f /im explorer.exe
@@ -155,7 +211,7 @@ winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreeme
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements }
 
 function TakeOwnership{
 New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
@@ -184,6 +240,21 @@ Clear-Host
 ""
 " Programme installieren..."
 winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
+
+function SpieleOrdner{
+New-Item -Path "C:\Spiele" -ItemType Directory }
+    
+function Festplatten_Name{
+Label C: Windows }
+
+function Ende{
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1 /F
+Clear-Host
+" Ihr System wurde erforlgreich optimiert"
+""
+Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
+timeout 60
+Restart-Computer }
 
 function Extras{
 [reflection.assembly]::LoadWithPartialName( "System.Windows.Forms")
@@ -281,6 +352,7 @@ Festplatten_Name
 WindowsTweaks_Index
 WindowsTweaks_Registry
 WindowsTweaks_Dienste
+WindowsTweaks_Tasks
 WindowsTweaks_Packages
 TakeOwnership
 Autoruns
@@ -291,8 +363,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNF2DgKv1iwOzAvv/PrZ8EuPC
-# 2nKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4B4uGhDTQ29345/f2FFQPN1X
+# As+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -312,11 +384,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9Tc+XssF4v3TJBvF9cbJ0vThNf4wDQYJ
-# KoZIhvcNAQEBBQAEggEAhpVO0B7/TLc+uGPklqtvACup46A2DLDIh37v/adBLtWe
-# jyRGTGoZVMXMlDda7fYyA3FjEAOyv9UK46OcmbcxjO/20OVyc1T9xX1nMUBHl+lQ
-# wcyAUJp9+c/EwkUwT5/nc7osHp287RYeFDNn+egbmulMfZ4ze84FKpchpye0xf3s
-# IZRXzMrqeTlzN7D0ye2CIDaSAHFXsZ3kr2IhgGILKXNUSZONTe9fnxE+nawrTvkR
-# UYso9cAlm/oTqbzBbGqktXqMT1sWoIAvCkeSI+nCbhflP9jDIlsj5rHQ6Kf4CNhA
-# bMesXGqt3JtK+q9O4MCYBTM4yhMVKtX/WQwDCclaaA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQURH2CFJuKyhzfof3o5CtkkNcDGfEwDQYJ
+# KoZIhvcNAQEBBQAEggEAMoUtI6iHqXkchj9YXhM6VkCky4lfpSf22qhGRy2gI2aj
+# cLKCyfIQIo1/J3vsfbBLB8fKvLOneOdQqbpi0l6igR6TnSXd8X/cy84lkQiP6GJ2
+# zZJ9iLvkfbqyzTg2IOfPWJGzAXxFJkO25lvHk+VdQTrWTwGy0VMiuorgWyVjr7sK
+# ih/JX4x97FACpdC9uhC6fiMZZ1i7poAfvKYukRk2MhrtUU3O1OqlM2qPrKezRp2g
+# RuwCJpW1nQ/ixY/D6lkoYOz3f3YI4KEutk1KcHlTQ+JE2Ch53Jkic5x/YWmVtbUk
+# 2hlPkmyugZaLAxhWc2Wfpy7CLkNY90R8GRkO6dlFWg==
 # SIG # End signature block
