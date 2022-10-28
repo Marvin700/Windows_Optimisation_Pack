@@ -5,10 +5,10 @@
 * Windows Spy Funktionen abschalten 
 * Cortana deaktivieren & entfernen
 * Autostart und Tasks bereinigen
+* Windows Komponenten dektivieren
+* Festplatten Indizierung abschalten
 * Laufzeitkomponenten installieren
 * Zeiger Beschleunigung deaktivieren
-* Festplatten Indizierung abschalten
-* Windows Komponenten dektivieren
 * Sophia Script & O&OShutUp
 * GUI für optionale Pakete
 * Insider Builds abschalten
