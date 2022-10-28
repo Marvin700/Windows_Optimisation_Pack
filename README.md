@@ -3,15 +3,16 @@
 ## Key Features
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
-* Cortana entfernen
+* Cortana deaktivieren & entfernen
 * Autostart und Tasks bereinigen
 * Laufzeitkomponenten installieren
 * Zeiger Beschleunigung deaktivieren
 * Festplatten Indizierung abschalten
+* Windows Komponenten dektivieren
 * Sophia Script & O&OShutUp
 * GUI für optionale Pakete
+* Insider Builds abschalten
 * Weitere Windows Tweaks
-* Insider Builds abschalten 
 * Take Ownership
 
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://user-images.githubusercontent.com/98750428/194409192-abe5edcc-9bf7-4873-bd55-ff5c4e458369.png"></a>
