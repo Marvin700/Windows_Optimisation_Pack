@@ -1,4 +1,6 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+$ScripPath = "C:\Windows_Optimisation_Pack"
 
 function Begruesung{
 Clear-Host
@@ -17,7 +19,7 @@ timeout 30
 Clear-Host }
 
 function SystemPunkt{
-vssadmin delete shadows /all /quie
+vssadmin delete shadows /all /quiet
 Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -94,18 +96,18 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWOR
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
-REG DELETE "HKCR:\Extensions\ContractId\Windows.BackgroundTasks\PackageId\46928bounde.EclipseManager_2.2.4.51_neutral__a5h4egax66k6y"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.BackgroundTasks\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.BackgroundTasks\PackageId\Microsoft.MicrosoftOfficeHub_17.7909.7600.0_x64__8wekyb3d8bbwe"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.BackgroundTasks\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.File\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.Launch\PackageId\46928bounde.EclipseManager_2.2.4.51_neutral__a5h4egax66k6y"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.Launch\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.Launch\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.ShareTarget\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.Protocol\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.Protocol\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy"
-REG DELETE "HKCR:\Extensions\ContractId\Windows.PreInstalledConfigTask\PackageId\Microsoft.MicrosoftOfficeHub_17.7909.7600.0_x64__8wekyb3d8bbwe"
+REG DELETE "HKCR\Extensions\ContractId\Windows.BackgroundTasks\PackageId\46928bounde.EclipseManager_2.2.4.51_neutral__a5h4egax66k6y" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.BackgroundTasks\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.BackgroundTasks\PackageId\Microsoft.MicrosoftOfficeHub_17.7909.7600.0_x64__8wekyb3d8bbwe" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.BackgroundTasks\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.File\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.Launch\PackageId\46928bounde.EclipseManager_2.2.4.51_neutral__a5h4egax66k6y" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.Launch\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.Launch\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.ShareTarget\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.Protocol\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.Protocol\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy" /F
+REG DELETE "HKCR\Extensions\ContractId\Windows.PreInstalledConfigTask\PackageId\Microsoft.MicrosoftOfficeHub_17.7909.7600.0_x64__8wekyb3d8bbwe" /F
 New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient" -Force
 New-Item -Path "HKLM:\Software\Policies\Microsoft\Edge" -Force | Out-Null
 New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupEnabled" -Type "String" -Value 0 -Force
@@ -175,13 +177,11 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients
 dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
 dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart }
 
-
 function WindowsTweaks_Index{
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='D:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='E:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='F:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} }
-
 
 function Pruefungen{
 if (!(Test-Path "C:\Windows_Optimisation_Pack")) {
@@ -209,18 +209,17 @@ Start-Sleep 20
 exit}} }
 
 function SophiaScript{
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.11.v6.2.0.zip" -Destination "$env:temp\Sophia.zip"
-Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
-Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force }
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.11.v6.2.0.zip" -Destination $env:temp\Sophia.zip
+Expand-Archive $env:temp\Sophia.zip $env:temp -force
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScripPath\_Files\Sophia_Script\
+Move-Item -Path $ScripPath\_Files\config\Sophia.ps1 -Destination $ScripPath\_Files\Sophia_Script\Sophia.ps1 -force }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.10.v5.14.0.zip" -Destination "$env:temp\Sophia.zip"
-Expand-Archive "$env:temp\Sophia.zip" "$env:temp" -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\"
-Move-Item -Path "C:\Windows_Optimisation_Pack\_Files\config\Sophia_Win10.ps1" -Destination "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1" -force} }
-Powershell.exe -executionpolicy Bypass "C:\Windows_Optimisation_Pack\_Files\Sophia_Script\Sophia.ps1"
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.10.v5.14.0.zip" -Destination $env:temp\Sophia.zip
+Expand-Archive $env:temp\Sophia.zip $env:temp -force
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScripPath\_Files\Sophia_Script\
+Move-Item -Path $ScripPath\_Files\config\Sophia_Win10.ps1 -Destination $ScripPath\_Files\Sophia_Script\Sophia.ps1 -force} }
+Powershell.exe -executionpolicy Bypass $ScripPath\_Files\Sophia_Script\Sophia.ps1
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWORD /D 1 /F
 Clear-Host }
 
@@ -229,15 +228,15 @@ Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.
 C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet }
 
 function Autoruns{
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
-Expand-Archive "$env:temp\Autoruns.zip" "$env:temp\Autoruns"
-Move-Item -Path "$env:temp\Autoruns\Autoruns64.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" -Force
-Start-Process "C:\Windows_Optimisation_Pack\_Files\Autoruns.exe" }
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
+Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
+Move-Item -Path $env:temp\Autoruns\Autoruns64.exe -Destination $ScripPath\_Files\Autoruns.exe -Force
+Start-Process $ScripPath\_Files\Autoruns.exe }
 
 function WindowsRefresh{
 Clear-Host
 gpupdate.exe /force 
-Remove-Item -Path C:\Windows_Optimisation_Pack\_Files\config\  -Force -Recurse
+Remove-Item -Path $ScripPath\_Files\config\  -Force -Recurse
 Cmd.exe /c Cleanmgr /sagerun:65535
 Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse
@@ -422,8 +421,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1wt5g1heNYrgzJ8JLjBLZDiK
-# LkagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFpNeY+UzdN3Xxqq4D07X608D
+# YVOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -443,11 +442,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU3E1UUayfnb0ANVR1a+mVziDfzY0wDQYJ
-# KoZIhvcNAQEBBQAEggEAisVfNbbQMun7D4NWPj0GB4JasCmA6mKWNzzdNObl1B2B
-# o4gqd3kO85Ex3FWWEV6ONzPF3AaKhXRUbHkOP83QsmipabrpbbwlTSG9CoGrgvUP
-# vAbBzXlGredd8Wq1XeSDdzhgk7RVKqHTYekhn327tcwc7la8/i+6CMLW/IHViR95
-# D0nPaYsBkbibeLhrKx0EMNi1SgCRnjDADBSzK3Y/Xolvis15dKAf/10Q0o2zwmCt
-# /UywtxmyRl6NA0KvTdVjY2SHPlzZawdKaq3mJWYwpLDvrs6fAHjZ4PMxqsouhkyd
-# lBEN5BcyY74Hf+OQhK6U7BsbkPhRvftbSffCgrNH9A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkk4wi5UupSuqHx4d666nbnxyp5UwDQYJ
+# KoZIhvcNAQEBBQAEggEAHE7nBib8hfd/STUNu1VT6W90ct5ygYDboQZ5bsiYNeO1
+# XsCrRAlBRZ+eQpqJJkh/s5EVUYhhgiEIpaKCjWSssAkh9DpddCG55Q8fVchQnu6y
+# MQ9O1gM/c0MrBmwNh04kyf+WKUSqZarXwu0L5DEEjaMutlbtQMKG1GVmGL6H9Mm4
+# LRkT02NGGg8LmcqrbluUkSiao5WZ8tSKuSWjLIBSN86T7xbo+HA6mTMRv6xp5EjC
+# kGt6jepHzhM6Q5SARBP82MY8NecUP9uNnNM/V2xkO4gxuKB9OEmEg58dvTHzfGQM
+# CF08CZL2+JO1IiAfb5l133GtcrLR+am5LvMg1eQFEA==
 # SIG # End signature block
