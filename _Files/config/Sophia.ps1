@@ -227,7 +227,7 @@ UpdateMicrosoftProducts -Enable
 PowerPlan -Balanced
 
 # Use the latest installed .NET runtime for all apps
-LatestInstalled.NET -Enable
+#LatestInstalled.NET -Enable
 
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
@@ -415,8 +415,8 @@ Errors
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUok49Lpd/OXgVaTVVzrD7fzJI
-# /k2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDtUulgKBKcRIaSCbm/TZika2
+# IiCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -436,11 +436,11 @@ Errors
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUIh2p8XwdkQ7aAdYFsenzW8LLK2MwDQYJ
-# KoZIhvcNAQEBBQAEggEAAugBHYRINIdS2+mnP6LOMzRqBxO+yxZQxki5IFsO6n37
-# iK5BI0gfgYngJtrT9HWxRIJwlpFGGeQHe5A+HAWVJ7wD7Vd/NEHvWURXyA9qTK3L
-# hlXD/YrbN0SRYJqklFXzUl0f2AvqGcmSnLglMl/yIo+MAkuWUcUc5v8XWJ/EtHME
-# nIsHazYRc7arZJouMelqDU4Wa82/kh5deqqhEpmYGRy5FWXX7FGFaSspBVam/JNx
-# spwvS6GpmXs/JdAQnGMahB0HalflyRsXEhnLcJOGuC/t+llMHjwl1z1ykXf3Mueg
-# NSGc7wXiZqOodZF49vQI+A99OWDXONT5Bs0bCjdW7g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUyx+9dq5W5BkGobDuSjeVsipPSQowDQYJ
+# KoZIhvcNAQEBBQAEggEAt77abMCeeHxBaIdHbyT6WtJPp7nZa7Q/8s7qmuQqYV5l
+# kjyH22QxTjlYumezc1+jj8ZBMTA3aNcwDDlzOsZH2XfrkdII5v9uFvhIhwk6pQjP
+# a31No4CDp7ZhHhkDr1i+JQtzZ4dM0+0otfIvpfsqli+VCfbvBY948NOu+I7zFmDF
+# mEWqDtYK/eYoRtwz3TutTAkPvS1A20i78elIIO84UsqkZwPuPHGSjOIXhj4LQ8my
+# 1YTpFxdLGMRx7MxS4CMedt63RViWWrSkJly+Kqfa12997MaKc9dfLfItGGoEgt2d
+# r3Jwfs8oj3eZVKRMgGjFrPeyD2XTvvYTFBpQADdlIw==
 # SIG # End signature block

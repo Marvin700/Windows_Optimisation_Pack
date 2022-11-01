@@ -210,12 +210,12 @@ exit}} }
 
 function SophiaScript{
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.11.v6.2.0.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.1/Sophia.Script.for.Windows.11.v6.2.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScripPath\_Files\Sophia_Script\
 Move-Item -Path $ScripPath\_Files\config\Sophia.ps1 -Destination $ScripPath\_Files\Sophia_Script\Sophia.ps1 -force }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.0/Sophia.Script.for.Windows.10.v5.14.0.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.1/Sophia.Script.for.Windows.10.v5.14.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScripPath\_Files\Sophia_Script\
 Move-Item -Path $ScripPath\_Files\config\Sophia_Win10.ps1 -Destination $ScripPath\_Files\Sophia_Script\Sophia.ps1 -force} }
@@ -225,7 +225,8 @@ Clear-Host }
 
 function ooShutup{
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
-C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet }
+C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
+}
 
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
@@ -236,25 +237,22 @@ Start-Process $ScripPath\_Files\Autoruns.exe }
 function WindowsRefresh{
 Clear-Host
 gpupdate.exe /force 
-Remove-Item -Path $ScripPath\_Files\config\  -Force -Recurse
+Remove-Item -Path $ScripPath\_Files\config\  -Force -Recurse 
 Cmd.exe /c Cleanmgr /sagerun:65535
-Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue
-Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -ErrorAction SilentlyContinue
+Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
+Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse SilentlyContinue 
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportArchive\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportQueue\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item /f /q $env:localappdata\Temp\*
-Remove-Item /f /q $env:LocalAppData\Microsoft\Windows\WebCache\*.*
-Remove-Item /f /q $env:SystemRoot\ServiceProfiles\LocalService\AppData\Local\Temp\*.*
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
 taskkill /f /im explorer.exe
-Start-Process explorer.exe }
+Start-Process explorer.exe 
+Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force SilentlyContinue}
 
 function TakeOwnership{
 New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
@@ -279,7 +277,7 @@ function Laufzeitkomponenten{
 Clear-Host
 ""
 " Laufzeitkomponenten installieren..."
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2091/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2691/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
 Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
 Start-Sleep 5
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
@@ -355,7 +353,7 @@ $button1.IsAccessible = $false
 $Titel.text = "Windows_Optimisation_Pack"})
 $button2.add_click({
 $Titel.text = "Bitte warten..."
-Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.6/DS4Windows_3.1.6_x86.zip' -OutFile $env:temp\DS4Windows.zip 
+Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.9/DS4Windows_3.1.9_x64.zip' -OutFile $env:temp\DS4Windows.zip 
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -421,8 +419,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFpNeY+UzdN3Xxqq4D07X608D
-# YVOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp03xhypP5TtSZWIuBjFs77d4
+# 2+6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -442,11 +440,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkk4wi5UupSuqHx4d666nbnxyp5UwDQYJ
-# KoZIhvcNAQEBBQAEggEAHE7nBib8hfd/STUNu1VT6W90ct5ygYDboQZ5bsiYNeO1
-# XsCrRAlBRZ+eQpqJJkh/s5EVUYhhgiEIpaKCjWSssAkh9DpddCG55Q8fVchQnu6y
-# MQ9O1gM/c0MrBmwNh04kyf+WKUSqZarXwu0L5DEEjaMutlbtQMKG1GVmGL6H9Mm4
-# LRkT02NGGg8LmcqrbluUkSiao5WZ8tSKuSWjLIBSN86T7xbo+HA6mTMRv6xp5EjC
-# kGt6jepHzhM6Q5SARBP82MY8NecUP9uNnNM/V2xkO4gxuKB9OEmEg58dvTHzfGQM
-# CF08CZL2+JO1IiAfb5l133GtcrLR+am5LvMg1eQFEA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUBeE/UeiHvqDA1tMaX3P4UuoiFHUwDQYJ
+# KoZIhvcNAQEBBQAEggEACu4cDMrtgQ1aOcO31OtULfLwUgO6V9+coUQaO/eSgfCw
+# DjgxqE81Llj+yShTQxXUXZkNR+2hZpn+Mau2HN+ba1RFiqssD8I6cKOJhWyPsBsc
+# HfHfC/JoFztiQwZx2q8A/hUkYYZ6ruFziAikCbxX10vZEfjq42V+mazajcgNMenl
+# ifxKke2u+6/HZM0g11AslvcW2R/1xntpQ8vcjYTvmK7AD/bFwrx96JKtXEC3pTId
+# b8/bDZdAI6pPcFzS6y19n/dXRryfgJCYUGmX4dZHYDyoggzXO2EBG/bqluAj/Fwp
+# p7yEBo/UHDjoNZfdshdkk90QcUFpVNTzy6hPXAT8vw==
 # SIG # End signature block
