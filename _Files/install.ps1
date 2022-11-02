@@ -1,29 +1,6 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-$ScripPath = "C:\Windows_Optimisation_Pack"
-
-function Begruesung{
-Clear-Host
-" ==========================="
-"  Windows Optimization Pack"
-" ==========================="
-" Schritt 1 - Vorbereitung"
-" Schritt 2 - Laufzeitkomponenten"
-" Schritt 3 - Extras"
-" Schritt 4 - Sophia Script"
-" Schritt 5 - o&oShutup"
-" Schritt 5 - Windows Optimierungen"
-" Schritt 7 - Autostart"
-" Schritt 8 - Windows Refresh"
-timeout 30
-Clear-Host }
-
-function SystemPunkt{
-vssadmin delete shadows /all /quiet
-Enable-ComputerRestore -Drive "C:\"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
-Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
+Set-Location $env:temp
 
 function WindowsTweaks_Dienste{
 Stop-Service "WpcMonSvc"
@@ -91,6 +68,8 @@ Set-Service "WerSvc" -StartupType Disabled
 Set-Service "wercplsupport" -StartupType Disabled }
 
 function WindowsTweaks_Registry{
+#simeononsecurity / Windows-Optimize-Harden-Debloat
+#undergroundwires / privacy.sexy
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
@@ -183,76 +162,297 @@ Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='D:'" | Set-WmiInstance -
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='E:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
 Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='F:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} }
 
-function Pruefungen{
-if (!(Test-Path "C:\Windows_Optimisation_Pack")) {
-Write-Warning " Das Script liegt nicht im korrekten Ordner !"
-Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit}
-if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
-Write-Warning " Reboot Pending !"
-Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit}
-If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " Keine benoetigten Admin Rechte vorhanden"
-Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit} 
-if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
-Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack optimiert"
-"Moechten sie wirklich fortfahren?"
-$weitermachen = Read-Host "Ja oder Nein ?"
-IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
-Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit}} }
-
 function SophiaScript{
+#Copyright (c) 2014—2022 farag
+#Copyright (c) 2019—2022 farag & Inestic
+#https://github.com/farag2
+#https://github.com/Inestic
+
+function SophiaScript_Win11{
+#Version: v6.2.1
+ScheduledTasks -Disable
+UninstallUWPApps
+WindowsFeatures -Disable
+WindowsCapabilities -Uninstall
+DiagTrackService -Disable
+DiagnosticDataLevel -Minimal
+ErrorReporting -Disable
+FeedbackFrequency -Never
+SigninInfo -Disable
+LanguageListAccess -Disable
+AdvertisingID -Disable
+WindowsWelcomeExperience -Hide
+WindowsTips -Disable
+SettingsSuggestedContent -Hide
+AppsSilentInstalling -Disable
+WhatsNewInWindows -Disable
+TailoredExperiences -Disable
+BingSearch -Disable
+ThisPC -Hide
+CheckBoxes -Disable
+HiddenItems -Enable
+FileExtensions -Show
+MergeConflicts -Show
+FileExplorerCompactMode -Disable
+OneDriveFileExplorerAd -Hide
+SnapAssist -Disable
+SnapAssistFlyout -Enable
+FileTransferDialog -Detailed
+RecycleBinDeleteConfirmation -Enable
+QuickAccessRecentFiles -Hide
+QuickAccessFrequentFolders -Hide
+TaskbarAlignment -Left
+TaskbarSearch -Hide
+TaskViewButton -Hide
+TaskbarWidgets -Hide
+TaskbarChat -Hide
+UnpinTaskbarShortcuts -Shortcuts Edge, Store
+ControlPanelView -Category
+WindowsColorMode -Dark
+AppColorMode -Dark
+FirstLogonAnimation -Disable
+JPEGWallpapersQuality -Max
+TaskManagerWindow -Expanded
+RestartNotification -Show
+ShortcutsSuffix -Disable
+PrtScnSnippingTool -Enable
+AppsLanguageSwitch -Disable
+AeroShaking -Enable
+OneDrive -Uninstall
+StorageSense -Enable
+StorageSenseFrequency -Month
+StorageSenseTempFiles -Enable
+Hibernation -Disable
+Win32LongPathLimit -Disable
+BSoDStopError -Enable
+AdminApprovalMode -Never
+MappedDrivesAppElevatedAccess -Enable
+DeliveryOptimization -Disable
+WaitNetworkStartup -Enable
+WindowsManageDefaultPrinter -Disable
+UpdateMicrosoftProducts -Enable
+PowerPlan -Balanced
+NetworkAdaptersSavePower -Disable
+IPv6Component -Disable
+WinPrtScrFolder -Desktop
+RecommendedTroubleshooting -Automatically
+FoldersLaunchSeparateProcess -Enable
+ReservedStorage -Disable
+F1HelpPage -Disable
+NumLock -Enable
+StickyShift -Disable
+Autoplay -Disable
+ThumbnailCacheRemoval -Enable
+SaveRestartableApps -Disable
+NetworkDiscovery -Enable
+ActiveHours -Automatically
+RestartDeviceAfterUpdate -Enable
+DefaultTerminalApp -WindowsTerminal
+UnpinAllStartApps
+RunPowerShellShortcut -Elevated
+StartLayout -ShowMorePins
+CortanaAutostart -Disable
+TeamsAutostart -Disable
+CheckUWPAppsUpdates
+XboxGameBar -Disable
+XboxGameTips -Disable
+GPUScheduling -Enable
+CleanupTask -Register
+SoftwareDistributionTask -Register
+TempTask -Register
+NetworkProtection -Disable
+PUAppsDetection -Disable
+DismissMSAccount
+DismissSmartScreenFilter
+AuditProcess -Enable
+CommandLineProcessAudit -Enable
+EventViewerCustomView -Enable
+PowerShellModulesLogging -Enable
+PowerShellScriptsLogging -Enable
+AppsSmartScreen -Disable
+SaveZoneInformation -Disable
+WindowsSandbox -Disable
+DNSoverHTTPS -Enable -PrimaryDNS 1.0.0.1 -SecondaryDNS 1.1.1.1
+MSIExtractContext -Show
+CABInstallContext -Show
+RunAsDifferentUserContext -Hide
+CastToDeviceContext -Hide
+ShareContext -Hide
+EditWithPhotosContext -Hide
+CreateANewVideoContext -Hide
+PrintCMDContext -Hide
+IncludeInLibraryContext -Hide
+SendToContext -Hide
+CompressedFolderNewContext -Hide
+MultipleInvokeContext -Enable
+UseStoreOpenWith -Hide
+OpenWindowsTerminalContext -Show
+OpenWindowsTerminalAdminContext -Enable
+Windows10ContextMenu -Disable
+UpdateLGPEPolicies
+Errors } 
+
+function SophiaScript_Win10{
+#Version: v5.14.1
+ScheduledTasks -Disable
+UninstallUWPApps 
+WindowsFeatures -Disable
+WindowsCapabilities -Uninstall
+DiagTrackService -Disable
+DiagnosticDataLevel -Minimal
+ErrorReporting -Disable
+FeedbackFrequency -Never
+SigninInfo -Disable
+LanguageListAccess -Disable
+AdvertisingID -Disable
+WindowsWelcomeExperience -Hide
+WindowsTips -Disable
+SettingsSuggestedContent -Hide
+AppsSilentInstalling -Disable
+WhatsNewInWindows -Disable
+TailoredExperiences -Disable
+BingSearch -Disable
+ThisPC -Hide
+CheckBoxes -Disable
+HiddenItems -Enable
+FileExtensions -Show
+MergeConflicts -Show
+CortanaButton -Hide
+OneDriveFileExplorerAd -Hide
+SnapAssist -Disable
+FileTransferDialog -Detailed
+FileExplorerRibbon -Expanded
+RecycleBinDeleteConfirmation -Enable
+3DObjects -Hide
+QuickAccessRecentFiles -Hide
+QuickAccessFrequentFolders -Hide
+TaskbarSearch -Hide
+TaskViewButton -Hide
+SearchHighlights -Hide
+PeopleTaskbar -Hide
+SecondsInSystemClock -Hide
+WindowsInkWorkspace -Hide
+NotificationAreaIcons -Hide
+MeetNow -Hide
+NewsInterests -Disable
+UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail
+ControlPanelView -Category
+WindowsColorMode -Dark
+AppColorMode -Dark
+NewAppInstalledNotification -Hide
+FirstLogonAnimation -Disable
+JPEGWallpapersQuality -Max
+TaskManagerWindow -Expanded
+RestartNotification -Show
+ShortcutsSuffix -Disable
+PrtScnSnippingTool -Enable
+AppsLanguageSwitch -Disable
+AeroShaking -Enable
+OneDrive -Uninstall
+StorageSense -Enable
+StorageSenseFrequency -Month
+StorageSenseTempFiles -Enable
+Hibernation -Disable
+Win32LongPathLimit -Disable
+BSoDStopError -Enable
+AdminApprovalMode -Never
+MappedDrivesAppElevatedAccess -Enable
+DeliveryOptimization -Disable
+WaitNetworkStartup -Enable
+UpdateMicrosoftProducts -Enable
+PowerPlan -Balanced
+NetworkAdaptersSavePower -Disable
+IPv6Component -Disable
+WinPrtScrFolder -Desktop
+RecommendedTroubleshooting -Automatically
+FoldersLaunchSeparateProcess -Enable
+ReservedStorage -Disable
+F1HelpPage -Disable
+NumLock -Enable
+StickyShift -Disable
+Autoplay -Disable
+ThumbnailCacheRemoval -Enable
+SaveRestartableApps -Disable
+NetworkDiscovery -Enable
+ActiveHours -Automatically
+RestartDeviceAfterUpdate -Enable
+UninstallPCHealthCheck
+RecentlyAddedApps -Hide
+AppSuggestions -Hide
+RunPowerShellShortcut -Elevated
+PinToStart -UnpinAll
+CortanaAutostart -Disable
+BackgroundUWPApps -Disable
+CheckUWPAppsUpdates
+XboxGameBar -Disable
+XboxGameTips -Disable
+GPUScheduling -Enable
+CleanupTask -Register
+SoftwareDistributionTask -Register
+TempTask -Register
+NetworkProtection -Disable
+PUAppsDetection -Disable
+DefenderSandbox -Disable
+DismissMSAccount
+DismissSmartScreenFilter
+AuditProcess -Enable
+CommandLineProcessAudit -Enable
+EventViewerCustomView -Enable
+PowerShellModulesLogging -Enable
+PowerShellScriptsLogging -Enable
+AppsSmartScreen -Disable
+SaveZoneInformation -Disable
+WindowsSandbox -Disable
+MSIExtractContext -Show
+CABInstallContext -Show
+RunAsDifferentUserContext -Hide
+CastToDeviceContext -Hide
+EditWithPaint3DContext -Hide
+EditWithPhotosContext -Hide
+CreateANewVideoContext -Hide
+ImagesEditContext -Hide
+PrintCMDContext -Hide
+IncludeInLibraryContext -Hide
+SendToContext -Hide
+BitmapImageNewContext -Hide
+RichTextDocumentNewContext -Hide
+CompressedFolderNewContext -Hide
+MultipleInvokeContext -Enable
+UseStoreOpenWith -Hide
+UpdateLGPEPolicies
+Errors }
+
+function SophiaScript_Dependencies{
+[cmdletbinding()]
+param ([parameter(mandatory = $false)]
+[string[]]
+$functions)
+remove-module -name sophia -force -erroraction ignore
+import-module -name $env:temp\Sophia_Script\manifest\sophia.psd1 -passthru -force
+import-localizeddata -bindingvariable global:localization -basedirectory $env:temp\Sophia_Script\localizations -filename sophia
+if ($functions) { invoke-command -scriptblock {checkings}
+foreach ($function in $functions)
+{invoke-expression -command $function }
+invoke-command -scriptblock {errors; refreshenvironment}
+exit}}
+	
+function SophiaScript_Downloade{
+Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.1/Sophia.Script.for.Windows.11.v6.2.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScripPath\_Files\Sophia_Script\
-Move-Item -Path $ScripPath\_Files\config\Sophia.ps1 -Destination $ScripPath\_Files\Sophia_Script\Sophia.ps1 -force }
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $env:temp\Sophia_Script\}
+SophiaScript_Dependencies
+SophiaScript_Win11
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.1/Sophia.Script.for.Windows.10.v5.14.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScripPath\_Files\Sophia_Script\
-Move-Item -Path $ScripPath\_Files\config\Sophia_Win10.ps1 -Destination $ScripPath\_Files\Sophia_Script\Sophia.ps1 -force} }
-Powershell.exe -executionpolicy Bypass $ScripPath\_Files\Sophia_Script\Sophia.ps1
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $env:temp\Sophia_Script\
+SophiaScript_Dependencies
+SophiaScript_Win10} }
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWORD /D 1 /F
-Clear-Host }
-
-function ooShutup{
-Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "C:\Windows_Optimisation_Pack\_Files\OOSU10.exe"
-C:\Windows_Optimisation_Pack\_Files\OOSU10.exe C:\Windows_Optimisation_Pack\_Files\config\ooshutup10.cfg /quiet
-}
-
-function Autoruns{
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
-Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
-Move-Item -Path $env:temp\Autoruns\Autoruns64.exe -Destination $ScripPath\_Files\Autoruns.exe -Force
-Start-Process $ScripPath\_Files\Autoruns.exe }
-
-function WindowsRefresh{
-Clear-Host
-gpupdate.exe /force 
-Remove-Item -Path $ScripPath\_Files\config\  -Force -Recurse 
-Cmd.exe /c Cleanmgr /sagerun:65535
-Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
-Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse SilentlyContinue 
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportArchive\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportQueue\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue
-Clear-BCCache -Force -ErrorAction SilentlyContinue
-lodctr /r
-lodctr /r
-taskkill /f /im explorer.exe
-Start-Process explorer.exe 
-Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force SilentlyContinue}
+Clear-Host } 
+SophiaScript_Downloade }
 
 function TakeOwnership{
 New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
@@ -272,6 +472,74 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'Position' -Value 'middle' -PropertyType String -Force -ea SilentlyContinue;
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name '(default)' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;}
+
+function Begruesung{
+Clear-Host
+" ==========================="
+"  Windows Optimization Pack"
+" ==========================="
+" Schritt 1 - Vorbereitung"
+" Schritt 2 - Laufzeitkomponenten"
+" Schritt 3 - Extras"
+" Schritt 4 - Sophia Script"
+" Schritt 5 - o&oShutup"
+" Schritt 5 - Windows Optimierungen"
+" Schritt 7 - Autostart"
+" Schritt 8 - Windows Refresh"
+timeout 30
+Clear-Host }
+
+function SystemPunkt{
+vssadmin delete shadows /all /quiet
+Enable-ComputerRestore -Drive "C:\"
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
+Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
+
+function Pruefungen{
+if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
+Write-Warning " Reboot Pending !"
+Write-Warning " Das Script wird in 20 Sekunden beendet"
+Start-Sleep 20
+exit}
+If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
+Write-Warning " Keine benoetigten Admin Rechte vorhanden"
+Write-Warning " Das Script wird in 20 Sekunden beendet"
+Start-Sleep 20
+exit} 
+if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
+Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack optimiert"
+"Moechten sie wirklich fortfahren?"
+$weitermachen = Read-Host "Ja oder Nein ?"
+IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
+Write-Warning " Das Script wird in 20 Sekunden beendet"
+Start-Sleep 20
+exit}} }
+
+function Autoruns{
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
+Expand-Archive $env:temp\Autoruns.zip $env:temp\Autoruns
+Start-Process $env:temp\Autoruns\Autoruns64.exe }
+
+function WindowsRefresh{
+Clear-Host
+gpupdate.exe /force 
+Cmd.exe /c Cleanmgr /sagerun:65535
+Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
+Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse SilentlyContinue 
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportArchive\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportQueue\* -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue
+Clear-BCCache -Force -ErrorAction SilentlyContinue
+lodctr /r
+lodctr /r
+taskkill /f /im explorer.exe
+Start-Process explorer.exe 
+Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force SilentlyContinue}
+
 
 function Laufzeitkomponenten{
 Clear-Host
@@ -394,12 +662,202 @@ $form.controls.add($button4)
 $form.controls.add($button5)
 $form.ShowDialog() }
 
+function ooShutup_config{
+New-Item $env:temp\ooshutup10.cfg
+Set-Content $env:temp\ooshutup10.cfg "
+P001	+
+P002	+
+P003	+
+P004	+
+P005	+
+P006	+
+P008	+
+P026	+
+P027	+
+P028	+
+P064	+
+P065	+
+P066	+
+P067	+
+P070	+
+P069	+
+P009	+
+P010	-
+P015	-
+P068	-
+P016	-
+A001	+
+A002	+
+A003	+
+A004	+
+A006	+
+A005	+
+P007	+
+P036	+
+P025	+
+P033	+
+P023	+
+P056	-
+P057	-
+P012	-
+P034	-
+P013	-
+P035	-
+P062	-
+P063	-
+P081	-
+P047	-
+P019	-
+P048	+
+P049	+
+P020	-
+P037	-
+P011	-
+P038	-
+P050	-
+P051	-
+P018	-
+P039	-
+P021	-
+P040	-
+P022	-
+P041	-
+P014	-
+P042	-
+P052	-
+P053	-
+P054	-
+P055	-
+P029	-
+P043	-
+P030	-
+P044	-
+P031	-
+P045	-
+P032	-
+P046	-
+P058	-
+P059	-
+P060	-
+P061	-
+P071	-
+P072	-
+P073	-
+P074	-
+P075	-
+P076	-
+P077	-
+P078	-
+P079	-
+P080	-
+P024	-
+S001	+
+S002	+
+S003	+
+S008	-
+E101	+
+E115	+
+E118	+
+E107	+
+E111	+
+E112	+
+E109	+
+E121	+
+E103	+
+E123	+
+E124	+
+E119	+
+E120	+
+E122	+
+E106	-
+E001	+
+E002	+
+E003	+
+E008	+
+E007	+
+E010	+
+E011	+
+E012	+
+E009	+
+E004	+
+E005	+
+E013	+
+E014	+
+E006	-
+Y001	+
+Y002	+
+Y003	+
+Y004	+
+Y005	+
+Y006	+
+Y007	+
+C012	+
+C002	+
+C013	+
+C007	+
+C008	+
+C009	+
+C010	+
+C011	+
+C014	+
+L001	+
+L003	+
+L004	+
+L005	+
+U001	+
+U004	+
+U005	+
+U006	+
+U007	+
+W001	+
+W011	+
+W004	-
+W005	-
+W010	-
+W009	-
+P017	-
+W006	-
+W008	-
+M006	+
+M011	+
+M010	+
+O003	+
+O001	+
+S012	+
+S013	+
+S014	+
+K001	+
+K002	+
+K005	+
+M022	+
+M001	+
+M004	+
+M005	+
+M003	+
+M012	+
+M013	+
+M014	+
+M015	+
+M016	+
+M017	+
+M018	+
+M019	+
+M020	+
+M021	+
+N001	-" }
+
+function ooShutup{
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $env:temp\OOSU10.exe
+ooShutup_config
+Set-Location $env:temp
+.\OOSU10.exe ooshutup10.cfg \quiet }
+
 Begruesung
 Pruefungen
 SystemPunkt
 Laufzeitkomponenten
 Programme
-Updaten
+#Updaten
 Extras
 SophiaScript
 ooShutup
@@ -415,12 +873,11 @@ TakeOwnership
 Autoruns
 WindowsRefresh
 Ende
-
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp03xhypP5TtSZWIuBjFs77d4
-# 2+6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnVQqmRbnTCd1ym6S9Tz1xmtY
+# enOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -440,11 +897,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUBeE/UeiHvqDA1tMaX3P4UuoiFHUwDQYJ
-# KoZIhvcNAQEBBQAEggEACu4cDMrtgQ1aOcO31OtULfLwUgO6V9+coUQaO/eSgfCw
-# DjgxqE81Llj+yShTQxXUXZkNR+2hZpn+Mau2HN+ba1RFiqssD8I6cKOJhWyPsBsc
-# HfHfC/JoFztiQwZx2q8A/hUkYYZ6ruFziAikCbxX10vZEfjq42V+mazajcgNMenl
-# ifxKke2u+6/HZM0g11AslvcW2R/1xntpQ8vcjYTvmK7AD/bFwrx96JKtXEC3pTId
-# b8/bDZdAI6pPcFzS6y19n/dXRryfgJCYUGmX4dZHYDyoggzXO2EBG/bqluAj/Fwp
-# p7yEBo/UHDjoNZfdshdkk90QcUFpVNTzy6hPXAT8vw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUwl7+qyVtkDyy9lcTRmtZwJPXmWAwDQYJ
+# KoZIhvcNAQEBBQAEggEAyoAbPK5Y0c/buRS5olE2wwvl5U2a93IbyodXLrv6fofw
+# 5XiQCBAWEnW4d1ia9BPMXKEgp35JVsAY3P0pnZuNZ+GquU7oD8OupgnjsVyO5bIs
+# Da0pTVBgo/HERSg1ZJGuB2udBVdMEYA+PY+ovquKzRukjIrcBVndQgZcTSyJZV/I
+# MnEcYNFuZykAgov9HUGGLIhTpFba+ViuJ78beDxL3xqZ6rSWi2urYDh3iKvKgrxz
+# /2NZZx8NzEO/D0ri3Rb1jGhGJQlwZrfnpcr+4FGo9kBQN4GyhKzqczIbHbJw+BGa
+# 2jgndGIP0WVT13Zbd3u6BWsK+7OyJ0LyDn35idf7mg==
 # SIG # End signature block
