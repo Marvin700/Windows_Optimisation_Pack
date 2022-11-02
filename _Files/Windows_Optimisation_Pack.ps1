@@ -1,3 +1,5 @@
+# Thanks too simeononsecurity - Windows-Optimize-Harden-Debloat and undergroundwires - privacy.sexy
+
 $Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Set-Location $env:temp
@@ -62,8 +64,6 @@ Set-Service "WerSvc" -StartupType Disabled
 Set-Service "wercplsupport" -StartupType Disabled }
 
 function WindowsTweaks_Registry{
-#simeononsecurity / Windows-Optimize-Harden-Debloat
-#undergroundwires / privacy.sexy
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
@@ -159,14 +159,12 @@ Clear-Host
 " ==========================="
 "  Windows Optimization Pack"
 " ==========================="
-" Schritt 1 - Vorbereitung"
-" Schritt 2 - Laufzeitkomponenten"
-" Schritt 3 - Extras"
-" Schritt 4 - Sophia Script"
-" Schritt 5 - o&oShutup"
-" Schritt 5 - Windows Optimierungen"
-" Schritt 7 - Autostart"
-" Schritt 8 - Windows Refresh"
+" Schritt 1 - Sophia Script"
+" Schritt 2 - o&oShutup"
+" Schritt 3 - Windows Optimierungen"
+" Schritt 4 - Laufzeitkomponenten"
+" Schritt 5 - Extras"
+" Schritt 6 - Windows Refresh"
 timeout 30
 Clear-Host }
 
@@ -367,8 +365,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUB9VdxjG1mh7WO4ZQPSZWL4d
-# nIugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnKdLsBEtXH/DWUo7Ezr0T931
+# qTmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -388,11 +386,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUvtYOVCtMViPdIBUTcPi1lDqklzcwDQYJ
-# KoZIhvcNAQEBBQAEggEAjl2mFK7dTpNaokDS2sXSgl9yrk0AD3BCAzggFhvVa1D7
-# UfSabRYN9BF4CrP9CwjREfilzx9tSNTS+GJ4qZ+aJKpYDCaM5mUZJ4t8yLl7YENz
-# AHn7wsK6uK0gSB/3QiCHd8zSDaW+P/TvVLGFVyYhQWPcRkj5iLZ2QQo4OPW0eanS
-# CspxXOajxQK3ht4RPQp/DIV8Wq/dPqVQ7z5BVefQsImmQv9jni8+kpX6ihCk3Gzu
-# sHvevnRMnsUkHsVE2U1DAoE4C5NJSECWAvHIVwQFdXbLkmLDmZtewoMNGSPikNpg
-# jV3EdpFH5hqgQdCXlDZtSyfdcWE6b/hAtxCq/tN0xw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb/32LtRmwqQWG3BFFqd5qADzbOwwDQYJ
+# KoZIhvcNAQEBBQAEggEAQBzoAd/cxYsZMfdH6W8L7hygEfWMgWLvmZlhUhlZcpan
+# Mo28RDNZeYr0EJq3bl6cqUj0d2vqYbfrtJ4JxoiQUITTXTeTmaYFob+B+WKpiCUI
+# IyjvJ7Nth4cVoqcf6WNIDSV+8gFxv/xXC7e+o7NuK5i1jCFV3im0IGOBA5uka0VQ
+# Gq4dVqx+Hppi0N9J0P6cONT4q/zHHWVEowW/0D3+Xf09oKNquaUEALqOts9vg1sH
+# 0bc5vMdTJRMDDkXrvmhMkchI/Oe1is+/HhnnXC7dFTxkXd7+wHtnCbmDYJyqBwjD
+# 9MkGPAQ7VqFXhdLauA5ITk1sJCtinLNlWpgRBCk07w==
 # SIG # End signature block
