@@ -3,7 +3,7 @@
 ## Key Features
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
-* Cortana deaktivieren & entfernen
+* Cortana deaktivieren
 * Autostart und Tasks bereinigen
 * Windows Komponenten dektivieren
 * Festplatten Indizierung abschalten
