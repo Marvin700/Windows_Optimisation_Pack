@@ -1,5 +1,3 @@
-# Thanks too simeononsecurity - Windows-Optimize-Harden-Debloat and undergroundwires - privacy.sexy
-
 $Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Set-Location $env:temp
@@ -179,21 +177,18 @@ function Pruefungen{
 if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
 Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit}
+Start-Sleep 20;exit}
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 Write-Warning " Keine benoetigten Admin Rechte vorhanden"
 Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit} 
+Start-Sleep 20;exit} 
 if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
 Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack optimiert"
 "Moechten sie wirklich fortfahren?"
 $weitermachen = Read-Host "Ja oder Nein ?"
 IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
 Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20
-exit}} }
+Start-Sleep 20;exit}} }
 
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
@@ -237,17 +232,11 @@ winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 function SpieleOrdner{
 New-Item -Path "C:\Spiele" -ItemType Directory }
 
-function Festplatten_Name{
-Label C: Windows }
+function Festplatten_Name{Label C: Windows }
 
-function Updaten{
-winget upgrade --all --accept-source-agreements}
+function Updaten{winget upgrade --all --accept-source-agreements}
 
-function Programme{
-Clear-Host
-""
-" Programme installieren..."
-winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
+function Programme{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Ende{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1 /F
@@ -365,8 +354,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnKdLsBEtXH/DWUo7Ezr0T931
-# qTmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6y1CWRuOo7/G9/+y/nO19eZf
+# gnOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -386,11 +375,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb/32LtRmwqQWG3BFFqd5qADzbOwwDQYJ
-# KoZIhvcNAQEBBQAEggEAQBzoAd/cxYsZMfdH6W8L7hygEfWMgWLvmZlhUhlZcpan
-# Mo28RDNZeYr0EJq3bl6cqUj0d2vqYbfrtJ4JxoiQUITTXTeTmaYFob+B+WKpiCUI
-# IyjvJ7Nth4cVoqcf6WNIDSV+8gFxv/xXC7e+o7NuK5i1jCFV3im0IGOBA5uka0VQ
-# Gq4dVqx+Hppi0N9J0P6cONT4q/zHHWVEowW/0D3+Xf09oKNquaUEALqOts9vg1sH
-# 0bc5vMdTJRMDDkXrvmhMkchI/Oe1is+/HhnnXC7dFTxkXd7+wHtnCbmDYJyqBwjD
-# 9MkGPAQ7VqFXhdLauA5ITk1sJCtinLNlWpgRBCk07w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUPorV/g5ptH8oS+SwksHMDLCsbMYwDQYJ
+# KoZIhvcNAQEBBQAEggEAmVBSyg1y55DpJMHc2DRFmwStQgrmkdGJ9BKvhP3SXYte
+# I7doBuzuYkXbg5/S48Sp7OQC0xKT+9DJvdehRIIey7idBQx5HymHcDIdCegldQ1E
+# Nt0Or4oythfrPI3Zq/EQUoXCHOm3Q3VijSPHDCT/045s8zi7S+Bu5SeFE33xGoS7
+# 0kgWprzYXDcIs/pR82ELZUUDe/20lEDbr1iemjPK5ocsEajMqM1aYQnoeU5eAHf0
+# XIdoE3YC8PtnabNGPKbQWT3Oo5zvqsl2b6SQkyHYJgsZdwPcWvOYdBjlbsxk5gNE
+# bHnPgPdxjcLNZWD7zeRqKE8KqViptPcE4HMwdJfaMA==
 # SIG # End signature block
