@@ -223,6 +223,9 @@ UpdateMicrosoftProducts -Enable
 # Set power plan on "Balanced" (default value)
 PowerPlan -Balanced
 
+# Use the latest installed .NET runtime for all apps
+#LatestInstalled.NET -Enable
+
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
 
@@ -267,6 +270,9 @@ ActiveHours -Automatically
 
 # Restart as soon as possible to finish updating
 RestartDeviceAfterUpdate -Enable
+
+# Set Windows Terminal as default terminal app to host the user interface for command-line applications
+DefaultTerminalApp -WindowsTerminal
 
 # Unpin all Start apps
 UnpinAllStartApps
@@ -403,8 +409,8 @@ Errors
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJbbI2X8B9erqOoE3ckkVhGj7
-# ESWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzjKkFyL60O+mpaxiUrdbUdC+
+# yVGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -424,11 +430,11 @@ Errors
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0QmRCfg2kNqsYWqopPHO2ExSt2AwDQYJ
-# KoZIhvcNAQEBBQAEggEAasPqmJbm87TAo+m5Az7XYDTpyb/0W4yhBNfwYTvzML1S
-# wr6tpoPsUbbMwyezjR6KuA06xT9beS+VQkths/JPF7n399LAaC/wp7HjjRqdP+gE
-# ph3+FbwXAojG5rsZAqW75EdCI5SurZ4wwIxNVDGonuYB/fxN4WKuYxU2ZlRl8dqT
-# N/QD9eHwkJ1e5Ngf0teJEG8xvRroSq9WpXJNhhO3a5EFavXqiAxWdMtGrmzpMx9z
-# P9bdE/I2sF5tHWWEAT6Zx1YYTHLBrUmm4u7tsYu448yssSsrEDaOD33PWW9Oqcgv
-# X+6RO383uW8GLm36cGCVu+MLtcRWjPIcTVJ0qCHA5w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUqfHrfQK9CvcCyAGkFQrBdxb2rDUwDQYJ
+# KoZIhvcNAQEBBQAEggEAXUxumsBLwt8HGFdSThErRI3RaN3p9hx1j2tfAwSs556u
+# QUUeZa/k+tRrhxiL18p0DonFm/lGHED1AMaGOKZgXkWiXrfkOTvY9ie+NbjRzSs2
+# s6ldcaGt2sNrpGuceKu41NWEL3QOlDnqe0zxIE995eiQnmzPhwrnVE4sR5dT+pvR
+# 1b8JBT7l1qf2XCImwYvkFKnHnf03a9nsWhNoo4YWPnvKg54nbZGKyiH6gNFKdWDz
+# 4UijfmBDMO0putXUMk3zlV27ykKKSIuqowu5iqjZAogdTB3356i52NENQJckDVaZ
+# abq8CeLsUxyWoIc4jg5Loa0eNLFP0Vgk7o0/ztykzw==
 # SIG # End signature block
