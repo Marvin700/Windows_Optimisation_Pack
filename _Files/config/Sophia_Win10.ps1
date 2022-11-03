@@ -1,5 +1,5 @@
 ﻿<#
-	Version: v5.14.1
+	Version: v5.14.2
 
 	Copyright (c) 2014—2022 farag
 	Copyright (c) 2019—2022 farag & Inestic
@@ -433,17 +433,14 @@ MultipleInvokeContext -Enable
 # Hide the "Look for an app in the Microsoft Store" item in the "Open with" dialog
 UseStoreOpenWith -Hide
 
-# Update Local Group Policy Editor (gpedit.msc) to make all manually created policy keys in the registry visible in the snap-in
-UpdateLGPEPolicies
-
 # Errors output
 Errors
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrQ4fFGDvyygpMU7OPzA0aRYg
-# hs6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNgr6xnZ7KoVOfThwxLi5t9Y6
+# IwSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -463,11 +460,11 @@ Errors
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQULf7HUFEB7SN+Hge0/dpI4fhWaUowDQYJ
-# KoZIhvcNAQEBBQAEggEARL1i5ees7HRgRS7Rwi/0lVyUUa+YALm3C0dWO4v3Smga
-# VdC308Tj3S5TPU36yzqqMP1u53rlHQMqaixbfAiFx++l2DKncMr6TN7yF6he1hMP
-# 2l99j4rFH4meoXhrH8VB/5CXNhnMHjHcD0RTi/dqzuJohasybWFa/NruhigGO0LQ
-# X8fkNXNTHmAUpcRu/BHYWw8VF3/DUmmLoOCnBreG7pT/Z9fVR/jZs/cUw7XSNPup
-# lNgRLKT5k4EZSpsCh+/bwQRB/3z2o2IzSdD4O2uGGjIqb3XtyujxpZpZR7kgOkBQ
-# dOh5Jy2TibW9wHsv82FtHOHtZa0lR4vkg5fM6GwAxA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVH0w9dRACh1Lp5gbdrUeVGIpK5IwDQYJ
+# KoZIhvcNAQEBBQAEggEAIelhFK7+D4PQn2t+E0tk7zUbYIB/nvBcJ29Zm5QgAlTM
+# uNLIc4MBH56wnOeOCimxRBqdOyuilHTHY1yYhpcNfGTgnTwGICV6IQYVxy52sx4J
+# HSHH5hC/ExdbPBxWHTAvMLasj0wlgR7uW7RCuCJQ6jj5O+AihdcbDXnu5gzJp8B5
+# v3xFeDy4lGHBqEXJbmSWcWXZB9OJglA176Fh99JbqOiQiwdR9ZEKSWsTBKgfcS7m
+# GQ9L+zWuU+LdrDuJhdqUmCBoCemYkWde/L5QfyDkvCJISBhQCVjuMBTzql219hqD
+# aXZ01bhPWVDe6BbWYLLfFI8nZuw3uXm5o7AEEV5ZAA==
 # SIG # End signature block
