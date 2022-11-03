@@ -81,6 +81,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force}
+
 function WindowsTweaks_Tasks{
 Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
@@ -129,12 +130,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.1/Sophia.Script.for.Windows.11.v6.2.1.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.2/Sophia.Script.for.Windows.11.v6.2.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $env:temp\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win11.ps1" -Destination "$env:temp\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.1/Sophia.Script.for.Windows.10.v5.14.1.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.2/Sophia.Script.for.Windows.10.v5.14.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $env:temp\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win10.ps1" -Destination "$env:temp\Sophia_Script\Sophia.ps1" } }
@@ -347,8 +348,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+yxlIHQeuuptXz/E9VN9mlrq
-# t/SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAKWAEIr+sjaMLZ39GSLzSzak
+# V6WgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -368,11 +369,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMsNEnFECHwxKLCWd1p0o4UbpKxcwDQYJ
-# KoZIhvcNAQEBBQAEggEAwZHIKPdT/rQlFcuOZPms2d8DeLoQ392zOcTMQRXZjZnz
-# UpgmGIl7iBGeYtZGflotH7W4zMB933plA+HT2IpJvJZE3MbyFs4RQCDIIa6vSHST
-# CsJoRwyhvpglYeqOrwrLtPwXDXmFXEEXqfqVJP+PZSuikze0GWaejZU774uWZB0Z
-# pUXJx00GDvkiDNkFmxTH9uxHx/weymA1ENoSVCGHFQLoOGBpykxqS5vx31EYsLgX
-# 9ZCxdwtPmkCWVGOh1DqYIGjM/AqtsgTLxb5ixXeVSwy82Rfcc8eryDEvgCr2zhOr
-# A6jNoa/GGu5qIK3TalU9bYnb+MX18ZHb1YLyk3qcsA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU+Fa5BNWUBqYFIPOT8kyRcTjQ0iowDQYJ
+# KoZIhvcNAQEBBQAEggEADEbhDCqmumZsIdOJnxfEhaq6YOn9Fa4My4OwXHGG5ZKo
+# RGtlpYCTubWLFZrFpI7rF9y/2wk91Ej1YAnoPQcwabGJ0z9ne3EKvuOQBuMCTcmn
+# uM5e9EnfLRa+MBqU9hRAq5rl05Y6kxaEPYnj8ka1U1XJS0QslHcn8oAGtamK9b73
+# 3fGVQ9UEhdtA6ZiZLTAA0UAnKEezwm2Cw8Gi2UwL01NVSwHal7berEKRuLwPpNwa
+# 9aT1U58SLiP8hPIzJx73qfj2dB0CBcm5ljUvRq/FOo9VWQH76cvX2aS7vBDlfIRu
+# pTswIB8KpnH8JKCsGbDWsRGjORvHrQOW0Z+43+zDCw==
 # SIG # End signature block
