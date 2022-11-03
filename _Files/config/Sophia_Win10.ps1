@@ -249,9 +249,6 @@ UpdateMicrosoftProducts -Enable
 # Set power plan on "Balanced" (default value)
 PowerPlan -Balanced
 
-# Use the latest installed .NET runtime for all apps
-#LatestInstalled.NET -Enable
-
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
 
@@ -433,14 +430,11 @@ MultipleInvokeContext -Enable
 # Hide the "Look for an app in the Microsoft Store" item in the "Open with" dialog
 UseStoreOpenWith -Hide
 
-# Errors output
-Errors
-
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNgr6xnZ7KoVOfThwxLi5t9Y6
-# IwSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUL7ErAvVxVB5kaZG3XiMZrSms
+# mS6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -460,11 +454,11 @@ Errors
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVH0w9dRACh1Lp5gbdrUeVGIpK5IwDQYJ
-# KoZIhvcNAQEBBQAEggEAIelhFK7+D4PQn2t+E0tk7zUbYIB/nvBcJ29Zm5QgAlTM
-# uNLIc4MBH56wnOeOCimxRBqdOyuilHTHY1yYhpcNfGTgnTwGICV6IQYVxy52sx4J
-# HSHH5hC/ExdbPBxWHTAvMLasj0wlgR7uW7RCuCJQ6jj5O+AihdcbDXnu5gzJp8B5
-# v3xFeDy4lGHBqEXJbmSWcWXZB9OJglA176Fh99JbqOiQiwdR9ZEKSWsTBKgfcS7m
-# GQ9L+zWuU+LdrDuJhdqUmCBoCemYkWde/L5QfyDkvCJISBhQCVjuMBTzql219hqD
-# aXZ01bhPWVDe6BbWYLLfFI8nZuw3uXm5o7AEEV5ZAA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUvDuS1sLm6gCiFLnV8O/8jc4SbpowDQYJ
+# KoZIhvcNAQEBBQAEggEAFg86rCjyyjqO/NlZzJc4W5oHeptsrNNfeAFO+foEz8U4
+# CWypODsDgYCwWKkOPmO3Z7aKM5UDyRSIb/XIgVpPXP3QbsGU4Xl0T7DWB+e1+7XF
+# AvY6iJxfvR6/mkENzAsJeb7E86zPTk+wfkWVSH5tOjj5499FgkrL37vp7vKVYWCS
+# +GACa3UuMNDGiKu3VmP+WT8hc2ddo1rG7SLIA//CvYn8pGhjr3ftk+AQzLxfv65U
+# WPrcrorXqa4VSPnOn7c/jPZZtf490rSsCOPF0VCTbFA8VgfO1/Cka+ahyXg3K11k
+# y9pxR1KmpXQg3iRHB9T5STU2DyYmRexm9Hw4d9Ttog==
 # SIG # End signature block

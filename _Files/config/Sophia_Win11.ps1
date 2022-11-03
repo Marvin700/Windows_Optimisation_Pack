@@ -223,9 +223,6 @@ UpdateMicrosoftProducts -Enable
 # Set power plan on "Balanced" (default value)
 PowerPlan -Balanced
 
-# Use the latest installed .NET runtime for all apps
-#LatestInstalled.NET -Enable
-
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
 
@@ -403,14 +400,11 @@ OpenWindowsTerminalAdminContext -Enable
 # Disable the Windows 10 context menu style (default value)
 Windows10ContextMenu -Disable
 
-# Errors output
-Errors
-
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzjKkFyL60O+mpaxiUrdbUdC+
-# yVGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwjHDHtk8W2RCRHFajDN3xSwJ
+# qragggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -430,11 +424,11 @@ Errors
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUqfHrfQK9CvcCyAGkFQrBdxb2rDUwDQYJ
-# KoZIhvcNAQEBBQAEggEAXUxumsBLwt8HGFdSThErRI3RaN3p9hx1j2tfAwSs556u
-# QUUeZa/k+tRrhxiL18p0DonFm/lGHED1AMaGOKZgXkWiXrfkOTvY9ie+NbjRzSs2
-# s6ldcaGt2sNrpGuceKu41NWEL3QOlDnqe0zxIE995eiQnmzPhwrnVE4sR5dT+pvR
-# 1b8JBT7l1qf2XCImwYvkFKnHnf03a9nsWhNoo4YWPnvKg54nbZGKyiH6gNFKdWDz
-# 4UijfmBDMO0putXUMk3zlV27ykKKSIuqowu5iqjZAogdTB3356i52NENQJckDVaZ
-# abq8CeLsUxyWoIc4jg5Loa0eNLFP0Vgk7o0/ztykzw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGwD3zl6vlXp8+fAoUKf48RM8HM4wDQYJ
+# KoZIhvcNAQEBBQAEggEAYR+Ty3wAjhbiCSpLC0wIv9QjmpR9fkQeGWXa4f9ISy2F
+# 5eTmoWD4ZKS8ogqliQVcyjFDf/0ZZwdbCr8utgicoI47pdsBK56VXw5QypijYRpk
+# y5Lksr/Z1U3a3hpHy4lfEQtxfOSh9sC0fb2eVxRZk8FTs5Vo4uiR6of8xGHFMfMd
+# 0k3kLnAbmIOTNWJQOrCPSifRuuB+2+UEdO0JZYrJ1XqNTVQqcsQs2Q3foPVhH0at
+# s1h0COPGPmgGICIwFl2Uq4p0hngDS5U7GB23Fd2CJpgU5OiL7Yvqp4oq9mkkzSDx
+# +MxcqInnToyEtTDse2hfZpx+GWQAlyzMMqDyMFJqkw==
 # SIG # End signature block

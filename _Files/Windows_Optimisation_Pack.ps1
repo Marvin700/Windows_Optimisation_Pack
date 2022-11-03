@@ -65,7 +65,6 @@ REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
 REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "EnableLUA" /T REG_DWORD /D 00000000 /F
 New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient" -Force
 New-Item -Path "HKLM:\Software\Policies\Microsoft\Edge" -Force | Out-Null
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Edge" -Name "SyncDisabled" -Type "DWORD" -Value 1 -Force
@@ -188,7 +187,7 @@ Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack opt
 $weitermachen = Read-Host "Ja oder Nein ?"
 IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
 Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20;exit}}}
+Start-Sleep 20;exit}} }
 
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
@@ -352,8 +351,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUT/iH/j22Bna2mOtoAigDECqV
-# WnKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2BUfgS0s343afZm/b9OEq3/7
+# ULCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -373,11 +372,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgaxW5W38y7CwsvmgXQNNdv9TWnEwDQYJ
-# KoZIhvcNAQEBBQAEggEAlpRZORwqP0u+BBVytrL3voneUE4z/Wacv0cYVv4pTvZe
-# TXy40umgVmlgTxruOQLbG/4+ZW2kGoZ2j6+tcnb3OunS+EkYpcKUn80sNqMmTzs5
-# lAAvBpVXMUBlvuAaLga9acuHsRCQ8/Ysr9O6tWVtxPOCGcguRCFoznx1m3GqcN6O
-# JIgSkrZRg37xARmMxT8FTtTAR5Fj6kHhBOlT36T0srz6FT741YBe6IvuTeqfl2X/
-# /AMIGxRQONBss2XnyIgtV3DZidUpFNr5eM/vlEAF4nk2BlWuv3biEGQ5JdhfSz+B
-# MmUeVhcVtUFQQcEqofULZ36l0HS//kM/hAp4fYu1GA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUJLxKN8y9wtvPf0FXMDcd32QYkhQwDQYJ
+# KoZIhvcNAQEBBQAEggEAHsjUqTPdF2O5ZqN8VTB6739oaOdkxgDcinp7sGVyfSxT
+# 5u2mMGxIXwpxnvHpPr8ph34PwACblFDpkB5wXrKTztxfKeeyqNACzrx6SVXKs9Ks
+# OxnvZklZpG1lHoDjyuyH4GPrLohNS1SvRVjX7m9C+jjngLygqvpa7vTfcelt5UD6
+# 51Dz5cimwcd+m14pbf8L3B7vQYXnFG0mhnsMzCSnoQifK3NVxQ1o04Vw3+UaSfnH
+# P0PNUD2ffgmhQjrlW17COFapUWgrd7UWfPEHJdElwPeQnPrdRzfQHeejxxPIokd0
+# MVmF0PoJIv6hodaRe+69jqWLf3xMssyxF5RPkNhC1A==
 # SIG # End signature block
