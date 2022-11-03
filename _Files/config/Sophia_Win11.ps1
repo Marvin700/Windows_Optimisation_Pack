@@ -272,7 +272,7 @@ ActiveHours -Automatically
 RestartDeviceAfterUpdate -Enable
 
 # Set Windows Terminal as default terminal app to host the user interface for command-line applications
-DefaultTerminalApp -WindowsTerminal
+#DefaultTerminalApp -WindowsTerminal
 
 # Unpin all Start apps
 UnpinAllStartApps
