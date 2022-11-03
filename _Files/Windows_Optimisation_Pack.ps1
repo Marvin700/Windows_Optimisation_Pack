@@ -188,8 +188,7 @@ Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack opt
 $weitermachen = Read-Host "Ja oder Nein ?"
 IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
 Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20;exit}} 
-Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse }
+Start-Sleep 20;exit}}}
 
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
@@ -353,8 +352,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUy0Ge80AP+De2mMNBoGsLPagW
-# Wl+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUT/iH/j22Bna2mOtoAigDECqV
+# WnKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -374,11 +373,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUElyDIQavvZT9Ykuo+gwrZboIm+0wDQYJ
-# KoZIhvcNAQEBBQAEggEAlUHhvq5dpVfn0AbQgwZOrOTbB6exVK7mlE8Sqy2oxQ9r
-# s9c6NK9my907KFE0pKkswyjzsBdWVc+0yhb96n+rqWRqvd1U+0Pk1khNMflOzERu
-# QK7G0A/A/4cnxz+81BplEuo6xsc6M6+1TKQqmLvnUfs7L6/fbgpyqxi1wDYSErB6
-# KHzXllpBwn0e6Ic+Fqi80sm1fC4NqEIzi+QBMubXNxFeN86EQpBEBIunT7mlx+kx
-# Qu2up+l073E6hj2Kn+oaS1AP2VQxMxC4wFehge+jIhCzQ+++2Dh9Ugj81FOow7wX
-# pfBAspg6SS1cthouk3H4Y37DqyfmM8QGhmfimPiZ1Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgaxW5W38y7CwsvmgXQNNdv9TWnEwDQYJ
+# KoZIhvcNAQEBBQAEggEAlpRZORwqP0u+BBVytrL3voneUE4z/Wacv0cYVv4pTvZe
+# TXy40umgVmlgTxruOQLbG/4+ZW2kGoZ2j6+tcnb3OunS+EkYpcKUn80sNqMmTzs5
+# lAAvBpVXMUBlvuAaLga9acuHsRCQ8/Ysr9O6tWVtxPOCGcguRCFoznx1m3GqcN6O
+# JIgSkrZRg37xARmMxT8FTtTAR5Fj6kHhBOlT36T0srz6FT741YBe6IvuTeqfl2X/
+# /AMIGxRQONBss2XnyIgtV3DZidUpFNr5eM/vlEAF4nk2BlWuv3biEGQ5JdhfSz+B
+# MmUeVhcVtUFQQcEqofULZ36l0HS//kM/hAp4fYu1GA==
 # SIG # End signature block
