@@ -1,5 +1,5 @@
 <#
-	Version: v6.2.1
+	Version: v6.2.2
 
 	Copyright (c) 2014—2022 farag
 	Copyright (c) 2019—2022 farag & Inestic
@@ -165,9 +165,6 @@ FirstLogonAnimation -Disable
 
 # Set the quality factor of the JPEG desktop wallpapers to maximum
 JPEGWallpapersQuality -Max
-
-# Start Task Manager in the expanded mode
-TaskManagerWindow -Expanded
 
 # Notify me when a restart is required to finish updating
 RestartNotification -Show
@@ -406,17 +403,14 @@ OpenWindowsTerminalAdminContext -Enable
 # Disable the Windows 10 context menu style (default value)
 Windows10ContextMenu -Disable
 
-# Update Local Group Policy Editor (gpedit.msc) to make all manually created policy keys in the registry visible in the snap-in
-UpdateLGPEPolicies
-
 # Errors output
 Errors
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCm/9Ox0wCQNeFG6hxMojoezE
-# TLmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzjKkFyL60O+mpaxiUrdbUdC+
+# yVGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -436,11 +430,11 @@ Errors
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXdLheDaeeHHSsul34fuEU7Kpu+EwDQYJ
-# KoZIhvcNAQEBBQAEggEAVK8Jo/IPG4FmKCy+WDZ9wrs0pr8O6yY2jF90FU81CHi0
-# fcnz9wkaXzjk0yU03sKDEJ8kiMBqyrRkOA/4iZUQ8tTEP73836flbeQVvFViBt8U
-# Y8D8n1pMHdRmtxjtg5KfTbFOBCddY9xLNcJhd9f38EgI5Mb9YlCuaNDgxUGu0NQl
-# fJcYfTA9xqlqnNZW1Lwn/QObbPQ3MA02hXDZIc9Rk+ch6Ip7+XqvNIzuyja/eqBn
-# JDh4sA+pTocNRjKaZlFuDAC8DOJGi7R2CCYkC5s973WZbEFOxRTumQ7RJOccEnYB
-# O6VoHBRfOfv9uiRbhZ7kG54oCayQpwqt1hFnJjOYXw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUqfHrfQK9CvcCyAGkFQrBdxb2rDUwDQYJ
+# KoZIhvcNAQEBBQAEggEAXUxumsBLwt8HGFdSThErRI3RaN3p9hx1j2tfAwSs556u
+# QUUeZa/k+tRrhxiL18p0DonFm/lGHED1AMaGOKZgXkWiXrfkOTvY9ie+NbjRzSs2
+# s6ldcaGt2sNrpGuceKu41NWEL3QOlDnqe0zxIE995eiQnmzPhwrnVE4sR5dT+pvR
+# 1b8JBT7l1qf2XCImwYvkFKnHnf03a9nsWhNoo4YWPnvKg54nbZGKyiH6gNFKdWDz
+# 4UijfmBDMO0putXUMk3zlV27ykKKSIuqowu5iqjZAogdTB3356i52NENQJckDVaZ
+# abq8CeLsUxyWoIc4jg5Loa0eNLFP0Vgk7o0/ztykzw==
 # SIG # End signature block
