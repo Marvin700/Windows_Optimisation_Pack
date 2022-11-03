@@ -81,20 +81,15 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force}
-
 function WindowsTweaks_Tasks{
 Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
-schtasks /change /TN "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /DISABLE
-schtasks /change /TN "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /DISABLE
-schtasks /change /TN "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
-schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
-schtasks /change /TN "Microsoft\Windows\Application Experience\AitAgent" /DISABLE }
+schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
 function WindowsTweaks_Features{
 dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
@@ -214,7 +209,6 @@ Start-Process explorer.exe
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse SilentlyContinue 
 Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force SilentlyContinue}
 
-
 function Laufzeitkomponenten{
 Clear-Host
 ""
@@ -229,14 +223,13 @@ winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
-function SpieleOrdner{
-New-Item -Path "C:\Spiele" -ItemType Directory }
+function Festplatten_Name{Label C: Windows}
 
-function Festplatten_Name{Label C: Windows }
-
-function Updaten{winget upgrade --all --accept-source-agreements}
+function SpieleOrdner{New-Item -Path "C:\Spiele" -ItemType Directory}
 
 function Programme{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
+
+function Updaten{winget upgrade --all --accept-source-agreements}
 
 function Ende{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1 /F
@@ -354,8 +347,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6y1CWRuOo7/G9/+y/nO19eZf
-# gnOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU086F00X7vbDv26QQSGDjpk7C
+# UBagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -375,11 +368,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUPorV/g5ptH8oS+SwksHMDLCsbMYwDQYJ
-# KoZIhvcNAQEBBQAEggEAmVBSyg1y55DpJMHc2DRFmwStQgrmkdGJ9BKvhP3SXYte
-# I7doBuzuYkXbg5/S48Sp7OQC0xKT+9DJvdehRIIey7idBQx5HymHcDIdCegldQ1E
-# Nt0Or4oythfrPI3Zq/EQUoXCHOm3Q3VijSPHDCT/045s8zi7S+Bu5SeFE33xGoS7
-# 0kgWprzYXDcIs/pR82ELZUUDe/20lEDbr1iemjPK5ocsEajMqM1aYQnoeU5eAHf0
-# XIdoE3YC8PtnabNGPKbQWT3Oo5zvqsl2b6SQkyHYJgsZdwPcWvOYdBjlbsxk5gNE
-# bHnPgPdxjcLNZWD7zeRqKE8KqViptPcE4HMwdJfaMA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlGjEyL1oy9p9GKyOhCqKN9VMjxIwDQYJ
+# KoZIhvcNAQEBBQAEggEAIR6BrkfydqvIApTXJxT40HG/LdlRpnZidbEdQ+8xOx98
+# 9fmG6q0ZwGlBZ3zcrLxhzV73UPI/4yFFE82TjdaOr2LZLYl0KRqfU+052fNbWJ06
+# jZgGPocQSbtXylZSDqHmgKurZfcIvjsRjZYnRlfQouBhBLtsSYHGifn4jpqFW9ns
+# z4EmV3F01I4SV8uua4s+Lp6tZPsgv3zKvbU2pPXyV+ui/gW5Y90PUCq/r64zr9O+
+# nWywuwu8KC64XOXDqQVKrGBqUWS1Hr1pyHLX9giDpobKSpZ6eP9nPKbOV+n/sBV7
+# 4dpm0OvhbQPov+zaW63YdgF5xFHiSU7NWnjF4xU71w==
 # SIG # End signature block
