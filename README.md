@@ -20,6 +20,6 @@
 ## Before running
 > **Note**: <BR> 
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
-Im unteren Teil des Script können die Funktionen nach belieben auskommentiert werden.  <BR>
+Nicht gewuenscht Funktionen können im unteren teil des Skriptes auskommentiert werden.<BR>
   
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Screenshots">Screenshots</a> | <a href="https://www.youtube.com/watch?v=Xl8VvnytMu8">Video</a>
