@@ -1,5 +1,4 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 Set-Location $env:temp
 
 function WindowsTweaks_Dienste{
@@ -129,12 +128,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 
 function SophiaScript{
 Clear-Host
-IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
+IF([System.Version][Environment]::OSVersion.Version.ToString() -lt [System.Version]"11.0") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.2/Sophia.Script.for.Windows.11.v6.2.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $env:temp\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win11.ps1" -Destination "$env:temp\Sophia_Script\Sophia.ps1" }
-else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
+else { IF([System.Version][Environment]::OSVersion.Version.ToString() -lt [System.Version]"10.0") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.2/Sophia.Script.for.Windows.10.v5.14.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $env:temp\Sophia_Script\
@@ -170,6 +169,11 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
 
 function Pruefungen{
+IF(!([System.Version][Environment]::OSVersion.Version.ToString() -lt [System.Version]"11.0" )) {
+IF(!([System.Version][Environment]::OSVersion.Version.ToString() -lt [System.Version]"10.0" )) { 
+Write-Warning " Kein Unterstuetztes Betriebsystem! Windows 10 oder Windows 11 erforderlich"
+Write-Warning " Das Script wird in 20 Sekunden beendet"
+Start-Sleep 20;exit}} 
 if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
 Write-Warning " Das Script wird in 20 Sekunden beendet"
@@ -184,7 +188,8 @@ Write-Warning " Das System wurde bereits durch das Windows_Opsimisation_Pack opt
 $weitermachen = Read-Host "Ja oder Nein ?"
 IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
 Write-Warning " Das Script wird in 20 Sekunden beendet"
-Start-Sleep 20;exit}} }
+Start-Sleep 20;exit}} 
+Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse }
 
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
@@ -348,8 +353,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAKWAEIr+sjaMLZ39GSLzSzak
-# V6WgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUy0Ge80AP+De2mMNBoGsLPagW
+# Wl+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -369,11 +374,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU+Fa5BNWUBqYFIPOT8kyRcTjQ0iowDQYJ
-# KoZIhvcNAQEBBQAEggEADEbhDCqmumZsIdOJnxfEhaq6YOn9Fa4My4OwXHGG5ZKo
-# RGtlpYCTubWLFZrFpI7rF9y/2wk91Ej1YAnoPQcwabGJ0z9ne3EKvuOQBuMCTcmn
-# uM5e9EnfLRa+MBqU9hRAq5rl05Y6kxaEPYnj8ka1U1XJS0QslHcn8oAGtamK9b73
-# 3fGVQ9UEhdtA6ZiZLTAA0UAnKEezwm2Cw8Gi2UwL01NVSwHal7berEKRuLwPpNwa
-# 9aT1U58SLiP8hPIzJx73qfj2dB0CBcm5ljUvRq/FOo9VWQH76cvX2aS7vBDlfIRu
-# pTswIB8KpnH8JKCsGbDWsRGjORvHrQOW0Z+43+zDCw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUElyDIQavvZT9Ykuo+gwrZboIm+0wDQYJ
+# KoZIhvcNAQEBBQAEggEAlUHhvq5dpVfn0AbQgwZOrOTbB6exVK7mlE8Sqy2oxQ9r
+# s9c6NK9my907KFE0pKkswyjzsBdWVc+0yhb96n+rqWRqvd1U+0Pk1khNMflOzERu
+# QK7G0A/A/4cnxz+81BplEuo6xsc6M6+1TKQqmLvnUfs7L6/fbgpyqxi1wDYSErB6
+# KHzXllpBwn0e6Ic+Fqi80sm1fC4NqEIzi+QBMubXNxFeN86EQpBEBIunT7mlx+kx
+# Qu2up+l073E6hj2Kn+oaS1AP2VQxMxC4wFehge+jIhCzQ+++2Dh9Ugj81FOow7wX
+# pfBAspg6SS1cthouk3H4Y37DqyfmM8QGhmfimPiZ1Q==
 # SIG # End signature block
