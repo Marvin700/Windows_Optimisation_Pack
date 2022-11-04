@@ -221,7 +221,7 @@ Clear-Host
 ""
 " Laufzeitkomponenten installieren..."
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2691/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
-Invoke-Expression 'cmd /c start powershell -windowstyle hidden -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
+Invoke-Expression 'cmd /c start powershell -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
 Start-Sleep 5
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
