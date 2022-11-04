@@ -26,7 +26,7 @@ Nicht gewünscht Funktionen können im unteren Teil des Skriptes auskommentiert 
 Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen:
 
   ```powershell
-iex (irm github.com/Marvin700/Windows_Optimisation_Pack/releases/download/1.5/Windows_Optimisation_Pack.ps1)
+iex (irm cript.windows-optimisation.de)
   ```  
 
   
