@@ -330,18 +330,18 @@ $form.controls.add($button4)
 $form.controls.add($button5)
 $form.ShowDialog() }
 
-Begruesung
-Pruefungen
-SystemPunkt
+#Begruesung
+#Pruefungen
+#SystemPunkt
 #SophiaScript
-ooShutup
-WindowsTweaks_Index
-WindowsTweaks_Dienste
-WindowsTweaks_Tasks
-WindowsTweaks_Registry
-WindowsTweaks_Features
-Festplatten_Name
-SpieleOrdner
+#ooShutup
+#WindowsTweaks_Index
+#WindowsTweaks_Dienste
+#WindowsTweaks_Tasks
+#WindowsTweaks_Registry
+#WindowsTweaks_Features
+#Festplatten_Name
+#SpieleOrdner
 Laufzeitkomponenten
 Programme
 #Updaten
