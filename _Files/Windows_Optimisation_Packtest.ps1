@@ -1,7 +1,7 @@
-$Host.UI.RawUI.WindowTitle = "Windows_Optimization_Pack"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 if (!(Test-Path $env:temp\Windows_Optimization_Pack)) {New-Item -Path $env:temp\Windows_Optimization_Pack -ItemType Directory}
-$ScriptOrdner = "$env:temp\Windows_Optimization_Pack"
+$ScriptOrdner = "$env:temp\Windows_Optimisation_Pack"
 
 function WindowsTweaks_Dienste{
 Stop-Service "WpcMonSvc"
