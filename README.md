@@ -26,7 +26,7 @@ Das Script kann direkt über die Powershell gestartet werden. <BR>
 Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen:
 
   ```powershell
-iex (irm rebrand.ly/Windows_Optimisation_Pack)
+iex (irm windows-optimisation-pack.de)
   ```   
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Screenshots">Screenshots</a> | <a href="https://www.youtube.com/watch?v=Xl8VvnytMu8">Video</a>
    
