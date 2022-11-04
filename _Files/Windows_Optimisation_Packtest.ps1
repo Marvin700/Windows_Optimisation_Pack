@@ -145,7 +145,6 @@ REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWO
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/ooshutup10.cfg" -Destination "$ScriptOrdner\ooshutup10.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptOrdner\OOSU10.exe
-Set-Location $env:temp\Windows_Optimization_Pack
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
 function Begruesung{
@@ -220,9 +219,7 @@ function Laufzeitkomponenten{
 Clear-Host
 ""
 " Laufzeitkomponenten installieren..."
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/download/v1.3.2691/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\winget.msixbundle"
-Invoke-Expression 'cmd /c start powershell -Command { add-AppxPackage -Path "$env:temp\winget.msixbundle";winget source update}'
-Start-Sleep 5
+winget source update
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
@@ -330,18 +327,18 @@ $form.controls.add($button4)
 $form.controls.add($button5)
 $form.ShowDialog() }
 
-#Begruesung
-#Pruefungen
-#SystemPunkt
-#SophiaScript
-#ooShutup
-#WindowsTweaks_Index
-#WindowsTweaks_Dienste
-#WindowsTweaks_Tasks
-#WindowsTweaks_Registry
-#WindowsTweaks_Features
-#Festplatten_Name
-#SpieleOrdner
+Begruesung
+Pruefungen
+SystemPunkt
+SophiaScript
+ooShutup
+WindowsTweaks_Index
+WindowsTweaks_Dienste
+WindowsTweaks_Tasks
+WindowsTweaks_Registry
+WindowsTweaks_Features
+Festplatten_Name
+SpieleOrdner
 Laufzeitkomponenten
 Programme
 #Updaten
