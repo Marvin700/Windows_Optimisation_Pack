@@ -199,6 +199,8 @@ function WindowsRefresh{
 Clear-Host
 gpupdate.exe /force 
 Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
+Cmd.exe /c Cleanmgr /sagerun:65535
+Cmd.exe /c Cleanmgr  /SAGERUN:1221
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
@@ -210,7 +212,6 @@ lodctr /r
 lodctr /r
 taskkill /f /im explorer.exe
 Start-Process explorer.exe 
-Cmd.exe /c Cleanmgr /sagerun:65535
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse SilentlyContinue 
 Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force SilentlyContinue}
 
@@ -352,8 +353,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFIRhUJ5EwYobNKttTfflmgwo
-# u1GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUunjE5IyM92bwkMnAZXE2H2PD
+# kd6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -373,11 +374,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUalcr/eClV++XugGvWHOrf6Y2aTowDQYJ
-# KoZIhvcNAQEBBQAEggEAoCCRSwr9w8IATShTeYZtcz4Vap+OMFS5aBOzmUjMjyVL
-# KfOwG4gnAP01aU//SEJmj/SDPUhESNyFUCFe1ghD7TU80Zr2+5czSfBc9cK94f2w
-# g2PettMdIp6Cp+WghKBCI9vXuyNo9eV0tlVCUuxCPiBtfeDakOdPykA8GIdtaT/Q
-# QxuuFjXu/oueA+mEeTU6rGzFGFiTGZPMh5aMH2kGUTdh/B8ll24naeXxk3+E11c6
-# 6oGKRyrhFAei0JYNQJEiniXfM24Vp6LbQ8XHyWAg4bIjUKkT0XshRX7mgRu1lsFL
-# 1v720c6crmZaJ+jCCUFJtOqgaJXDbmEAhE+NZlaCSA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUyNBg/g3y9OwXkWun71UKFa+vrvkwDQYJ
+# KoZIhvcNAQEBBQAEggEAR9zn/3ZAVyQgfqoF/erl29njWiz1RrB86Bg+Hrxw1C+R
+# t93zT15HbNIxXPDbuUjuQBy+mnNGD2f+1Ad4Xxnl1qPBNgvPMWq3VegMNRoOhfK8
+# aqNjxXTZ2mBy4rpGeRPUpNtFbw1FG+2ISbQNuoiw7YpHJgTfqNXyjCnrP+xSGxZO
+# MbLJc+zNY2WUM9yYyui9hFjIIj0++xgMvS4VI6nq3fJAbukQvDuBTlncr3L9+C8+
+# Yr85kXYjzQ0o977mg64QCTTRX14FUpN4jD6P7Tawxj7rwBhUP2t1IAaFzEDrTIA5
+# GR3QqU4DxquDc5RLg8gyK0yiIAmUjVWMgpncfMKyDQ==
 # SIG # End signature block
