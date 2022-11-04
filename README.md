@@ -21,13 +21,5 @@
 > **Note**: <BR> 
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Nicht gewünscht Funktionen können im unteren Teil des Skriptes auskommentiert werden.<BR>
-  
- ## 
-Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen:
-
-  ```powershell
-iex (irm cript.windows-optimisation.de)
-  ```  
-
-  
+   
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Screenshots">Screenshots</a> | <a href="https://www.youtube.com/watch?v=Xl8VvnytMu8">Video</a>
