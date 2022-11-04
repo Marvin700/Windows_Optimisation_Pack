@@ -61,12 +61,12 @@ Set-Service "WerSvc" -StartupType Disabled
 Set-Service "wercplsupport" -StartupType Disabled }
 
 function WindowsTweaks_Registry{
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseSpeed" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold1" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseThreshold2" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /V "MouseTrails" /T REG_DWORD /D 0 /F
 New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient" -Force
 New-Item -Path "HKLM:\Software\Policies\Microsoft\Edge" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type "DWORD" -Value 0 -Force
+New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type "DWORD" -Value 0 -Force
+New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type "DWORD" -Value 0 -Force
+New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Edge" -Name "SyncDisabled" -Type "DWORD" -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
@@ -78,7 +78,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force }
 
 function WindowsTweaks_Tasks{
 Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
@@ -351,8 +351,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2BUfgS0s343afZm/b9OEq3/7
-# ULCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2HMcr86Y/tO10SoDMfxsxveu
+# 1vWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -372,11 +372,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUJLxKN8y9wtvPf0FXMDcd32QYkhQwDQYJ
-# KoZIhvcNAQEBBQAEggEAHsjUqTPdF2O5ZqN8VTB6739oaOdkxgDcinp7sGVyfSxT
-# 5u2mMGxIXwpxnvHpPr8ph34PwACblFDpkB5wXrKTztxfKeeyqNACzrx6SVXKs9Ks
-# OxnvZklZpG1lHoDjyuyH4GPrLohNS1SvRVjX7m9C+jjngLygqvpa7vTfcelt5UD6
-# 51Dz5cimwcd+m14pbf8L3B7vQYXnFG0mhnsMzCSnoQifK3NVxQ1o04Vw3+UaSfnH
-# P0PNUD2ffgmhQjrlW17COFapUWgrd7UWfPEHJdElwPeQnPrdRzfQHeejxxPIokd0
-# MVmF0PoJIv6hodaRe+69jqWLf3xMssyxF5RPkNhC1A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHeCn5XzmIy5PF65nqs/69C04m5EwDQYJ
+# KoZIhvcNAQEBBQAEggEAIindHKzntrUrjZqXuWxDO3YFnBaMt+fnxm9Dhn1BoxYd
+# DzwhsAOG+t5SJkojrHnXSiRJUcH38gr0PAC94dzktAwQPE8dPI588M5e7VOHCaOQ
+# 6Yfg3bu0Zca7fG8LTkw8JmfVLd9tYvvmpTDc+l7R/9HKDZ8Eq7jAxTE6QorffydR
+# dA8qPlvQLZiJLP12gXkrae/Bd04t5xxOtd3ueu9EyxIQ6Y7DWRDHiDl0fOJjx2+f
+# VTf/kqSPp9wawXr8lQ0j5rKwxGcOHpTPv8q17Tlr0DsI6VSXdPub+VX2vpLi9u9y
+# U5i8kWsnWhgN6unP8DzQdYOTLwX9qz8TugGxzqHIoA==
 # SIG # End signature block
