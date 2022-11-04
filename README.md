@@ -20,8 +20,9 @@
 ## Before running
 > **Note**: <BR> 
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
-Nicht gewünscht Funktionen können im unteren Teil des Skriptes auskommentiert werden.<BR>
 Das Script kann direkt über die Powershell gestartet werden. <BR>
+Nicht gewünscht Funktionen können in der manuellen Download Option angepasst werden.<BR>
+
 
 Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen:
 
