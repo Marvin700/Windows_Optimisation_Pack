@@ -29,6 +29,3 @@ Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen:
   ```powershell
 iex (irm windows-optimisation-pack.de)
   ```   
- <img class="" src="https://user-images.githubusercontent.com/98750428/200116390-9c437688-fd3b-4595-95c0-860774a75e3c.gif"/>  
-  
-
