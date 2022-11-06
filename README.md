@@ -27,6 +27,6 @@ Nicht gewünscht Funktionen können in der manuellen Download Option angepasst w
 Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen:
 
   ```powershell
-iex (irm download.windows-optimisation.de)
+iex (irm windows-optimisation.de/download)
   ```   
 <p dir="auto"><a href="https://github.com/Marvin700/Windows_Optimisation_Pack/wiki/Screenshots">Screenshots</a> | <a href="https://www.youtube.com/watch?v=Xl8VvnytMu8" rel="nofollow">Video</a></p>
