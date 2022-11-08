@@ -3,11 +3,11 @@
 ## Key Features
 * Windows Bloatware entfernen
 * Windows Spy Funktionen abschalten 
+* RAM und CPU Last verringern 
 * Cortana deaktivieren
 * Autostart und Tasks bereinigen
 * Windows Komponenten dektivieren
 * Festplatten Indizierung abschalten
-* RAM und CPU Last verringern 
 * Laufzeitkomponenten installieren
 * Zeiger Beschleunigung deaktivieren
 * Sophia Script & O&OShutUp
