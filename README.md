@@ -7,6 +7,7 @@
 * Autostart und Tasks bereinigen
 * Windows Komponenten dektivieren
 * Festplatten Indizierung abschalten
+* Reduktion des RAM Verbrauchs und CPU Last. 
 * Laufzeitkomponenten installieren
 * Zeiger Beschleunigung deaktivieren
 * Sophia Script & O&OShutUp
