@@ -18,11 +18,6 @@
 
 <a href="https://github.com/Marvin700/Windows_Optimisation_Pack/releases/latest"><img src="https://user-images.githubusercontent.com/98750428/194409192-abe5edcc-9bf7-4873-bd55-ff5c4e458369.png"></a>
 
-> **Note**: <BR> 
-Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
-Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen <BR>
-Nicht gewünscht Funktionen können in der manuellen Download Option angepasst werden.<BR>
-
 Automatische Optimierung
   ```powershell
 iex (irm windows-optimisation.de/download)
@@ -31,7 +26,12 @@ Benutzerdefinierte Optimierung
   ```powershell
 iex (irm windows-optimisation.de/custom)
   ```  
-
+  
+> **Note**: <BR> 
+Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
+Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen <BR>
+Nicht gewünscht Funktionen können in der manuellen Download Option angepasst werden.<BR>
+  
   
 ## Screenshots
 <div>
