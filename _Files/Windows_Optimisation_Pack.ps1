@@ -200,8 +200,7 @@ function WindowsRefresh{
 Clear-Host
 gpupdate.exe /force 
 Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
-Cmd.exe /c Cleanmgr /sagerun:65535
-Cmd.exe /c Cleanmgr /SAGERUN:1221
+Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse 
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
@@ -211,10 +210,11 @@ Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
+Cmd.exe /c Cleanmgr /sagerun:65535
+Cmd.exe /c Cleanmgr /SAGERUN:1221
 taskkill /f /im explorer.exe
-Start-Process explorer.exe 
-Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse SilentlyContinue 
-Get-ChildItem -Path c:\ -Include *.tmp, *.dmp, *.etl, *.evtx, thumbcache*.db, *.log -File -Recurse -Force SilentlyContinue}
+Start-Sleep 3
+Start-Process explorer.exe }
 
 function Laufzeitkomponenten{
 Clear-Host
@@ -352,8 +352,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbFfOkkEm6Xd+KXnGB7aNx6Qj
-# ryWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaZHjR2H9Py/4p6XhMMvPGnpK
+# clagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -373,11 +373,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUePHZAcLtT3F+SCHFW4vEpH0AepEwDQYJ
-# KoZIhvcNAQEBBQAEggEABN59yxTV4WmzhDCxL9jkDm2s8FPgrltjxjGhdAwKpzbZ
-# ci5bKJSNqqXwe7zYKMeTbNi4QlfuuPLmNgYn7LK2C5L7qhHWGvwsq6VPOceaib5V
-# 6J0NMXOI1QRPVZibjc+m7jWoSCd9Lhkl6LRSFYs6ZY3k1Ao1gZd0iAIIRU9em1NY
-# 724MUf5Kiv8dPHTclUEcgoINCDpWcPoivrmHpnWDUPekS+rDdS8OHyNEfY65CmHg
-# 8Vrw9FfU7eGtkxcbDJZRvKTM01zWRfGJPvRwHcCkWx+BmPA3Z2LLiiOuDk44mxpw
-# eIQl+LR4sePfgdNbM3yP8zSsIFTrMdiCqljStfQLYQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNvgPFZItrbnZdT7qYMNYqza1RJQwDQYJ
+# KoZIhvcNAQEBBQAEggEADj69S2aKbNUpONaM1ScYLJ79/YkJ+z0ljMdA8qeFuLTP
+# 8yEJn8+Mw7+9grAeY+Drb+4RmZtt+cJgMDUm7DdxqE1yLRJE3Zqxt5Z4j81yBpuZ
+# Sq2RODpXLxaylOi/x41rME2hemi4h+/f5FnYtNOrGiIQQZP83zpMOXYe67BBeDng
+# hzpQmNYY4wGfkiiFmDTtbJJjnvzw37wuzx76XB2TNYs7ypSxi+/dtKFum2koFowP
+# EhWqjHm8JHop3bzlo7//6+qbaUt8EvE1KRkFTeS8rXZDKwzimgT+rrIl7+c9oi0V
+# jTX0ncuPZvuEE/XiliySCnzVolubp5EWRoGkHly4mg==
 # SIG # End signature block
