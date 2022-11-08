@@ -130,12 +130,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.2/Sophia.Script.for.Windows.11.v6.2.2.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.3/Sophia.Script.for.Windows.11.v6.2.3.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptOrdner\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win11.ps1" -Destination "$ScriptOrdner\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.2/Sophia.Script.for.Windows.10.v5.14.2.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.3/Sophia.Script.for.Windows.10.v5.14.3.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptOrdner\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win10.ps1" -Destination "$ScriptOrdner\Sophia_Script\Sophia.ps1" } }
@@ -201,7 +201,7 @@ Clear-Host
 gpupdate.exe /force 
 Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
 Cmd.exe /c Cleanmgr /sagerun:65535
-Cmd.exe /c Cleanmgr  /SAGERUN:1221
+Cmd.exe /c Cleanmgr /SAGERUN:1221
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
@@ -352,8 +352,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVbPpAtvrQ+SQ4vCTsTbzMD/P
-# St2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbFfOkkEm6Xd+KXnGB7aNx6Qj
+# ryWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -373,11 +373,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUrz8LPBx0FR2muCGmQgJKO+pOlQEwDQYJ
-# KoZIhvcNAQEBBQAEggEAomzSIHhDec77OO/XLv2qnwP4hL4563NV0/VefBNCinDs
-# lxnAs1PvRI2Sb7BQ4TWg+/aYSf10NAWN1i5rP12Vqt57pW64kxEW+w8K0BSUhGxE
-# T0eeEXChKSP6e1wGZ/4VcARweCgdOysvAZHF+6SYArwAtdjO5T5NAqoSUaEQq/CN
-# lW2En1G6K58lXIuMaOZeLnj4nSwGvnlr39z+R1n/v1cH3FG82NUfuluKGP0VHpbr
-# g6Cfj+iPnLBTTGl2d8y03MQUstgjZOhLmvI7eEgSvJS7dkyXwLV9+HOqHMaXQwgc
-# /og4jzizWNVCNr4TNMI3TiB4tuc2u/dyofxhZb1S4Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUePHZAcLtT3F+SCHFW4vEpH0AepEwDQYJ
+# KoZIhvcNAQEBBQAEggEABN59yxTV4WmzhDCxL9jkDm2s8FPgrltjxjGhdAwKpzbZ
+# ci5bKJSNqqXwe7zYKMeTbNi4QlfuuPLmNgYn7LK2C5L7qhHWGvwsq6VPOceaib5V
+# 6J0NMXOI1QRPVZibjc+m7jWoSCd9Lhkl6LRSFYs6ZY3k1Ao1gZd0iAIIRU9em1NY
+# 724MUf5Kiv8dPHTclUEcgoINCDpWcPoivrmHpnWDUPekS+rDdS8OHyNEfY65CmHg
+# 8Vrw9FfU7eGtkxcbDJZRvKTM01zWRfGJPvRwHcCkWx+BmPA3Z2LLiiOuDk44mxpw
+# eIQl+LR4sePfgdNbM3yP8zSsIFTrMdiCqljStfQLYQ==
 # SIG # End signature block
