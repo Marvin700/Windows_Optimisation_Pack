@@ -6,7 +6,7 @@
 * RAM und CPU Last verringern 
 * Cortana deaktivieren
 * Autostart und Tasks bereinigen
-* Windows Komponenten dektivieren
+* Windows Komponenten deaktivieren
 * Festplatten Indizierung abschalten
 * Laufzeitkomponenten installieren
 * Zeiger Beschleunigung deaktivieren
