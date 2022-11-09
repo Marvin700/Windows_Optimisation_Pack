@@ -202,13 +202,10 @@ Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContin
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
-Cmd.exe /c Cleanmgr /sagerun:65535
-Cmd.exe /c Cleanmgr /sagerun:1221 }
+Cleanmgr /sagerun:65535
+Cleanmgr /sagerun:1221 }
 
 function Laufzeitkomponenten{
-Clear-Host
-""
-" Laufzeitkomponenten installieren..."
 winget source update
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
@@ -228,7 +225,7 @@ function Updaten{winget upgrade --all --accept-source-agreements}
 function Ende{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1 /F
 Clear-Host
-" Ihr System wurde erforlgreich optimiert"
+" Ihr System wurde erforlgreich durch das Windows_Optimisation_Pack optimiert"
 ""
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
 Start-Sleep 60
@@ -341,8 +338,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDsbhdSg/A19qpegzUM6p0/XB
-# BLegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi9OvLVt6O2lO3UT3//xNk8I8
+# a3ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -362,11 +359,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmX2BbCcVqtxswBQF746pw9JbZ8owDQYJ
-# KoZIhvcNAQEBBQAEggEAO1ZcbWUsOdxDN252VH5bGU5IyfmfSFYjxvFUTPCMHEVL
-# MlKjVN0dyQvrDzTwVVFEADNggZsiq1MyXSar47qnrEjiPkrAZaI7arNvRK4OZFTW
-# 6dVfzxG5F0SE3YDy9q7ZKpUUi6nY2gSFe7MStPMVPBn+cb/o0pR6hxuFDh9V4Tvt
-# ZB63nm6KSTdpeY+KjQVnpPskBPRjeRTvBj5+YV4f2MMT8BM2978ncN1NKITrpPJ2
-# 3x2PA6hiMGH2255WqQ33SSYsXkc25Zf3SNIGDj7yBHikeeZXqvdQufQ7eReEx49d
-# DJUlbeHqKsSFo/eKntXfmZB+jfHPxwHO9hSzMMYFxA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUwaxQBOFXItPDaOMN7LX8dbnQCZEwDQYJ
+# KoZIhvcNAQEBBQAEggEAmwJ6J2GoFBSuBFILPUbIcvdmrlcp6/Bkxj815xc8Ovq2
+# u9gj+QgNdfuM9VI7xM2tznxJjzTmfXXbA7u6suKTKzTHDzjDr0Vx94Eo1KfBVDEj
+# 12q8b9JdtqfMjhdV7Ob9KbLFCF+TssMaSZNqmDK0hX80fkPsMGB5UNhMX2ljhcuw
+# 3tsjA1jPrggOVt3AVHU4OPXAzTGpaupjcSeXimjHP2kUkaNNVluXgELFttxZZ1uU
+# E0/PbrKadzEqtzP/wu2DPIwiInrr4HyYwqsFGOQQoDtlivab4jpeYMXpnuEhL581
+# pOyN0+j5cvizpwMa3NO5P5B/k2uQCtYyALqolHyXlw==
 # SIG # End signature block
