@@ -25,13 +25,10 @@ Benutzerdefinierte Optimierung
   ```powershell
 iex (irm windows-optimisation.de/custom)
   ```   
-
 > **Note**: <BR> 
 Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
 Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen <BR>
 Nicht gewünscht Funktionen können in der Benutzerdefinierten Option angepasst werden.<BR>
-Es wurden Code Zeilen von simeononsecurity/Windows-Optimize-Harden-Debloat & undergroundwires/privacy.sexy genutzt. <BR>
-  
   
 ## Screenshots
 <div>
