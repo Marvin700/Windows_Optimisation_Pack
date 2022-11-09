@@ -34,7 +34,7 @@ Nicht gewünscht Funktionen können in der Benutzerdefinierten Option angepasst 
   
 ## Screenshots
 <div>
-    <img src="https://user-images.githubusercontent.com/98750428/200678853-363ec142-b0ab-4623-97cb-077bff29ca9d.png" width="420" height="350">
-    <img src="https://user-images.githubusercontent.com/98750428/200678119-e192ef85-75ef-4585-8260-3a444e8c66a1.png" width="420" height="350">
+    <img src="https://user-images.githubusercontent.com/98750428/200678853-363ec142-b0ab-4623-97cb-077bff29ca9d.png" width="410" height="340">
+    <img src="https://user-images.githubusercontent.com/98750428/200678119-e192ef85-75ef-4585-8260-3a444e8c66a1.png" width="410" height="340">
 </div>
 
