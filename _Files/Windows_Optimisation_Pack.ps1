@@ -195,8 +195,6 @@ Start-Process $env:temp\Autoruns64.exe }
 function WindowsCleanup{
 Clear-Host
 gpupdate.exe /force 
-Cmd.exe /c Cleanmgr /sagerun:65535
-Cmd.exe /c Cleanmgr /sagerun:1221
 Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse 
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
@@ -204,9 +202,8 @@ Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContin
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
-taskkill /f /im explorer.exe
-Start-Sleep 3
-Start-Process explorer.exe }
+Cmd.exe /c Cleanmgr /sagerun:65535
+Cmd.exe /c Cleanmgr /sagerun:1221 }
 
 function Laufzeitkomponenten{
 Clear-Host
@@ -234,7 +231,7 @@ Clear-Host
 " Ihr System wurde erforlgreich optimiert"
 ""
 Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
-timeout 60
+Start-Sleep 60
 Restart-Computer }
 
 function Extras{
@@ -344,8 +341,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUleQbQMMCe451CIFeduLmk2Xz
-# viygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDsbhdSg/A19qpegzUM6p0/XB
+# BLegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -365,11 +362,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0IG/0AGJYzt7PvSSOeS4eU2QD6wwDQYJ
-# KoZIhvcNAQEBBQAEggEAZOUfszXJZpmcR/54EJhM6SzY+2zYw5r7BLIkrjjbC/wL
-# jjcl7bINmmSmWqeJ7CLCylt9g0AkbbJty+/JDOqPSl2iXezfRK7WhZQqGiRCB7qU
-# 3WOWSfitKW6zB8uXDh7SDXVtOLCXi5mGzkhGLTdL3sgysRXZwMeSZ4qigtWsKsET
-# zZxbdh2Nx1R3WraAfFo0pXf/iD6VmXndnflice0VO8gmIEg+J9C5UwaXSQ9K+iVJ
-# AhrBZt0hXUZqsNyDWKjGPlIZYefKocB0hXr83wDXirNVejQDSArToURcXrtXrURV
-# J1K6BDhjaDlk/YOO9P1CdgQldMg2nUJRUpIcKMYfsA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmX2BbCcVqtxswBQF746pw9JbZ8owDQYJ
+# KoZIhvcNAQEBBQAEggEAO1ZcbWUsOdxDN252VH5bGU5IyfmfSFYjxvFUTPCMHEVL
+# MlKjVN0dyQvrDzTwVVFEADNggZsiq1MyXSar47qnrEjiPkrAZaI7arNvRK4OZFTW
+# 6dVfzxG5F0SE3YDy9q7ZKpUUi6nY2gSFe7MStPMVPBn+cb/o0pR6hxuFDh9V4Tvt
+# ZB63nm6KSTdpeY+KjQVnpPskBPRjeRTvBj5+YV4f2MMT8BM2978ncN1NKITrpPJ2
+# 3x2PA6hiMGH2255WqQ33SSYsXkc25Zf3SNIGDj7yBHikeeZXqvdQufQ7eReEx49d
+# DJUlbeHqKsSFo/eKntXfmZB+jfHPxwHO9hSzMMYFxA==
 # SIG # End signature block
