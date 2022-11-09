@@ -63,12 +63,10 @@ Set-Service "WerSvc" -StartupType Disabled
 Set-Service "wercplsupport" -StartupType Disabled }
 
 function WindowsTweaks_Registry{
-New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient" -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type "DWORD" -Value 0 -Force
-Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\DiagTrack" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\dmwappushservice" -Name "Start" -Type "DWORD" -Value 4 -Force 
@@ -201,15 +199,11 @@ Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-It
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse 
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportArchive\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:ProgramData\Microsoft\Windows\WER\ReportQueue\* -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
 Cmd.exe /c Cleanmgr /sagerun:65535
-Cmd.exe /c Cleanmgr /SAGERUN:1221
+Cmd.exe /c Cleanmgr /sagerun:1221
 taskkill /f /im explorer.exe
 Start-Sleep 3
 Start-Process explorer.exe }
@@ -350,8 +344,8 @@ Ende
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaZHjR2H9Py/4p6XhMMvPGnpK
-# clagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9r1RoFk9Rraigczg3hje9u7v
+# cNCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -371,11 +365,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNvgPFZItrbnZdT7qYMNYqza1RJQwDQYJ
-# KoZIhvcNAQEBBQAEggEADj69S2aKbNUpONaM1ScYLJ79/YkJ+z0ljMdA8qeFuLTP
-# 8yEJn8+Mw7+9grAeY+Drb+4RmZtt+cJgMDUm7DdxqE1yLRJE3Zqxt5Z4j81yBpuZ
-# Sq2RODpXLxaylOi/x41rME2hemi4h+/f5FnYtNOrGiIQQZP83zpMOXYe67BBeDng
-# hzpQmNYY4wGfkiiFmDTtbJJjnvzw37wuzx76XB2TNYs7ypSxi+/dtKFum2koFowP
-# EhWqjHm8JHop3bzlo7//6+qbaUt8EvE1KRkFTeS8rXZDKwzimgT+rrIl7+c9oi0V
-# jTX0ncuPZvuEE/XiliySCnzVolubp5EWRoGkHly4mg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI5NHtiC4isEQlAa09ahJFpSeVrIwDQYJ
+# KoZIhvcNAQEBBQAEggEAhyubG1uZDPefkH2d8wOOodZcGtWqxJF4kJSwkCv1SHVN
+# //HLnGC77CeqqkIZKRgMamJ2Ogz6fywXOj4eEPrjAaGicfkhoPfpDYCg5pONKIzV
+# 42/y8LXpnYdxHiGCQmEHu2ahQibdElFiIoor1deB57yin0fuXrqv5ddgcHku2a6L
+# ipGUP9gXBeZmlr/so6YO0JRD3OGmznPEUwOpE+zejTpPAxRbqd/1nR9QBOB/szTQ
+# TryeVrC/v9x1C37ZA6zG1vrmvvXzKVIN2a+f6v26GPgcYmA6YbGTJi2r7k5nBtTt
+# iVk7aknB5fzgVW+c26gI7sGVS/E0iRAbPIY3oidjBg==
 # SIG # End signature block
