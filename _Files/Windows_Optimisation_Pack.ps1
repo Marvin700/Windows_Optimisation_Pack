@@ -153,8 +153,8 @@ Clear-Host
 " Schritt 2 - o&oShutup"
 " Schritt 3 - Windows Optimierungen"
 " Schritt 4 - Laufzeitkomponenten"
-" Schritt 5 - Extras"
-" Schritt 6 - Windows Refresh"
+" Schritt 5 - Windows Cleanup"
+" Schritt 6 - Extras"
 timeout 30
 Clear-Host }
 
@@ -192,7 +192,7 @@ Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
-function WindowsRefresh{
+function WindowsCleanup{
 Clear-Host
 gpupdate.exe /force 
 Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
@@ -202,11 +202,11 @@ Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContin
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
-Cmd.exe /c Cleanmgr /sagerun:65535
-Cmd.exe /c Cleanmgr /sagerun:1221
 taskkill /f /im explorer.exe
 Start-Sleep 3
-Start-Process explorer.exe }
+Start-Process explorer.exe 
+Cmd.exe /c Cleanmgr /sagerun:65535
+Cmd.exe /c Cleanmgr /sagerun:1221 }
 
 function Laufzeitkomponenten{
 Clear-Host
@@ -337,15 +337,15 @@ Programme
 #Updaten
 TakeOwnership
 Autoruns
+WindowsCleanup
 Extras
-WindowsRefresh
 Ende
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9r1RoFk9Rraigczg3hje9u7v
-# cNCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUu2LuGRxLCRBOWkkXUGG4ImZp
+# TpegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -365,11 +365,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI5NHtiC4isEQlAa09ahJFpSeVrIwDQYJ
-# KoZIhvcNAQEBBQAEggEAhyubG1uZDPefkH2d8wOOodZcGtWqxJF4kJSwkCv1SHVN
-# //HLnGC77CeqqkIZKRgMamJ2Ogz6fywXOj4eEPrjAaGicfkhoPfpDYCg5pONKIzV
-# 42/y8LXpnYdxHiGCQmEHu2ahQibdElFiIoor1deB57yin0fuXrqv5ddgcHku2a6L
-# ipGUP9gXBeZmlr/so6YO0JRD3OGmznPEUwOpE+zejTpPAxRbqd/1nR9QBOB/szTQ
-# TryeVrC/v9x1C37ZA6zG1vrmvvXzKVIN2a+f6v26GPgcYmA6YbGTJi2r7k5nBtTt
-# iVk7aknB5fzgVW+c26gI7sGVS/E0iRAbPIY3oidjBg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUFC0lbkKMo6zgJamJXblwTv07C44wDQYJ
+# KoZIhvcNAQEBBQAEggEAAphqfebVbGuL3eGMd9XEp8WtnOQqAmuBTxcKG7ooLXj2
+# +o/Ps6ObXPR//DUUhIY9bu3UI5vjNm8jzth6nqm6xt0CLlkKLCH3OKvbUzZ8UPwO
+# ml8FrT9PPVQN2TqI3vcbC24w+1/oDO6FormHpKsrKe2ylNkgKVpMzdJLWv0aKgyT
+# k0z8h0pk7pMBuIA4SEU8/c7SLLb6TIu0hzvzV6kdvP9AmIx5vym1UwkQXzWAiQ5c
+# 7sQorLPfZhD95pvoToyNp8CJWMOLKthoqicMM5R3UyJjXeIuEJDwS86pN8rbOZxH
+# ykCwK9vko4VJNFxAYnBmJy0iLpJURXDhVDLAaKKPnA==
 # SIG # End signature block
