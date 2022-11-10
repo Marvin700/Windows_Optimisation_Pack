@@ -19,7 +19,7 @@
 ## Download
 Automatische Optimierung
   ```powershell
-iex (irm windows-optimisation.de/download)
+iex (irm windows-optimisation.de)
   ```   
 Benutzerdefinierte Optimierung
   ```powershell
