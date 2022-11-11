@@ -1,7 +1,7 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
-$ScriptOrdner = "$env:temp\Windows_Optimisation_Pack"
+$ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 
 function WindowsTweaks_Dienste{
 Stop-Service "WpcMonSvc"
@@ -128,63 +128,63 @@ Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.3/Sophia.Script.for.Windows.11.v6.2.3.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptOrdner\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win11.ps1" -Destination "$ScriptOrdner\Sophia_Script\Sophia.ps1" }
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.3/Sophia.Script.for.Windows.10.v5.14.3.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptOrdner\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win10.ps1" -Destination "$ScriptOrdner\Sophia_Script\Sophia.ps1" } }
-Powershell.exe -executionpolicy Bypass $ScriptOrdner\Sophia_Script\Sophia.ps1
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
+Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Sophia_Script" /T REG_DWORD /D 1 /F } 
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/ooshutup10.cfg" -Destination "$ScriptOrdner\ooshutup10.cfg"
-Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptOrdner\OOSU10.exe
-Set-Location $ScriptOrdner
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/_Files/config/ooshutup10.cfg" -Destination "$ScriptFolder\ooshutup10.cfg"
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
+Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
-function Begruesung{
+function Greeting{
 Clear-Host
 " ==========================="
 "  Windows Optimization Pack"
 " ==========================="
 " Schritt 1 - Sophia Script"
 " Schritt 2 - o&oShutup"
-" Schritt 3 - Windows Optimierungen"
-" Schritt 4 - Laufzeitkomponenten"
+" Schritt 3 - Windows Tweaks"
+" Schritt 4 - Runtime components"
 " Schritt 5 - Windows Cleanup"
 " Schritt 6 - Extras"
 timeout 30
 Clear-Host }
 
-function SystemPunkt{
+function SystemPoint{
 vssadmin delete shadows /all /quiet
 Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
 
-function Pruefungen{
+function Tests{
 IF(!($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro")) {
 IF(!($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro")) {
-Write-Warning " Kein Unterstuetztes Betriebsystem! Windows 10 oder Windows 11 erforderlich"
-Write-Warning " Das Script wird in 20 Sekunden beendet"
+Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
+Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
 if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
-Write-Warning " Das Script wird in 20 Sekunden beendet"
+Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " Keine benoetigten Admin Rechte vorhanden"
-Write-Warning " Das Script wird in 20 Sekunden beendet"
+Write-Warning " No admin rights available"
+Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit} 
 if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
-Write-Warning " Das System wurde bereits durch das Windows_Optimisation_Pack optimiert"
-"Moechten sie wirklich fortfahren?"
+Write-Warning " The system has already been optimised by the Windows_Optimisation_Pack"
+"Do you really want to continue?"
 $weitermachen = Read-Host "Ja oder Nein ?"
 IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
-Write-Warning " Das Script wird in 20 Sekunden beendet"
+Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} }
 
 function Autoruns{
@@ -205,7 +205,7 @@ lodctr /r
 Cleanmgr /sagerun:65535
 Cleanmgr /sagerun:1221 }
 
-function Laufzeitkomponenten{
+function Runtime{
 winget source update
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
@@ -214,20 +214,18 @@ winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
-function Festplatten_Name{Label C: Windows}
+function HDD_Name{Label C: Windows}
 
 function SpieleOrdner{New-Item -Path "C:\Spiele" -ItemType Directory}
 
-function Programme{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
+function Programs{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
-function Updaten{winget upgrade --all --accept-source-agreements}
-
-function Ende{
-REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Erfolgreich" /T REG_DWORD /D 1 /F
+function Finish{
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F
 Clear-Host
-" Ihr System wurde erforlgreich durch das Windows_Optimisation_Pack optimiert"
+" Your system has been successfully optimised by the Windows_Optimisation_Pack"
 ""
-Write-Warning " Der Computer wird in 60 Sekunden automatisch neugestartet !!!"
+Write-Warning " The computer will restart automatically in 60 seconds !!!!"
 Start-Sleep 60
 Restart-Computer }
 
@@ -245,15 +243,15 @@ $Textbox.location = New-Object Drawing.Point 60,170
 $Username=[Environment]::UserName
 $TextBox.Text = $Username+"-Computer"
 $button1 = New-Object Windows.Forms.Button
-$button1.text = "Process Lasso installieren"
+$button1.text = "Installi Process Lasso"
 $button1.Location = New-Object Drawing.Point 30,60
 $button1.Size = New-Object Drawing.Point 100,35
 $button2 = New-Object Windows.Forms.Button
-$button2.text = "PS4 Controller installieren"
+$button2.text = "Install PS4 Controller "
 $button2.Location = New-Object Drawing.Point 140,60
 $button2.Size = New-Object Drawing.Point 100,35
 $button3 = New-Object Windows.Forms.Button
-$button3.text = "AutoActions installieren"
+$button3.text = "Install AutoActions"
 $button3.Location = New-Object Drawing.Point 30,100
 $button3.Size = New-Object Drawing.Point 100,35
 $button4 = New-Object Windows.Forms.Button
@@ -261,7 +259,7 @@ $button4.text = "DLSS Swapper"
 $button4.Location = New-Object Drawing.Point 140,100
 $button4.Size = New-Object Drawing.Point 100,35
 $button5 = New-Object Windows.Forms.Button
-$button5.text = "Weiter"
+$button5.text = "Next"
 $button5.Location = New-Object Drawing.Point 80,200
 $button5.Size = New-Object Drawing.Point 110,40
 $button1.add_click({
@@ -298,7 +296,7 @@ $Titel.text = "Windows_Optimisation_Pack"})
 $button4.add_click({
 $Titel.text = "Bitte warten..."
 winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
-$Text.Text = "DLSS Swapper wurde installiert"
+$Text.Text = "DLSS Swapper was installed"
 $button4.Enabled = $false
 $button4.IsAccessible = $false
 $Titel.text = "Windows_Optimisation_Pack"})
@@ -314,9 +312,9 @@ $form.controls.add($button4)
 $form.controls.add($button5)
 $form.ShowDialog() }
 
-Begruesung
-Pruefungen
-SystemPunkt
+Greeting
+Tests
+SystemPoint
 SophiaScript
 ooShutup
 WindowsTweaks_Index
@@ -324,22 +322,21 @@ WindowsTweaks_Dienste
 WindowsTweaks_Tasks
 WindowsTweaks_Registry
 WindowsTweaks_Features
-Festplatten_Name
-SpieleOrdner
-Laufzeitkomponenten
-Programme
-#Updaten
+HDD_Name
+GameFolder
+Runtime
+Programs
 TakeOwnership
 Autoruns
 WindowsCleanup
 Extras
-Ende
+Finish
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi9OvLVt6O2lO3UT3//xNk8I8
-# a3ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZTrKKDgj6vSLPwvxumM53pGV
+# Az+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -359,11 +356,11 @@ Ende
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUwaxQBOFXItPDaOMN7LX8dbnQCZEwDQYJ
-# KoZIhvcNAQEBBQAEggEAmwJ6J2GoFBSuBFILPUbIcvdmrlcp6/Bkxj815xc8Ovq2
-# u9gj+QgNdfuM9VI7xM2tznxJjzTmfXXbA7u6suKTKzTHDzjDr0Vx94Eo1KfBVDEj
-# 12q8b9JdtqfMjhdV7Ob9KbLFCF+TssMaSZNqmDK0hX80fkPsMGB5UNhMX2ljhcuw
-# 3tsjA1jPrggOVt3AVHU4OPXAzTGpaupjcSeXimjHP2kUkaNNVluXgELFttxZZ1uU
-# E0/PbrKadzEqtzP/wu2DPIwiInrr4HyYwqsFGOQQoDtlivab4jpeYMXpnuEhL581
-# pOyN0+j5cvizpwMa3NO5P5B/k2uQCtYyALqolHyXlw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWssJbxdy5D5p9zcsr2agU4t7a50wDQYJ
+# KoZIhvcNAQEBBQAEggEAgnR3o06Mt0p8G6aY/KiyafjUpAppfnxhZJ/Z9xV0LEXv
+# Y5stVAPjsoA4TYr1gAhVGi7AjfGNuJLDKTPJ66MH2oe0B4zKDz8YkkRssas7t+JR
+# Vxid4e/j5uxjupUWF6ZNFsnJvrPkez9TWZA9zOjuz5NdfEU2WwPyqxFv0zxh8YyN
+# QoAWGT2rhan2jEr/KVKCMyJVs4dE/cgHjzt/sGeHWumMLcnZCzpq0Eo1koxQoR8F
+# WIo6Zl/X+Ezk0Kdr5A68tv9BNm6tvjOIk0RUwhQ4zUsjA+48TkfMsXSc/nRHM4dZ
+# x2zJPxvroGCQrOH7gqt9oRhqh3xdltJxT1gHNQhs0A==
 # SIG # End signature block
