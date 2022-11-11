@@ -1,34 +1,34 @@
 <img src="https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png"> 
 
 ## Key Features
-* Windows Bloatware entfernen
-* Windows Spy Funktionen abschalten 
-* RAM und CPU Last verringern 
-* Cortana deaktivieren
-* Autostart und Tasks bereinigen
-* Windows Komponenten deaktivieren
-* Festplatten Indizierung abschalten
-* Laufzeitkomponenten installieren
-* Zeiger Beschleunigung deaktivieren
+* Remove Windows Bloatware 
+* Disable Windows Spying
+* Lower CPU and Ram usage
+* Deactivate Cortana
+* Clean Tasks and Autostart
+* Deactivate unnecessary Windows Components
+* Deactivate Windows Indexing 
+* Install Runtimes
+* Deactivate Mouse acceleration
 * Sophia Script & O&OShutUp
-* GUI für optionale Pakete
-* Insider Builds abschalten
-* Weitere Windows Tweaks
+* GUI for optional Packages
+* Deactivate Insider Builds 
+* More Windows Tweaks
 * Take Ownership
 
 ## Download
-Automatische Optimierung
+Automatic Optimization
   ```powershell
 iex (irm windows-optimisation.de)
   ```   
-Benutzerdefinierte Optimierung
+Custom Optimization
   ```powershell
 iex (irm windows-optimisation.de/custom)
   ```   
 > **Note**: <BR> 
-Die frische Windows Installation bitte vorher <b>vollstäntig</b> updaten. <BR>
-Mit der **Powershell** / **Windows-Terminal** als **Admin** ausführen <BR>
-Nicht gewünscht Funktionen können in der Benutzerdefinierten Option angepasst werden.<BR>
+Please update the fresh Windows installation first. <BR>
+Run with the **Powershell** / **Windows-Terminal** as **Admin**. <BR>
+Unwanted functions can be customized in the Custom option. <BR>
   
 ## Screenshots
 <div>
