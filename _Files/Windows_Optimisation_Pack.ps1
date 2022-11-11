@@ -152,7 +152,7 @@ Clear-Host
 " Schritt 1 - Sophia Script"
 " Schritt 2 - o&oShutup"
 " Schritt 3 - Windows Tweaks"
-" Schritt 4 - Runtime components"
+" Schritt 4 - Runtime Components"
 " Schritt 5 - Windows Cleanup"
 " Schritt 6 - Extras"
 timeout 30
@@ -216,7 +216,7 @@ winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function HDD_Name{Label C: Windows}
 
-function SpieleOrdner{New-Item -Path "C:\Spiele" -ItemType Directory}
+function GameFolder{New-Item -Path "C:\Spiele" -ItemType Directory}
 
 function Programs{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
@@ -243,7 +243,7 @@ $Textbox.location = New-Object Drawing.Point 60,170
 $Username=[Environment]::UserName
 $TextBox.Text = $Username+"-Computer"
 $button1 = New-Object Windows.Forms.Button
-$button1.text = "Installi Process Lasso"
+$button1.text = "Install Process Lasso"
 $button1.Location = New-Object Drawing.Point 30,60
 $button1.Size = New-Object Drawing.Point 100,35
 $button2 = New-Object Windows.Forms.Button
@@ -255,23 +255,23 @@ $button3.text = "Install AutoActions"
 $button3.Location = New-Object Drawing.Point 30,100
 $button3.Size = New-Object Drawing.Point 100,35
 $button4 = New-Object Windows.Forms.Button
-$button4.text = "DLSS Swapper"
+$button4.text = ""
 $button4.Location = New-Object Drawing.Point 140,100
 $button4.Size = New-Object Drawing.Point 100,35
 $button5 = New-Object Windows.Forms.Button
 $button5.text = "Next"
 $button5.Location = New-Object Drawing.Point 80,200
 $button5.Size = New-Object Drawing.Point 110,40
-$button1.add_click({
-$Titel.text = "Bitte warten..."
-Invoke-WebRequest 'https://dl.bitsum.com/files/processlassosetup64.exe' -OutFile $env:temp\ProcesslassoSetup64.exe
+button1.add_click({
+$Titel.text = "Please wait..."
+Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"
 $button1.Enabled = $false
 $button1.IsAccessible = $false
 $Titel.text = "Windows_Optimisation_Pack"})
 $button2.add_click({
-$Titel.text = "Bitte warten..."
-Invoke-WebRequest 'https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.9/DS4Windows_3.1.9_x64.zip' -OutFile $env:temp\DS4Windows.zip 
+$Titel.text = "Please wait..."
+Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.9/DS4Windows_3.1.9_x64.zip" -Destination "$env:temp\DS4Windows.zip "
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -282,8 +282,8 @@ $button2.Enabled = $false
 $button2.IsAccessible = $false
 $Titel.text = "Windows_Optimisation_Pack"})
 $button3.add_click({
-$Titel.text = "Bitte warten..."
-Invoke-WebRequest 'https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip' -OutFile $env:temp\AutoActions.zip 
+$Titel.text = "Please wait..."
+Start-BitsTransfer -Source "https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip" -Destination $env:temp\AutoActions.zip 
 Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
 Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -294,9 +294,7 @@ $button3.Enabled = $false
 $button3.IsAccessible = $false
 $Titel.text = "Windows_Optimisation_Pack"})
 $button4.add_click({
-$Titel.text = "Bitte warten..."
-winget install "DLSS Swapper" --source msstore  --accept-package-agreements --accept-source-agreements 
-$Text.Text = "DLSS Swapper was installed"
+$Titel.text = "Please wait..."
 $button4.Enabled = $false
 $button4.IsAccessible = $false
 $Titel.text = "Windows_Optimisation_Pack"})
@@ -308,7 +306,7 @@ $form.controls.add($Textbox)
 $form.controls.add($button1)
 $form.controls.add($button2)
 $form.controls.add($button3)
-$form.controls.add($button4)
+#$form.controls.add($button4)
 $form.controls.add($button5)
 $form.ShowDialog() }
 
@@ -335,8 +333,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZTrKKDgj6vSLPwvxumM53pGV
-# Az+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1XH9/t4HaVNgH6IK8630HrR3
+# HRGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -356,11 +354,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWssJbxdy5D5p9zcsr2agU4t7a50wDQYJ
-# KoZIhvcNAQEBBQAEggEAgnR3o06Mt0p8G6aY/KiyafjUpAppfnxhZJ/Z9xV0LEXv
-# Y5stVAPjsoA4TYr1gAhVGi7AjfGNuJLDKTPJ66MH2oe0B4zKDz8YkkRssas7t+JR
-# Vxid4e/j5uxjupUWF6ZNFsnJvrPkez9TWZA9zOjuz5NdfEU2WwPyqxFv0zxh8YyN
-# QoAWGT2rhan2jEr/KVKCMyJVs4dE/cgHjzt/sGeHWumMLcnZCzpq0Eo1koxQoR8F
-# WIo6Zl/X+Ezk0Kdr5A68tv9BNm6tvjOIk0RUwhQ4zUsjA+48TkfMsXSc/nRHM4dZ
-# x2zJPxvroGCQrOH7gqt9oRhqh3xdltJxT1gHNQhs0A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWLP54NaFP4TCbj8TD4WmmNAI+e8wDQYJ
+# KoZIhvcNAQEBBQAEggEASGrIQ8CD4fzZvmyhyLXmG+Lo07zSJJFHdbiuyi7ZyxM9
+# wDMC2/INBVdlCT27t2fiReaRLNr6jWALtbVVNsUuPGdMmpOMJSgBhud7rn2erTpE
+# kX59mZx98sMuuwNbhIrC9rKs7py6g+q4D2bEQXeElADl0u867e8zNH663YTxq4/g
+# IflrzMePCJ542oUNen5U92XtvlbhyNyMWIe8vkujsorQd9Cwyzw/Z976sx6srcEi
+# Z1N/81QtBWHQJJ3NKDuaZkg4k0GPexCytP3o2fX4I6n68axopmUfYvFwn3fsT/yN
+# jg9DjW0CvQQSVIQ03AYGhv6iy9MgEpZMX2l+1tfZ0w==
 # SIG # End signature block
