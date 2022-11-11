@@ -28,7 +28,6 @@ iex (irm windows-optimisation.de/custom)
 > **Note**: <BR> 
 Please update the fresh Windows installation first. <BR>
 Run with the **Powershell** / **Windows-Terminal** as **Admin**. <BR>
-Unwanted functions can be customized in the Custom option. <BR>
   
 ## Screenshots
 <div>
