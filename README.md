@@ -17,11 +17,11 @@
 * Take Ownership
 
 ## Download
-Automatic Optimization
+Automatic Optimisation
   ```powershell
 iex (irm windows-optimisation.de)
   ```   
-Custom Optimization
+Custom Optimisation
   ```powershell
 iex (irm windows-optimisation.de/custom)
   ```   
