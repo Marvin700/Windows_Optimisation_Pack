@@ -8,7 +8,7 @@
 * Clean Tasks and Autostart
 * Deactivate unnecessary Windows Components
 * Deactivate Windows Indexing 
-* Install Runtimes
+* Install Runtime Components
 * Deactivate Mouse acceleration
 * Sophia Script & O&OShutUp
 * GUI for optional Packages
