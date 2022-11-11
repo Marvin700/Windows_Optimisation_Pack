@@ -262,7 +262,7 @@ $button5 = New-Object Windows.Forms.Button
 $button5.text = "Next"
 $button5.Location = New-Object Drawing.Point 80,200
 $button5.Size = New-Object Drawing.Point 110,40
-button1.add_click({
+$button1.add_click({
 $Titel.text = "Please wait..."
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"
@@ -333,8 +333,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1XH9/t4HaVNgH6IK8630HrR3
-# HRGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXFypNaw6d1bmnf8ryRqlg1b2
+# oGKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -354,11 +354,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWLP54NaFP4TCbj8TD4WmmNAI+e8wDQYJ
-# KoZIhvcNAQEBBQAEggEASGrIQ8CD4fzZvmyhyLXmG+Lo07zSJJFHdbiuyi7ZyxM9
-# wDMC2/INBVdlCT27t2fiReaRLNr6jWALtbVVNsUuPGdMmpOMJSgBhud7rn2erTpE
-# kX59mZx98sMuuwNbhIrC9rKs7py6g+q4D2bEQXeElADl0u867e8zNH663YTxq4/g
-# IflrzMePCJ542oUNen5U92XtvlbhyNyMWIe8vkujsorQd9Cwyzw/Z976sx6srcEi
-# Z1N/81QtBWHQJJ3NKDuaZkg4k0GPexCytP3o2fX4I6n68axopmUfYvFwn3fsT/yN
-# jg9DjW0CvQQSVIQ03AYGhv6iy9MgEpZMX2l+1tfZ0w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUE1Fv/QOaWWOj+MejPO+EP24GQzcwDQYJ
+# KoZIhvcNAQEBBQAEggEANzPo1gzrnE9xCvdtkB2bX8bCeYpXcIvTRYiw2GzKvUQV
+# AqdWpn7d+lo52tXd0ra15GE1FHmWSZ3y4FQ6FvZnaUELC4Bgzc0GxQSfvysHSp2h
+# NZ2c4BTVZUQW7RqEdxR1XDfWRHO9oYgVk0eBmIpN8iqbAW2a/heKrS2+u/FguNTF
+# 4++wm1NsKgtekjSTIemeNqvYHPvQvfWYyWZkpzxD9w7E8wpP4qwEkVbhDUggZ9FR
+# Ey8ROdjlbcH4j5MePU9TXeR9AfrorJo5FtUKPawMjBE2mtYnW42tGc/xDYlXuqZ0
+# cdkg3ZJjqfaMbl7jiUba5hcF4/ZwOCRIbqMF58Jbkw==
 # SIG # End signature block
