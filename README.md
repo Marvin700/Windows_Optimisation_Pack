@@ -9,7 +9,7 @@
 * Deactivate unnecessary Windows Components
 * Deactivate Windows Indexing 
 * Install Runtime Components
-* MarkC's mouse acceleration fix
+* Mouse acceleration fix
 * Sophia Script & O&OShutUp
 * GUI for optional Packages
 * Deactivate Insider Builds 
