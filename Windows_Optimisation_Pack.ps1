@@ -204,7 +204,9 @@ winget source update
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements }
 
 function AutoActions{
 Start-BitsTransfer -Source "https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip" -Destination $env:temp\AutoActions.zip 
@@ -226,9 +228,7 @@ $Shortcut.Save() }
     
 function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
-Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German" }t-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements }
+Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
 function HDD_Name{Label C: Windows}
 
@@ -244,21 +244,21 @@ Start-Sleep 60
 Restart-Computer }
 
 function GUI {
-[reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
-[reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
+[reflection.assembly]::loadwithpartialname("System.Windows.Forms")
+[reflection.assembly]::loadwithpartialname("System.Drawing")
 $handler_button_Click= {   
-if ($BOX_SophiaScript.Checked)                {$SophiaScript = "true"}    
-if ($BOX_ooShutup.Checked)                    {$ooShutup = "true"}    
-if ($BOX_WindowsTweaks_Registry.Checked)      {$WindowsTweaks_Registry = "true"}    
-if ($BOX_WindowsTweaks_Tasks.Checked)         {$WindowsTweaks_Tasks = "true"}       
-if ($BOX_WindowsTweaks_Features.Checked)      {$WindowsTweaks_Features = "true"}    
-if ($BOX_WindowsTweaks_Services.Checked)      {$WindowsTweaks_Services = "true"}    
-if ($BOX_Runtime.Checked)       {$Runtime = "true"}    
-if ($BOX_TakeOwnership.Checked)               {$TakeOwnership = "true"}    
-if ($BOX_Winrar.Checked)                      {$Winrar = "true"}    
-if ($BOX_AutoActions.Checked)                 {$AutoActions = "true"}    
-if ($BOX_Controller.Checked)                  {$Controller = "true"}    
-if ($BOX_Process_Lasso.Checked)               {$Process_Lasso = "true"} $Form.Close()}
+if ($BOX_SophiaScript.Checked)                {SophiaScript}    
+if ($BOX_ooShutup.Checked)                    {ooShutup}    
+if ($BOX_WindowsTweaks_Registry.Checked)      {WindowsTweaks_Registry}    
+if ($BOX_WindowsTweaks_Tasks.Checked)         {WindowsTweaks_Tasks}       
+if ($BOX_WindowsTweaks_Features.Checked)      {WindowsTweaks_Features}    
+if ($BOX_WindowsTweaks_Services.Checked)      {WindowsTweaks_Services}    
+if ($BOX_Runtime.Checked)      		          {Runtime}    
+if ($BOX_TakeOwnership.Checked)               {TakeOwnership}    
+if ($BOX_Winrar.Checked)                      {Winrar}    
+if ($BOX_AutoActions.Checked)                 {AutoActions}    
+if ($BOX_Controller.Checked)                  {Controller}    
+if ($BOX_Process_Lasso.Checked)               {Process_Lasso} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 370,410
 $form.text = "Windows_Optimisation_Pack"
@@ -277,8 +277,8 @@ $Titel_Extras.text = "Extras"
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
 $BOX_SophiaScript.Location = New-Object Drawing.Point 27,88
-$BOX_SophiaScript.Text = "Sophia Script"
-$BOX_SophiaScript.Checked = $true    
+$BOX_SophiaScript.Text = "Sophia Script" 
+$BOX_SophiaScript.Checked = $true 
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,119
@@ -302,8 +302,8 @@ $BOX_WindowsTweaks_Features.Checked = $true
 $BOX_WindowsTweaks_Services = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Services.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Services.Location = New-Object Drawing.Point 27,274
-$BOX_WindowsTweaks_Services.Text = "Disable Services"
-$BOX_WindowsTweaks_Services.Checked = $true    
+$BOX_WindowsTweaks_Services.Text = "Disable Services"  
+$BOX_WindowsTweaks_Services.Checked = $true   
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 135,25
 $BOX_Runtime.Location = New-Object Drawing.Point 200,88
@@ -312,23 +312,23 @@ $BOX_Runtime.Checked = $true
 $BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
 $BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
 $BOX_TakeOwnership.Location = New-Object Drawing.Point 200,119
-$BOX_TakeOwnership.Text = "TakeOwnership"
-$BOX_TakeOwnership.Checked = $true    
+$BOX_TakeOwnership.Text = "TakeOwnership" 
+$BOX_TakeOwnership.Checked = $true
 $BOX_Winrar = New-Object System.Windows.Forms.CheckBox
 $BOX_Winrar.Size = New-Object Drawing.Point 135,25
 $BOX_Winrar.Location = New-Object Drawing.Point 200,181
 $BOX_Winrar.Text = "Install Winrar"
-$BOX_Winrar.Checked = $true  
+$BOX_Winrar.Checked = $true
 $BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
 $BOX_AutoActions.Size = New-Object Drawing.Point 135,25
 $BOX_AutoActions.Location = New-Object Drawing.Point 200,212
 $BOX_AutoActions.Text = "Install AutoActions"
-$BOX_AutoActions.Checked = $false   
+$BOX_AutoActions.Checked = $false 
 $BOX_Controller = New-Object System.Windows.Forms.CheckBox
 $BOX_Controller.Size = New-Object Drawing.Point 135,25
 $BOX_Controller.Location = New-Object Drawing.Point 200,243
 $BOX_Controller.Text =  "Install PS4 Controller"
-$BOX_Controller.Checked = $false  
+$BOX_Controller.Checked = $false 
 $BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
 $BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
 $BOX_Process_Lasso.Location = New-Object Drawing.Point 200,274
@@ -355,23 +355,9 @@ $form.Controls.Add($BOX_AutoActions)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($button)
-$form.ShowDialog() | Out-Null } 
+$form.ShowDialog()} 
 
-function Choice{
-if ($SophiaScript = "true"){SophiaScript}
-if ($ooShutup = "true"){ooShutup}
-if ($WindowsTweaks_Registry = "true"){WindowsTweaks_Registry}
-if ($WindowsTweaks_Tasks = "true"){WindowsTweaks_Tasks}
-if ($WindowsTweaks_Features = "true"){WindowsTweaks_Features}
-if ($WindowsTweaks_Services = "true"){WindowsTweaks_Services}
-if ($Runtime = "true"){Runtime}
-if ($TakeOwnership = "true"){TakeOwnership}
-if ($Winrar = "true"){Winrar}
-if ($AutoActions = "true"){AutoActions}
-if ($Controller = "true"){Controller}
-if ($Process_Lasso = "true"){Process_Lasso} }
-
-Tests
+#Tests
 GUI
 SystemPoint
 HDD_Name
@@ -379,11 +365,12 @@ Choice
 Autoruns
 WindowsCleanup
 Finish
+
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5gbpN1bDlno8n0j6pgB/tPoj
-# YZ2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0zBQo3byCC5OYN5mGBseyxkh
+# deOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -403,11 +390,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/3dhEng5J5HmSBTMd2+E2g1H9twwDQYJ
-# KoZIhvcNAQEBBQAEggEAhbDbyWy75zyPdSJY4daHQuKIG7ThKn6Lkhbu3C9HQjTb
-# 36kvDf87Z91Pvmn3BjJpQDBIhqDFXHHbNDB6JIpQ29BugeSubEyiBNQsN6g/3gwb
-# KR/L4dSSxGh6XVTCQZ4MbwCjQtAvl9Waa0dVf5kxYO3Sksk0PcdUUM104McCcz3R
-# WoamUNSNZwCHAwQm15WXoy5bRGGv5i+HbvG4cWrQhzhtpx+NAI6v6Hf5QoQvXYi6
-# VNw2qHxbahxObDl842K3FdFCDFKSX08et81ABXqd9dT9Gd6W+0BvZnQIYJJCrUOe
-# qn/tcyvcSp8eOngwZ+3htxMv/Yr6IasjMrOD7M67OQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU1g4mlWTCd26rNXg0FmvNIwBPHS4wDQYJ
+# KoZIhvcNAQEBBQAEggEAmL1xIQNS3i343ordjw9YVKfIVGy1AmaagrtZ2XE1pnhH
+# fISG48ZUhLe9JgLcYoEG2hu2scsHpJxXG42JMz67RXoduyyeVG1Yta/9mqFh6VdZ
+# NxpnZiplmUNsmHExQq6gmppXpX70D09DREldS879xVpC2IcSsJIcYfKvqHheWzvA
+# hAgVyPnFnx8E6redP9PdG7M+wx+lHZs73mfJaCeDWUUaK0ftME0dezGIuqzaY2ES
+# IhBD6zSgev3fo1NSmRHeQcJoATB1ilT5Pz74a4FDftli4Vh78bzI6kA3Gvy9v4sw
+# RLPI69Bp8Pn0SNZnBYnGBeFnK8E7jsc887fQpGvx/w==
 # SIG # End signature block
