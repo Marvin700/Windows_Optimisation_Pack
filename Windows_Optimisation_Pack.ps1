@@ -358,8 +358,8 @@ $form.Controls.Add($button)
 $form.ShowDialog()} 
 
 #Tests
-GUI
 SystemPoint
+GUI
 HDD_Name
 Choice
 Autoruns
