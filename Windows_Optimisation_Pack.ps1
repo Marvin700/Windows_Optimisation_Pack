@@ -249,17 +249,17 @@ function GUI {
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $handler_button_Click= {   
 if ($BOX_SophiaScript.Checked)                {$hash.SophiaScript = $true}
-if ($BOX_ooShutup.Checked)                    {ooShutup}    
-if ($BOX_WindowsTweaks_Registry.Checked)      {WindowsTweaks_Registry}    
-if ($BOX_WindowsTweaks_Tasks.Checked)         {WindowsTweaks_Tasks}       
-if ($BOX_WindowsTweaks_Features.Checked)      {WindowsTweaks_Features}    
-if ($BOX_WindowsTweaks_Services.Checked)      {WindowsTweaks_Services}    
-if ($BOX_Runtime.Checked)      		          {Runtime}    
-if ($BOX_TakeOwnership.Checked)               {TakeOwnership}    
-if ($BOX_Winrar.Checked)                      {Winrar}    
-if ($BOX_AutoActions.Checked)                 {AutoActions}    
-if ($BOX_Controller.Checked)                  {Controller}    
-if ($BOX_Process_Lasso.Checked)               {Process_Lasso} $Form.Close()}
+if ($BOX_ooShutup.Checked)                    {$hash.ooShutup = $true}    
+if ($BOX_WindowsTweaks_Registry.Checked)      {$hash.WindowsTweaks_Registry = $true}    
+if ($BOX_WindowsTweaks_Tasks.Checked)         {$hash.WindowsTweaks_Tasks = $true}       
+if ($BOX_WindowsTweaks_Features.Checked)      {$hash.WindowsTweaks_Features = $true}    
+if ($BOX_WindowsTweaks_Services.Checked)      {$hash.WindowsTweaks_Services = $true}    
+if ($BOX_Runtime.Checked)      		          {$hash.Runtime = $true}    
+if ($BOX_TakeOwnership.Checked)               {$hash.TakeOwnership = $true}    
+if ($BOX_Winrar.Checked)                      {$hash.Winrar = $true}    
+if ($BOX_AutoActions.Checked)                 {$hash.AutoActions = $true}    
+if ($BOX_Controller.Checked)                  {$hash.Controller = $true}    
+if ($BOX_Process_Lasso.Checked)               {$hash.Process_Lasso = $true} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 370,410
 $form.text = "Windows_Optimisation_Pack"
