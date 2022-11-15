@@ -97,6 +97,7 @@ Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement 
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
+
 function WindowsTweaks_Features{
 dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
 dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart
@@ -398,8 +399,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUd9UeLnYpiqiGbeZDdbsh8WG/
-# pv6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUw5lweCYFrLkrOD6nPu73Iazq
+# 50qgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -419,11 +420,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU663lNxZc9Mm5xpkcBYS1cMcVtdcwDQYJ
-# KoZIhvcNAQEBBQAEggEAqwFHtWjn75Dm/uSvmkrcmZWBeVGL4HrCDc6Eb7aweG2T
-# cd7NmugnOofozGXLdqU/aXxHkAyq4PNlV1MCiN68hMdWKizTn6jEtoxVdpsr6ZrX
-# mFUybQ5fH7dH4uXRI7nnWarAGfuMzAcXl3cK6C/aFVPz64j6We49dvIQF/VrVhR7
-# K01LnfH1FotFuJHWoi58Pxira+kC/DdkqBohUaXjYVZbjumAaxn0xvRPWQxYkZm3
-# usCKZ20lZFHkoHlIETn/8bZA6Dole+MCdKYQhEqjGHCjjmB4uzih4pLftZIsYIHU
-# CKmPIOgtdz04OouQOCPB0+k2aIFc/AoqXBcrby7ySA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUSnd5gJhyKA8/ChW1Z3nJc9dLgo4wDQYJ
+# KoZIhvcNAQEBBQAEggEARpw781LnICtjxd6bVlLlncmsDJ0tphMUqqU04Ylz4JdF
+# RnZaXbfVcOzTlrDwG7xYggXKUlZLGkBeRsrk65Bpo2ZAz9H8xC14Dzcu0xJhj39Y
+# LDQ1Wp11fiyzsKWoUuTn1fOulFnqVUkiYdkFhHqix6+AlQtfHNGrNFbIrD13qfrl
+# pKTKgS9Rt/geuyMUALP6HG5j74MHfKpdA8BlUWoJzb8snlELzvAKkBsFx/QTG+6s
+# Eh2l9B4896yhYK+7Nt9GZcBncap1kyQ05B8rn5CowrcErjwDegnuXZtzp0sTdNL4
+# eev7rNnVwtPJp6bWZWIMEz/ngxvRl/UXHpZaETJMUA==
 # SIG # End signature block
