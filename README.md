@@ -17,13 +17,12 @@
 * Take Ownership
 
 ## Download
-Start Windows Optimisation Pack
+Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
 iex (irm windows-optimisation.de)
   ```   
 > **Note**: <BR> 
 Please update the fresh Windows installation first. <BR>
-Run with the **Powershell** / **Windows-Terminal** as **Admin**. <BR>
   
 ## Screenshots
 <div>
