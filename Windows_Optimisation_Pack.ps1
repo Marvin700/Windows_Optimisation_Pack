@@ -373,8 +373,8 @@ if($hash.Controller){Controller}
 if($hash.Process_Lasso){Process_Lasso}}
 
 Tests
-SystemPoint
 GUI
+SystemPoint
 HDD_Name
 Choice
 Autoruns
