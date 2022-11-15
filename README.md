@@ -1,6 +1,7 @@
 <img src="https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png"> 
 
 ## Key Features
+* GUI
 * Remove Windows Bloatware 
 * Disable Windows Spying
 * Lower CPU and Ram usage
