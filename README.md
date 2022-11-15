@@ -17,13 +17,9 @@
 * Take Ownership
 
 ## Download
-Automatic Optimisation
+Start Windows Optimisation Pack
   ```powershell
 iex (irm windows-optimisation.de)
-  ```   
-Custom Optimisation
-  ```powershell
-iex (irm windows-optimisation.de/custom)
   ```   
 > **Note**: <BR> 
 Please update the fresh Windows installation first. <BR>
