@@ -96,7 +96,6 @@ Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement 
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
-
 function WindowsTweaks_Features{
 dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
 dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart
@@ -207,7 +206,7 @@ winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreeme
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements }
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function AutoActions{
 Start-BitsTransfer -Source "https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip" -Destination $env:temp\AutoActions.zip 
@@ -229,7 +228,7 @@ $Shortcut.Save() }
     
 function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
-Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German" }
+Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
 function HDD_Name{Label C: Windows}
 
@@ -248,7 +247,7 @@ function GUI {
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms")
 [reflection.assembly]::loadwithpartialname("System.Drawing")
 $handler_button_Click= {   
-if ($BOX_SophiaScript.Checked)                {SophiaScript}    
+if ($BOX_SophiaScript.Checked)                {$SophiaScript = "test"}
 if ($BOX_ooShutup.Checked)                    {ooShutup}    
 if ($BOX_WindowsTweaks_Registry.Checked)      {WindowsTweaks_Registry}    
 if ($BOX_WindowsTweaks_Tasks.Checked)         {WindowsTweaks_Tasks}       
@@ -358,14 +357,16 @@ $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($button)
 $form.ShowDialog()} 
 
+function Choice { IF($SophiaScript -eq "test"){ SophiaScript } }
+
 #Tests
-SystemPoint
+#SystemPoint
 GUI
-HDD_Name
+#HDD_Name
 Choice
 Autoruns
-WindowsCleanup
-Finish
+#WindowsCleanup
+#Finish
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
