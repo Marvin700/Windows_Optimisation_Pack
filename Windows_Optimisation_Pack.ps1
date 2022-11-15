@@ -96,6 +96,7 @@ Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement 
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
+
 function WindowsTweaks_Features{
 dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
 dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart
@@ -228,7 +229,7 @@ $Shortcut.Save() }
     
 function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
-Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
+Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German" }
 
 function HDD_Name{Label C: Windows}
 
