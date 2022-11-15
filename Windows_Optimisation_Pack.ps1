@@ -1,4 +1,5 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack"
+$hash = [hashtable]::Synchronized(@{}) 
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
@@ -244,10 +245,10 @@ Start-Sleep 60
 Restart-Computer }
 
 function GUI {
-[reflection.assembly]::loadwithpartialname("System.Windows.Forms")
-[reflection.assembly]::loadwithpartialname("System.Drawing")
+[reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
+[reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $handler_button_Click= {   
-if ($BOX_SophiaScript.Checked)                {$SophiaScript = "test"}
+if ($BOX_SophiaScript.Checked)                {$hash.SophiaScript = $true}
 if ($BOX_ooShutup.Checked)                    {ooShutup}    
 if ($BOX_WindowsTweaks_Registry.Checked)      {WindowsTweaks_Registry}    
 if ($BOX_WindowsTweaks_Tasks.Checked)         {WindowsTweaks_Tasks}       
@@ -355,18 +356,30 @@ $form.Controls.Add($BOX_AutoActions)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($button)
-$form.ShowDialog()} 
+$form.ShowDialog() | Out-Null } 
 
-function Choice { IF($SophiaScript -eq "test"){ SophiaScript } }
+function Choice { 
+if($hash.SophiaScript){SophiaScript}
+if($hash.ooShutup){ooShutup}
+if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
+if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
+if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
+if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
+if($hash.Runtime){Runtime}   
+if($hash.TakeOwnership){TakeOwnership}
+if($hash.Winrar){Winrar}    
+if($hash.AutoActions){AutoActions}
+if($hash.Controller){Controller} 
+if($hash.Process_Lasso){Process_Lasso}}
 
-#Tests
-#SystemPoint
+Tests
+SystemPoint
 GUI
-#HDD_Name
+HDD_Name
 Choice
 Autoruns
-#WindowsCleanup
-#Finish
+WindowsCleanup
+Finish
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
