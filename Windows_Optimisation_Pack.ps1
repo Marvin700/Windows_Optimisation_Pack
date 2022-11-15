@@ -376,7 +376,6 @@ $form.ShowDialog() | Out-Null }
 function Choice { 
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
-if($hash.WindowsCleanup){WindowsCleanup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
@@ -400,8 +399,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQRWXAzEkjE1BzvRkKNpq1B0A
-# cDugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaej6R/Xc+te0FZXz/j1ACLU6
+# rOqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -421,11 +420,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUUIeOmHMBvbTjJqTlo1OXpBIulbowDQYJ
-# KoZIhvcNAQEBBQAEggEAk+uTrC67qegCdh0Svro5seh08gq40U/Q2ebQRg8VKO9z
-# 7f7+shdmn5TPKUnMoTaDiNlQTdO1DtpZdyj2QNwJWHu3kJstEPlhTajFGZRPI9Ca
-# v2Bfys14coedaSb12yn2Ay63gNXEaiBLdPodi+FnhupoMkNNSX7xC4V2cd954xCV
-# smqJzwkQ3ODkCIBNB/+ef0VDnyL2VjA1paXmLfxoQ4ZFN/BHwdwQcusqAXfoKc8a
-# 07W/MsDKYYqZO3749Z7vP7hREgOaQbu246ukhAu34lSFRPYmuGwyvcl6VJbylAet
-# ovXlENPGRyup97IzremnpgMzvxU/fsR2KJ1Di9De0A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQxHg2Tjme7rVni+HA3bSSvmicXQwDQYJ
+# KoZIhvcNAQEBBQAEggEAMn9SiVDeSchoCDxmDMAUjW2CM1kKMugNr0KmuUrFgYOt
+# JqY2/iGJVz8wd6QGOxdcFwBXkSHZwdAaDaVJ8Ngt+3mEM2rPFbk6g/uWRIY5HZyL
+# YUCDNEE4h/jTaf4WUc3OcMj8crOEx0iWGD4eGBqxFIoIMfh1V69tFfz2yCVNHJSr
+# r4gOQX3htzYyQ/Cz2Dl5qXiJ9VfxUNzCaUGUqPKi4sHY3BoSMZMlxNqgdXytkTLs
+# DI6q6kqBvhziFQ6N2u4PogJN4HPUULwvhz4W1Xw36PUXBS8T4ywmYZgKveK+ZIrd
+# FlYbBkVbx2GaV7jTaqWMlrvHL0uIQZa/vAlrctrjVA==
 # SIG # End signature block
