@@ -220,7 +220,7 @@ $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save() }
     
 function Controller{
-Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.9/DS4Windows_3.1.9_x64.zip" -Destination "$env:temp\DS4Windows.zip "
+Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.10/DS4Windows_3.1.10_x64.zip" -Destination "$env:temp\DS4Windows.zip "
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -400,8 +400,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJqO4+7Gy6wvMrqBgiB5QERI+
-# K7egggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwxlp47rSt6EHYgYAJAJlHEP+
+# 5P6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -421,11 +421,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUZh7GUXJXLb/HGkhaRDdhJolgvxQwDQYJ
-# KoZIhvcNAQEBBQAEggEADzP3qg6YawTaVeKRo+a4h66T9TuztiTWcsNGhvkglBY/
-# F2+xV9BX+WSXCkAmS1E8Y1RnQ3FB7x9WQjAO+4uZC3gJP8IXVSD+mLxtXOPJEN98
-# 4RLJmY898psG9ha4hsIVIOZbpDMMzYkW1Km4mgKf258nF4gGkVhaY7YHzNfQodvY
-# WgruADZ1UbK2zuWZqbYXWL4GXKPNvqzm1B6rR+4lGEawzu8pfDOIZ+Qcf0WTW2zh
-# XBZngjpd+bo9miZByVb4S0jccTIpA/t6eWvVTikNV4sSrcGbCbJESG/2B3lYT40F
-# 3qrprQpunsC6BMufTFNS+MLjSIztNTKeJ7PR1EKosw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU09x2x6XiScfXw2zXs50bWiIcYmEwDQYJ
+# KoZIhvcNAQEBBQAEggEAOSxB3rkxHnccdHxWDEJbKG21uyFkSLUmMHl2rMEEMMrR
+# t9h4rAl4KmnyVCK8hezJNSFb0IIxPC32aO2Ww5D1HNyelWQ234FKXBgiy4nfvX/h
+# IC4dX2o36c/RdDA9nAicp92aTRJknnkpfXy/VwLBKX/qalLqApelvoho33DRCZ3G
+# UXhKFciYUChuzZ/xdd/MmrQHmRNPdO8KTZ4GhUBevTJjKS1ZrYbssgABILPLdhB/
+# UfVPX4C4hPYiSiCFg15WCB0tNE7cnZlvt5ck98/nstVyh68zRT1PMNLd3NNJl/QS
+# VtojrqZVOwXqWH7ZAfSnAhFcyJqTbr0fjjzpsBifLg==
 # SIG # End signature block
