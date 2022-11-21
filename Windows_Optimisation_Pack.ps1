@@ -171,6 +171,10 @@ if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based 
 Write-Warning " Reboot Pending !"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
+If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
+Write-Warning " No admin rights available"
+Write-Warning " The script will be closed in 20 seconds"
+Start-Sleep 20;exit} 
 if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
 Write-Warning " The system has already been optimised by the Windows_Optimisation_Pack"
 "Do you really want to continue?"
@@ -467,8 +471,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeJFj/9nUFYPGCrkLIasudxa3
-# Kk2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyahiDlWNdCXFz2vo0H9XGZY/
+# v/igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -488,11 +492,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUn0Hl2cGYPmbP0Se+iFqFKCJ9Xc8wDQYJ
-# KoZIhvcNAQEBBQAEggEAHq42Aak7NwbDcOKQNlOSzs9OcR6EcO8bNNPlxFZBnq9R
-# K2N6f/VHWFNU5+p9JeygY/zVukyNH7tUCekmFUsNb3kes6pOFfQX3ttW1vMhf8yW
-# Q0SbGLUbjyy0YV2eyQMw8HqE4czcEgkkmvCAvrc4EyktiFJxfiKMCORuqsSK8Fw4
-# hHkd64rCGmWwBCO/QmdKEjCVGotKscjWE1fuHOeVFTcofA4EKRn1FLZvXiZLXTsc
-# 1/ebzxAZx1S6UnWIBYwleJ5oUHWYZBeu0cPOjPBZCuVDwSyYmXy4Y+V9sccHP+Ez
-# +Z+9rYH2FoXE3yeoqN25gLadlRCNUlzHuGo0vLH5AA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8KGqig2mDxJO3mlVmzJ93u0mZ9gwDQYJ
+# KoZIhvcNAQEBBQAEggEAl5EFvl5jeQjLqzoXz0TdBpCWgPlhlIZn95bWg5B3m20R
+# EnWPdLBQigoA5KGKRezPahWz79A40AfIlTDn4UNmdApG5FF534AHOk7xOz1wtnSn
+# 3iQwCqx5qSmCoMDW2Pm8MvIFGnM62Zx/g1uisPyZEDsLFnUqJ+l3O+ti4wJPcaL7
+# Sgfr8BEzNRYaevDo9SNEWwoQFzClDWBOFzFqJXgn/QZFxLgKCm/y6t67q0AbfWxj
+# hN3dSrXT7NFkZ86cgdb3vYIw5iXfW01iYrehGvLQ1P5yU9qA7s3Rp9aLsYXFOldy
+# nLvqMJXn0Td+4BTH2MqhlmAmDqbx8Uty9aN7vXWhUg==
 # SIG # End signature block
