@@ -161,7 +161,7 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "Sy
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
 
-function Tests{
+function Checks{
 IF(!($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise")) {
 IF(!($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -239,16 +239,18 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 function Finish{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F
 Clear-Host
-" Your system has been successfully optimised by the Windows_Optimisation_Pack"
-""
+" Your system has been successfully optimised by the Windows_Optimisation_Pack" }
+
+function Reboot{
 Write-Warning " The computer will restart automatically in 60 seconds !!!!"
 Start-Sleep 60
 Restart-Computer }
 
 function GUI {
+Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
-$handler_button_Click= {   
+$handler_BUTTON_Start_Click= {   
 if ($BOX_SophiaScript.Checked)                {$hash.SophiaScript = $true}
 if ($BOX_ooShutup.Checked)                    {$hash.ooShutup = $true}    
 if ($BOX_WindowsCleanup.Checked)              {$hash.WindowsCleanup = $true}    
@@ -264,122 +266,194 @@ if ($BOX_AutoActions.Checked)                 {$hash.AutoActions = $true}
 if ($BOX_Controller.Checked)                  {$hash.Controller = $true}    
 if ($BOX_Process_Lasso.Checked)               {$hash.Process_Lasso = $true} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
-$form.Size = New-Object Drawing.Point 370,441
+$form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack"
-$Titel = New-Object Windows.Forms.Label
-$Titel.Location = New-Object Drawing.Point 90,15
-$Titel.Size = New-Object Drawing.Point 200,15
-$Titel.text = "Windows_Optimisation_Pack"
+$form.BackColor='#ffffff'
+$form.StartPosition = "CenterScreen" 
+$Image = new-object Windows.Forms.PictureBox
+$img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Picture.png")
+$Image.Width = $img.Size.Width
+$Image.Height = $img.Size.Height
+$Image.Location=New-Object System.Drawing.Point(50,20)
+$Image.Image = $img
+$Titel_Essentials = New-Object Windows.Forms.Label
+$Titel_Essentials.Size = New-Object Drawing.Point 135,25
+$Titel_Essentials.Location = New-Object Drawing.Point 50,215
+$Titel_Essentials.text = "Essentials"
 $Titel_Tweaks = New-Object Windows.Forms.Label
 $Titel_Tweaks.Size = New-Object Drawing.Point 135,25
-$Titel_Tweaks.Location = New-Object Drawing.Point 50,55
+$Titel_Tweaks.Location = New-Object Drawing.Point 223,215
 $Titel_Tweaks.text = "Tweaks"
 $Titel_Extras = New-Object Windows.Forms.Label
 $Titel_Extras.Size = New-Object Drawing.Point 135,25
-$Titel_Extras.Location = New-Object Drawing.Point 220,55
+$Titel_Extras.Location = New-Object Drawing.Point 393,215
 $Titel_Extras.text = "Extras"
+$Titel_Install = New-Object Windows.Forms.Label
+$Titel_Install.Size = New-Object Drawing.Point 135,25
+$Titel_Install.Location = New-Object Drawing.Point 566,215
+$Titel_Install.text = "Install"
+$BOX_Checks = New-Object System.Windows.Forms.CheckBox
+$BOX_Checks.Size = New-Object Drawing.Point 135,25
+$BOX_Checks.Location = New-Object Drawing.Point 27,248
+$BOX_Checks.Text = "Compability Checks"
+$BOX_Checks.Checked = $true
+$BOX_Checks.Enabled = $false 
+$BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
+$BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
+$BOX_SystemPoint.Location = New-Object Drawing.Point 27,279
+$BOX_SystemPoint.Text = "Restore Point" 
+$BOX_SystemPoint.Checked = $true 
+$BOX_SystemPoint.Enabled = $false 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
-$BOX_SophiaScript.Location = New-Object Drawing.Point 27,88
+$BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
 $BOX_SophiaScript.Text = "Sophia Script" 
 $BOX_SophiaScript.Checked = $true 
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
-$BOX_ooShutup.Location = New-Object Drawing.Point 27,119
+$BOX_ooShutup.Location = New-Object Drawing.Point 27,341
 $BOX_ooShutup.Text = "O&O ShutUp10++"
 $BOX_ooShutup.Checked = $true
-$BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
-$BOX_WindowsCleanup.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsCleanup.Location = New-Object Drawing.Point 27,150
-$BOX_WindowsCleanup.Text = "Windows Cleanup"
-$BOX_WindowsCleanup.Checked = $true
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 27,212
+$BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 200,248
 $BOX_WindowsTweaks_Registry.Text = "Registry Tweaks"
 $BOX_WindowsTweaks_Registry.Checked = $true
 $BOX_WindowsTweaks_Tasks = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Tasks.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsTweaks_Tasks.Location = New-Object Drawing.Point 27,243
+$BOX_WindowsTweaks_Tasks.Location = New-Object Drawing.Point 200,279
 $BOX_WindowsTweaks_Tasks.Text = "Deaktivate Tasks"
 $BOX_WindowsTweaks_Tasks.Checked = $true
 $BOX_WindowsTweaks_Features = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Features.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsTweaks_Features.Location = New-Object Drawing.Point 27,274
+$BOX_WindowsTweaks_Features.Location = New-Object Drawing.Point 200,310
 $BOX_WindowsTweaks_Features.Text = "Disable Features"
 $BOX_WindowsTweaks_Features.Checked = $true
 $BOX_WindowsTweaks_Services = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Services.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsTweaks_Services.Location = New-Object Drawing.Point 27,305
+$BOX_WindowsTweaks_Services.Location = New-Object Drawing.Point 200,341
 $BOX_WindowsTweaks_Services.Text = "Disable Services"  
-$BOX_WindowsTweaks_Services.Checked = $true   
+$BOX_WindowsTweaks_Services.Checked = $true  
+$BOX_WindowsTweaks_Index = New-Object System.Windows.Forms.CheckBox
+$BOX_WindowsTweaks_Index.Size = New-Object Drawing.Point 135,25
+$BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 200,372
+$BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
+$BOX_WindowsTweaks_Index.Checked = $true  
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 135,25
-$BOX_Runtime.Location = New-Object Drawing.Point 200,88
+$BOX_Runtime.Location = New-Object Drawing.Point 373,243
 $BOX_Runtime.Text = "Runtime Comonents"
 $BOX_Runtime.Checked = $true  
+$BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
+$BOX_WindowsCleanup.Size = New-Object Drawing.Point 135,25
+$BOX_WindowsCleanup.Location = New-Object Drawing.Point 373,279
+$BOX_WindowsCleanup.Text = "Windows Cleanup"
+$BOX_WindowsCleanup.Checked = $true
+$BOX_Rename_PC = New-Object System.Windows.Forms.CheckBox
+$BOX_Rename_PC.Size = New-Object Drawing.Point 135,25
+$BOX_Rename_PC.Location = New-Object Drawing.Point 373,310
+$BOX_Rename_PC.Text = "Rename PC"
+$BOX_Rename_PC.Checked = $false
+$BOX_Rename_PC.Enabled = $false 
 $BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
 $BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
-$BOX_TakeOwnership.Location = New-Object Drawing.Point 200,119
-$BOX_TakeOwnership.Text = "TakeOwnership" 
+$BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
+$BOX_TakeOwnership.Text = "Take Ownership" 
 $BOX_TakeOwnership.Checked = $true
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
-$BOX_Autoruns.Location = New-Object Drawing.Point 200,150
+$BOX_Autoruns.Location = New-Object Drawing.Point 373,373
 $BOX_Autoruns.Text = "Autoruns" 
 $BOX_Autoruns.Checked = $true
 $BOX_Winrar = New-Object System.Windows.Forms.CheckBox
 $BOX_Winrar.Size = New-Object Drawing.Point 135,25
-$BOX_Winrar.Location = New-Object Drawing.Point 200,212
-$BOX_Winrar.Text = "Install Winrar"
+$BOX_Winrar.Location = New-Object Drawing.Point 546,248
+$BOX_Winrar.Text = "Winrar"
 $BOX_Winrar.Checked = $true
+$BOX_Fan_Control = New-Object System.Windows.Forms.CheckBox
+$BOX_Fan_Control.Size = New-Object Drawing.Point 135,25
+$BOX_Fan_Control.Location = New-Object Drawing.Point 546,279
+$BOX_Fan_Control.Text = "Fan Control"
+$BOX_Fan_Control.Checked = $false  
+$BOX_Fan_Control.Enabled = $false 
+$BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
+$BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
+$BOX_Process_Lasso.Location = New-Object Drawing.Point 546,310
+$BOX_Process_Lasso.Text = "Process Lasso"
+$BOX_Process_Lasso.Checked = $false  
 $BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
 $BOX_AutoActions.Size = New-Object Drawing.Point 135,25
-$BOX_AutoActions.Location = New-Object Drawing.Point 200,243
-$BOX_AutoActions.Text = "Install AutoActions"
+$BOX_AutoActions.Location = New-Object Drawing.Point 546,341
+$BOX_AutoActions.Text = "AutoActions"
 $BOX_AutoActions.Checked = $false 
 $BOX_Controller = New-Object System.Windows.Forms.CheckBox
 $BOX_Controller.Size = New-Object Drawing.Point 135,25
-$BOX_Controller.Location = New-Object Drawing.Point 200,274
-$BOX_Controller.Text =  "Install PS4 Controller"
+$BOX_Controller.Location = New-Object Drawing.Point 546,372
+$BOX_Controller.Text =  "Controller Support"
 $BOX_Controller.Checked = $false 
-$BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
-$BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
-$BOX_Process_Lasso.Location = New-Object Drawing.Point 200,305
-$BOX_Process_Lasso.Text = "Install Process Lasso"
-$BOX_Process_Lasso.Checked = $false  
-$button = New-Object System.Windows.Forms.Button
-$button.Text = "Start"
-$button.Size = New-Object Drawing.Point 75,24
-$button.Location = New-Object Drawing.Point 135,351
-$button.add_Click($handler_button_Click)
-$form.controls.add($Titel)
+$Titel_Compability = New-Object Windows.Forms.Label
+$Titel_Compability.Size = New-Object Drawing.Point 160,25
+$Titel_Compability.Location = New-Object Drawing.Point 500,422
+$Titel_Compability.text = "NO ADMIN AVAILABLE"
+$BOX_Reboot = New-Object System.Windows.Forms.CheckBox
+$BOX_Reboot.Size = New-Object Drawing.Point 135,25
+$BOX_Reboot.Location = New-Object Drawing.Point 423,422
+$BOX_Reboot.Text = "Reboot"
+$BOX_Reboot.Checked = $false
+$BUTTON_Start = New-Object System.Windows.Forms.Button
+$BUTTON_Start.Text = "Start"
+$BUTTON_Start.Size = New-Object Drawing.Point 75,24
+$BUTTON_Start.Location = New-Object Drawing.Point 225,422
+$BUTTON_Start.add_Click($handler_button_Start_Click)
+If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{$BUTTON_Start.Enabled = $false
+$Titel_Compability.text = "NO ADMIN AVAILABLE"
+}
+$BUTTON_Cancel = New-Object System.Windows.Forms.Button
+$BUTTON_Cancel.Text = "Cancel"
+$BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
+$BUTTON_Cancel.Location = New-Object Drawing.Point 320,422
+$form.controls.add($Image )
+$form.controls.add($Titel_Compability)
+$form.controls.add($Titel_Essentials)
 $form.controls.add($Titel_Tweaks)
 $form.controls.add($Titel_Extras)
+$form.controls.add($Titel_Install)
+$form.Controls.Add($BOX_Checks)
+$form.Controls.Add($BOX_SystemPoint)
 $form.Controls.Add($BOX_SophiaScript)
 $form.Controls.Add($BOX_ooShutup)
-$form.Controls.Add($BOX_WindowsCleanup)
 $form.Controls.Add($BOX_WindowsTweaks_Registry)
 $form.Controls.Add($BOX_WindowsTweaks_Tasks)
 $form.Controls.Add($BOX_WindowsTweaks_Features)
 $form.Controls.Add($BOX_WindowsTweaks_Services)
+$form.Controls.Add($BOX_WindowsTweaks_Index)
 $form.Controls.Add($BOX_Runtime)
+$form.Controls.Add($BOX_WindowsCleanup)
+$form.Controls.Add($BOX_Rename_PC)
 $form.Controls.Add($BOX_TakeOwnership)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
+$form.Controls.Add($BOX_Fan_Control)
 $form.Controls.Add($BOX_AutoActions)
-$form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Process_Lasso)
-$form.Controls.Add($button)
+$form.Controls.Add($BOX_Controller)
+$form.Controls.Add($BOX_Reboot)
+$form.Controls.Add($BUTTON_Start)
+$form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() | Out-Null } 
 
 function Choice { 
+if($hash.SophiaScript){Checks}
+if($hash.SophiaScript){SystemPoint}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
+if($hash.WindowsTweaks_Services){WindowsTweaks_Index}
+if($hash.WindowsTweaks_Services){HDD_Name}
 if($hash.Runtime){Runtime}   
 if($hash.TakeOwnership){TakeOwnership}
 if($hash.Autoruns){Autoruns}    
@@ -387,13 +461,10 @@ if($hash.Winrar){Winrar}
 if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
-if($hash.WindowsCleanup){WindowsCleanup}}
+if($hash.WindowsCleanup){WindowsCleanup}
+if($hash.WindowsCleanup){Reboot}}
 
 GUI
-Tests
-SystemPoint
-HDD_Name
-WindowsTweaks_Index
 Choice
 Finish
 
