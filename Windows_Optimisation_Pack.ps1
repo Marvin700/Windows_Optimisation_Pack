@@ -247,7 +247,7 @@ Start-Sleep 60
 Restart-Computer }
 
 function GUI {
-Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
+Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $handler_BUTTON_Start_Click= {   
@@ -441,7 +441,7 @@ $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Reboot)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
-$form.ShowDialog() | Out-Null } Out-Null
+$form.ShowDialog() } Out-Null
 
 function Choice { 
 if($hash.SophiaScript){Checks}
