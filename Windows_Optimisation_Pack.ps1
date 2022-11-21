@@ -441,7 +441,7 @@ $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Reboot)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
-$form.ShowDialog() | Out-Null } 
+$form.ShowDialog() | Out-Null } Out-Null
 
 function Choice { 
 if($hash.SophiaScript){Checks}
