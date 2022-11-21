@@ -393,7 +393,7 @@ $BOX_Controller.Text =  "Controller Support"
 $BOX_Controller.Checked = $false 
 $Titel_Compability = New-Object Windows.Forms.Label
 $Titel_Compability.Size = New-Object Drawing.Point 160,25
-$Titel_Compability.Location = New-Object Drawing.Point 500,422
+$Titel_Compability.Location = New-Object Drawing.Point 520,422
 $Titel_Compability.text = "NO ADMIN AVAILABLE"
 $BOX_Reboot = New-Object System.Windows.Forms.CheckBox
 $BOX_Reboot.Size = New-Object Drawing.Point 135,25
@@ -471,8 +471,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwxlp47rSt6EHYgYAJAJlHEP+
-# 5P6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeJFj/9nUFYPGCrkLIasudxa3
+# Kk2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -492,11 +492,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU09x2x6XiScfXw2zXs50bWiIcYmEwDQYJ
-# KoZIhvcNAQEBBQAEggEAOSxB3rkxHnccdHxWDEJbKG21uyFkSLUmMHl2rMEEMMrR
-# t9h4rAl4KmnyVCK8hezJNSFb0IIxPC32aO2Ww5D1HNyelWQ234FKXBgiy4nfvX/h
-# IC4dX2o36c/RdDA9nAicp92aTRJknnkpfXy/VwLBKX/qalLqApelvoho33DRCZ3G
-# UXhKFciYUChuzZ/xdd/MmrQHmRNPdO8KTZ4GhUBevTJjKS1ZrYbssgABILPLdhB/
-# UfVPX4C4hPYiSiCFg15WCB0tNE7cnZlvt5ck98/nstVyh68zRT1PMNLd3NNJl/QS
-# VtojrqZVOwXqWH7ZAfSnAhFcyJqTbr0fjjzpsBifLg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUn0Hl2cGYPmbP0Se+iFqFKCJ9Xc8wDQYJ
+# KoZIhvcNAQEBBQAEggEAHq42Aak7NwbDcOKQNlOSzs9OcR6EcO8bNNPlxFZBnq9R
+# K2N6f/VHWFNU5+p9JeygY/zVukyNH7tUCekmFUsNb3kes6pOFfQX3ttW1vMhf8yW
+# Q0SbGLUbjyy0YV2eyQMw8HqE4czcEgkkmvCAvrc4EyktiFJxfiKMCORuqsSK8Fw4
+# hHkd64rCGmWwBCO/QmdKEjCVGotKscjWE1fuHOeVFTcofA4EKRn1FLZvXiZLXTsc
+# 1/ebzxAZx1S6UnWIBYwleJ5oUHWYZBeu0cPOjPBZCuVDwSyYmXy4Y+V9sccHP+Ez
+# +Z+9rYH2FoXE3yeoqN25gLadlRCNUlzHuGo0vLH5AA==
 # SIG # End signature block
