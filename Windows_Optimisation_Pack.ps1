@@ -251,20 +251,26 @@ Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $handler_BUTTON_Start_Click= {   
-if ($BOX_SophiaScript.Checked)                {$hash.SophiaScript = $true}
-if ($BOX_ooShutup.Checked)                    {$hash.ooShutup = $true}    
-if ($BOX_WindowsCleanup.Checked)              {$hash.WindowsCleanup = $true}    
-if ($BOX_WindowsTweaks_Registry.Checked)      {$hash.WindowsTweaks_Registry = $true}    
-if ($BOX_WindowsTweaks_Tasks.Checked)         {$hash.WindowsTweaks_Tasks = $true}       
-if ($BOX_WindowsTweaks_Features.Checked)      {$hash.WindowsTweaks_Features = $true}    
-if ($BOX_WindowsTweaks_Services.Checked)      {$hash.WindowsTweaks_Services = $true}    
-if ($BOX_Runtime.Checked)      		          {$hash.Runtime = $true}    
-if ($BOX_TakeOwnership.Checked)               {$hash.TakeOwnership = $true}    
-if ($BOX_Autoruns.Checked)                    {$hash.Autoruns = $true} 
-if ($BOX_Winrar.Checked)                      {$hash.Winrar = $true}    
-if ($BOX_AutoActions.Checked)                 {$hash.AutoActions = $true}    
-if ($BOX_Controller.Checked)                  {$hash.Controller = $true}    
-if ($BOX_Process_Lasso.Checked)               {$hash.Process_Lasso = $true} $Form.Close()}
+if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
+if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
+if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
+if ($BOX_ooShutup.Checked)                  {$hash.ooShutup = $true}    
+if ($BOX_WindowsTweaks_Registry.Checked)    {$hash.WindowsTweaks_Registry = $true}    
+if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}   
+if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
+if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
+if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
+if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
+if ($BOX_WindowsCleanup.Checked)            {$hash.WindowsCleanup = $true}    
+if ($BOX_Rename_PC.Checked)                 {$hash.Rename_PC = $true} 
+if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
+if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
+if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
+if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}  
+if ($BOX_AutoActions.Checked)               {$hash.AutoActions = $true}
+if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
+if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
+if ($BOX_Reboot.Checked)                    {$hash.BOX_Reboot = $true} $Form.Close() }
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack"
@@ -341,7 +347,7 @@ $BOX_WindowsTweaks_Index.Text = "Disable Indexing"
 $BOX_WindowsTweaks_Index.Checked = $true  
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 135,25
-$BOX_Runtime.Location = New-Object Drawing.Point 373,243
+$BOX_Runtime.Location = New-Object Drawing.Point 373,248
 $BOX_Runtime.Text = "Runtime Comonents"
 $BOX_Runtime.Checked = $true  
 $BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
@@ -376,16 +382,16 @@ $BOX_Fan_Control.Location = New-Object Drawing.Point 546,279
 $BOX_Fan_Control.Text = "Fan Control"
 $BOX_Fan_Control.Checked = $false  
 $BOX_Fan_Control.Enabled = $false 
-$BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
-$BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
-$BOX_Process_Lasso.Location = New-Object Drawing.Point 546,310
-$BOX_Process_Lasso.Text = "Process Lasso"
-$BOX_Process_Lasso.Checked = $false  
 $BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
 $BOX_AutoActions.Size = New-Object Drawing.Point 135,25
-$BOX_AutoActions.Location = New-Object Drawing.Point 546,341
+$BOX_AutoActions.Location = New-Object Drawing.Point 546,310
 $BOX_AutoActions.Text = "AutoActions"
 $BOX_AutoActions.Checked = $false 
+$BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
+$BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
+$BOX_Process_Lasso.Location = New-Object Drawing.Point 546,341
+$BOX_Process_Lasso.Text = "Process Lasso"
+$BOX_Process_Lasso.Checked = $false  
 $BOX_Controller = New-Object System.Windows.Forms.CheckBox
 $BOX_Controller.Size = New-Object Drawing.Point 135,25
 $BOX_Controller.Location = New-Object Drawing.Point 546,372
@@ -471,8 +477,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyahiDlWNdCXFz2vo0H9XGZY/
-# v/igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmhBAUoj5IRRcd696bmvOAB+v
+# 0LqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -492,11 +498,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8KGqig2mDxJO3mlVmzJ93u0mZ9gwDQYJ
-# KoZIhvcNAQEBBQAEggEAl5EFvl5jeQjLqzoXz0TdBpCWgPlhlIZn95bWg5B3m20R
-# EnWPdLBQigoA5KGKRezPahWz79A40AfIlTDn4UNmdApG5FF534AHOk7xOz1wtnSn
-# 3iQwCqx5qSmCoMDW2Pm8MvIFGnM62Zx/g1uisPyZEDsLFnUqJ+l3O+ti4wJPcaL7
-# Sgfr8BEzNRYaevDo9SNEWwoQFzClDWBOFzFqJXgn/QZFxLgKCm/y6t67q0AbfWxj
-# hN3dSrXT7NFkZ86cgdb3vYIw5iXfW01iYrehGvLQ1P5yU9qA7s3Rp9aLsYXFOldy
-# nLvqMJXn0Td+4BTH2MqhlmAmDqbx8Uty9aN7vXWhUg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU2feawU6VmjHzqxb4ZA7ZGXMYfcgwDQYJ
+# KoZIhvcNAQEBBQAEggEAFP/yTBnsIUjv1TAHvIRlF0d2Qno7fg9XAnubHhTFCvH4
+# FNAxEhIDgyOzlbtM6JlmAx9UMBfjtiZy3mten5awruFF8FPm7ofkPwp+ieJiSduT
+# LXEDjuC1IWwe2SMab+y3ySJAv6BYhryNXG/31wqEcZ0ygBob150GcgomM9fKfV4o
+# kKjc2YBosdUGBVhTVtLk+rgpjfWyZ5h7u8xI4eQNil/WIrk21T8BpV/bkFOe00Kf
+# 0FGjyIxqDgFIzirXUHwcQtk8sjHN6EpS2uep17SPr//uk5NXEfgs5GbK3FHQ3oIY
+# Wfrmk1Fw6B1hrxugTT89zqREjCHlHAX2dkukKpeqyA==
 # SIG # End signature block
