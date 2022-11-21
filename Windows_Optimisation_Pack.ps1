@@ -171,10 +171,6 @@ if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based 
 Write-Warning " Reboot Pending !"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
-If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " No admin rights available"
-Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit} 
 if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
 Write-Warning " The system has already been optimised by the Windows_Optimisation_Pack"
 "Do you really want to continue?"
@@ -441,9 +437,7 @@ $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Reboot)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
-$form.ShowDialog() 
-Clear-Host
-} Out-Null
+$form.ShowDialog() } Out-Null
 
 function Choice { 
 if($hash.SophiaScript){Checks}
