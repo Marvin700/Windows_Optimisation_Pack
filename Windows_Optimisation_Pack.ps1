@@ -489,7 +489,6 @@ if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 if($hash.indowsTweaks_Index){WindowsTweaks_Index}
 HDD_Name
 if($hash.Runtime){Runtime}   
-if($hash.WindowsCleanup){WindowsCleanup}
 #if($hash.Rename_PC){Rename_PC}
 if($hash.TakeOwnership){TakeOwnership}
 if($hash.Autoruns){Autoruns}    
@@ -498,6 +497,7 @@ if($hash.Fan_Control){Fan_Control}
 if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
+if($hash.WindowsCleanup){WindowsCleanup}
 Finish
 if($hash.Reboot){Reboot}}
 
@@ -508,8 +508,8 @@ Choice
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgYJUWPTl4+eDrSx9Uvvy7rvJ
-# DxagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/5zYTllZpM7blIzSWQIdNe1v
+# lQWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -529,11 +529,11 @@ Choice
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUjUkoBsfHffbUvrR8FM/FKF/NQaUwDQYJ
-# KoZIhvcNAQEBBQAEggEAHjn1yNbrM4JUeMRWUIujqBmJq5foa/DIujF3Zpgjcmgf
-# MgSOaOa0HnA5Ka78w2H8zPxE8vK1EG0bcRm4qWYiILg8XaD4mPnSnr+laFyIraiv
-# cdgoudaG7GBswFUTFuq7oW4Y96v+mwMITxVxaKdatkaaJnRGYI7GwRZXyzDBjZEK
-# lwatxODarSrX57jUfxQPm7j2ONgCSw+uov7lERoZtybJYIG9tXMbmPzeIQPKUXGN
-# +K9FQ/vNzzwWCPyyQNdD4p/clMX2R8zWE0W3jiHKr+DXxG+tGUH+eRsvRSo1FnGE
-# ua3CvE/7NZbLfp6vPYAnQXErmeWSqnJwWsdIgoPO7g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQz9lrGauQudcbXVJI0AcL4/wpwkwDQYJ
+# KoZIhvcNAQEBBQAEggEAaz/Wd8hqHo8XuR/hvlhUo9oyeLPoKA9/vHgGfRR9vSbG
+# 88OemyJMBCl3AftqJ2w7xu9o8hFhm+/+cF6+6aV6mm62NayNAIex6ApDAIbhr8Lt
+# Wfi6eI+3WHPFKwgYWw4Z3ClVxeHPcUIIfIiwSFLUNTY+n/WOJ1SfoG74ppY7t812
+# 7ACDUdvihiBGUVAraoAVUF6Wehmwf1jr3lB3UzI1qq3s/0MfIT1I2S2sQqgnHS4A
+# VkdamBmvE8SI/a/5IPvlA1UbNcTa9cp8QLlJNWrq0otVsBVetlCJwC0YsFyGHjo/
+# 9RtOohxQAL2AIh7IWopPMBgoeGh32ibt0JKAoGyPiQ==
 # SIG # End signature block
