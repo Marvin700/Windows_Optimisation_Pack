@@ -21,7 +21,7 @@ Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
 iex (irm windows-optimisation.de)
   ```
-<img src="https://user-images.githubusercontent.com/98750428/202031856-cd4b4b8c-3cca-46d0-a97e-718a6324fd91.gif"> 
+<img src="https://user-images.githubusercontent.com/98750428/203324846-1b72b5d0-53c3-45f0-9a12-99d4c1beeb35.gif"> 
 
 > **Note**: <BR> 
 Please update the fresh Windows installation first. <BR>
