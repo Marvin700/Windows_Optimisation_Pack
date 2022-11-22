@@ -358,7 +358,7 @@ $BOX_WindowsTweaks_Index.Text = "Disable Indexing"
 $BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
-$BOX_Runtime.Size = New-Object Drawing.Point 135,25
+$BOX_Runtime.Size = New-Object Drawing.Point 145,25
 $BOX_Runtime.Location = New-Object Drawing.Point 373,248
 $BOX_Runtime.Text = "Runtime Components"
 $BOX_Runtime.ForeColor='#aaaaaa'
@@ -424,7 +424,6 @@ $Titel_Compability.Size = New-Object Drawing.Point 160,25
 $Titel_Compability.Location = New-Object Drawing.Point 520,422
 $Titel_Compability.ForeColor='#aaaaaa'
 #$Titel_Compability.text = ""
-
 $BOX_Reboot = New-Object System.Windows.Forms.CheckBox
 $BOX_Reboot.Size = New-Object Drawing.Point 135,25
 $BOX_Reboot.Location = New-Object Drawing.Point 423,422
@@ -507,8 +506,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5Ye+VtGP8Jy2yh86+bdH71Tj
-# KWOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2GZ1QR42igthY9fq4Q81haGb
+# nrmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -528,11 +527,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUErkV9HsRixftIQy3t9usOntVQt4wDQYJ
-# KoZIhvcNAQEBBQAEggEAwc3Rok/HL03F1GhT3SNa+rxBNCCjTqKNokVpF7GgBEn6
-# niMMvb9L0ZnNXingycRpBtP2ejzrD80T0sJRwkDRfWuSDvyExI+W+kB55+C4xuzm
-# GwQQpzyE0c8gKBR6PHQBxGfKLGc36NfZBHPGCM2JGf9yv/aBosu27O9a2nGsCyf1
-# BNxQdIUrXLUxTeCr6hhUCJTM3hztohOEn0KpwsTsKq+BdVHefMR+TVOGHvGqnSxH
-# 73ZooIPkfk8iv1zIPh4AtesXL4rbAhjTPCNV4OlywVVA8wMTFP3wj6KjqTyPDRA6
-# akv6fLS4pnd3x6xeR4hzYDTgtFExvQYxbKJ2KwHNHg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU3u4luJwNhqUjGzCBVxhQWLb8RbYwDQYJ
+# KoZIhvcNAQEBBQAEggEAfKlqW8sSOl6zU/hsFxJHGFSIDbhtlmFILJ9kAb1KXBmL
+# vFxLgdm/9uEIT772Nd6fWroLGrWtJuX6WgaWUYNEeUtH+9bk475oKQzFf0YdxXjr
+# rbM9OzvpJsww8KWCNw65XGHMwl8jwVqg5rEo9bk1FkOUGGFWzqdZ6Hj5iAZO9g65
+# tfrUpwN0gjY6cUyC0v54RL6vbPpxBAb1ZJOQfRnRPvrKUeo2Sxp+H7QSXpydRyCi
+# PUB6R2f/rOkN50vePXmTjDkFkutIxgrwKImCelfSVU1GsdeS1wafA7wRlaWdxxF7
+# zogoehCmqdJ+y+CbXg3Q1gHXkMC0UY8NdjgtNjIR0A==
 # SIG # End signature block
