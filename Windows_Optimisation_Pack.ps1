@@ -206,9 +206,18 @@ winget source update
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
+
+function Fan_Control{
+Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V137/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
+Expand-Archive $env:temp\FanControl.zip "C:\Program Files\FanControl" -force
+Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
+$Shortcut.TargetPath = "C:\Program Files\FanControl\FanControl.exe"
+$Shortcut.Save() }
 
 function AutoActions{
 Start-BitsTransfer -Source "https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip" -Destination $env:temp\AutoActions.zip 
@@ -275,6 +284,7 @@ $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack"
 $form.StartPosition = "CenterScreen" 
+$form.ForeColor='#aaaaaa'
 $form.BackColor='#212121'
 $Image = new-object Windows.Forms.PictureBox
 $img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Picture.png")
@@ -400,7 +410,6 @@ $BOX_Fan_Control.Location = New-Object Drawing.Point 546,279
 $BOX_Fan_Control.Text = "Fan Control"
 $BOX_Fan_Control.ForeColor='#aaaaaa'
 $BOX_Fan_Control.Checked = $false  
-$BOX_Fan_Control.Enabled = $false 
 $BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
 $BOX_AutoActions.Size = New-Object Drawing.Point 135,25
 $BOX_AutoActions.Location = New-Object Drawing.Point 546,310
@@ -493,7 +502,7 @@ if($hash.WindowsCleanup){WindowsCleanup}
 if($hash.TakeOwnership){TakeOwnership}
 if($hash.Autoruns){Autoruns}    
 if($hash.Winrar){Winrar}    
-#if($hash.Fan_Control){Fan_Control}
+if($hash.Fan_Control){Fan_Control}
 if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
@@ -506,8 +515,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2GZ1QR42igthY9fq4Q81haGb
-# nrmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuNOKF+68GqxKLbNPqROrCoYE
+# ixOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -527,11 +536,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU3u4luJwNhqUjGzCBVxhQWLb8RbYwDQYJ
-# KoZIhvcNAQEBBQAEggEAfKlqW8sSOl6zU/hsFxJHGFSIDbhtlmFILJ9kAb1KXBmL
-# vFxLgdm/9uEIT772Nd6fWroLGrWtJuX6WgaWUYNEeUtH+9bk475oKQzFf0YdxXjr
-# rbM9OzvpJsww8KWCNw65XGHMwl8jwVqg5rEo9bk1FkOUGGFWzqdZ6Hj5iAZO9g65
-# tfrUpwN0gjY6cUyC0v54RL6vbPpxBAb1ZJOQfRnRPvrKUeo2Sxp+H7QSXpydRyCi
-# PUB6R2f/rOkN50vePXmTjDkFkutIxgrwKImCelfSVU1GsdeS1wafA7wRlaWdxxF7
-# zogoehCmqdJ+y+CbXg3Q1gHXkMC0UY8NdjgtNjIR0A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmjC8QMEe49II1bJ7L4KDPgVLbVYwDQYJ
+# KoZIhvcNAQEBBQAEggEANzya6gCnBl9IL496Z1XhdvuKiTNbhFHsJiq5AWCpaK7a
+# UL3n/9nhb6n1DYfvlNjqf4Wy5ut0VkuXMrSkpKcpr12LJSauRpu9rDp7VDfLd7PC
+# UG2v+e40HHfTHQkbpQN1jevCJ2iCJlQu6q01ZFWD1OGO6pQV606lQAXoPzCuLfZx
+# 97DzrTBBuoKLK55RYTpTV5IBqO+bSiCY7PPSP3ldFSSJQa97C/Mes/nvhhEmTbeN
+# irimd4UyblhIs6cz2TlxYZ3eLcv8IWZlQKuSZdHhcOk4kX97aY9EGtiO7tsin5SO
+# PoUR7yjYemuFZM2MoVbAUxbBbhUbcDVA79Kayz61Ig==
 # SIG # End signature block
