@@ -1,4 +1,4 @@
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
@@ -282,7 +282,7 @@ if ($BOX_Controller.Checked)                {$hash.Controller = $true}
 if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
-$form.text = "Windows_Optimisation_Pack"
+$form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $form.StartPosition = "CenterScreen" 
 $form.ForeColor='#aaaaaa'
 $form.BackColor='#212121'
@@ -515,8 +515,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuNOKF+68GqxKLbNPqROrCoYE
-# ixOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZ2G6IZlfyFH3gJpSx/ZkzcmF
+# CiegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -536,11 +536,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmjC8QMEe49II1bJ7L4KDPgVLbVYwDQYJ
-# KoZIhvcNAQEBBQAEggEANzya6gCnBl9IL496Z1XhdvuKiTNbhFHsJiq5AWCpaK7a
-# UL3n/9nhb6n1DYfvlNjqf4Wy5ut0VkuXMrSkpKcpr12LJSauRpu9rDp7VDfLd7PC
-# UG2v+e40HHfTHQkbpQN1jevCJ2iCJlQu6q01ZFWD1OGO6pQV606lQAXoPzCuLfZx
-# 97DzrTBBuoKLK55RYTpTV5IBqO+bSiCY7PPSP3ldFSSJQa97C/Mes/nvhhEmTbeN
-# irimd4UyblhIs6cz2TlxYZ3eLcv8IWZlQKuSZdHhcOk4kX97aY9EGtiO7tsin5SO
-# PoUR7yjYemuFZM2MoVbAUxbBbhUbcDVA79Kayz61Ig==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUpsI67MTDVM0/b9Md+Th/BluF/G4wDQYJ
+# KoZIhvcNAQEBBQAEggEAVn7QGaApP1utL4adWAoHFSjcverRp4F4ckum9ybD3yQd
+# uyO1ceOTrx1haga7w+J7pNWcbbogXzVFNOtvtk28fpOCGmwvWowyHZCI17KxrVve
+# NP/JX+C/EoPg4akRodBeMU/lqO+FyN0sPLUudA5vI/8WItDnnuaqNNXB0UvPAxoR
+# aIlM+pXA+8R4diI5sxEqlsKmM/WT3tuD2bBXA2Ozv0NGblNKWBVudk84gcaVJxmr
+# BRehbr4w0HW7XdlTx+FgqsHJ2d5geTlcnMgnnN40BIb7XdOZR3jDP4qqJ3jHrzjh
+# 1PSM4H5+brI2YqpB4PWtQHFlVgcT4gJjZKgV9puI7A==
 # SIG # End signature block
