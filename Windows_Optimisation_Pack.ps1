@@ -251,7 +251,9 @@ function GUI {
 Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
+$hash.Cancel = $true
 $handler_BUTTON_Start_Click= {   
+$hash.Cancel = $false
 if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
 if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
 if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
@@ -498,7 +500,6 @@ if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
 if($hash.WindowsCleanup){WindowsCleanup}
-if($hash.Checks){exit}
 if($hash.Reboot){Reboot}}
 
 GUI
@@ -507,8 +508,8 @@ Choice
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgApnp72FG/IuUw73KhDkNJaD
-# ijegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJJm8lZ5eowgpwda7YNDDThBZ
+# u9qgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -528,11 +529,11 @@ Choice
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmTVfdqBbUGbaTpk+yBW+U7a9oSIwDQYJ
-# KoZIhvcNAQEBBQAEggEAM9JkM5rOfppnEwMgT26vPFDCouAZB8hamjxpDwhPMuUr
-# qh578p+10JA7CFlD7EG9Cp/sxE+CRTly2DNv2b5ZHfIh4bj2eYgPViWlP3/kjp74
-# 8kjY85mk8aPakT2oIeGrhxFGTBeriykwzAviIyi22QOSgpW1AFAj/SIomRde0fj1
-# FONs9s4XB5+fpAuSCZoE4shXJXmbZfjmaTZGYmYz0rlBTig75nD5pw5S03NUgi4g
-# pY1kK1ZmgdkZRZ/5qSuxXS7SJ0dFnp80uSXiQRGnJDxZjOAat1k86TFIgJjoA3ak
-# N1k/8U/27ewUflINHRg/IbtKgcU86hOW4Oh9/KvC7Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUsn1fjVhTUGu6jkwIai/bkq5HK0QwDQYJ
+# KoZIhvcNAQEBBQAEggEADUGSNyTaSeEj+/QTi5Q0cnoTXKmDPgefOtec1QERNKLG
+# hABKegaKzu7BatdM1su/zMstY1AWxXuJs/O31xNS9ijzltYIwevrccI83MTy9lE1
+# ydt47rOBrtKJZhqCyYSGest4iFcWFmq95KyQ4RBuXLEsp+2ZV4kNW5/8UOxx4GKA
+# Mscsc8h+8Tw+nTlgWV8H2yQSnB8I+DbDbe8thPhZF8MQ+wOrgfAyzRBY3wCnyef3
+# ogSjbt+OFVrJJGDuQLkBxpKt7AAOCHUB4EkJZ03vMUgFRtBX4FtqvRGZcxnR7q07
+# M6DjkauNbhUFMBWhETV6FvFu+eS6yGI8P3+cHUYNIw==
 # SIG # End signature block
