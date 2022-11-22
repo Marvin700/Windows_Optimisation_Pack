@@ -240,9 +240,13 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 function Finish{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F
 Clear-Host
-" Your system has been successfully optimised by the Windows_Optimisation_Pack" }
+"Your system has been successfully optimised by the Windows_Optimisation_Pack" 
+Start-Sleep 60}
 
 function Reboot{
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F
+Clear-Host
+"Your system has been successfully optimised by the Windows_Optimisation_Pack" 
 Write-Warning " The computer will restart automatically in 20 seconds !!!"
 Start-Sleep 20
 Restart-Computer }
@@ -263,7 +267,7 @@ if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}
 if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
-if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
+if ($BOX_Runtime.Checked)      		  {$hash.Runtime = $true}   
 if ($BOX_WindowsCleanup.Checked)            {$hash.WindowsCleanup = $true}    
 if ($BOX_Rename_PC.Checked)                 {$hash.Rename_PC = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
@@ -500,17 +504,17 @@ if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
 if($hash.WindowsCleanup){WindowsCleanup}
-if($hash.Reboot){Reboot}
-Finish}
+if($hash.Reboot){Reboot}}
 
 GUI
 Choice
+Finish
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUI6VtearUYiF9f68MQGRqZCpc
-# 0iOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUb0gLhOzt7PsIf/7YP1rdQyjT
+# 1IegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -530,11 +534,11 @@ Choice
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgNmbd3nYfxFT3JZzG/cZBxn4oUYwDQYJ
-# KoZIhvcNAQEBBQAEggEAnlLYePOJa6Bjrwjp2rvQcezxE8SH1xVLwiN/mbFjNDjc
-# 5YQlHGmN+7f5/5T92u60DEKqNF18RghyORla5B+ZNP/QXgzWQ+0C2UPHsLnRDwOY
-# PiHRwxLBO+AAxA7sSmWa4BHas4ZTg70ul4c1eJhgNsqkfr1humJrGvonarliSjk0
-# kM1dYMpz298gO+KhfaYlTjHbQ9TVPvw2KmpNSzHMe7HE6OlGjdEi566OlzcN8oME
-# wz1fiYAeY/oaxej6ByqehpSnnimIChjGx+CP3HG58QKzFHAbtp9kS9oAbedLbB7f
-# ID43gN3fmJWnLuUUjWikMx8yE7rVM0mZI6z+PG123A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUdtfx3O0a1cHA4NGvu0svRHT4w0gwDQYJ
+# KoZIhvcNAQEBBQAEggEAVetMj4okM/8b9fkXxqDS086cE+/izl9Zup1dLvkbbaCj
+# RnZb/vlrj4+DHZU3Ugz4rDlXqNo1xyTQw3niJTWePy2K3XyVL4GhwwVkh/LnEvUI
+# U78nn/NyKLB3jKNHLXXowMFwgiGB531qstL1AkwgvzbgkyxBzYQu/knjrCd0/1L7
+# v6mQl9binIe8Lt9JwlceC9oOctoDTsOoOo+bpwjCfYwdGQcK9WbX+vLj42mnjkcS
+# Rhr8vMz3vrU35BRo5gJBWPveadex+zJcOwDUqRPnxXFpjjEIHOyhcwTFi0eTyOc9
+# wxvum+pEvinfJvQRB7GZi1QG0OP3MW4JgW7TxT7j3A==
 # SIG # End signature block
