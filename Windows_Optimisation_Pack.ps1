@@ -280,7 +280,7 @@ $Image = new-object Windows.Forms.PictureBox
 $img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Picture.png")
 $Image.Width = $img.Size.Width
 $Image.Height = $img.Size.Height
-$Image.Location=New-Object System.Drawing.Point(50,20)
+$Image.Location=New-Object System.Drawing.Point(68,20)
 $Image.Image = $img
 $Titel_Essentials = New-Object Windows.Forms.Label
 $Titel_Essentials.Size = New-Object Drawing.Point 135,25
@@ -348,7 +348,7 @@ $BOX_WindowsTweaks_Index.Checked = $true
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 135,25
 $BOX_Runtime.Location = New-Object Drawing.Point 373,248
-$BOX_Runtime.Text = "Runtime Comonents"
+$BOX_Runtime.Text = "Runtime Components"
 $BOX_Runtime.Checked = $true  
 $BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsCleanup.Size = New-Object Drawing.Point 135,25
@@ -479,8 +479,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDNTLG9ah0YQpHJ1YC4m/Usem
-# tqGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtvkJspMo8YXStdk/mMSHTbnL
+# wEegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -500,11 +500,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUZ8O6DIoFrRfFxDarz68SKUm8UJAwDQYJ
-# KoZIhvcNAQEBBQAEggEAA9PrnbPk9ZH8KoU5icz8ICVKjgAdxD8FKGAWZRlF1atm
-# 9Ep3Qz/UnSMOiZqIdDcvP6YkQJEomEMjaQhRMcugmRdFk+qGLXQxw+5T60TIK6D5
-# +pqNHvznzYK/0PVmz2yu/xjJMy9F2a/xCkeyQrh9eD2Dw24aOd1D7duWyzcRaWfe
-# SLWf8jYQkQJyqUkJV9lXbYwFzn4gf9GTIhN8NH5hwB0GmX2EaH40D/ic8pMBOt3b
-# Z7PYAspPfXmEgoARZCVmLN2jXiXfmcepOntXQ07OBdthjs4v8eBaKSYGoRW3pmLT
-# 3bHDvNReEqW6jCpUZqizPZZCE3lXOZcydcNYqrfazA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUtzeykuNhZSaopmGSQjQehA+horowDQYJ
+# KoZIhvcNAQEBBQAEggEAhFh4nR/MP5C8/B/jgPxkpDkG7Jg3ULTkXItS4Prge+o7
+# dWXApOXqRvbyuNjfs9hgWo6Mhd6D7+zlkd05TBv5lN0UAea1XGNb82g3e6tt2kWH
+# kWVfjIQotoKmyHgbQgmFe7cioxwu4YY4AFPX7Jgnbi7MA34MLFqA5tGIHE04H/J5
+# g9Z1LiWa55D0w9gcYrLrijqsQvrVVkPcmC36Z1B5HHrHidh2YV4zt1u4orKxwj+o
+# GBIlHgZCh1mp7vjSp/uMXHo5lL+AjHDzaD5tHRAG+ikzDJGyZlD1cl7vB4ELxu6p
+# opxAptlZ/UGIF5R+q4hvc0LWscPUM//Wbg6mt2Q7gA==
 # SIG # End signature block
