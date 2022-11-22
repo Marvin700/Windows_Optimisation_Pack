@@ -242,8 +242,8 @@ Clear-Host
 " Your system has been successfully optimised by the Windows_Optimisation_Pack" }
 
 function Reboot{
-Write-Warning " The computer will restart automatically in 60 seconds !!!!"
-Start-Sleep 60
+Write-Warning " The computer will restart automatically in 20 seconds !!!"
+Start-Sleep 20
 Restart-Computer }
 
 function GUI {
@@ -274,8 +274,8 @@ if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack"
-$form.BackColor='#ffffff'
 $form.StartPosition = "CenterScreen" 
+$form.BackColor='#212121'
 $Image = new-object Windows.Forms.PictureBox
 $img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Picture.png")
 $Image.Width = $img.Size.Width
@@ -286,138 +286,166 @@ $Titel_Essentials = New-Object Windows.Forms.Label
 $Titel_Essentials.Size = New-Object Drawing.Point 135,25
 $Titel_Essentials.Location = New-Object Drawing.Point 50,215
 $Titel_Essentials.text = "Essentials"
+$Titel_Essentials.ForeColor='#aaaaaa'
 $Titel_Tweaks = New-Object Windows.Forms.Label
 $Titel_Tweaks.Size = New-Object Drawing.Point 135,25
 $Titel_Tweaks.Location = New-Object Drawing.Point 223,215
 $Titel_Tweaks.text = "Tweaks"
+$Titel_Tweaks.ForeColor='#aaaaaa'
 $Titel_Extras = New-Object Windows.Forms.Label
 $Titel_Extras.Size = New-Object Drawing.Point 135,25
 $Titel_Extras.Location = New-Object Drawing.Point 393,215
 $Titel_Extras.text = "Extras"
+$Titel_Extras.ForeColor='#aaaaaa'
 $Titel_Install = New-Object Windows.Forms.Label
 $Titel_Install.Size = New-Object Drawing.Point 135,25
 $Titel_Install.Location = New-Object Drawing.Point 566,215
 $Titel_Install.text = "Install"
+$Titel_Install.ForeColor='#aaaaaa'
 $BOX_Checks = New-Object System.Windows.Forms.CheckBox
 $BOX_Checks.Size = New-Object Drawing.Point 135,25
 $BOX_Checks.Location = New-Object Drawing.Point 27,248
 $BOX_Checks.Text = "Compability Checks"
+$BOX_Checks.ForeColor='#aaaaaa'
 $BOX_Checks.Checked = $true
 $BOX_Checks.Enabled = $false 
 $BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
 $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
 $BOX_SystemPoint.Location = New-Object Drawing.Point 27,279
 $BOX_SystemPoint.Text = "Restore Point" 
+$BOX_SystemPoint.ForeColor='#aaaaaa'
 $BOX_SystemPoint.Checked = $true 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
 $BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
 $BOX_SophiaScript.Text = "Sophia Script" 
+$BOX_SophiaScript.ForeColor='#aaaaaa'
 $BOX_SophiaScript.Checked = $true 
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
 $BOX_ooShutup.Text = "O&O ShutUp10++"
+$BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 200,248
 $BOX_WindowsTweaks_Registry.Text = "Registry Tweaks"
+$BOX_WindowsTweaks_Registry.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Registry.Checked = $true
 $BOX_WindowsTweaks_Tasks = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Tasks.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Tasks.Location = New-Object Drawing.Point 200,279
 $BOX_WindowsTweaks_Tasks.Text = "Deaktivate Tasks"
+$BOX_WindowsTweaks_Tasks.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Tasks.Checked = $true
 $BOX_WindowsTweaks_Features = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Features.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Features.Location = New-Object Drawing.Point 200,310
 $BOX_WindowsTweaks_Features.Text = "Disable Features"
+$BOX_WindowsTweaks_Features.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Features.Checked = $true
 $BOX_WindowsTweaks_Services = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Services.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Services.Location = New-Object Drawing.Point 200,341
 $BOX_WindowsTweaks_Services.Text = "Disable Services"  
+$BOX_WindowsTweaks_Services.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Services.Checked = $true  
 $BOX_WindowsTweaks_Index = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Index.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 200,372
 $BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
+$BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 135,25
 $BOX_Runtime.Location = New-Object Drawing.Point 373,248
 $BOX_Runtime.Text = "Runtime Components"
+$BOX_Runtime.ForeColor='#aaaaaa'
 $BOX_Runtime.Checked = $true  
 $BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsCleanup.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsCleanup.Location = New-Object Drawing.Point 373,279
 $BOX_WindowsCleanup.Text = "Windows Cleanup"
+$BOX_WindowsCleanup.ForeColor='#aaaaaa'
 $BOX_WindowsCleanup.Checked = $true
 $BOX_Rename_PC = New-Object System.Windows.Forms.CheckBox
 $BOX_Rename_PC.Size = New-Object Drawing.Point 135,25
 $BOX_Rename_PC.Location = New-Object Drawing.Point 373,310
 $BOX_Rename_PC.Text = "Rename PC"
+$BOX_Rename_PC.ForeColor='#aaaaaa'
 $BOX_Rename_PC.Checked = $false
 $BOX_Rename_PC.Enabled = $false 
 $BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
 $BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
 $BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
 $BOX_TakeOwnership.Text = "Take Ownership" 
+$BOX_TakeOwnership.ForeColor='#aaaaaa'
 $BOX_TakeOwnership.Checked = $true
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
 $BOX_Autoruns.Location = New-Object Drawing.Point 373,373
 $BOX_Autoruns.Text = "Autoruns" 
+$BOX_Autoruns.ForeColor='#aaaaaa'
 $BOX_Autoruns.Checked = $true
 $BOX_Winrar = New-Object System.Windows.Forms.CheckBox
 $BOX_Winrar.Size = New-Object Drawing.Point 135,25
 $BOX_Winrar.Location = New-Object Drawing.Point 546,248
 $BOX_Winrar.Text = "Winrar"
+$BOX_Winrar.ForeColor='#aaaaaa'
 $BOX_Winrar.Checked = $true
 $BOX_Fan_Control = New-Object System.Windows.Forms.CheckBox
 $BOX_Fan_Control.Size = New-Object Drawing.Point 135,25
 $BOX_Fan_Control.Location = New-Object Drawing.Point 546,279
 $BOX_Fan_Control.Text = "Fan Control"
+$BOX_Fan_Control.ForeColor='#aaaaaa'
 $BOX_Fan_Control.Checked = $false  
 $BOX_Fan_Control.Enabled = $false 
 $BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
 $BOX_AutoActions.Size = New-Object Drawing.Point 135,25
 $BOX_AutoActions.Location = New-Object Drawing.Point 546,310
 $BOX_AutoActions.Text = "AutoActions"
+$BOX_AutoActions.ForeColor='#aaaaaa'
 $BOX_AutoActions.Checked = $false 
 $BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
 $BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
 $BOX_Process_Lasso.Location = New-Object Drawing.Point 546,341
 $BOX_Process_Lasso.Text = "Process Lasso"
+$BOX_Process_Lasso.ForeColor='#aaaaaa'
 $BOX_Process_Lasso.Checked = $false  
 $BOX_Controller = New-Object System.Windows.Forms.CheckBox
 $BOX_Controller.Size = New-Object Drawing.Point 135,25
 $BOX_Controller.Location = New-Object Drawing.Point 546,372
 $BOX_Controller.Text =  "Controller Support"
+$BOX_Controller.ForeColor='#aaaaaa'
 $BOX_Controller.Checked = $false 
 $Titel_Compability = New-Object Windows.Forms.Label
 $Titel_Compability.Size = New-Object Drawing.Point 160,25
 $Titel_Compability.Location = New-Object Drawing.Point 520,422
+$Titel_Compability.ForeColor='#aaaaaa'
 #$Titel_Compability.text = ""
+
 $BOX_Reboot = New-Object System.Windows.Forms.CheckBox
 $BOX_Reboot.Size = New-Object Drawing.Point 135,25
 $BOX_Reboot.Location = New-Object Drawing.Point 423,422
 $BOX_Reboot.Text = "Reboot"
+$BOX_Reboot.ForeColor='#aaaaaa'
 $BOX_Reboot.Checked = $false
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
 $BUTTON_Start.Location = New-Object Drawing.Point 225,422
+$BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {$BUTTON_Start.Enabled = $false
-$Titel_Compability.text = "NO ADMIN AVAILABLE"
-}
+$Titel_Compability.text = "NO ADMIN AVAILABLE" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
-$BUTTON_Cancel.Text = "Cancel"
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 320,422
+$BUTTON_Cancel.ForeColor='#aaaaaa'
+$BUTTON_Cancel.Text = "Cancel"
+$BUTTON_Cancel.add_click({$Form.Close()})
 $form.controls.add($Image )
 $form.controls.add($Titel_Compability)
 $form.controls.add($Titel_Essentials)
@@ -478,8 +506,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrSnNpg5nC7dUn8y15DUWljrS
-# 02SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwsyxu/cdE+jb4RRsNgi3aHyc
+# d42gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -499,11 +527,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUAmvUsHC73JHugFqNIxk9lE3TXlgwDQYJ
-# KoZIhvcNAQEBBQAEggEAXRiCZGS+4Ih3W2p0EKOE/WbfQpqAkUYBucrVQ31Avyj9
-# 0SN+/SwDSTPUl8OW/jrEBk3bYmeeqDjB7x3o2dsFPuGwKVZjPTXJaS4PspFFGKFc
-# mCkJIP3jHdyH0F011FamBG2p1pLPMs1p3gf5gGZ4NeEeewegS+JypWpr0sRtBOBN
-# TuZQLdjem+VOvJxQQUPLA5+JPzrS2v1Y81IEinXKN40WNRBIbD99hSKGXKomL6hd
-# qtlF5CE9FOPFKIqOSL3hZWed0xraqwqH1M4WqF/C//BWdCJr1eu1rDY6XSU2srB7
-# 2Fru8BcLHDz7YyT6a09fFvMBpH04FDsh7GCqSPZq+Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUSQ8wEMIJoEzlli4A6DnZwId8f+MwDQYJ
+# KoZIhvcNAQEBBQAEggEATx+HAusJTMm3Bnn64pzLQuQnBhTipqXcOdzTk+Jm7SQi
+# h5fLtJjOXQx3QYOAaEHcM5DuYzoNgGF/ktcxsUlS3Xk91ODVtiaFmx/zxpbt1AjC
+# mj3ZqIViabqCj9xZiUXOyuRH4+idGQe/ZpVZNNvgUhFIfcq6AOiTxmHVhOV29G1/
+# wfTCbUnl36g6fVWiHnM8TuwpPLBz4x8uOv9Ac6GxeFOkdvKXhcESeBuLU97ZKqko
+# N4yAPrrLC+Ts8R1tnAbxON0elFFmw4GUbXDQRnnb1Y7K9SJYJy6lkfwhthqAxSr9
+# OYdmxuTWXYBnX12vYFjwHOUx92XlvBU5Wd13886DrQ==
 # SIG # End signature block
