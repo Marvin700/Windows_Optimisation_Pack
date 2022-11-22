@@ -174,14 +174,7 @@ Start-Sleep 20;exit}
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 Write-Warning " No admin rights available"
 Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit} 
-if ((Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
-Write-Warning " The system has already been optimised by the Windows_Optimisation_Pack"
-"Do you really want to continue?"
-$weitermachen = Read-Host "Ja oder Nein ?"
-IF(!($weitermachen -eq "Ja" -Or $weitermachen -eq "j" -Or $weitermachen -eq "JA" -Or $weitermachen -eq "y" -Or $weitermachen -eq "yes")) {         
-Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit}} }
+Start-Sleep 20;exit}}
 
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
@@ -515,8 +508,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZ2G6IZlfyFH3gJpSx/ZkzcmF
-# CiegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUm/c4EeOQy0AmJqO/1Ns7c02o
+# dFqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -536,11 +529,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUpsI67MTDVM0/b9Md+Th/BluF/G4wDQYJ
-# KoZIhvcNAQEBBQAEggEAVn7QGaApP1utL4adWAoHFSjcverRp4F4ckum9ybD3yQd
-# uyO1ceOTrx1haga7w+J7pNWcbbogXzVFNOtvtk28fpOCGmwvWowyHZCI17KxrVve
-# NP/JX+C/EoPg4akRodBeMU/lqO+FyN0sPLUudA5vI/8WItDnnuaqNNXB0UvPAxoR
-# aIlM+pXA+8R4diI5sxEqlsKmM/WT3tuD2bBXA2Ozv0NGblNKWBVudk84gcaVJxmr
-# BRehbr4w0HW7XdlTx+FgqsHJ2d5geTlcnMgnnN40BIb7XdOZR3jDP4qqJ3jHrzjh
-# 1PSM4H5+brI2YqpB4PWtQHFlVgcT4gJjZKgV9puI7A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQAa/vESnvSf+vkh/Uz8LraVk/uAwDQYJ
+# KoZIhvcNAQEBBQAEggEAkurSCbE3xwCqYCDs3eQazYS5VHwLhXD9mXJLc6nXBC9i
+# v2v13fIAY7EmAJUa/pu6WYexk3F26zlptS/2NhtdGdXFNrdIUWUdf6lD7GqJPrxH
+# wgOH4Mxxmvqbsu7cvdO6bS9HRpqtqyprvA2ubc3fchPlo9rHY+BzKfuyscbJuFCo
+# B+IvPQBjFRWq06YVwxZ03SdmGFjB3wp2fi6g6z/3nD5XXx/OBmZJf2G9OHOJq2nj
+# +KLLerXQkzNTBWYUEVctGKon+8zkdDNK4rzud10IYIAn7of4zrcKYoOlSUr9vzID
+# PDLhp2wOzRCimhU9+884kHJHFno674ngXLDOItn7fQ==
 # SIG # End signature block
