@@ -155,7 +155,7 @@ Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
 function SystemPoint{
-vssadmin delete shadows /all /quiet
+if($hash.WindowsCleanup){vssadmin delete shadows /all /quiet}
 Enable-ComputerRestore -Drive "C:\"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -309,7 +309,6 @@ $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
 $BOX_SystemPoint.Location = New-Object Drawing.Point 27,279
 $BOX_SystemPoint.Text = "Restore Point" 
 $BOX_SystemPoint.Checked = $true 
-$BOX_SystemPoint.Enabled = $false 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
 $BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
@@ -479,8 +478,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKa7jlZFw/9p3+TZXf0hn1QL0
-# s0igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrSnNpg5nC7dUn8y15DUWljrS
+# 02SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -500,11 +499,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUAPyDJ6p8LSQ8vUj+86M/ZAeCTwIwDQYJ
-# KoZIhvcNAQEBBQAEggEAurJACH6fZOBAc0ExHPJfsZ73hNzFRkEBN2fRSSa+QxyN
-# pG5wbN+VBwnYv1pRRlYrCvJXYDUdRPwHVgu1niLQu9ar0GkxhnI4ZsCssHY1WWuI
-# zMImAwzE8OHTwNZnPQbEn0FyHyI8/SmW3PECyKRuiMDzIf9wIC5TNGXlPxAWRbI8
-# QDmwi86ROX1KXcJNkLpDjdiuag8RtMKeVTt1uDEhQ3kL5kcw8iSEwbJIt7g7rHuJ
-# 73wRWpZVuRVpcXc8WdSifg0fRmYTcUqF5bBOQa2hb8XzbqMj4Ufx9vnfPJhqFz3w
-# c0JfzIeER7YUlWa944vgHKlIft3/qBProhEA05Arzg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUAmvUsHC73JHugFqNIxk9lE3TXlgwDQYJ
+# KoZIhvcNAQEBBQAEggEAXRiCZGS+4Ih3W2p0EKOE/WbfQpqAkUYBucrVQ31Avyj9
+# 0SN+/SwDSTPUl8OW/jrEBk3bYmeeqDjB7x3o2dsFPuGwKVZjPTXJaS4PspFFGKFc
+# mCkJIP3jHdyH0F011FamBG2p1pLPMs1p3gf5gGZ4NeEeewegS+JypWpr0sRtBOBN
+# TuZQLdjem+VOvJxQQUPLA5+JPzrS2v1Y81IEinXKN40WNRBIbD99hSKGXKomL6hd
+# qtlF5CE9FOPFKIqOSL3hZWed0xraqwqH1M4WqF/C//BWdCJr1eu1rDY6XSU2srB7
+# 2Fru8BcLHDz7YyT6a09fFvMBpH04FDsh7GCqSPZq+Q==
 # SIG # End signature block
