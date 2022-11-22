@@ -270,7 +270,7 @@ if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}
 if ($BOX_AutoActions.Checked)               {$hash.AutoActions = $true}
 if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
 if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
-if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close() }
+if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack"
@@ -445,8 +445,8 @@ $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 320,422
 $BUTTON_Cancel.ForeColor='#aaaaaa'
 $BUTTON_Cancel.Text = "Cancel"
-$BUTTON_Cancel.add_click({$Form.Close()})
-$form.controls.add($Image )
+$BUTTON_Cancel.add_click{$hash.Cancel = $true; $Form.Close()}
+$form.controls.add($Image)
 $form.controls.add($Titel_Compability)
 $form.controls.add($Titel_Essentials)
 $form.controls.add($Titel_Tweaks)
@@ -477,6 +477,7 @@ $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() } Out-Null
 
 function Choice { 
+if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
 if($hash.SophiaScript){SophiaScript}
@@ -506,8 +507,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwsyxu/cdE+jb4RRsNgi3aHyc
-# d42gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5Ye+VtGP8Jy2yh86+bdH71Tj
+# KWOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -527,11 +528,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUSQ8wEMIJoEzlli4A6DnZwId8f+MwDQYJ
-# KoZIhvcNAQEBBQAEggEATx+HAusJTMm3Bnn64pzLQuQnBhTipqXcOdzTk+Jm7SQi
-# h5fLtJjOXQx3QYOAaEHcM5DuYzoNgGF/ktcxsUlS3Xk91ODVtiaFmx/zxpbt1AjC
-# mj3ZqIViabqCj9xZiUXOyuRH4+idGQe/ZpVZNNvgUhFIfcq6AOiTxmHVhOV29G1/
-# wfTCbUnl36g6fVWiHnM8TuwpPLBz4x8uOv9Ac6GxeFOkdvKXhcESeBuLU97ZKqko
-# N4yAPrrLC+Ts8R1tnAbxON0elFFmw4GUbXDQRnnb1Y7K9SJYJy6lkfwhthqAxSr9
-# OYdmxuTWXYBnX12vYFjwHOUx92XlvBU5Wd13886DrQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUErkV9HsRixftIQy3t9usOntVQt4wDQYJ
+# KoZIhvcNAQEBBQAEggEAwc3Rok/HL03F1GhT3SNa+rxBNCCjTqKNokVpF7GgBEn6
+# niMMvb9L0ZnNXingycRpBtP2ejzrD80T0sJRwkDRfWuSDvyExI+W+kB55+C4xuzm
+# GwQQpzyE0c8gKBR6PHQBxGfKLGc36NfZBHPGCM2JGf9yv/aBosu27O9a2nGsCyf1
+# BNxQdIUrXLUxTeCr6hhUCJTM3hztohOEn0KpwsTsKq+BdVHefMR+TVOGHvGqnSxH
+# 73ZooIPkfk8iv1zIPh4AtesXL4rbAhjTPCNV4OlywVVA8wMTFP3wj6KjqTyPDRA6
+# akv6fLS4pnd3x6xeR4hzYDTgtFExvQYxbKJ2KwHNHg==
 # SIG # End signature block
