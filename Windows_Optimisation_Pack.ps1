@@ -285,6 +285,8 @@ $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $form.StartPosition = "CenterScreen" 
 $form.ForeColor='#aaaaaa'
 $form.BackColor='#212121'
+$form.MinimizeBox = $false
+$form.MaximizeBox = $false
 $Image = new-object Windows.Forms.PictureBox
 $img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Picture.png")
 $Image.Width = $img.Size.Width
@@ -513,8 +515,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7C8BGwul1m0WZ5Ipf6ZQzUgR
-# RtugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7I9//gu+GAbYkTUyrzjiQsJ3
+# edigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -534,11 +536,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUK7uQH1yjY2Oci8dJT82VTkSPiaQwDQYJ
-# KoZIhvcNAQEBBQAEggEAF70EqPACJDo0CrtLifHswNjg61KjhUzx6CrFBmZ8kLYL
-# wxrRhTOE1ZDuIzUDkS7bv3VJZBQUbQE0u1FrN7IjsWWgu+INCgO6ViV1rmHaqU6g
-# Yu/5VjDMbuUmWBzd2N9iBJ+Wj4Ci4loN+4s/Y/tojw5D5K6ulv18OQCaVP1bSjuu
-# HYAoDthve+3j4gjAHqOqBpfIsgMbTN3oqgyu6WnG4ppqgy3KB08c2eltBy1IdChL
-# cJ77zzvVEzLtpBX23eyTl/zhq9/+muhak1InZ0K0e5SKzivGgotWBJVWZG0UOtgk
-# icMYTcN7AsoIaM+irJskiB1sN6AP3obvnISzCWvG1Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgNhtzwPN2YmDqHESKmxRPX5XrZcwDQYJ
+# KoZIhvcNAQEBBQAEggEAL6KupDN38mveW0KljalqlLcsZ3iX2Sl5q8Oyg03p5Pmp
+# nO5LHGYoDR+bEs4bjUk18cTorE9n2Smm4E5Vyted6qeQmE1z1ReiQBe8EM9UbH3t
+# V+D0HkQb3NX12oL6ejqtFoLw0WzT5hoMfmRTWnpKK48Z+KadAFriP1YWcFEf7+iK
+# 3AEtD/QXLkDZlIJcgWVwdFXKvD2kG5a5JDhd+MZ6U7D/uHP7fYtm0S7IJDXozxGh
+# KgcHgfxD5XYHihoEJVEAgPYDlPRmVNv0gxVfKgqtXNRZHgNu6guCGRnAMyLsPvKk
+# OQY+2kCpLAqA9yXywbnHUs91ORu0+UL52tSCbYUnHQ==
 # SIG # End signature block
