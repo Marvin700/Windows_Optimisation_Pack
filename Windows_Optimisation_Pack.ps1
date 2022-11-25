@@ -277,7 +277,8 @@ if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}
 if ($BOX_AutoActions.Checked)               {$hash.AutoActions = $true}
 if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
 if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
-if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
+if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true}
+if ($BOX_Reboot.Checked -and $BOX_WindowsCleanup.Checked) {$hash.Reboot = $false} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
@@ -512,8 +513,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFQ2KVDDuAApkXYLtqyqewtn1
-# svegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7C8BGwul1m0WZ5Ipf6ZQzUgR
+# RtugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -533,11 +534,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/pJbbgWXaLSzXmDpu/3QADDwv2AwDQYJ
-# KoZIhvcNAQEBBQAEggEAVTJMPwyqEhPFxSnTeE0JlMOO4xzEr4SEEdpCefjGYMFJ
-# +CWyDa3lFRDvjS+3uv9Iu5Ndss8SXEZIy1WB7c2/8LbqdtK7BzVHDgEUnVY3sgjy
-# 1luBqlM3KowJihP6lucnoWE+gBSOGVWbptuv8l6HY0/H4E+KwCQfYfKl78fIoKMo
-# P1qhtowCVLbyq/Dn9A1d56PfYBLCsyXejBzIyekNKLa3EazIo40SPzTIfUEENXbG
-# r6Jl5Q9JIIZ7petaZZMnvvd5bSjdOzfX+Ul6cODEdDichwDFyM2FmNPypf35h/g6
-# ETdxt83jAX8FD/BDrfaHt2zRKHVDfRL1kt88lw9O9Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUK7uQH1yjY2Oci8dJT82VTkSPiaQwDQYJ
+# KoZIhvcNAQEBBQAEggEAF70EqPACJDo0CrtLifHswNjg61KjhUzx6CrFBmZ8kLYL
+# wxrRhTOE1ZDuIzUDkS7bv3VJZBQUbQE0u1FrN7IjsWWgu+INCgO6ViV1rmHaqU6g
+# Yu/5VjDMbuUmWBzd2N9iBJ+Wj4Ci4loN+4s/Y/tojw5D5K6ulv18OQCaVP1bSjuu
+# HYAoDthve+3j4gjAHqOqBpfIsgMbTN3oqgyu6WnG4ppqgy3KB08c2eltBy1IdChL
+# cJ77zzvVEzLtpBX23eyTl/zhq9/+muhak1InZ0K0e5SKzivGgotWBJVWZG0UOtgk
+# icMYTcN7AsoIaM+irJskiB1sN6AP3obvnISzCWvG1Q==
 # SIG # End signature block
