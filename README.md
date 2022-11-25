@@ -32,7 +32,7 @@ Please update the fresh Windows installation first. <BR>
 ## Screenshots
 <div>
     <img src="https://user-images.githubusercontent.com/98750428/200678853-363ec142-b0ab-4623-97cb-077bff29ca9d.png" width="410" height="340">
-    <img src="https://user-images.githubusercontent.com/98750428/200678119-e192ef85-75ef-4585-8260-3a444e8c66a1.png" width="410" height="340">
+    <img src="https://user-images.githubusercontent.com/98750428/203978712-a4273aa4-9402-4dbb-a40f-ff2c508d4935.jpg" width="410" height="340">
 </div>
 
 ## GUI
