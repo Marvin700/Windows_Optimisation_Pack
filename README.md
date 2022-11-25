@@ -36,5 +36,5 @@ Please update the fresh Windows installation first. <BR>
 </div>
 
 ## GUI
-<img src="https://user-images.githubusercontent.com/98750428/203286121-103d2ddf-fc1c-4100-b9df-7ebca3efb55e.png"> 
+<img src="https://user-images.githubusercontent.com/98750428/204053689-772220c0-4b15-451f-ad7b-1546361a4095.jpg">
 
