@@ -244,9 +244,7 @@ function Finish{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F
 Clear-Host
 "Your system has been successfully optimised by the Windows_Optimisation_Pack" 
-if($hash.Reboot){Reboot}
-Write-Warning " The Script close in 120 seconds"
-Start-Sleep 120}
+if($hash.Reboot){Reboot}}
 
 function Reboot{
 Write-Warning " The computer will restart automatically in 120 seconds !!!"
@@ -517,8 +515,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUT4Ka1cz6Z6LAl482B1JV+KDl
-# nOygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7Ibo+0DA6IZDXLoI9juS98AW
+# aF2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -538,11 +536,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUnp6TQ4eN7Mwv8t1MiKohMDLyX9EwDQYJ
-# KoZIhvcNAQEBBQAEggEAPQ3+KIho8akrUnbfBRoB6dkg7tsoJqetacvZRFlnsytz
-# OcMJ/m4m9BBF1+H++zdZstrC6iQEcP7oAwux+wgEdsh1V/Y5mx91hIb+MWhERum6
-# /aApqk4OBdJ/GmnKq+hT5J9sG6lfvmwGGUPwOzxa8QkvODOAa6wqLbYuxidRuhZv
-# jH5UTYVtSNPL+oQCrkTZjTyl5ouv1Rdrf3IdA2on/FLk1/fiJ/am55B3lYcQ9qec
-# Wim/klwnwegqaWKVEumBrjrBxNPBAUNZg+asYDOS3mL2rKxcqEZV5Aq9nKgyAG+e
-# E5nxSi+YW8CVZXIvilvVOI6+aAO2avRXVokgRsPAUg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUL3KLX0HfKnPV88NmRv6ZOUeyKbMwDQYJ
+# KoZIhvcNAQEBBQAEggEAnDHY3p/ENjdR8cCvZcABLQi4NVTPP60a5B0M6/cIRFnc
+# 8vj379V9WRhPYk4+AtF9E0c8w/vqxmmwm4gxJqyYzDsEAkJDCz9xcML3wF0jTq0c
+# sNG12gizhJu6e2QxKFZdrkEVdm3Z51oawLVzI648LQfzE0JYyJGtAas7TLYXGbmy
+# u4zXmB37VLBxw+FxUXqkGBJo8P7Tvul9XM5Me/aNsSliLSQM5BmfaM6yfF98W4Bi
+# rtwoDVmNyxF8fSdB8qu3261kpo8smFf+5tO/9j65LvH7Xls2EieN5I7XHkwiZEjo
+# d7SAR7wAGhQ+16UMx5p99co4abB86985tK6yEwXjcQ==
 # SIG # End signature block
