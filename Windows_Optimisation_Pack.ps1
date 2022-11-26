@@ -236,7 +236,7 @@ function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
-function HDD_Name{Label C: Windows}
+function Rename_HDD{Label C: Windows}
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
@@ -269,7 +269,7 @@ if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $tru
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
 if ($BOX_WindowsCleanup.Checked)            {$hash.WindowsCleanup = $true}    
-if ($BOX_Rename_PC.Checked)                 {$hash.Rename_PC = $true} 
+if ($BOX_Rename_HDD.Checked)                {$hash.Rename_HDD = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
 if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
@@ -380,13 +380,12 @@ $BOX_WindowsCleanup.Location = New-Object Drawing.Point 373,279
 $BOX_WindowsCleanup.Text = "Windows Cleanup"
 $BOX_WindowsCleanup.ForeColor='#aaaaaa'
 $BOX_WindowsCleanup.Checked = $true
-$BOX_Rename_PC = New-Object System.Windows.Forms.CheckBox
-$BOX_Rename_PC.Size = New-Object Drawing.Point 135,25
-$BOX_Rename_PC.Location = New-Object Drawing.Point 373,310
-$BOX_Rename_PC.Text = "Rename PC"
-$BOX_Rename_PC.ForeColor='#aaaaaa'
-$BOX_Rename_PC.Checked = $false
-$BOX_Rename_PC.Enabled = $false 
+$BOX_Rename_HDD = New-Object System.Windows.Forms.CheckBox
+$BOX_Rename_HDD.Size = New-Object Drawing.Point 135,25
+$BOX_Rename_HDD.Location = New-Object Drawing.Point 373,310
+$BOX_Rename_HDD.Text = "Rename C Drive"
+$BOX_Rename_HDD.ForeColor='#aaaaaa'
+$BOX_Rename_HDD.Checked = $true
 $BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
 $BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
 $BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
@@ -433,7 +432,6 @@ $Titel_Compability = New-Object Windows.Forms.Label
 $Titel_Compability.Size = New-Object Drawing.Point 160,25
 $Titel_Compability.Location = New-Object Drawing.Point 520,422
 $Titel_Compability.ForeColor='#aaaaaa'
-#$Titel_Compability.text = ""
 $BOX_Reboot = New-Object System.Windows.Forms.CheckBox
 $BOX_Reboot.Size = New-Object Drawing.Point 135,25
 $BOX_Reboot.Location = New-Object Drawing.Point 423,422
@@ -472,7 +470,7 @@ $form.Controls.Add($BOX_WindowsTweaks_Services)
 $form.Controls.Add($BOX_WindowsTweaks_Index)
 $form.Controls.Add($BOX_Runtime)
 $form.Controls.Add($BOX_WindowsCleanup)
-$form.Controls.Add($BOX_Rename_PC)
+$form.Controls.Add($BOX_Rename_HDD)
 $form.Controls.Add($BOX_TakeOwnership)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
@@ -495,10 +493,9 @@ if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
-if($hash.indowsTweaks_Index){WindowsTweaks_Index}
-HDD_Name
+if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
+if($hash.Rename_HDD){Rename_HDD}
 if($hash.Runtime){Runtime}   
-#if($hash.Rename_PC){Rename_PC}
 if($hash.TakeOwnership){TakeOwnership}
 if($hash.Autoruns){Autoruns}    
 if($hash.Winrar){Winrar}    
@@ -515,8 +512,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7Ibo+0DA6IZDXLoI9juS98AW
-# aF2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYLcDj9nfl9ar0tg0O1pCrCui
+# VYugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -536,11 +533,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUL3KLX0HfKnPV88NmRv6ZOUeyKbMwDQYJ
-# KoZIhvcNAQEBBQAEggEAnDHY3p/ENjdR8cCvZcABLQi4NVTPP60a5B0M6/cIRFnc
-# 8vj379V9WRhPYk4+AtF9E0c8w/vqxmmwm4gxJqyYzDsEAkJDCz9xcML3wF0jTq0c
-# sNG12gizhJu6e2QxKFZdrkEVdm3Z51oawLVzI648LQfzE0JYyJGtAas7TLYXGbmy
-# u4zXmB37VLBxw+FxUXqkGBJo8P7Tvul9XM5Me/aNsSliLSQM5BmfaM6yfF98W4Bi
-# rtwoDVmNyxF8fSdB8qu3261kpo8smFf+5tO/9j65LvH7Xls2EieN5I7XHkwiZEjo
-# d7SAR7wAGhQ+16UMx5p99co4abB86985tK6yEwXjcQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGtr8eJsJNnKbc1QrD/HZQeBqcKowDQYJ
+# KoZIhvcNAQEBBQAEggEATRz2vzhiaWGa3PsPYAleOqXANJIR90o60f1hxWAUHvFk
+# wgmVLLrlL5M2tAFXYDIuzqaNn21P1Z9O7DLoX+GbJZB/fOdTZJsEfX3Gn80erAqw
+# ALfpcHfVgKMchyzc/sBJ8wJhiZluMd5Thl4IUaSZ8/L2rJRb7BPIR5EFCSKArE7R
+# jRN+ekOFpTSGWQXR3Gj7Ibf+SZxemuppIgeU7Ub7wpw3gtXsYNVN+s1ovNuN607x
+# EPLmPxS9ZhssYqFod+4Se9CDngeeE+Ox3Z9BKKWynGwj/1ksT5uBc+18nG7L1YJ7
+# GBZBLYUDwHMN34qxtm0LIcjvBd81PGnGYE/vf0D36w==
 # SIG # End signature block
