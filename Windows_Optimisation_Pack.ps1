@@ -199,6 +199,8 @@ winget source update
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x86 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
@@ -515,8 +517,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7I9//gu+GAbYkTUyrzjiQsJ3
-# edigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUT4Ka1cz6Z6LAl482B1JV+KDl
+# nOygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -536,11 +538,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgNhtzwPN2YmDqHESKmxRPX5XrZcwDQYJ
-# KoZIhvcNAQEBBQAEggEAL6KupDN38mveW0KljalqlLcsZ3iX2Sl5q8Oyg03p5Pmp
-# nO5LHGYoDR+bEs4bjUk18cTorE9n2Smm4E5Vyted6qeQmE1z1ReiQBe8EM9UbH3t
-# V+D0HkQb3NX12oL6ejqtFoLw0WzT5hoMfmRTWnpKK48Z+KadAFriP1YWcFEf7+iK
-# 3AEtD/QXLkDZlIJcgWVwdFXKvD2kG5a5JDhd+MZ6U7D/uHP7fYtm0S7IJDXozxGh
-# KgcHgfxD5XYHihoEJVEAgPYDlPRmVNv0gxVfKgqtXNRZHgNu6guCGRnAMyLsPvKk
-# OQY+2kCpLAqA9yXywbnHUs91ORu0+UL52tSCbYUnHQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUnp6TQ4eN7Mwv8t1MiKohMDLyX9EwDQYJ
+# KoZIhvcNAQEBBQAEggEAPQ3+KIho8akrUnbfBRoB6dkg7tsoJqetacvZRFlnsytz
+# OcMJ/m4m9BBF1+H++zdZstrC6iQEcP7oAwux+wgEdsh1V/Y5mx91hIb+MWhERum6
+# /aApqk4OBdJ/GmnKq+hT5J9sG6lfvmwGGUPwOzxa8QkvODOAa6wqLbYuxidRuhZv
+# jH5UTYVtSNPL+oQCrkTZjTyl5ouv1Rdrf3IdA2on/FLk1/fiJ/am55B3lYcQ9qec
+# Wim/klwnwegqaWKVEumBrjrBxNPBAUNZg+asYDOS3mL2rKxcqEZV5Aq9nKgyAG+e
+# E5nxSi+YW8CVZXIvilvVOI6+aAO2avRXVokgRsPAUg==
 # SIG # End signature block
