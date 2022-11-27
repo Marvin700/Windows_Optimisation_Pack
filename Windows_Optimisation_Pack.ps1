@@ -112,10 +112,10 @@ dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRest
 dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart }
             
 function WindowsTweaks_Index{
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='D:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='E:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='F:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} }
+Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
+Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='D:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
+Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='E:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
+Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='F:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null }
 
 function TakeOwnership{
 New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
@@ -511,8 +511,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGWzXJD3ReI6hLwbKX6vDZPO5
-# LBygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgCM1CFj+3DdTLscBdDWVgVJ/
+# I6ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -532,11 +532,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8gvTVNwYxLJI1bmOf2fRD2ClLU0wDQYJ
-# KoZIhvcNAQEBBQAEggEAyfNJbphKRNyo90PBKKIvgF5ffjvVSYCrfAcwhP+zsjIS
-# ca3ucxHPcl1q901QUrDezAW5faM0oH+O/LhtYZ/cOABZzEGRMHYw5PYxhhfbq+c1
-# aipKDs+2nMt+Q1kVHi+dwnb6SrlMeeSQT24qOY950L2yhDQnsoI8t9wGEhh9gCdf
-# i9V2zqAb8hc5JQ363egLP1cueCi7pFnN7xNLAALInbYiOVnHc3EZhl2tF+RmpxYD
-# r9V1BaAJ5HMnD1FY5BvmtMdfF1iYOZ+GtVN7gxWS9ZRkfzdlhvvRd+1AcK+hBjsP
-# q9Dc0iAj9lLEjllVM6U8Mgqe4UXIUlXv23PCPGdNjg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQULY4Zpbh8DfOMOFLdrop0k0yVJCYwDQYJ
+# KoZIhvcNAQEBBQAEggEAXE0cFSl34+c5+eLntWufSuFmH/yhp4t3FaQ+MoNNnKch
+# 8ymRAWbBE56iPB4whu0mdEQFXS/amLtcoIH2W6FjMF1Q8uSuaHBfBpm8QxocUOff
+# i9nfEkEnP/GG/dxdPkOBKfk4rnwrVjpnvHLcy72mFP56VgDe24tHhEEpC/G+gbGn
+# XGMwJuh3gbOcpqFgaET52UY/s/tbkBSP3LxkKLgkSrtDvN0kUS2Lrh6X3xDLWTDE
+# 7Mog3wdGnmz87la/3ta9XWVoFcaOx67WvY37ptvY2MdRlkxa2l6ba/05pcDtuD3z
+# GKT6AfihL19wKnj8ewMW3oXz1OyCT29fcN1brsL9+w==
 # SIG # End signature block
