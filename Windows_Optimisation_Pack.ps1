@@ -1,8 +1,10 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
+if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} 
+
 
 function WindowsTweaks_Services{
 Stop-Service "WpcMonSvc"
@@ -184,7 +186,7 @@ Start-Process $env:temp\Autoruns64.exe }
 function WindowsCleanup{
 Clear-Host
 gpupdate.exe /force 
-Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse 
+Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse 
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
@@ -195,15 +197,12 @@ Cleanmgr /sagerun:65535
 Cleanmgr /sagerun:1221 }
           
 function Runtime{
-winget source update
-winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
-winget install --id=Microsoft.VCRedist.2015+.x86 --exact --accept-source-agreements
-winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x86 --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements
-winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x86 --exact --accept-source-agreements
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
+winget source update | Out-Null
+winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements | Out-Null
+IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931")){winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements}
+IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.11 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
+IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.0 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements | Out-Null}
 
 function Fan_Control{
 Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V137/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
@@ -241,7 +240,7 @@ function Rename_HDD{Label C: Windows}
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Finish{
-REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F
+REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F | Out-Null
 Clear-Host
 "Your system has been successfully optimised by the Windows_Optimisation_Pack" 
 if($hash.Reboot){Reboot}}
@@ -512,8 +511,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYLcDj9nfl9ar0tg0O1pCrCui
-# VYugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGWzXJD3ReI6hLwbKX6vDZPO5
+# LBygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -533,11 +532,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGtr8eJsJNnKbc1QrD/HZQeBqcKowDQYJ
-# KoZIhvcNAQEBBQAEggEATRz2vzhiaWGa3PsPYAleOqXANJIR90o60f1hxWAUHvFk
-# wgmVLLrlL5M2tAFXYDIuzqaNn21P1Z9O7DLoX+GbJZB/fOdTZJsEfX3Gn80erAqw
-# ALfpcHfVgKMchyzc/sBJ8wJhiZluMd5Thl4IUaSZ8/L2rJRb7BPIR5EFCSKArE7R
-# jRN+ekOFpTSGWQXR3Gj7Ibf+SZxemuppIgeU7Ub7wpw3gtXsYNVN+s1ovNuN607x
-# EPLmPxS9ZhssYqFod+4Se9CDngeeE+Ox3Z9BKKWynGwj/1ksT5uBc+18nG7L1YJ7
-# GBZBLYUDwHMN34qxtm0LIcjvBd81PGnGYE/vf0D36w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8gvTVNwYxLJI1bmOf2fRD2ClLU0wDQYJ
+# KoZIhvcNAQEBBQAEggEAyfNJbphKRNyo90PBKKIvgF5ffjvVSYCrfAcwhP+zsjIS
+# ca3ucxHPcl1q901QUrDezAW5faM0oH+O/LhtYZ/cOABZzEGRMHYw5PYxhhfbq+c1
+# aipKDs+2nMt+Q1kVHi+dwnb6SrlMeeSQT24qOY950L2yhDQnsoI8t9wGEhh9gCdf
+# i9V2zqAb8hc5JQ363egLP1cueCi7pFnN7xNLAALInbYiOVnHc3EZhl2tF+RmpxYD
+# r9V1BaAJ5HMnD1FY5BvmtMdfF1iYOZ+GtVN7gxWS9ZRkfzdlhvvRd+1AcK+hBjsP
+# q9Dc0iAj9lLEjllVM6U8Mgqe4UXIUlXv23PCPGdNjg==
 # SIG # End signature block
