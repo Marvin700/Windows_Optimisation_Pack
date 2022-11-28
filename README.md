@@ -21,10 +21,6 @@ Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
 iex (irm windows-optimisation.de)
   ```
-If the domain does not work, as I am currently changing the hoster
-  ```powershell
-iex (irm https://github.com/Marvin700/Windows_Optimisation_Pack/releases/download/1.7/Windows_Optimisation_Pack.ps1)
-  ```
 
 <img src="https://user-images.githubusercontent.com/98750428/203324846-1b72b5d0-53c3-45f0-9a12-99d4c1beeb35.gif"> 
 
