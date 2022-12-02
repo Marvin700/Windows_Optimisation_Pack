@@ -1,17 +1,17 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Cleaner | $([char]0x00A9) Marvin700"
-Get-ChildItem -Path $env:TEMP -Recurse -Force | Remove-Item -Recurse -Force
-Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse 
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
-Clear-BCCache -Force -ErrorAction SilentlyContinue
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
-Dism.exe /Online /Cleanup-Image /spsuperseded
-Dism.exe /online /Cleanup-Image /StartComponentCleanup
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Clear-BCCache -Force -ErrorAction SilentlyContinue
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
+Dism.exe /Online /Cleanup-Image /spsuperseded
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
 cleanmgr.exe /sagerun:1
 Clear-Host
 Write-Host "The System has been cleaned"
@@ -19,8 +19,8 @@ Write-Host "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfyLJkj+V7+/01hO6q0IXcSNg
-# J5mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUV1AlQ1ennhSRLNNB+plJ7/JE
+# 91igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -40,11 +40,11 @@ Write-Host "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUA1sqvUxEOi0eZfbgLOILDb2vr1kwDQYJ
-# KoZIhvcNAQEBBQAEggEAkET1fsYy4Sk6I/nce9Xw5XWC7EH2vUIC0QLDS0mw6hGQ
-# FgjyxwU7t7gpaVWNffLKIXI9PrF3Yje98C/8TWmd0sWcfWS5lvPxLwoTSQZgZxhb
-# nvqzgPrfZkJIwaSLpNsag6ZSf+gqrNQi9In4/HStnpj7uDhgHK4heAe6Ye4cHTO8
-# MxRptawZ92DLpv9PZ6kufEjPnRB4FAakQ/7PIMnnXKgGoWD/GxEPKaQhcwgFHf3Z
-# +XZ19iDFq5qc1uZ5uxs3CcnAfDbxlFzf7JpQWAuRjhTN2DYbBaFJvSY/cyKvsWms
-# szTTfFxALccciZfd0Y1vS8UWAiqFFTseGFEurIypEw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUk7UNDMeo6bFCHpkJayeHCtQ3xWIwDQYJ
+# KoZIhvcNAQEBBQAEggEAeWXQOkiwkcmmIRoo3YDqIXiQ3fwo8r5oX5s1nsZ5Pr+4
+# s041aIlPyq4FqXZaTyFJ1u2tTi8uxqNO/0Dy+XzQOclr3fRIazJM30fXA8nGav7R
+# zpfZ4i/+ckRE9ISdoAtowDl8U4DRDoWhPyeMYuZq58yRTIjkuZSZ6UiOXQ31+zZf
+# GAwN69M0joaeSAMcuD43hiq59a2OnySyI0RM5G16omk3TM1qiSzUOmRQJ35LhaBz
+# xCWKySJDgiO9sloguILoJYcUmZuFu/TFfV+5+T2b2JYLDjd5YbZ7cgWzgbbkl7fx
+# mahVWFj5+AUUR70wSLuplnz/3Jkimq97A8rbaYtWfg==
 # SIG # End signature block
