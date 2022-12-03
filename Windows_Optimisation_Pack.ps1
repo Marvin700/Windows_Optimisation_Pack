@@ -193,11 +193,8 @@ Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContin
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
-Start-Process cleanmgr.exe /sagerun:1221 -Wait
 Start-Process cleanmgr.exe /sagerun:65535 -Wait
-
-Cleanmgr /sagerun:65535
-Cleanmgr /sagerun:1221 }
+Start-Process cleanmgr.exe /sagerun:1221 -Wait }
           
 function Runtime{
 winget source update | Out-Null
@@ -513,8 +510,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvhkRYy1MmdZn/CZMoTaa0qzO
-# XNOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU22dpEOcVfzKv0iF303n0Yauk
+# p1igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -534,11 +531,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUA/cjppTSkB9RWMOizRM6NCoz8YswDQYJ
-# KoZIhvcNAQEBBQAEggEAVWKV8tZqZAzb6bRj2+oOtjb73H1Y2D6mJGuzS4V0FeTC
-# 6KNeOHo3iCSBoNOLE6UytH+NQ3vbN1x1y5RVq+rFgBn7kflvOsg8IKk4vn44blUA
-# Jct2bRn6guRNE0HxCHmGr13JBNPdNcgzDPhKj+vl9fYvyysCzqfCS+xY9pc8g6Vi
-# CoOBrkmKE257kskQtW4kb3JgeFD1iGUm6SyOQ2kI68hhH8PxNwemBb20R55aBRwX
-# NGTHaPcdoHRb0SsUFpzytnA9hpIRxh16bxe6G4PwrRdX5bb2c/T+nnPqUCCcKKMe
-# VWqWO9hyx5qHwM1XuFOt1lC7K/FEJwKJJBsB+p8wBA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQULx+ITu0mplEf15j9SDTAoNWEh9AwDQYJ
+# KoZIhvcNAQEBBQAEggEAd9iFxiG4ghC2puV+Y0gCP7qOeEXwiC62jr5H3+as0hkC
+# XxBEZYzzcMfvG0xmhWrBqlSe5XiR5ihdHTnTKM/Pu1ypUdAoURbIYK+NuiScTnyA
+# 8JfwRpiSHJY1A6xVcdcB3ZZTNeATmo8A0ClPDYXE4jYMwadRWdNlxWBWDo5m2/Rc
+# aO5ylBUiHM5T53N7bpaqZqEpzKU0B63LNR2XCpXh58c6WMy/JMC1CTRlnn0dKjFc
+# CxrLoi8uSBuQbhNkLNc4gg3IB0xzeT68gsY/jdSCwdyyf4w6rkMeJoOQDW3yAAMy
+# Z+MfVuZR9QKbdJjVjV31vH3m03PvVE4Xozd7qB3sgA==
 # SIG # End signature block
