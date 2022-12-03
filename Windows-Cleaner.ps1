@@ -17,15 +17,15 @@ Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Forc
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Clear-Host
-Write-Host "Datenträger Bereinigung wird gestartet..."
+Write-Host "Datentraeger Bereinigung wird gestartet..."
 Start-Process cleanmgr.exe /sagerun:1 -Wait
 Write-Warning "The System has been cleaned"
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOB6hZFdq2tjKYriEzoMtgOAt
-# lGCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUU94Aiva06PrLvdaslMdlWiyG
+# 9kqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -45,11 +45,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlxKza5Q/ZMNWvgIfj7dPnEhI42gwDQYJ
-# KoZIhvcNAQEBBQAEggEAny2Ao624BhCixCWIy+8txoBQEyd5AsWFWfoOM/n0YKk3
-# 0skRmIqM7+c4Z5rlwplA3CAn0srgHpVjXMQ9g2B4DNyWIrTkF+FGS5FGJFgr93s6
-# Qg7lbmX7sc5Tbf8x2aTwoDPReMIhn41HaVhMyHur75VgxcdBl56LEYJkIt0tdJVs
-# LVUcEByklDhdNULfWJ1cNTkrTpkt8X58lTm1OgWUe0rKLyaWPSZmgdlQrCxhg+P4
-# pjWLe/2CyQn4ZHnLWOV/hbA78MroqNKHa239/CXTQkEMk54T+hE0Ys52dEOn8Bi/
-# lolfqWcdTlxxCRHGmY5GQgFbG5WOxfuQQ/KZjXNmVQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHA5anDrEHUbDHiXFRjWbGEBT6JEwDQYJ
+# KoZIhvcNAQEBBQAEggEAYSL8/4tpykMXT3vnZrAgIR9fhXvneO/tRT8g483GGzGa
+# 383YETxlvXYiOrykX2dwScdBCFjMgFI2CliBVNdyh7kDIquwP6FBnPxAOlQO0pIJ
+# Crxwak+G70m+U0aLoSvn11t9vrraTud9M9DdWSrp7EbiQ6REHCOk+S06SpA2npoI
+# xNx0O/pyDC+s8ADvi3LGrMYPGNhozaO2t8J1RbDhV1AVWH65xsEOgx93X/or7AQ6
+# ZmMVD3DFSOcZJAququ8xuLXmVRVsPwUYS/A5wODOmmMPWjkTJRE/1QsgpIVJ1m6v
+# S7jKAtGcNomMBNoNfNwq3TKytynPmzBZ0IrVsrlKgg==
 # SIG # End signature block
