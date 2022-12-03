@@ -13,14 +13,15 @@ Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 Dism.exe /Online /Cleanup-Image /spsuperseded
 Dism.exe /online /Cleanup-Image /StartComponentCleanup
 cleanmgr.exe /sagerun:1
+vssadmin delete shadows /all /quiet
 Clear-Host
 Write-Host "The System has been cleaned"
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUV1AlQ1ennhSRLNNB+plJ7/JE
-# 91igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUufq4crI6wLVuRILwQPeZG8rr
+# o0CgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -40,11 +41,11 @@ Write-Host "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUk7UNDMeo6bFCHpkJayeHCtQ3xWIwDQYJ
-# KoZIhvcNAQEBBQAEggEAeWXQOkiwkcmmIRoo3YDqIXiQ3fwo8r5oX5s1nsZ5Pr+4
-# s041aIlPyq4FqXZaTyFJ1u2tTi8uxqNO/0Dy+XzQOclr3fRIazJM30fXA8nGav7R
-# zpfZ4i/+ckRE9ISdoAtowDl8U4DRDoWhPyeMYuZq58yRTIjkuZSZ6UiOXQ31+zZf
-# GAwN69M0joaeSAMcuD43hiq59a2OnySyI0RM5G16omk3TM1qiSzUOmRQJ35LhaBz
-# xCWKySJDgiO9sloguILoJYcUmZuFu/TFfV+5+T2b2JYLDjd5YbZ7cgWzgbbkl7fx
-# mahVWFj5+AUUR70wSLuplnz/3Jkimq97A8rbaYtWfg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU3QSMl6462b6W1FNybUKwYVf1zt8wDQYJ
+# KoZIhvcNAQEBBQAEggEALrkRE8Xwzt4pe29J8f6G8PcagNhUEKJzOD1g2LNR+8r5
+# sUw0dPiTj4qpl1p8DLQ9sftIG//VKcpTNQP99ezbroVVDvfLs6uAdYiszfLQo9CR
+# YQsNPFDiVgwrdrM4LaWrs/zmOa1skXGqLN1gIb0Ip8wf9BqOgac+VRO+a+0w4gtq
+# OUb1Td9v2iMF5cu6KNXmdxlj//YiApUcTnjiaqxYNA+ub68dBV0vMXMup3NFGjQR
+# OAL7B8PHiASreH++kXBwjOg7zf2D1f6hqVEeo2P/rF5b6wW5EmZiOhXG4xPA6VnQ
+# TNZAhv4449hdjBSmEtzAy1PRUEmmnr483QhVarGP3w==
 # SIG # End signature block
