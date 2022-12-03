@@ -4,14 +4,14 @@ ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
+Dism.exe /Online /Cleanup-Image /spsuperseded
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
+Clear-BCCache -Force -ErrorAction SilentlyContinue
 Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Clear-BCCache -Force -ErrorAction SilentlyContinue
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
-Dism.exe /Online /Cleanup-Image /spsuperseded
-Dism.exe /online /Cleanup-Image /StartComponentCleanup
 cleanmgr.exe /sagerun:1
 vssadmin delete shadows /all /quiet
 Clear-Host
@@ -20,8 +20,8 @@ Write-Host "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUufq4crI6wLVuRILwQPeZG8rr
-# o0CgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUC+acs+EPWE3WX2A8XXFeSM1a
+# /IygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -41,11 +41,11 @@ Write-Host "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU3QSMl6462b6W1FNybUKwYVf1zt8wDQYJ
-# KoZIhvcNAQEBBQAEggEALrkRE8Xwzt4pe29J8f6G8PcagNhUEKJzOD1g2LNR+8r5
-# sUw0dPiTj4qpl1p8DLQ9sftIG//VKcpTNQP99ezbroVVDvfLs6uAdYiszfLQo9CR
-# YQsNPFDiVgwrdrM4LaWrs/zmOa1skXGqLN1gIb0Ip8wf9BqOgac+VRO+a+0w4gtq
-# OUb1Td9v2iMF5cu6KNXmdxlj//YiApUcTnjiaqxYNA+ub68dBV0vMXMup3NFGjQR
-# OAL7B8PHiASreH++kXBwjOg7zf2D1f6hqVEeo2P/rF5b6wW5EmZiOhXG4xPA6VnQ
-# TNZAhv4449hdjBSmEtzAy1PRUEmmnr483QhVarGP3w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7PGX5Q6wEId6O5y2EF8V2/c+ajEwDQYJ
+# KoZIhvcNAQEBBQAEggEATz8beCkJzZlEvamHAe7erb1dDo866Crdk0UNeiwr7k5b
+# NgbuDIc5ZO0+SJFgyHI9IsHEPFmXbAAuvU3Oy1SiqLj0n9Kp6mCJQdd6ry4+6PN7
+# Yi5LnuSzPTkoMz5gxN8xlCVa+GXPLp8EvN7CzZh2KdwbadWpdoZrI+CchPFOHKb5
+# qV8prj8BowBsRFguHGAjF6EqCh/XO/SunqfYTWRupW9ccBnz5WLBZFVQU2T7UfM7
+# 72DbfGXNIViwvi9w5N2o7KCd/Ji8BRfJ+I2PDiPeLFwTMCWrF2x5NwJQqeN3JxlF
+# TrbpX6OLl3iiZbMCUyTn8bomTHwiD3H4EEMHPCAcOg==
 # SIG # End signature block
