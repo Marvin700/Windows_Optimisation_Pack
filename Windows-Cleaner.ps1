@@ -12,17 +12,17 @@ Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Re
 Get-ChildItem -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Clear-Host
 Start-Process cleanmgr.exe /sagerun:1 -Wait
 vssadmin delete shadows /all /quiet
-Clear-Host
 Write-Host "The System has been cleaned"
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUimL8bvPDFm5hrtuqbMpOuyEK
-# Ub6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDe1BLj5Du07xjxVoD0/emQmC
+# Jb2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -42,11 +42,11 @@ Write-Host "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUPGM+WLS+FoYJsdSAwpIyoQjF34kwDQYJ
-# KoZIhvcNAQEBBQAEggEAChRq3WlEvRy9Jih6eyvr0qCHgqoU6+80PJwzDOyIgrux
-# r9Ftfo/ius8i6dMrFFWsUZrqPFp85RnctUMfh2vkMhy7/Kn7dRarZJFFyJcduzGm
-# WQefdaONqKOuFGjAEEjlnT55jujKhAuTds1o+RXIkrJJ8xM8Mfxwym8EZB/gvYz8
-# fEXNooPO0IDp8Hq3gcBtG76wCAvXgF0mjP6QEuhdI5gMgyNS6N86agTrqMaMZ/iE
-# 2tsQzoesCZ0VmEdrsg7XDkmWJYV5/LXrvoy2vBzXPDxTydU7/03KkCNPVZuTi8VL
-# QW7twD4ZlKs2Co95RjQQ6ppvzkQrwXh5ctMTqcVjBA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb70SU+m0VR4YHfk/SdLgK5ta9N8wDQYJ
+# KoZIhvcNAQEBBQAEggEAlUqIsSN97qNyK6K8/6/PwsJHaYIw6ejc6V+ekNFLnm2P
+# 71vLoC6ikONWymLX5xh8YPf+WA80SyqAMM9+22U/3eVSpvSafNvxPn4KAilwVgUx
+# xssW64+35J/mTvMqiPnHGuDeIv32pHD0HTFJdaD3BcBrz/hJFQvAN0z3wHmy9CWf
+# 01ci+MtvhpcxRtpdpI9XKyWfCUWeANSzTw8IDVTjjWEfCa+GmwIv1dZjiPQVES9d
+# HOhhRofaprS2KaynBuDvPbky7QZrWRK2tKkMi5K69U8/Y3yjWmkjeeJp8zT8TsS/
+# 26Lj7OXksoOVuobuWsBZgtXBVtvHCFijSbOLgWaV+Q==
 # SIG # End signature block
