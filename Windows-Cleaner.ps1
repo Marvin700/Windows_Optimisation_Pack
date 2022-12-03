@@ -1,6 +1,6 @@
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Cleaner | $([char]0x00A9) Marvin700"
-vssadmin delete shadows /all /quiet
-Checkpoint-Computer -Description "Windows_Optimisation_Pack Cleaner" -RestorePointType MODIFY_SETTINGS
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Cleaner | $([char]0x00A9) Marvin700" 
+vssadmin delete shadows /all /quiet | Out-Null
+Checkpoint-Computer -Description "Windows_Optimisation_Pack Cleaner" -RestorePointType MODIFY_SETTINGS 
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
@@ -10,21 +10,20 @@ Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 Dism.exe /Online /Cleanup-Image /spsuperseded
 Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
+Start-Process cleanmgr.exe /sagerun:1 -Wait
 Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Clear-Host
-Start-Process cleanmgr.exe /sagerun:1 -Wait
-
 Write-Host "The System has been cleaned"
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXKT4gTNCWO2h+m0cba7AOU+B
-# 5V6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUex0qVzOO/pFiFo4t9Fc5CqWf
+# roegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -44,11 +43,11 @@ Write-Host "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU1NZRiNoRv6ekNNep/guqfNgjwKIwDQYJ
-# KoZIhvcNAQEBBQAEggEAuQ1f29jF3N/pqdu4Et0jBEHlW7mICwqtrbhRnCxHB61M
-# sn7aH33H+RZk+ma2Z2gQ17uGyYPAMXCFYfXr8MUpvKSP9DTb806IQ3sMXwQdled6
-# hVDP3P9MVJZYFLdabgCGh1zCLTjg6pEFr9JON4NYUsWSo+eyTi6dbpdrO6JezLu4
-# zZuhNbY19HHbyZ1meB0HLfRwRpty0NDuFvv4U11ZL5EMf9lKunzHDNT/wj6m9VIH
-# D/uPJ/RIo39MdtnQEca6u6D4R6mCyfVQbT2gOsP4Xf6KgGkARRr8OkBWi/I2R9AY
-# /o8ipWzjdE4lbclZ/5tpGHMuhFBkHR65PI4bELdNYQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/GN81gQiMzN1K9JT2hAg/0HlRF0wDQYJ
+# KoZIhvcNAQEBBQAEggEACBxvB4f+lZpXZbW0Q1l8n4TYBdadPjYlJu5h6pdYtLs4
+# G0DyPQfgHhdmgXrw0JqMaUnvp7kAleSq/jdoHmNmJhS2yu0G08AP7YLKakyxvyKu
+# NZ3/Tu7hutSkvFUr627kLhIp5pzStwSoCaxE8+DV0Dp1tzkgvCw/KY1qU8OgGmfr
+# cTIRVpdv06BFnxya05PLFb70Uad/IQUFn1B14Rxp0k44GF30rOpKMx+VcZ+oWe+2
+# N9ah2ZwcYHtEARgLu30vjvWPkY6EvO48Lw5n8qZXIwwXOwX+Pr+k4aG/E9V9B/3f
+# RA5SEnDC2PrYbtWvJAhxh7ghhBR+9GCeHVUFMaUNuQ==
 # SIG # End signature block
