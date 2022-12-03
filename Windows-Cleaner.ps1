@@ -10,20 +10,22 @@ Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 Dism.exe /Online /Cleanup-Image /spsuperseded
 Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-Start-Process cleanmgr.exe /sagerun:1 -Wait
-Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Clear-Host
-Write-Host "The System has been cleaned"
+Write-Host "Datenträger Bereinigung wird gestartet..."
+Start-Process cleanmgr.exe /sagerun:1 -Wait
+Write-Warning "The System has been cleaned"
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUex0qVzOO/pFiFo4t9Fc5CqWf
-# roegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOB6hZFdq2tjKYriEzoMtgOAt
+# lGCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -43,11 +45,11 @@ Write-Host "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/GN81gQiMzN1K9JT2hAg/0HlRF0wDQYJ
-# KoZIhvcNAQEBBQAEggEACBxvB4f+lZpXZbW0Q1l8n4TYBdadPjYlJu5h6pdYtLs4
-# G0DyPQfgHhdmgXrw0JqMaUnvp7kAleSq/jdoHmNmJhS2yu0G08AP7YLKakyxvyKu
-# NZ3/Tu7hutSkvFUr627kLhIp5pzStwSoCaxE8+DV0Dp1tzkgvCw/KY1qU8OgGmfr
-# cTIRVpdv06BFnxya05PLFb70Uad/IQUFn1B14Rxp0k44GF30rOpKMx+VcZ+oWe+2
-# N9ah2ZwcYHtEARgLu30vjvWPkY6EvO48Lw5n8qZXIwwXOwX+Pr+k4aG/E9V9B/3f
-# RA5SEnDC2PrYbtWvJAhxh7ghhBR+9GCeHVUFMaUNuQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlxKza5Q/ZMNWvgIfj7dPnEhI42gwDQYJ
+# KoZIhvcNAQEBBQAEggEAny2Ao624BhCixCWIy+8txoBQEyd5AsWFWfoOM/n0YKk3
+# 0skRmIqM7+c4Z5rlwplA3CAn0srgHpVjXMQ9g2B4DNyWIrTkF+FGS5FGJFgr93s6
+# Qg7lbmX7sc5Tbf8x2aTwoDPReMIhn41HaVhMyHur75VgxcdBl56LEYJkIt0tdJVs
+# LVUcEByklDhdNULfWJ1cNTkrTpkt8X58lTm1OgWUe0rKLyaWPSZmgdlQrCxhg+P4
+# pjWLe/2CyQn4ZHnLWOV/hbA78MroqNKHa239/CXTQkEMk54T+hE0Ys52dEOn8Bi/
+# lolfqWcdTlxxCRHGmY5GQgFbG5WOxfuQQ/KZjXNmVQ==
 # SIG # End signature block
