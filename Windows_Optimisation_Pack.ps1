@@ -193,6 +193,9 @@ Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContin
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 lodctr /r
 lodctr /r
+Start-Process cleanmgr.exe /sagerun:1221 -Wait
+Start-Process cleanmgr.exe /sagerun:65535 -Wait
+
 Cleanmgr /sagerun:65535
 Cleanmgr /sagerun:1221 }
           
@@ -276,8 +279,7 @@ if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}
 if ($BOX_AutoActions.Checked)               {$hash.AutoActions = $true}
 if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
 if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
-if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true}
-if ($BOX_Reboot.Checked -and $BOX_WindowsCleanup.Checked) {$hash.Reboot = $false} $Form.Close()}
+if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
@@ -511,8 +513,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgCM1CFj+3DdTLscBdDWVgVJ/
-# I6ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvhkRYy1MmdZn/CZMoTaa0qzO
+# XNOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -532,11 +534,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQULY4Zpbh8DfOMOFLdrop0k0yVJCYwDQYJ
-# KoZIhvcNAQEBBQAEggEAXE0cFSl34+c5+eLntWufSuFmH/yhp4t3FaQ+MoNNnKch
-# 8ymRAWbBE56iPB4whu0mdEQFXS/amLtcoIH2W6FjMF1Q8uSuaHBfBpm8QxocUOff
-# i9nfEkEnP/GG/dxdPkOBKfk4rnwrVjpnvHLcy72mFP56VgDe24tHhEEpC/G+gbGn
-# XGMwJuh3gbOcpqFgaET52UY/s/tbkBSP3LxkKLgkSrtDvN0kUS2Lrh6X3xDLWTDE
-# 7Mog3wdGnmz87la/3ta9XWVoFcaOx67WvY37ptvY2MdRlkxa2l6ba/05pcDtuD3z
-# GKT6AfihL19wKnj8ewMW3oXz1OyCT29fcN1brsL9+w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUA/cjppTSkB9RWMOizRM6NCoz8YswDQYJ
+# KoZIhvcNAQEBBQAEggEAVWKV8tZqZAzb6bRj2+oOtjb73H1Y2D6mJGuzS4V0FeTC
+# 6KNeOHo3iCSBoNOLE6UytH+NQ3vbN1x1y5RVq+rFgBn7kflvOsg8IKk4vn44blUA
+# Jct2bRn6guRNE0HxCHmGr13JBNPdNcgzDPhKj+vl9fYvyysCzqfCS+xY9pc8g6Vi
+# CoOBrkmKE257kskQtW4kb3JgeFD1iGUm6SyOQ2kI68hhH8PxNwemBb20R55aBRwX
+# NGTHaPcdoHRb0SsUFpzytnA9hpIRxh16bxe6G4PwrRdX5bb2c/T+nnPqUCCcKKMe
+# VWqWO9hyx5qHwM1XuFOt1lC7K/FEJwKJJBsB+p8wBA==
 # SIG # End signature block
