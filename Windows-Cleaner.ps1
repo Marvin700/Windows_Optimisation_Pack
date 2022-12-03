@@ -16,6 +16,8 @@ Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyCo
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Clear-Host
 Write-Host "Datentraeger Bereinigung wird gestartet..."
 Start-Process cleanmgr.exe /sagerun:1 -Wait
@@ -24,8 +26,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUU94Aiva06PrLvdaslMdlWiyG
-# 9kqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQZbWgGoO4cayhtqF1RgiJiJU
+# 5D2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -45,11 +47,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHA5anDrEHUbDHiXFRjWbGEBT6JEwDQYJ
-# KoZIhvcNAQEBBQAEggEAYSL8/4tpykMXT3vnZrAgIR9fhXvneO/tRT8g483GGzGa
-# 383YETxlvXYiOrykX2dwScdBCFjMgFI2CliBVNdyh7kDIquwP6FBnPxAOlQO0pIJ
-# Crxwak+G70m+U0aLoSvn11t9vrraTud9M9DdWSrp7EbiQ6REHCOk+S06SpA2npoI
-# xNx0O/pyDC+s8ADvi3LGrMYPGNhozaO2t8J1RbDhV1AVWH65xsEOgx93X/or7AQ6
-# ZmMVD3DFSOcZJAququ8xuLXmVRVsPwUYS/A5wODOmmMPWjkTJRE/1QsgpIVJ1m6v
-# S7jKAtGcNomMBNoNfNwq3TKytynPmzBZ0IrVsrlKgg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUoAUZlNfMROT0QvEgth2/yeGfpXgwDQYJ
+# KoZIhvcNAQEBBQAEggEAg2XWPHvQ5/oFKW7lA+sQsXfNy02h1HKgfQ54ouTPIPGV
+# 5Ox35bj5QFqd1z0ObBY8oqphWvkW80hVuhKNne0iLZAXwUSuacMfVwa7sOoCeLGx
+# y7KUFX8jxs2YCnosho1itoxjRVo0wA7pL7xfAEVRBSzACdkuEkYDXZXjOZrgyMi2
+# BIMSsznSX/6CQo/7aCnkPpaE/xSh2+Gpg4/MfkmBU8td6LclyvHB7lXimHKIU9id
+# p2lJ3mQSya2ug6628v/CavJ4vFHHCpmm6SFsAKXZFh6N2nNyy2HQpdsIM91NcH2i
+# uPLtEdQT58/80CteMO2l1tmh271shWxJLIOsvH8Lsg==
 # SIG # End signature block
