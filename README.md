@@ -16,7 +16,8 @@
 * More Windows Tweaks
 * Take Ownership
 
-## Download
+
+## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
 iex (irm windows-optimisation.de)
@@ -27,14 +28,23 @@ iex (irm windows-optimisation.de)
 > **Note**: <BR> 
 Please update the fresh Windows installation first. <BR>
 
-
-<body background="https://user-images.githubusercontent.com/98750428/202020525-83b8b79d-f623-49a0-b053-7e19653e2975.png" bgproperties=fixed>
   
 ## Screenshots
 <div>
     <img src="https://user-images.githubusercontent.com/98750428/200678853-363ec142-b0ab-4623-97cb-077bff29ca9d.png" width="410" height="340">
     <img src="https://user-images.githubusercontent.com/98750428/203978712-a4273aa4-9402-4dbb-a40f-ff2c508d4935.jpg" width="410" height="340">
 </div>
+
+## Windows-Cleaner
+  ```powershell
+iex (irm windows-optimisation.de/cleaner)
+  ```
+* Creates a new system point and deletes all others
+* Customize and run Disk Cleanup
+* Cleanup Windows Image with DISM
+* Cleanup different Windows Cache FIles
+* Deactivate unnecessary Windows Components
+* Clear Shader Cache for AMD and Nvidia
 
 ## GUI
 <img src="https://user-images.githubusercontent.com/98750428/204111653-663e20f7-0f67-4b2b-9a50-76e65a5d4d20.jpg">
