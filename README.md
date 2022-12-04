@@ -43,7 +43,6 @@ iex (irm windows-optimisation.de/cleaner)
 * Customize and run Disk Cleanup
 * Cleanup Windows Image with DISM
 * Cleanup different Windows Cache FIles
-* Deactivate unnecessary Windows Components
 * Clear Shader Cache for AMD and Nvidia
 
 ## GUI
