@@ -198,11 +198,11 @@ Start-Process cleanmgr.exe /sagerun:1221 -Wait }
           
 function Runtime{
 winget source update | Out-Null
-winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements | Out-Null
+winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
 IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931")){winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.11 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.0 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements | Out-Null}
+winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function Fan_Control{
 Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V137/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
@@ -510,8 +510,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU22dpEOcVfzKv0iF303n0Yauk
-# p1igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyYBrSpryii6sFgO9M1PgsEAu
+# skigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -531,11 +531,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQULx+ITu0mplEf15j9SDTAoNWEh9AwDQYJ
-# KoZIhvcNAQEBBQAEggEAd9iFxiG4ghC2puV+Y0gCP7qOeEXwiC62jr5H3+as0hkC
-# XxBEZYzzcMfvG0xmhWrBqlSe5XiR5ihdHTnTKM/Pu1ypUdAoURbIYK+NuiScTnyA
-# 8JfwRpiSHJY1A6xVcdcB3ZZTNeATmo8A0ClPDYXE4jYMwadRWdNlxWBWDo5m2/Rc
-# aO5ylBUiHM5T53N7bpaqZqEpzKU0B63LNR2XCpXh58c6WMy/JMC1CTRlnn0dKjFc
-# CxrLoi8uSBuQbhNkLNc4gg3IB0xzeT68gsY/jdSCwdyyf4w6rkMeJoOQDW3yAAMy
-# Z+MfVuZR9QKbdJjVjV31vH3m03PvVE4Xozd7qB3sgA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUcVepHKaUFhZ/gw/fpM6LY71auCwwDQYJ
+# KoZIhvcNAQEBBQAEggEAQPFANpHkM8D+dYd+yyPukM2niEmwriAuIHoUtyLzdpHT
+# Gq/+8oVEcOSWL/z+RbzQAYuKW3nsB7f3QPdgfQ1loifDqgB+RW4HyiLQpCQpTVzV
+# XkJKBzJwnKLyW6mNZW9fQEFACm7VKNKC9WQWzV/agUXfJmK7iHhA1Zmat19tnqUZ
+# 1yDqh6vIO5f0BqgMBQHNjeEy5Nk1CffRWdRSFxDyevyomKpEOheZDQpEcKONAsmL
+# Byn+Zh3u5zTtjsmDTEg+Ua1gM2uGYdEKX0GgoEXSYd9cSyvDT4TtrSh+ZP+WQzjM
+# SRDeMDfU98S72r5B0e/hY1FFSxk9a2NYydUAWH5bKA==
 # SIG # End signature block
