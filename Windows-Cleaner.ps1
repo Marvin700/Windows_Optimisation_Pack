@@ -16,6 +16,7 @@ Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyCo
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
@@ -27,8 +28,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQZbWgGoO4cayhtqF1RgiJiJU
-# 5D2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvRbsZqB+rN2YMgUFyAWeRQnV
+# Gm2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -48,11 +49,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUoAUZlNfMROT0QvEgth2/yeGfpXgwDQYJ
-# KoZIhvcNAQEBBQAEggEAg2XWPHvQ5/oFKW7lA+sQsXfNy02h1HKgfQ54ouTPIPGV
-# 5Ox35bj5QFqd1z0ObBY8oqphWvkW80hVuhKNne0iLZAXwUSuacMfVwa7sOoCeLGx
-# y7KUFX8jxs2YCnosho1itoxjRVo0wA7pL7xfAEVRBSzACdkuEkYDXZXjOZrgyMi2
-# BIMSsznSX/6CQo/7aCnkPpaE/xSh2+Gpg4/MfkmBU8td6LclyvHB7lXimHKIU9id
-# p2lJ3mQSya2ug6628v/CavJ4vFHHCpmm6SFsAKXZFh6N2nNyy2HQpdsIM91NcH2i
-# uPLtEdQT58/80CteMO2l1tmh271shWxJLIOsvH8Lsg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU39Og5ETyONA9vxyIwabOAmsVanswDQYJ
+# KoZIhvcNAQEBBQAEggEAKWSKBL6XqPAt3o0y61Xr2SuYf/X7cL1ZPOaBNJZk4Um0
+# WGPNApvuEeI2kNnmQ7RMwR42dBKT51kG3tPdlTU1iZQYbQIGrh8NZhpDFGSipeqX
+# +Kh10LvC2yH9wwxF5WlGB/BV9R0nKYeBgmzO42qa9H5LyazKjt/1AZYMjxWgNy5S
+# GxtFgQ1Dr9oSFhjeoDKffl/geaXVWQrGoyJl7xC12WtgizA5lNX2l3w+c+B5Tro9
+# tgwDgY5Pw5+WNq77NWVFHIcP7Itcpd25pI1ltsW2iuLPeN8HFo/CzrEv+oNdY7Dy
+# JZ7DsWFsxe+R3Jg8s/sq0zMPEPuHAN3COXIYfjC4QQ==
 # SIG # End signature block
