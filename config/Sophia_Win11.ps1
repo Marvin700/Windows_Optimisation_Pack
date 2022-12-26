@@ -1,8 +1,8 @@
 <#
-	Version: v6.2.3
+	Version: v6.2.5
 
-	Copyright (c) 2014—2022 farag
-	Copyright (c) 2019—2022 farag & Inestic
+	Copyright (c) 2014—2023 farag
+	Copyright (c) 2019—2023 farag & Inestic
 
 	https://github.com/farag2
 	https://github.com/Inestic
