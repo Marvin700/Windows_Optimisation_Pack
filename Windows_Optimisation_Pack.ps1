@@ -66,6 +66,9 @@ Set-Service "WerSvc" -StartupType Disabled
 Set-Service "wercplsupport" -StartupType Disabled }
 
 function WindowsTweaks_Registry{
+#GPU MPO FIx for Flickering
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value "00000005" -Force
+OverlayTestMode
 # MarkC Mouse Acceleration Fix
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseXCurve" ([byte[]](0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0xCC, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -139,12 +142,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.3/Sophia.Script.for.Windows.11.v6.2.3.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.5/Sophia.Script.for.Windows.11.v6.2.5.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.3/Sophia.Script.for.Windows.10.v5.14.3.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.5/Sophia.Script.for.Windows.10.v5.14.5.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
@@ -186,15 +189,28 @@ Start-Process $env:temp\Autoruns64.exe }
 function WindowsCleanup{
 Clear-Host
 gpupdate.exe /force 
-Get-ChildItem -Path $ENV:userprofile\AppData\Local\Temp *.* -Recurse | Remove-Item -Force -Recurse
-Get-ChildItem -Path $env:windir\Prefetch *.* -Recurse | Remove-Item -Force -Recurse 
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo\* -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Remove-Item -Path $env:windir\Temp\* -Recurse -Force -ErrorAction SilentlyContinue
+$Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
+ForEach($result in $Key)
+{If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
+$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
+New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
+Dism.exe /Online /Cleanup-Image /spsuperseded
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
+Get-ChildItem -Path $env:temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 lodctr /r
 lodctr /r
-Start-Process cleanmgr.exe /sagerun:65535 -Wait
-Start-Process cleanmgr.exe /sagerun:1221 -Wait }
+Start-Process cleanmgr.exe /sagerun:1 -Wait }
           
 function Runtime{
 winget source update | Out-Null
@@ -205,7 +221,7 @@ IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.0 (x6
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function Fan_Control{
-Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V137/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
+Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V140/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
 Expand-Archive $env:temp\FanControl.zip "C:\Program Files\FanControl" -force
 Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -223,7 +239,7 @@ $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save() }
     
 function Controller{
-Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.10/DS4Windows_3.1.10_x64.zip" -Destination "$env:temp\DS4Windows.zip "
+Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.1.12/DS4Windows_3.1.12_x64.zip" -Destination "$env:temp\DS4Windows.zip "
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -510,8 +526,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyYBrSpryii6sFgO9M1PgsEAu
-# skigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULTMfmWswrPXCKt7t2M/YHJWA
+# sgugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -531,11 +547,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUcVepHKaUFhZ/gw/fpM6LY71auCwwDQYJ
-# KoZIhvcNAQEBBQAEggEAQPFANpHkM8D+dYd+yyPukM2niEmwriAuIHoUtyLzdpHT
-# Gq/+8oVEcOSWL/z+RbzQAYuKW3nsB7f3QPdgfQ1loifDqgB+RW4HyiLQpCQpTVzV
-# XkJKBzJwnKLyW6mNZW9fQEFACm7VKNKC9WQWzV/agUXfJmK7iHhA1Zmat19tnqUZ
-# 1yDqh6vIO5f0BqgMBQHNjeEy5Nk1CffRWdRSFxDyevyomKpEOheZDQpEcKONAsmL
-# Byn+Zh3u5zTtjsmDTEg+Ua1gM2uGYdEKX0GgoEXSYd9cSyvDT4TtrSh+ZP+WQzjM
-# SRDeMDfU98S72r5B0e/hY1FFSxk9a2NYydUAWH5bKA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUOcnyGYKltzny4SYK6sUCPts1l1IwDQYJ
+# KoZIhvcNAQEBBQAEggEAGbEVuMAYEPrJfxqypKIvWa6CSSxFW5hh3mUDZDVt/dyo
+# xOn9LEZlYHrVXCKxPAJOAH3O4hICeF8fJ0J1FMOBM5+L0wGrpcXw1HV6FMWd8NT3
+# Y3eRS5wsVzSlJ93w9Tuyma6vUHtOSns+VpUFD0ox1fisEh9QlgB9tn5KomF5/GFY
+# nE2Llpe93gKjOg29Yo/5EqfXYvvxTxxCkpaGnAYWeJq+nNMv/H/b4xq754VfnoTp
+# Z+AFVGn9lL7vMQ4oeCj+3HkUs/v2BQ8pxVGyCPCqMzBIV7jBo3CIB6x9rEamkIcb
+# LGsLiigTQVYtYdXiAD2KJRv1UzXDw0ADPMyFAEx5bw==
 # SIG # End signature block
