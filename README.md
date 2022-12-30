@@ -40,6 +40,7 @@ Please update the fresh Windows installation first. <BR>
 iex (irm windows-optimisation.de/cleaner)
   ```
 * Creates a new system point and deletes all others
+* Check System Files
 * Customize and run Disk Cleanup
 * Cleanup Windows Image with DISM
 * Cleanup different Windows Cache FIles
