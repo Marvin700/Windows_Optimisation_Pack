@@ -6,6 +6,7 @@ ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+sfc /SCANNOW
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 Dism.exe /Online /Cleanup-Image /spsuperseded
 Dism.exe /online /Cleanup-Image /StartComponentCleanup
