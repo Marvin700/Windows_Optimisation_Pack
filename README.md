@@ -46,6 +46,12 @@ iex (irm windows-optimisation.de/cleaner)
 * Cleanup different Windows Cache FIles
 * Clear GPU Shader Cache
 
+## Driver-Cleaner
+  ```powershell
+iex (irm windows-optimisation.de/gpucleaner)
+  ```
+* Clean uninstall of GPU Driver
+
 ## GUI
 <img src="https://user-images.githubusercontent.com/98750428/204111653-663e20f7-0f67-4b2b-9a50-76e65a5d4d20.jpg">
 
