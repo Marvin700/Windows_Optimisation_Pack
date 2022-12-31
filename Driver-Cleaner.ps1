@@ -3,11 +3,14 @@ Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pa
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
+Write-Warning "Please Wait..."
+Write-Warning "The Driver Removal takes up to 10 Minutes"
+
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7LIjHgih+to5wBrjdZ2eoDPG
-# QkqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUq3rtFfgLLrJonoAHgAN5aAlQ
+# Bw+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -27,11 +30,11 @@ Set-Location $env:temp\DDU\
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUi+0GstLQOxJaMZEsgitPQRYqPP0wDQYJ
-# KoZIhvcNAQEBBQAEggEACpSmOB1DR6/1ZDxQpHd4cbX+Czbfg7HXgMHdbTVuipsA
-# XrUPazMKH2Cr9jGbTBWq7lFwprBZlLJDmCJvXth3U/5rI54b3ZboMkfKSgR1Kmrg
-# uyL6AxPdSPwhwqbGz+zH4Aj0nDLQFuM9NSrhBn8OCslpPxfUKo3a56kdLUh62LR/
-# 0NM54/pGJeFvXgJEdPl3MzCF6VwWZVPK3BrUHyxcZw8Wf1LPBoC6zcgrQi/g4wrC
-# 70SeYCFa5tXc1+ORuwctOHt6h7WQF1Gj6yJPokwAPByqx7n9a7iUZMDL873GciGz
-# H2SUiBCTWOHU6CzPtdyS/VIlTI5xq5Jao0uI1ZFvCg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUjZIP7FLctevXKFqcJ/LKV7IjDUQwDQYJ
+# KoZIhvcNAQEBBQAEggEAwEfq1vN4qkoanMCu1j0077k2rW0U1u5TwUntPrNIrQ2w
+# pnhXqKCbIeUql7E8SqRCXntsyI6t7Rz6ZlFufWhDfb5d96EWVU8rwoBG+ESNsxkW
+# n0Z02P7enQ1bwzF6K4TpXrQfvzn1OOvLBmUljrV4/A2jTuFidAFJpBReMNFFiVgK
+# 2mA2+sGsR1pU0eFNl+8ox+Bs9mNf+xJos+QQlSPk03rgrRukjyw/HYVEZZKaMq3D
+# jyGMh71ok04NA1TLV78Edeqyc1EueTRzNnfnhmtK1lqd73rKnJmpt0d0t/lDtbHD
+# 4/QU3wT3U6b87PWi5bHC45fALQC4sa9FlgpzsDdcwQ==
 # SIG # End signature block
