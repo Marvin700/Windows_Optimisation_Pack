@@ -1,6 +1,3 @@
 Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/DDU.zip" -Destination $env:temp\DDU.zip
 Expand-Archive $env:temp\DDU.zip $env:temp
-bcdedit /set {default} safeboot minimal
-Restart-Computer
-bcdedit /deletevalue {default} safeboot
-$env:temp\"Display Driver Uninstaller.exe" -cleancomplete -CleanNvidia -CleanAmd -CleanIntel -RemovePhysx -RemoveGFE -RemoveNVBROADCAST -RemoveNVCP -RemoveINTELCP -RemoveAMDCP -Restart 
+$env:temp\"Display Driver Uninstaller.exe" -nosafemodemsg -cleancomplete -CleanNvidia -CleanAmd -CleanIntel -RemovePhysx -RemoveGFE -RemoveNVBROADCAST -RemoveNVCP -RemoveINTELCP -RemoveAMDCP -Restart 
