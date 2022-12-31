@@ -48,7 +48,7 @@ iex (irm windows-optimisation.de/cleaner)
 
 ## Driver-Cleaner
   ```powershell
-iex (irm windows-optimisation.de/gpucleaner)
+iex (irm windows-optimisation.de/drivercleaner)
   ```
 * Clean uninstall of GPU Driver
 
