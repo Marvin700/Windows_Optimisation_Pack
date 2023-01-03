@@ -9,8 +9,7 @@
 * Deactivate unnecessary Windows Components
 * Deactivate Windows Indexing 
 * Install Runtime Components
-* Mouse acceleration fix
-* GPU Flickering Fix
+* Mouse acceleration and GPU Flickering
 * Sophia Script & O&OShutUp
 * GUI for enable / disable functions
 * Deactivate Insider Builds 
