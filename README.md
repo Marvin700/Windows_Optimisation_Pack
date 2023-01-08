@@ -4,7 +4,7 @@
 * Remove Windows Bloatware 
 * Disable Windows Spying
 * Lower CPU and Ram usage
-* Deactivate Cortana
+* Deactivate Cortana and OneDrive
 * Clean Tasks and Autostart
 * Deactivate unnecessary Windows Components
 * Deactivate Windows Indexing 
