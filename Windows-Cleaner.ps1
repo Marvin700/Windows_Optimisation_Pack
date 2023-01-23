@@ -21,6 +21,8 @@ Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyCon
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path C:\Spiele\Escape from Tarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Clear-Host
 Write-Host "Datentraeger Bereinigung wird gestartet..."
 Start-Process cleanmgr.exe /sagerun:1 -Wait
@@ -29,8 +31,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULn43MACmejbU2UtWHVQeZHp4
-# lAmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqo/mEErY/6q90usxEZ/sDo1W
+# XWWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -50,11 +52,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUS2hkvuyj///+iCLYfpFZZyFCdQEwDQYJ
-# KoZIhvcNAQEBBQAEggEApXYiauLwtwymkgWmPLYCImHQfKMfkDQ1PyLeUj32lV0z
-# 9FN+PI9D/cUY+hjyL4si3YNnJHMeEOvixCDJsdTybVEnLS8nKS8HKkZi8bYCKjSq
-# VqMgAZsGxXW4+9CwFNd756ZRFaqxYjxbaLt/qFsL8lGZwe6Vz9kIdH4lUkFpc3Yp
-# K0GtiBuESb1xcXLTy1XH5lxJCI1xqT2Vq97ARZxToSBSMJHEMlkSVH0qH0NPP9rH
-# iWJnD47cWE9/zRJo1rk+0Y6GIouTWDzsqdcW1FhTU3jzg91fJPu9Z+/DPYSw1wVZ
-# WhVI5S3Z3jx2OIijIixNWvE3GcQT7PNydYGFM3oeMQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUIIaNKwAfP0Zb59MCPVszzN1qfmswDQYJ
+# KoZIhvcNAQEBBQAEggEAtPlB2NBLncHYu7Sz/V5yAKMbgJz5+krRBknJxTLXTyT0
+# ymv2FiYSg5efKNL5m1w+lQUCbm4z8XQF18/OK9UwM4L8XzdwVYjAjhHSAJMA569F
+# X2ETZz2LgEPw/+zzoNz4hUu//9UoOeUwW4izOm/wvRts9n52PEnaKZ34BB2lKKOK
+# 3nhPF1XhvfzI9jYuoy7/zrskn+bY9cC/43DNQ5rCy0Czqajidh0NXlyscxD/Z6yV
+# fMsg+xXY0uGc2EJVU350VVB0ObzKqnI0gu9yVxwXRk1sUr4I636ikXfYb8DFgkFj
+# iDWMBtGH532yXerl4RPGG/MLMdwt4xIIOtJvPHVy6Q==
 # SIG # End signature block
