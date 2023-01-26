@@ -28,6 +28,8 @@ $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+lodctr /r
+lodctr /r
 Clear-Host
 Write-Host "Datentraeger Bereinigung wird gestartet..."
 Start-Process cleanmgr.exe /sagerun:1 -Wait
@@ -36,8 +38,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFHlPqJqhYijbnJWMIVmuyBDl
-# PtigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUY1/meQWw+hVjrB9iNZ9BUhYw
+# bCegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -57,11 +59,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUxNAPJt7X1lFc3mj/zAGieI3N6JUwDQYJ
-# KoZIhvcNAQEBBQAEggEAsCsCp9ktxmCkNb3lyTbfLdscXxMsGD1iYNQAjz/mFwe5
-# pNoDPBbVLkNDEXn2UzvEPrhgPtihZDI1zb96frEa5vkBPSnsPBPtrzwgNBbRRmXM
-# xPz2yjMnhr1fg2ju7pjcRQSkstcnSYhlyyhp6JWvQjXxi7+M72KmMfXFe0SKhLEa
-# PZ84WwNBZ1uG/+0ncWORJmzgG4mMWwQKfhlTaXQkhqwEfrM3QyW/DGXnm9V7zUF7
-# 59902JCqjUVNiNgw1B5f4yIOPqvS0EfV9FAgAkbxyLwqVWAct6dUIlEPC6wBS1JX
-# ujWxzAQT00yVA+GWhIa5qAM4egkv7D9lmLhzGPRX9Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/OB3OPjdfAou6lTjMdZ8wQt4LzQwDQYJ
+# KoZIhvcNAQEBBQAEggEAwHAEMY5ixHsJ2XMUXyN0TCN3po6yPj/2l1tUzwHDObw7
+# Inhz6MquevcwQftktLr8V4bC1FevFELaG134mUqE+oB9/2l8hBM+UCMlRClriBue
+# 6JGndiUibtAtG0hk/yWbbqOZW4aH3UB2bQgwWtAS8sBClozGCfsMwtVf4iUDfoVJ
+# ACI2xiHkUuWUq0Q07xAWYftJn4Zqr8l2mv6jZLGieqL+4FcgX8qP9zp6xtxqYzKh
+# zeB+FYXqPFeaxuOIi9XRLcYuWl8vcaX+QxD3IFQDHJtXzdinNLEuajkqywh6S37w
+# JRojoIm2kvY+y9FfENtBfw1ZHf4TZsW9r9MariTC9A==
 # SIG # End signature block
