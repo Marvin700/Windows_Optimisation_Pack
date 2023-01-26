@@ -1,8 +1,8 @@
 ﻿<#
-	Version: v5.14.3
+	Version: v5.14.7
 
-	Copyright (c) 2014—2022 farag
-	Copyright (c) 2019—2022 farag & Inestic
+	Copyright (c) 2014—2023 farag
+	Copyright (c) 2019—2023 farag & Inestic
 
 	https://github.com/farag2
 	https://github.com/Inestic
@@ -18,7 +18,7 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2022"
+$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
@@ -433,8 +433,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDQTdwe3gk+eq7CxUp3IbHpup
-# Nv+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHEgdha1TrkSySJ4d2MCG4EZK
+# F+SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -454,11 +454,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXB97WGBYQQ5Hy+vb5SHGwJ0z/BQwDQYJ
-# KoZIhvcNAQEBBQAEggEAYE9NKfNQWF96WgBbuauk0RW3Nr4R1yKyPWxpnnXrodiZ
-# tmwGzpswgSdiwnUxq5rjbHolbBakA88Gd3fV3+0pUmZEZt0GJKYJAoTzuWzlzmor
-# 0L52NV0EPqphpaX0Tp7irnwQsOMHCW/vLXHuNTyYClGQHWsd/XOqLBcPXIFoxyjH
-# GC5x8jV4urlLRSnkgE7cwy1W9OT+BJArn7O/F6ObCGVj6tMP40hNlxtHI0DZwywK
-# UZbBqG8gWj7T8lC7HPL5HMecCOPw7edj1Q7olMY3Vn2QNKQoe8WPu+M94ovXbzLy
-# luB3K+bXhjGcef8YNq3SW04qJyiLPgsCFgfyZJ/rJA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUskBuVCkgqHvtGa3Pm3FsA0fV3qYwDQYJ
+# KoZIhvcNAQEBBQAEggEAujb98bO5ayTY/BbJG9jRpQKqvnDKqP/q56xL+WvO9qyO
+# i4KW4HP6Fc0TGOU/1tq6Y3a3LfAbbTnjLYFD2u2wwlwAPSZ5WHX8/NfbxoIxuj4D
+# qELRh2FVFIyZsYkuUVNrvFYB0rj06ZCXP1gv+T/cXEC0DX7G36SetSZ0NYe1RRhp
+# J8O0SudP1woJ7XCmx81toBXHfst5JQ8yseO6cFCdTgwJ90MCFToneuhxegXyIICL
+# OISq/7wLRibqybnhhNNBZfzwjcssZcqp0sIB63Q8DEKb+TcRxmCqvsi2gYcNBOlC
+# 3bmrgNGrnSNiOEdo3L1pDWurw0o3I870WR9MlGewgg==
 # SIG # End signature block
