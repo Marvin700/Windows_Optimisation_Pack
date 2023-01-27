@@ -24,6 +24,7 @@ Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -
 Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $EscapefromTarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
@@ -38,8 +39,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUY1/meQWw+hVjrB9iNZ9BUhYw
-# bCegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwaDqF7cepUkBwAZW1tZblLKt
+# jZKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -59,11 +60,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/OB3OPjdfAou6lTjMdZ8wQt4LzQwDQYJ
-# KoZIhvcNAQEBBQAEggEAwHAEMY5ixHsJ2XMUXyN0TCN3po6yPj/2l1tUzwHDObw7
-# Inhz6MquevcwQftktLr8V4bC1FevFELaG134mUqE+oB9/2l8hBM+UCMlRClriBue
-# 6JGndiUibtAtG0hk/yWbbqOZW4aH3UB2bQgwWtAS8sBClozGCfsMwtVf4iUDfoVJ
-# ACI2xiHkUuWUq0Q07xAWYftJn4Zqr8l2mv6jZLGieqL+4FcgX8qP9zp6xtxqYzKh
-# zeB+FYXqPFeaxuOIi9XRLcYuWl8vcaX+QxD3IFQDHJtXzdinNLEuajkqywh6S37w
-# JRojoIm2kvY+y9FfENtBfw1ZHf4TZsW9r9MariTC9A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGIl7W1FUnmWs9hjRcJze7ocUcG4wDQYJ
+# KoZIhvcNAQEBBQAEggEAjfhC+3oyxkwGEx2xBwX41MhQ/Khza7ObKaz2KbvcN8Ic
+# LRfveIcBQLZdvuKEbJuWS8gY2t4gT6DWG+C/2G8Hec06yW1sKdsEurcvVj1+/LTT
+# /F1k8tshnnPjhrfhRdczE0SpwJNTdQ/JxBl6IXw5h+OJnr/R/pI2Wcin6RSIrEZk
+# gXpuMuzwuOqzELEj5HYMAwmsK2iAQsh5C9RUTCU0l7dhJvlGem4+b2UCbE9VqfoW
+# 6M/jOzKKbDsjZdqNMGiCPEtCS44LVfvEssuk1+zDGTVy8Ot+AYX+7wEm5VjVxbpx
+# OKBcjnq+95IiK9zPpImYS/FBDakr2p3ts2zOmLPJmA==
 # SIG # End signature block
