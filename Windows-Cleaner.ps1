@@ -1,4 +1,5 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Cleaner | $([char]0x00A9) Marvin700" 
+ipconfig /flushdns
 vssadmin delete shadows /all /quiet | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack Cleaner" -RestorePointType MODIFY_SETTINGS 
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
@@ -21,14 +22,23 @@ Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyCon
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\CrashDumps -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:APPDATA\..\locallow\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:windir\..\MSOCache
 Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
+taskkill /F /IM EscapeFromTarkov.exe
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $EscapefromTarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
+taskkill /F /IM iexplore.exe
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
+Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
+taskkill /F /IM iexplore.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
-Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 lodctr /r
 lodctr /r
 Clear-Host
@@ -39,8 +49,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwaDqF7cepUkBwAZW1tZblLKt
-# jZKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUL2QVdkdwMSDn0zGCfb4CXS5M
+# sf2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -60,11 +70,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGIl7W1FUnmWs9hjRcJze7ocUcG4wDQYJ
-# KoZIhvcNAQEBBQAEggEAjfhC+3oyxkwGEx2xBwX41MhQ/Khza7ObKaz2KbvcN8Ic
-# LRfveIcBQLZdvuKEbJuWS8gY2t4gT6DWG+C/2G8Hec06yW1sKdsEurcvVj1+/LTT
-# /F1k8tshnnPjhrfhRdczE0SpwJNTdQ/JxBl6IXw5h+OJnr/R/pI2Wcin6RSIrEZk
-# gXpuMuzwuOqzELEj5HYMAwmsK2iAQsh5C9RUTCU0l7dhJvlGem4+b2UCbE9VqfoW
-# 6M/jOzKKbDsjZdqNMGiCPEtCS44LVfvEssuk1+zDGTVy8Ot+AYX+7wEm5VjVxbpx
-# OKBcjnq+95IiK9zPpImYS/FBDakr2p3ts2zOmLPJmA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUUZ7pgk4/c9W9GF/BpWghAdoJ7rUwDQYJ
+# KoZIhvcNAQEBBQAEggEAnQkxWJzzk0x+I+rA7rVkrpcBwEnKkUxJjBLrQEcjDgVg
+# ZI8HOwwo4wNmFTgdAyfcsBM3KdImgQk22A7RJuAzKZ3rpyzPnhz4ttZ5DJZ1xqVg
+# ODOuqXTNRsIQtKeZ/QtO3AyU+gNQrPE60oBzWiRN67MCFoQ2DB1DtKXul06NBZa1
+# 6QTapeud4hGTpVebxXIWDWnxJtmhecOkMVqCa83x+hIAkP1a4h8xt0UHVOlKVTBg
+# agddv+oYCeGXU+AQ7sCV6sgASMQKg3Q3oLEqgBgLoJChBZZT/uouH6ioc9Rwrv0s
+# H6S7BrPHiT2ChzvZmn8PIpLYXVtOQKPIEDRx08cziw==
 # SIG # End signature block
