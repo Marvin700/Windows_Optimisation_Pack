@@ -1,5 +1,4 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Cleaner | $([char]0x00A9) Marvin700" 
-ipconfig /flushdns
 vssadmin delete shadows /all /quiet | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack Cleaner" -RestorePointType MODIFY_SETTINGS 
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
@@ -7,6 +6,7 @@ ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+ipconfig /flushdns
 sfc /SCANNOW
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 Dism.exe /Online /Cleanup-Image /spsuperseded
@@ -49,8 +49,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUL2QVdkdwMSDn0zGCfb4CXS5M
-# sf2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNIBOz3F4fkaQqpiON0fJRjOG
+# 9G+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -70,11 +70,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUUZ7pgk4/c9W9GF/BpWghAdoJ7rUwDQYJ
-# KoZIhvcNAQEBBQAEggEAnQkxWJzzk0x+I+rA7rVkrpcBwEnKkUxJjBLrQEcjDgVg
-# ZI8HOwwo4wNmFTgdAyfcsBM3KdImgQk22A7RJuAzKZ3rpyzPnhz4ttZ5DJZ1xqVg
-# ODOuqXTNRsIQtKeZ/QtO3AyU+gNQrPE60oBzWiRN67MCFoQ2DB1DtKXul06NBZa1
-# 6QTapeud4hGTpVebxXIWDWnxJtmhecOkMVqCa83x+hIAkP1a4h8xt0UHVOlKVTBg
-# agddv+oYCeGXU+AQ7sCV6sgASMQKg3Q3oLEqgBgLoJChBZZT/uouH6ioc9Rwrv0s
-# H6S7BrPHiT2ChzvZmn8PIpLYXVtOQKPIEDRx08cziw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlmFeVy99SzP/n+s4aAtYobAiWkIwDQYJ
+# KoZIhvcNAQEBBQAEggEAGblJkL/ScZ/BLVLDPhN6Q2SeUFUsZkTAtCGicZlxui+p
+# +cT3SWEUxIn7O8z+phQjjoD5iZv+F3oqUvgKnt16MQRXdNZKF2/LXyoJqv6XOQs0
+# NEkjva/c4D3IVgtEOwAGM++E9ErsF7EMGK26nJPNBVJIzJCUyThClGg86SC4vJxU
+# Z8PypBqSu9I54NMVInwHQzmFXXjKS48UPRVORQ770k39ZWBCYPmhR6JYBQriV7Hd
+# TtQsstk/3e1WUFKHvxfAaLmw/xhEVd37tHcy3x7OHuB2QLW4nQ6aW8dP6vlLuo8p
+# 597Sj3gsJ7+xS39nWvekIgzsf4guAHAiP2//ABVeOA==
 # SIG # End signature block
