@@ -206,7 +206,7 @@ Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyCo
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
 Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+#Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
@@ -547,8 +547,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOBufR16vHOptTI6QyQSJYO4p
-# mCSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0T69ZTOcRQ0aHCvAXqudFqGN
+# izGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -568,11 +568,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU50CDKFUA4bUv06rTk248mPMQlWcwDQYJ
-# KoZIhvcNAQEBBQAEggEAhn8wxrQiyrJAAeLd1yGX7dJ2xjVggTh8yos7FO68keL4
-# XJklrPTweHWBDI69/8h2ktI/xQ/CjW8gyPqiK04uf0gJbCmdhsC5Ij+ZfxK69HC4
-# Bfpz+Ed/EPtM8VC40Wzw5CnfSwOHKKvOAbd8PpWUyUzIBzM8BxAp0gQFGYLqMyn+
-# OZANmk/TTu14U22KnvR3i1I7UVogDSWnR8cLClUU9SUwGyVe+9GrTMTOs6MBMtvV
-# QJ1/KQ621er0fSG9OTi7UPilWRk6OGM7zy/Ohi2HuKOyeIx50AVyOHTigaZ9bso7
-# 752iefYf99Kss0dNXkSHYQ76XRhDnQkoGNVFM/uufg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUY7YNKgVlaB6j4hVcBM7tSDO4COYwDQYJ
+# KoZIhvcNAQEBBQAEggEABAMZQbNUkBgNM2DwyajdVeGuPc+f5qre+x4SbVn5Jhfn
+# TG/gCyF+khY09PGR8ehaM9cTHYy7aFI65scy8SuL1jXtxACH5+uIWgqA9TBdtK4o
+# CywGUf43G2XLF004M6aXazprhKyNE1fINZ9X2ilt4cSD6dJlcake4Ydrgoh6gUje
+# kSvLXCMqy7Ex3jw7WYPLbFaDspN/F9itcqBOJ4A362Pc5QnNy9BLbcplBvPPG/QS
+# uEuxv3pHHKBUPFKdHUXeYjAdxF1vkwguY9/Suw9RwlDFesyuXJB0cVTxgzSh9liF
+# wFf2IvAgaonN8V0x6HcGFMPqkxYEa78ML2RF/5fwrw==
 # SIG # End signature block
