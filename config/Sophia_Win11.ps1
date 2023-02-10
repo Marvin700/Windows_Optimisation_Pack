@@ -42,14 +42,14 @@ if ($Functions)
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
 
-# Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps
-
 # Disable the Windows features using the pop-up dialog box
 WindowsFeatures -Disable
 
 # Uninstall optional features using the pop-up dialog box
 WindowsCapabilities -Uninstall
+
+# Uninstall UWP apps using the pop-up dialog box
+UninstallUWPApps
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
@@ -403,8 +403,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCclkOSupASrEBqJkCHRUw0BG
-# 9emgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF7fvgfGrTIs7NwBSaXXPvznv
+# keegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -424,11 +424,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUy0AcGnOMzh2SkwQKPLTDwIVSRZQwDQYJ
-# KoZIhvcNAQEBBQAEggEAxiZNVwAfDNT0y9doE+Vv1vUEvd7trGdcA4aFJ8+1X/J/
-# 1bLUBFhKXp50Red2rF0gtBBUCioYbzDJQmtZge7AAHxl3rjtf4GJiAMNCHnIOMoo
-# hXuVre58porIDN/++OrTIfDK5KRADNeptfiSjrpZhSbccwKGyf2lUsTEk2GEx8LI
-# D3kchK1WuOni9Va4dbJmalWOdBf13MApSWdKdQsW2Duj7DURCa+Hyll06ulghp0p
-# W3P3En4V9LwsjvzPgCdJG+awR8e27ORut8NykWmMcOCmmqTfDtWXmZ3yZyO7TSP5
-# QRMtmcqfq2ImqsiTejmHAqKFSw+Ig37ausvVK1tfCw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXuLw6Atpb35sjNSz/vCA+3s+rN0wDQYJ
+# KoZIhvcNAQEBBQAEggEAFBjlInf6hd3Nz96p4gZeaHNosH2LQzl7wAlRGf6cSyAZ
+# A4G/9PHWhe9w6m2ahJ3bipeewdFKfVM1VW0gTss3w6I5vpiDD7hDQlt4/D3pvUas
+# CP6FAsrxehHrQKWdjAnzUKWdR4mUFau6RRTUalIdMfP/1tP4a2Ck7oNoAqjp34pb
+# uen0XdTgzip9apPykKqCVPxoLJFz/Trsvo5arHZocdw0OzuTHhBilw06Nt4Si4jX
+# vdPuWNnoH2DSU8Pql2Ee6xc4uteOemSWf688txA6IjmmDGAeKCKitSH1JmDN+WiD
+# 0JOlLny8Jh3KUH9NIAc923+WQstiyJAQra4FtHayJw==
 # SIG # End signature block
