@@ -142,12 +142,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.7/Sophia.Script.for.Windows.11.v6.2.7.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.11.v6.3.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.2.7/Sophia.Script.for.Windows.10.v5.14.7.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.10.v5.15.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
@@ -189,11 +189,16 @@ Start-Process $env:temp\Autoruns64.exe }
 function WindowsCleanup{
 Clear-Host
 gpupdate.exe /force 
+ipconfig /flushdns
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+sfc /SCANNOW
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
+Dism.exe /Online /Cleanup-Image /spsuperseded
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 Get-ChildItem -Path $env:temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
 Get-ChildItem -Path $env:windir\Temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
@@ -205,16 +210,28 @@ Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyCon
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\CrashDumps -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:APPDATA\..\locallow\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:windir\..\MSOCache
 Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
+taskkill /F /IM EscapeFromTarkov.exe
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $EscapefromTarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
+taskkill /F /IM iexplore.exe
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
+Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
+taskkill /F /IM iexplore.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
-Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 lodctr /r
 lodctr /r
-Start-Process cleanmgr.exe /sagerun:1 -Wait }
+Clear-Host
+Write-Host "Datentraeger Bereinigung wird gestartet..."
+Start-Process cleanmgr.exe /sagerun:1 -Wait}
           
 function Runtime{
 winget source update | Out-Null
@@ -225,7 +242,7 @@ IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.0 (x6
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function Fan_Control{
-Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V143/FanControl_net_4_8.zip" -Destination $env:temp\FanControl.zip 
+Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V145/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
 Expand-Archive $env:temp\FanControl.zip "C:\Program Files\FanControl" -force
 Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -243,7 +260,7 @@ $Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
 $Shortcut.Save() }
     
 function Controller{
-Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.7/DS4Windows_3.2.7_x64.zip" -Destination "$env:temp\DS4Windows.zip "
+Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip "
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -530,8 +547,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULxxa4KM2eZS8DeyMe43lHaCE
-# DU2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOBufR16vHOptTI6QyQSJYO4p
+# mCSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -551,11 +568,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUrSRLDzn3nDcFGbsaJhsMvPttetswDQYJ
-# KoZIhvcNAQEBBQAEggEAFtRuiR6e8tkCYcwVx202okELK/zk2k2VyJqXi41WvkwI
-# Ng9khH2KYHTdLgeVYGBOoY9VEQLwcln0m/AyIqDMFD0QUo89+dhDZtND0u3pMM6g
-# fjWuYVBV4UHHeS7r5VXpAhg4CGOEuS7YisQpucfNdbu+vICGayiIt/1BtnUrcz0Y
-# sOVfcZhDte1Tk+wgChtbm9evhC8K/D1AeLVqP4VyWfmojWGUAxJQVVaVUL2jSMKj
-# R2jslLFKbFWD3L5UbwXDQTWxDysixj8JSyAzTTzNWr3Rd2zrx979ZczfJXKBl9Aa
-# /IovF4kIIjBfn/IXOTA24E2848d4Qd/7r40QfB3N+Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU50CDKFUA4bUv06rTk248mPMQlWcwDQYJ
+# KoZIhvcNAQEBBQAEggEAhn8wxrQiyrJAAeLd1yGX7dJ2xjVggTh8yos7FO68keL4
+# XJklrPTweHWBDI69/8h2ktI/xQ/CjW8gyPqiK04uf0gJbCmdhsC5Ij+ZfxK69HC4
+# Bfpz+Ed/EPtM8VC40Wzw5CnfSwOHKKvOAbd8PpWUyUzIBzM8BxAp0gQFGYLqMyn+
+# OZANmk/TTu14U22KnvR3i1I7UVogDSWnR8cLClUU9SUwGyVe+9GrTMTOs6MBMtvV
+# QJ1/KQ621er0fSG9OTi7UPilWRk6OGM7zy/Ohi2HuKOyeIx50AVyOHTigaZ9bso7
+# 752iefYf99Kss0dNXkSHYQ76XRhDnQkoGNVFM/uufg==
 # SIG # End signature block
