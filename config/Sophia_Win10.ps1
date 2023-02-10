@@ -42,13 +42,13 @@ if ($Functions)
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
 
-#Disable the Windows features using the pop-up dialog box
+# Disable the Windows features using the pop-up dialog box
 WindowsFeatures -Disable
 
-#Uninstall optional features using the pop-up dialog box
+# Uninstall optional features using the pop-up dialog box
 WindowsCapabilities -Uninstall
 
-#Uninstall UWP apps using the pop-up dialog box
+# Uninstall UWP apps using the pop-up dialog box
 UninstallUWPApps 
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
@@ -431,8 +431,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBSbmEOGPIZ5y1nDUH0x7eE4A
-# kSSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjAU/XjwRO/I3ArylfQ6ixjyl
+# 8bigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -452,11 +452,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUquuwFs/Qn7EP8POOgLHtc6D/jh0wDQYJ
-# KoZIhvcNAQEBBQAEggEAmLXwzs5Vx4BEmI1WNLNWjlQH1v96fDIgW5d51jldY04u
-# uAWhbT4RN9V/aN7eUVziBiwUcoyhGH+UsgYE2mTSoLkMwCXiF4I0+1WR7z6qDK6Z
-# i7Culnl+iMST8C56ztJoO7UG9Mbvo/txnS+a/bPCnoaxLFruMK4w3ZxevNq80BUx
-# Df1Yhym0qfPWwY/Aae5oKoqia/0Rt22s7VgrP5P7Hcj7J5Y/JYBMOZUpnAGoTaeW
-# oxO85A6fyFFk9Ud3KhiI54LSIhVGd2qbpClEeI68zAB8+whxr6y3ETsnKXDN6Ie8
-# dE8Z5s+e6gaF29CNoCX4fKZao3pTqxCHM7XTvXDfPg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUFZoG8biy8hJOVVE91WZjVgDyGuUwDQYJ
+# KoZIhvcNAQEBBQAEggEAKL3lZ0gs000P1OwZySyoiqeBomb7gpZ17e8M5mkJGkyC
+# 7NkBx5QGIrQWW32jKQukswdzUtXiOWH2h0B2V32S/qgfZ6jzxOaxhpEEnLqQPZ8a
+# H9mKYVS7BsIvZ11SZmi6OYQRkIB0614Z+hww9lssy8G4wvDC6TqeXFxAWO26/+E9
+# hJGscSAY9HbHJt+jDGaeJQ0ZNCz3UCGEwCHxsC9xueiDGuRP7BhjSS0lCi0SmaWf
+# vJdLhbPNpxRnRfV6ZYt3nEozFiJ6hq+b62UwzevcsVofE0IUhcO0Uczqhb/PjjUr
+# qDBdUnn6VhBL9oBeNRhjhbYzwImKmT/J+LjnBBgb4g==
 # SIG # End signature block
