@@ -168,7 +168,7 @@ REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V 
 
 function Checks{
 IF(!($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise")) {
-IF(!($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise")) {
+IF(!($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 10 Enterprise")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
@@ -547,8 +547,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOBufR16vHOptTI6QyQSJYO4p
-# mCSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1Qry5twy5tScEXkayrzlh19y
+# YFCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -568,11 +568,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU50CDKFUA4bUv06rTk248mPMQlWcwDQYJ
-# KoZIhvcNAQEBBQAEggEAhn8wxrQiyrJAAeLd1yGX7dJ2xjVggTh8yos7FO68keL4
-# XJklrPTweHWBDI69/8h2ktI/xQ/CjW8gyPqiK04uf0gJbCmdhsC5Ij+ZfxK69HC4
-# Bfpz+Ed/EPtM8VC40Wzw5CnfSwOHKKvOAbd8PpWUyUzIBzM8BxAp0gQFGYLqMyn+
-# OZANmk/TTu14U22KnvR3i1I7UVogDSWnR8cLClUU9SUwGyVe+9GrTMTOs6MBMtvV
-# QJ1/KQ621er0fSG9OTi7UPilWRk6OGM7zy/Ohi2HuKOyeIx50AVyOHTigaZ9bso7
-# 752iefYf99Kss0dNXkSHYQ76XRhDnQkoGNVFM/uufg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWQhsfpuqe88rWjnepUzjMuRIECgwDQYJ
+# KoZIhvcNAQEBBQAEggEAlODSVyWfroS7LUkFHIKNEo4/aPYmurESNK49aV55hcpb
+# eTrCe7mKrEgPt123kTlE4nIJ+pHL31VuOkWeTxoopXkdHQkzst+8/xBjBeoVHq7E
+# s5i4zOexNHW2COsyV4xazCQag8tv/WhNvbgpNKCyNgj8UyXAz9iHXgroA7APzYhw
+# VWPT37SzfqnMYYnZ2gFfBIhI7Vb2wZt2O1DTMuUurCp0uiGp2zrJc8/w4VuS3cfH
+# +mC79zANqHzU/UoBBrBPHrFVhSt7x1tw4TSp2rjb737x87CStQPWohtjSTXWQ2rR
+# qRI7b1QtPhd4QGK+zPoaFvs2KquBBUed2EpshRuRTg==
 # SIG # End signature block
