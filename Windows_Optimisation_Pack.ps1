@@ -149,7 +149,7 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
                 
 function SophiaScript{
 Clear-Host
-Sophia_Tasks
+if($hash.WindowsTweaks_Tasks){Sophia_Tasks} 
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.11.v6.3.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
@@ -556,8 +556,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUONzNWTwGqWDEada2+aav8o4A
-# ZC6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+qvQheN9O2BsR/S7gVD+4ZPI
+# P8ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -577,11 +577,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUwetjfw7tqTSjHeyiMqAAiHJhJ2kwDQYJ
-# KoZIhvcNAQEBBQAEggEArgHeJPzVdOTWXpz0pHDnj+WBoWazpYVsPJwnULsQm6Iq
-# hoAzlVYMRcShIMBVsVsuVfQ5qiY4GuzjqIeiQdz1OtZR20xad0/Cu1jUSqPY3p6q
-# hPPc9gfdQzHB/CS9f5T5UGKtg+Cj+v2q6WYS5e/gYgPBUH6w5Bg4jaDdSCYdNQQt
-# hAf+fFtQVDJwN7R45e7IThr//gFB2YLuYFeA3N+bcZ+/Z6ZTO6L65+GzB1A/n0AW
-# KJ7epBBkoaQe/usm9ReDcU04tMw1l6/iVXAsPszyvjF+g87WcqiLJ+EUpHpv3xjp
-# Kez3rDCqM6BlfX+lvI3HG9ybnS5zDlYnogUnh8Z7Iw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8ohP6uJ0yOGwrujyPF9bMaY8kIswDQYJ
+# KoZIhvcNAQEBBQAEggEAXoNhaj9bHNwR/teycCpstZcF3sDbLQYNjPV3DhpdqeHQ
+# 1uj0RPEbwJKsPJARPmEtmyR1H9ETWw+Iluxd/wDlrWHoJFbXE7LQ8R7E4d06cxbg
+# QpPXZOg9IoM/J9QhOz/HUNa3OQXRlQBJtfuDthU6H2zPklffbxqWtry6C2xJ4V0m
+# AxljEPbmjfFdHczsY8iwQa6ZahCpOQyRtjc8n8vTUJGnkLyLtnK2a7RDMXEbjX8t
+# x3Qp+py/tXBvf1C6nAb+/r5WRF1dlJI4KsO/xVtAd0JEEyioGiOwzBFkaX6VxX2M
+# Tb+JFAGPZstu4N/3sOggeQz6ZiZFNtgJJbWJePCpXA==
 # SIG # End signature block
