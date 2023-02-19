@@ -149,7 +149,6 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
                 
 function SophiaScript{
 Clear-Host
-if($hash.WindowsTweaks_Tasks){Sophia_Tasks} 
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.11.v6.3.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
@@ -531,6 +530,7 @@ function Choice {
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
+if($hash.WindowsTweaks_Tasks){Sophia_Tasks}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
