@@ -38,8 +38,17 @@ if ($Functions)
 	exit
 }
 
-
 # Turn off the diagnostics tracking scheduled tasks
+Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Microsoft-Windows-DiskDiagnosticDataCollector | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Proxy | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
 ScheduledTasks -Disable
 
 # Disable the Windows features using the pop-up dialog box
@@ -431,8 +440,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjAU/XjwRO/I3ArylfQ6ixjyl
-# 8bigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUluhvVO5AdzTPJiuTJisu2mqy
+# zS6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -452,11 +461,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUFZoG8biy8hJOVVE91WZjVgDyGuUwDQYJ
-# KoZIhvcNAQEBBQAEggEAKL3lZ0gs000P1OwZySyoiqeBomb7gpZ17e8M5mkJGkyC
-# 7NkBx5QGIrQWW32jKQukswdzUtXiOWH2h0B2V32S/qgfZ6jzxOaxhpEEnLqQPZ8a
-# H9mKYVS7BsIvZ11SZmi6OYQRkIB0614Z+hww9lssy8G4wvDC6TqeXFxAWO26/+E9
-# hJGscSAY9HbHJt+jDGaeJQ0ZNCz3UCGEwCHxsC9xueiDGuRP7BhjSS0lCi0SmaWf
-# vJdLhbPNpxRnRfV6ZYt3nEozFiJ6hq+b62UwzevcsVofE0IUhcO0Uczqhb/PjjUr
-# qDBdUnn6VhBL9oBeNRhjhbYzwImKmT/J+LjnBBgb4g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMcv/aAQnp0wfKQhcxgoivyLxghYwDQYJ
+# KoZIhvcNAQEBBQAEggEAF5PKnu2ZwOiQ5k2SBGmDjdtOck5hnnYbFzRRCM3ycHxx
+# QEHLs3bhcSZA5ENeSY0M0LPtSA/laHN2yLBfzUbIWjI3icCP+g7IYFV34PdlS+b7
+# mNxY4vszzNLhG+/fpGT98eVg13k1Fe3uKiSqevjH6XkiYtyHFP2yrOgISqMRsNt2
+# KqT3gZFcGful78uzkiFXmAs4iBJpdq8eGrE6KHHfq4Puu0GgIV4voLo96vVJjtAY
+# DcPC/LS/AypNFG75GionadZd1O+u7hjzyuzqBlKDMGVYCWeVH9rT2L5QWk88+fXj
+# +TbUcDrgHxPIUQwHoBlJtlxyih3LQZU/kzhqgmiu1A==
 # SIG # End signature block

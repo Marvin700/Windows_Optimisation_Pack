@@ -95,17 +95,6 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force }
         
 function WindowsTweaks_Tasks{
-function Sophia_Tasks{
-Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName Microsoft-Windows-DiskDiagnosticDataCollector | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName Proxy | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue}
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
@@ -530,7 +519,6 @@ function Choice {
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
-if($hash.WindowsTweaks_Tasks){Sophia_Tasks}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
@@ -556,8 +544,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+qvQheN9O2BsR/S7gVD+4ZPI
-# P8ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUf54XML623jiG1Um++LT5NWFW
+# e7+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -577,11 +565,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8ohP6uJ0yOGwrujyPF9bMaY8kIswDQYJ
-# KoZIhvcNAQEBBQAEggEAXoNhaj9bHNwR/teycCpstZcF3sDbLQYNjPV3DhpdqeHQ
-# 1uj0RPEbwJKsPJARPmEtmyR1H9ETWw+Iluxd/wDlrWHoJFbXE7LQ8R7E4d06cxbg
-# QpPXZOg9IoM/J9QhOz/HUNa3OQXRlQBJtfuDthU6H2zPklffbxqWtry6C2xJ4V0m
-# AxljEPbmjfFdHczsY8iwQa6ZahCpOQyRtjc8n8vTUJGnkLyLtnK2a7RDMXEbjX8t
-# x3Qp+py/tXBvf1C6nAb+/r5WRF1dlJI4KsO/xVtAd0JEEyioGiOwzBFkaX6VxX2M
-# Tb+JFAGPZstu4N/3sOggeQz6ZiZFNtgJJbWJePCpXA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU50ZsKMMI0WOfDTHXOWJ8EOs6RWowDQYJ
+# KoZIhvcNAQEBBQAEggEAnNzZ+7st2m12gcJl+rYfLaDRSD0tzj3xg1wREh59+XSv
+# A1IEN2Y2W9y2QtXcoLYdBouKIQbMlySBJ6UbUdC+mi92h3nYF45Ciw5d6TOkfeXe
+# xZBqVTk1YX60WX4wpipxQOc1qrV/rtHPlYTOGc2vhhMv5Hs2n9FSQ14ncloEHxBD
+# gsY+PTQQUljlRviYQMuj5yBOeKGhq0b6kZzNSYHt8VLJ0oSowILP3sMqgYKcROny
+# fFq/DQFdvsOX3pgDDmjAN0mweazkFspU7BkNT/LD6aPsqyh9QFcstrOH840F8D7D
+# YIls315huGJPomUfvfl5BgPfJi+u/b+Om60aTPgu7w==
 # SIG # End signature block
