@@ -93,10 +93,18 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force }
-        
+
 function WindowsTweaks_Tasks{
-Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Microsoft-Windows-DiskDiagnosticDataCollector | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Proxy | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
