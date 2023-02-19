@@ -38,7 +38,19 @@ if ($Functions)
 	exit
 }
 
+
+# Disable the Windows features using the pop-up dialog box
+WindowsFeatures -Disable
+
+# Uninstall optional features using the pop-up dialog box
+WindowsCapabilities -Uninstall
+
+# Uninstall UWP apps using the pop-up dialog box
+UninstallUWPApps 
+
 # Turn off the diagnostics tracking scheduled tasks
+$DeviceHasCamera = Get-CimInstance -ClassName Win32_PnPEntity | Where-Object -FilterScript {(($_.PNPClass -eq "Camera") -or ($_.PNPClass -eq "Image")) -and ($_.Service -ne "StillCam")}
+if (-not $DeviceHasCamera){Get-ScheduledTask -TaskName FODCleanupTask | Disable-ScheduledTask -ErrorAction SilentlyContinue}
 Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
@@ -50,15 +62,6 @@ Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAct
 Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
 ScheduledTasks -Disable
-
-# Disable the Windows features using the pop-up dialog box
-WindowsFeatures -Disable
-
-# Uninstall optional features using the pop-up dialog box
-WindowsCapabilities -Uninstall
-
-# Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps 
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
@@ -440,8 +443,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUluhvVO5AdzTPJiuTJisu2mqy
-# zS6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtwwzqUaPMTA6LtyAoiIAfgNY
+# +d2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -461,11 +464,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMcv/aAQnp0wfKQhcxgoivyLxghYwDQYJ
-# KoZIhvcNAQEBBQAEggEAF5PKnu2ZwOiQ5k2SBGmDjdtOck5hnnYbFzRRCM3ycHxx
-# QEHLs3bhcSZA5ENeSY0M0LPtSA/laHN2yLBfzUbIWjI3icCP+g7IYFV34PdlS+b7
-# mNxY4vszzNLhG+/fpGT98eVg13k1Fe3uKiSqevjH6XkiYtyHFP2yrOgISqMRsNt2
-# KqT3gZFcGful78uzkiFXmAs4iBJpdq8eGrE6KHHfq4Puu0GgIV4voLo96vVJjtAY
-# DcPC/LS/AypNFG75GionadZd1O+u7hjzyuzqBlKDMGVYCWeVH9rT2L5QWk88+fXj
-# +TbUcDrgHxPIUQwHoBlJtlxyih3LQZU/kzhqgmiu1A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb1GrZe3z1RQm6mdmk1pQFL2JBAcwDQYJ
+# KoZIhvcNAQEBBQAEggEAqV94gFCJFXUkH1tdFxgHoeG2nTf6/hN5demvg/jpS1xD
+# ucAr+FnZppb1eLDfKW3kVwkMWmsKVxdrhIqu1xIioX0YBjwc7WosvyiB1I9voXFO
+# 6Bty+CZsYALtj4EDGZxGC4DmF0xR2ey4M5ZstSSIJNKE2WpDQE8YyLB5Av2B1tpZ
+# zsZ3nRw3X0uk64svS5dnqFKhH0DvCSP7Gex3JvLda7l5PCK1QNago8Ca+A5usJY2
+# h1lc0c7iXABjyoJ6dnuoJVafPW2QhLKjAB/ChiNCmnyd1GoVer1X6yxNGvo3HrYb
+# 5mD64FwkJbbMK9oRM2Iye39f0xQsV/dh41YHzOtokQ==
 # SIG # End signature block
