@@ -99,7 +99,20 @@ Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction Silent
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
-schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
+schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
+#From Sophia Script to reduce user Imput
+$DeviceHasCamera = Get-CimInstance -ClassName Win32_PnPEntity | Where-Object -FilterScript {(($_.PNPClass -eq "Camera") -or ($_.PNPClass -eq "Image")) -and ($_.Service -ne "StillCam")}
+if (-not $DeviceHasCamera){Get-ScheduledTask -TaskName FODCleanupTask | Disable-ScheduledTask -ErrorAction SilentlyContinue}
+Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Microsoft-Windows-DiskDiagnosticDataCollector | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Proxy | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue }
 
 function WindowsTweaks_Features{
 dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
@@ -519,10 +532,10 @@ function Choice {
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
+if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
-if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
@@ -544,8 +557,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUf54XML623jiG1Um++LT5NWFW
-# e7+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmQD0nYXEce09X2s1sjrdSwth
+# LyygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -565,11 +578,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU50ZsKMMI0WOfDTHXOWJ8EOs6RWowDQYJ
-# KoZIhvcNAQEBBQAEggEAnNzZ+7st2m12gcJl+rYfLaDRSD0tzj3xg1wREh59+XSv
-# A1IEN2Y2W9y2QtXcoLYdBouKIQbMlySBJ6UbUdC+mi92h3nYF45Ciw5d6TOkfeXe
-# xZBqVTk1YX60WX4wpipxQOc1qrV/rtHPlYTOGc2vhhMv5Hs2n9FSQ14ncloEHxBD
-# gsY+PTQQUljlRviYQMuj5yBOeKGhq0b6kZzNSYHt8VLJ0oSowILP3sMqgYKcROny
-# fFq/DQFdvsOX3pgDDmjAN0mweazkFspU7BkNT/LD6aPsqyh9QFcstrOH840F8D7D
-# YIls315huGJPomUfvfl5BgPfJi+u/b+Om60aTPgu7w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHek0VJs2RjgYcgNZ9DusgkzLcb0wDQYJ
+# KoZIhvcNAQEBBQAEggEAVp7eSGx6RArWWct4Yf1arCTa4ppr+TY7eJHMMDaZD88s
+# bELXKHi5S7MwQS84/i1MJPDf9ewIJYzZNfv4c0RfX+4iR6H3rsRr+S2/vHAGkm9B
+# tOvot1zKidAZCgkIsilifPT1xBUpmXAZYrKFVMV9y6zUzGTFo4h5S269k/GU0mnB
+# Y/yS5Z9SgahBnUds8SrPc2nlwXw14zsQZBF6xaHfRVwbSW3YWV73v0lj0DYnAa6s
+# OAYR2VNxjT2l6f4SI0Rd/yjXk35MqPLxxuC1VcqPmMgjPiBEGtwAYJntdOu4Dd+M
+# QU8VtFWnd0nDo786fgEkLeSAqIoFBC2b787p/TaqLA==
 # SIG # End signature block
