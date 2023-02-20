@@ -32,11 +32,11 @@ $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsof
 Get-ChildItem -Path $EscapefromTarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
-taskkill /F /IM iexplore.exe
+taskkill /F /IM cod.exe
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
-taskkill /F /IM iexplore.exe
+taskkill /F /IM cod.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 lodctr /r
@@ -49,8 +49,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNIBOz3F4fkaQqpiON0fJRjOG
-# 9G+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXinVnvKYUREea3r92VKNgDZB
+# 3qqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -70,11 +70,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlmFeVy99SzP/n+s4aAtYobAiWkIwDQYJ
-# KoZIhvcNAQEBBQAEggEAGblJkL/ScZ/BLVLDPhN6Q2SeUFUsZkTAtCGicZlxui+p
-# +cT3SWEUxIn7O8z+phQjjoD5iZv+F3oqUvgKnt16MQRXdNZKF2/LXyoJqv6XOQs0
-# NEkjva/c4D3IVgtEOwAGM++E9ErsF7EMGK26nJPNBVJIzJCUyThClGg86SC4vJxU
-# Z8PypBqSu9I54NMVInwHQzmFXXjKS48UPRVORQ770k39ZWBCYPmhR6JYBQriV7Hd
-# TtQsstk/3e1WUFKHvxfAaLmw/xhEVd37tHcy3x7OHuB2QLW4nQ6aW8dP6vlLuo8p
-# 597Sj3gsJ7+xS39nWvekIgzsf4guAHAiP2//ABVeOA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU6vItnLL0Df/Yn83IpUqsn9vCu+wwDQYJ
+# KoZIhvcNAQEBBQAEggEAM4KtV0sF7t70AL/h44CJumBVeNraKDsrv9YhAzmzkMzZ
+# uVHXB93lcGhU4DW9PG9DtKNQAUDjqcfJMU90R9Oqre0amtMbkdbb0JOYxVSnrnsa
+# Nf2BLOJ/TU8WeuGm1GUBeN+BrpxfMuL5Iz4q8KX+xJBCxOA6r7VvbFK8pjM2ocy1
+# n6rgp5b+iQGM6gGws7umdVxBLfwHJjk0Jn4YcSpM3Nt7ukFJoVGY4mxnzShO1JvF
+# 9U0gh3/2tgBUve8/laC3BdZc+RSx/gRwnCzo9jBtVXvN23d2l4Tg57mWZKh+ZVcz
+# 1C4XbZjzNA99o0GwjzuL6Pb8IBGUQdVkuUpniVt9hQ==
 # SIG # End signature block
