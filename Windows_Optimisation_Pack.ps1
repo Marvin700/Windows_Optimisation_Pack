@@ -6,69 +6,45 @@ $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentV
 if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} 
 
 
-function WindowsTweaks_Services{
-Stop-Service "WpcMonSvc"
-Stop-Service "SharedRealitySvc"
-Stop-Service "Fax"
-Stop-Service "autotimesvc"
-Stop-Service "wisvc"
-Stop-Service "SDRSVC"
-Stop-Service "MixedRealityOpenXRSvc"
-Stop-Service "WalletService"
-Stop-Service "SmsRouter"
-Stop-Service "SharedAccess"
-Stop-Service "MapsBroker"
-Stop-Service "PhoneSvc"
-Stop-Service "ScDeviceEnum"
-Stop-Service "icssvc"
-Stop-Service "edgeupdatem"
-Stop-Service "edgeupdate"
-Stop-Service "MicrosoftEdgeElevationService"
-Stop-Service "RetailDemo"
-Stop-Service "MessagingService"
-Stop-Service "PimIndexMaintenanceSvc"
-Stop-Service "OneSyncSvc"
-Stop-Service "UnistoreSvc"
-Stop-Service "DiagTrack"
-Stop-Service "dmwappushservice"
-Stop-Service "diagnosticshub.standardcollector.service"
-Stop-Service "diagsvc"
-Stop-Service "WerSvc" 
-Stop-Service "wercplsupport" 
-Set-Service "WpcMonSvc" -StartupType Disabled
-Set-Service "SharedRealitySvc" -StartupType Disabled
-Set-Service "Fax" -StartupType Disabled
-Set-Service "autotimesvc" -StartupType Disabled
-Set-Service "wisvc" -StartupType Disabled
-Set-Service "SDRSVC" -StartupType Disabled
-Set-Service "MixedRealityOpenXRSvc" -StartupType Disabled
-Set-Service "WalletService" -StartupType Disabled
-Set-Service "SmsRouter" -StartupType Disabled
-Set-Service "SharedAccess" -StartupType Disabled
-Set-Service "MapsBroker" -StartupType Disabled
-Set-Service "PhoneSvc" -StartupType Disabled
-Set-Service "ScDeviceEnum" -StartupType Disabled
-Set-Service "TabletInputService" -StartupType Disabled
-Set-Service "icssvc" -StartupType Disabled
-Set-Service "edgeupdatem" -StartupType Disabled
-Set-Service "edgeupdate" -StartupType Disabled
-Set-Service "MicrosoftEdgeElevationService" -StartupType Disabled
-Set-Service "RetailDemo" -StartupType Disabled
-Set-Service "MessagingService" -StartupType Disabled 
-Set-Service "PimIndexMaintenanceSvc" -StartupType Disabled 
-Set-Service "OneSyncSvc" -StartupType Disabled
-Set-Service "UnistoreSvc" -StartupType Disabled
-Set-Service "DiagTrack" -StartupType Disabled
-Set-Service "dmwappushservice" -StartupType Disabled
-Set-Service "diagnosticshub.standardcollector.service" -StartupType Disabled
-Set-Service "diagsvc" -StartupType Disabled 
-Set-Service "WerSvc" -StartupType Disabled
-Set-Service "wercplsupport" -StartupType Disabled }
+function WindowsTweaks_Services {
+$services = @(
+"WpcMonSvc",
+"SharedRealitySvc",
+"Fax",
+"autotimesvc",
+"wisvc",
+"SDRSVC",
+"MixedRealityOpenXRSvc",
+"WalletService",
+"SmsRouter",
+"SharedAccess",
+"MapsBroker",
+"PhoneSvc",
+"ScDeviceEnum",
+"TabletInputService",
+"icssvc",
+"edgeupdatem",
+"edgeupdate",
+"MicrosoftEdgeElevationService",
+"RetailDemo",
+"MessagingService",
+"PimIndexMaintenanceSvc",
+"OneSyncSvc",
+"UnistoreSvc",
+"DiagTrack",
+"dmwappushservice",
+"diagnosticshub.standardcollector.service",
+"diagsvc",
+"WerSvc",
+"wercplsupport")
+foreach ($service in $services){
+    Stop-Service $service
+    Set-Service $service -StartupType Disabled}}
+
 
 function WindowsTweaks_Registry{
 #GPU MPO FIx for Flickering
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value "00000005" -Force
-OverlayTestMode
 # MarkC Mouse Acceleration Fix
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseXCurve" ([byte[]](0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0xCC, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00,
