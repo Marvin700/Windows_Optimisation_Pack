@@ -38,8 +38,8 @@ $services = @(
 "WerSvc",
 "wercplsupport")
 foreach ($service in $services){
-    Stop-Service $service
-    Set-Service $service -StartupType Disabled}}
+Stop-Service $service
+Set-Service $service -StartupType Disabled}}
 
 
 function WindowsTweaks_Registry{
@@ -73,32 +73,31 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" 
 function WindowsTweaks_Tasks{
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
-function WindowsTweaks_Features{
-dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"TFTP" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart }
+function WindowsTweaks_Features {
+$features = @(
+"TFTP",
+"TelnetClient",
+"WCF-TCP-PortSharing45",
+"Microsoft-Hyper-V-All",
+"Microsoft-Hyper-V-Management-Clients",
+"Microsoft-Hyper-V-Tools-All",
+"Microsoft-Hyper-V-Management-PowerShell")
+foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
             
-function WindowsTweaks_Index{
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='D:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='E:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='F:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null }
+function WindowsTweaks_Index {
+$drives = @('C:', 'D:', 'E:', 'F:', 'G:')
+foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
 
 function TakeOwnership{
 New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
 New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command" -force -ea SilentlyContinue
 New-Item "HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership" -force -ea SilentlyContinue
 New-Item "HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command" -force -ea SilentlyContinue
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name '(default)' -Value 'Take Ownership' -PropertyType String -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name '(default)' -Value 'Take Ownership' -PropertyType String -Force| -ea SilentlyContinue;
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'HasLUAShield' -Value '' -PropertyType String -Force -ea SilentlyContinue;
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'NoWorkingDirectory' -Value '' -PropertyType String -Force -ea SilentlyContinue;
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'Position' -Value 'middle' -PropertyType String -Force -ea SilentlyContinue;
@@ -124,7 +123,7 @@ Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
-Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 } 
+Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 }
 
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/ooshutup10.cfg" -Destination "$ScriptFolder\ooshutup10.cfg"
@@ -173,20 +172,22 @@ Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
 Dism.exe /Online /Cleanup-Image /spsuperseded
 Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-Get-ChildItem -Path $env:temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:windir\Temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:LOCALAPPDATA\CrashDumps -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:APPDATA\..\locallow\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:windir\..\MSOCache
-Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+$paths = @(
+"$env:temp",
+"$env:windir\Temp",
+"$env:windir\Prefetch",
+"$env:SystemRoot\SoftwareDistribution\Download",
+"$env:ProgramData\Microsoft\Windows\RetailDemo",
+"$env:LOCALAPPDATA\AMD",
+"$env:windir/../AMD/",
+"$env:LOCALAPPDATA\NVIDIA\DXCache",
+"$env:LOCALAPPDATA\NVIDIA\GLCache",
+"$env:APPDATA\..\locallow\Intel\ShaderCache",
+"$env:LOCALAPPDATA\CrashDumps",
+"$env:APPDATA\..\locallow\AMD",
+"$env:windir\..\MSOCache",
+"${env:ProgramFiles(x86)}\Steam\steamapps\common\Call of Duty HQ\shadercache")
+foreach ($path in $paths) {Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 taskkill /F /IM EscapeFromTarkov.exe
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
@@ -520,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJH1L3Hd2LYIrwwX+h9pAq3NG
-# QBygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF+Bs54VWAAja2qKF/VLvavzS
+# WcegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -541,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNzphbKsnT+DEuRfCZqJZ5lXRiuQwDQYJ
-# KoZIhvcNAQEBBQAEggEACln7go0YAasdxp7EdME00cTPF22kPo/FpBLiS/PCarTy
-# qrg1xqD/3XLiEmTGuKjKDoPI17Y6QV24HOf+2KvQWetAWCFErcviFlaW83VcDccx
-# +pxEDsunGx0ZbKm36eSz3SCSUwFvfBBWrc2CILlNbL5r2CsA2103baAROBGwS9kb
-# PforKhDHCBiPi2d6OAOnyW2Q8VrgebAkXQa3SkeFIC4vFCan/utkWoVJIxel7rxs
-# hAIDf+FLiMFFL2OJLyAOnDHq5fyHfWy96VH3wfn7ceSCzf5QnUNpNPIAmV9n+Ord
-# EyiKVyb7tROV3a82WVHt2BR2b+V704mb0qCcz1U39A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHKjpcJ6+6b+VoCRSFwo99HxpjAwwDQYJ
+# KoZIhvcNAQEBBQAEggEAAxkraYweaqncix3yOrl6IhIoOo+rQ8aJsk2/g6t6KdI5
+# TqKG4yE3rXGv8LYtk/VioNuLFexriv0y+QvilHrhOLNyCgAYWiBXh8bJIXrDWhMJ
+# 6f6Pz522LkekUZ3C+UU8B13ym3YVgADx7O1MlrU1O40OjUMWydZz4Ua73gCmBe9x
+# 9K6wK+I16msQYQ5EecSGT/4ZQNWPV8nxzz2017gUPwxUCiVikjgMqWlQfaoK0K8o
+# yUtYLLK5KPIGi4Tr0Qhc3CPSo0NoiesXiFPNMPzW8u7xPh6TEOK4UZr1BFjpyLGu
+# lf3urrkcPWTCkxo2zA52N/tErdY/PC4pclOWnFgKog==
 # SIG # End signature block
