@@ -74,7 +74,7 @@ function WindowsTweaks_Tasks{
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
-schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
+schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
 function WindowsTweaks_Features{
@@ -113,20 +113,7 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;}
                 
 function SophiaScript{
-Clear-Host   
-if($hash.WindowsTweaks_Tasks){
-Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName Proxy | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName Microsoft-Windows-DiskDiagnosticDataCollector | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-$DeviceHasCamera = Get-CimInstance -ClassName Win32_PnPEntity | Where-Object -FilterScript {(($_.PNPClass -eq "Camera") -or ($_.PNPClass -eq "Image")) -and ($_.Service -ne "StillCam")}
-if (-not $DeviceHasCamera){Get-ScheduledTask -TaskName FODCleanupTask | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
+Clear-Host
 IF($WindowsVersion -match "Microsoft Windows 11") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.11.v6.3.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
@@ -541,8 +528,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkCOdC0b7mzVrqyaUDXChkCt0
-# MkugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbq62im28pmzd6cePTxvjCbF8
+# EUGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -562,11 +549,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUY0OEikZDIQ6zhwSszihNhuGUILwwDQYJ
-# KoZIhvcNAQEBBQAEggEAhOl+LDZFE0DPbZjYa22WKGXcaYvQukUBXHTzZ4lUuqNL
-# H33MpOJcG7cR4IBfcIg4AXyCPy+gNRHMlDPfMQ8iAXQ1d7zz5lwLd531sGKpV9nk
-# gXLR26EMLadq3XKU2XR4qdAREadwwyHRh5QRiWl8X3e9Acra7hxSD5UpDRf8G9Ap
-# ST3YyVd6T+csXmEKs/NJ6ycJtK0wKImhBcRLWz2E/1OEc5ypTNg1GbBFvr69HMQA
-# VsfcBbOy1wskjRcipGySx7LwkOzCQjGawoNsenKIIQdmZjj0shG8z+ugkDEiNRFG
-# rDn5d4fpLi5IZwdiiaAkodon/o/aiF060jbeHdpk7Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVoQSRRXBmqhLZZZa8ZKMWcnS8/gwDQYJ
+# KoZIhvcNAQEBBQAEggEAgZiBNa2gslnFGUFsuXivtkT5Z8yRh6MnWodbwtQaS7Yf
+# BJLRNzqgd4W19GGoorkC70035MiM0wRgAt8t9wQM+Z6iPXKXCTzSiMKv8GYsF4nq
+# m8Mh73kHmks09ccmZGfgjpCFTTCx9Jqhj+p/X8PEonFnDXBjWB5p3Yotly77ILMa
+# mVqHkxzxWu5dJyUZ931kBBBYnK18SjJBb39YsyoexgFzlqr13WR/J8+m1tY1AIJ2
+# BTlbr2hUgKqY/D9hQkum0L1lk/T3rz/ZEVwGfPgecM2hYq+DfBrTW8U4ZgWJ4ULm
+# PSTKj0zuSv7D0ZtvrNY87NjogHCGSEJnzRIDi96cEg==
 # SIG # End signature block
