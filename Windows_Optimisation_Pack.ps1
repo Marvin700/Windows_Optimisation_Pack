@@ -77,7 +77,7 @@ Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement 
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
-function WindowsTweaks_Features {
+function WindowsTweaks_Features{
 $features = @(
 "TFTP",
 "TelnetClient",
@@ -89,6 +89,7 @@ $features = @(
 foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
             
 function WindowsTweaks_Index {
+Label C: Windows
 $drives = @('C:', 'D:', 'E:', 'F:', 'G:')
 foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
 
@@ -246,7 +247,13 @@ function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
-function Rename_HDD{Label C: Windows}
+function Remove_ASUS{
+Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/UninstallAI3Tool_1.00.04.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\UninstallAI3Tool.zip"
+Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
+Expand-Archive $env:temp\UninstallAI3Tool.zip $env:temp -force
+Expand-Archive $env:temp\Armoury_Crate_Uninstall_Tool.zip $env:temp -force
+Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
+Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe" }
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
@@ -279,7 +286,7 @@ if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $tru
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
 if ($BOX_WindowsCleanup.Checked)            {$hash.WindowsCleanup = $true}    
-if ($BOX_Rename_HDD.Checked)                {$hash.Rename_HDD = $true} 
+if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
 if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
@@ -389,12 +396,12 @@ $BOX_WindowsCleanup.Location = New-Object Drawing.Point 373,279
 $BOX_WindowsCleanup.Text = "Windows Cleanup"
 $BOX_WindowsCleanup.ForeColor='#aaaaaa'
 $BOX_WindowsCleanup.Checked = $true
-$BOX_Rename_HDD = New-Object System.Windows.Forms.CheckBox
-$BOX_Rename_HDD.Size = New-Object Drawing.Point 135,25
-$BOX_Rename_HDD.Location = New-Object Drawing.Point 373,310
-$BOX_Rename_HDD.Text = "Rename C Drive"
-$BOX_Rename_HDD.ForeColor='#aaaaaa'
-$BOX_Rename_HDD.Checked = $true
+$BOX_Remove_ASUS = New-Object System.Windows.Forms.CheckBox
+$BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
+$BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,310
+$BOX_Remove_ASUS.Text = "Remove Asus Bloat"
+$BOX_Remove_ASUS.ForeColor='#aaaaaa'
+$BOX_Remove_ASUS.Checked = $true
 $BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
 $BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
 $BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
@@ -479,7 +486,7 @@ $form.Controls.Add($BOX_WindowsTweaks_Services)
 $form.Controls.Add($BOX_WindowsTweaks_Index)
 $form.Controls.Add($BOX_Runtime)
 $form.Controls.Add($BOX_WindowsCleanup)
-$form.Controls.Add($BOX_Rename_HDD)
+$form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_TakeOwnership)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
@@ -503,9 +510,9 @@ if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks}
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-if($hash.Rename_HDD){Rename_HDD}
 if($hash.Runtime){Runtime}   
 if($hash.TakeOwnership){TakeOwnership}
+if($hash.Remove_ASUS){Remove_ASUS}
 if($hash.Autoruns){Autoruns}    
 if($hash.Winrar){Winrar}    
 if($hash.Fan_Control){Fan_Control}
@@ -521,8 +528,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjsl0PPXKsngIejA4zyzojNtt
-# 6eqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULgxJS4BP2kvMfQ72kyUwmn7p
+# BxmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +549,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTHZQem3DNHlKGicOMxBXC6HWLQ0wDQYJ
-# KoZIhvcNAQEBBQAEggEAozJQz+sMOn4F1jYN2LJ1JkAo+qmPzuPTS/PTUEpldARV
-# uhlybd5gATi8tZanIjsL3V/M48dLKkjD84M+i9aozTZthSC8kDdobPcH8ellB7rI
-# 4CY864TRLh8vsuL199a/DfrV5Zavvwvugk9bjuZZ60Ch2uDyniLfGkJwh+KGmkVH
-# E5xIUHXvrNv3KmpNJajeI+mTCrL8xVgOagJxhY3DrKlyYWULqI4q69Hh4GI9+w+W
-# 0kfzlSJoeRS+3ulTOUFt5OryfFYap96P6x6QBEp6Th6Gbj8ILny5QD9RxNwpaF+R
-# K4vgXKcYgc0lJ0GA1Mvma9VXLZ1WQxKZ5bYBtaU4+Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUC3TLeu2BOvdf9kqwPFAiNp1vYg8wDQYJ
+# KoZIhvcNAQEBBQAEggEAIBGRx1CKuukGiPUb7iQ4mnthIwndgGJR8FtQdPIm27Ip
+# ngBC6fZvDilbWpJrNSjRNN/2RUMW3M7unSq69Iq8Mfp18lZbcLfFmTPGnZ0CbcvN
+# zVevoRQVHMO6ze/1CrQUFejU7rB0zBagCFj957fOi00lU0fkAwD9x7bsTqyeiMgP
+# h88S7kIR5tJpmR+0hqr1cy55mFpNiPkfq59QRoRbLv9aSYNW0HdoLddzWzzyAadS
+# OvLnSa8Rc2P9rNihbxw+P+1gYKM8nGhg0VZkuq6nLs1nQdLUh1RoKXXJyE97UFlj
+# M0NgDnItvxAmJp+SMUzFWqawijp47GEA/EbpziFeUw==
 # SIG # End signature block
