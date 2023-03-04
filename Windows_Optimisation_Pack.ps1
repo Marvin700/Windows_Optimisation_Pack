@@ -113,7 +113,18 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;}
                 
 function SophiaScript{
-Clear-Host
+Clear-Host   
+if($hash.WindowsTweaks_Tasks){
+Get-ScheduledTask -TaskName ProgramDataUpdater | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Proxy | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName Microsoft-Windows-DiskDiagnosticDataCollector | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue}
 IF($WindowsVersion -match "Microsoft Windows 11") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.11.v6.3.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
@@ -528,8 +539,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULgxJS4BP2kvMfQ72kyUwmn7p
-# BxmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqgMZhuZQMUXgf341z4uj1zS+
+# DVWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -549,11 +560,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUC3TLeu2BOvdf9kqwPFAiNp1vYg8wDQYJ
-# KoZIhvcNAQEBBQAEggEAIBGRx1CKuukGiPUb7iQ4mnthIwndgGJR8FtQdPIm27Ip
-# ngBC6fZvDilbWpJrNSjRNN/2RUMW3M7unSq69Iq8Mfp18lZbcLfFmTPGnZ0CbcvN
-# zVevoRQVHMO6ze/1CrQUFejU7rB0zBagCFj957fOi00lU0fkAwD9x7bsTqyeiMgP
-# h88S7kIR5tJpmR+0hqr1cy55mFpNiPkfq59QRoRbLv9aSYNW0HdoLddzWzzyAadS
-# OvLnSa8Rc2P9rNihbxw+P+1gYKM8nGhg0VZkuq6nLs1nQdLUh1RoKXXJyE97UFlj
-# M0NgDnItvxAmJp+SMUzFWqawijp47GEA/EbpziFeUw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXAjS9vSmsSkfD4WafQ2lYQ9ryiYwDQYJ
+# KoZIhvcNAQEBBQAEggEAHxWF6kLrI3uTLxpnaz8UZJ/g1yfwdJF7nCJ6ulFGjuBe
+# 7pw0S868ZguQcBFPa3DquqP9cZ61/Jsc7piC97xb3NQ/zBIfhjcr9fShEs+9fgZn
+# ji89qb8P0ZCNBBKbFYP8QXA8e9hHgoDUqM8aOJkHU5ewcap8mWniOcrPBMknLlUz
+# LmOxTLjhVCEKErOKwDPfjZdjWN9fpDZMB6ch+xJ4thS33ngmUtlkKZ075qHRRwC3
+# 8rbTl2+FqKmdB/uwHl8LqL6tj7y+BOKyAbx/5X/4SEHDKy8lDM6cRLNWzOlAFkH5
+# vrnUu4Dkaj5bysyqzY3pFBHC5bQy70EBerR9m79nKQ==
 # SIG # End signature block
