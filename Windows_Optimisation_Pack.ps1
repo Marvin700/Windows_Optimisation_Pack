@@ -124,7 +124,9 @@ Get-ScheduledTask -TaskName MapsToastTask | Disable-ScheduledTask -ErrorAction S
 Get-ScheduledTask -TaskName MapsUpdateTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName FamilySafetyMonitor | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName FamilySafetyRefreshTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue}
+Get-ScheduledTask -TaskName XblGameSaveTask | Disable-ScheduledTask -ErrorAction SilentlyContinue
+$DeviceHasCamera = Get-CimInstance -ClassName Win32_PnPEntity | Where-Object -FilterScript {(($_.PNPClass -eq "Camera") -or ($_.PNPClass -eq "Image")) -and ($_.Service -ne "StillCam")}
+if (-not $DeviceHasCamera){Get-ScheduledTask -TaskName FODCleanupTask | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
 IF($WindowsVersion -match "Microsoft Windows 11") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.11.v6.3.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
@@ -539,8 +541,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqgMZhuZQMUXgf341z4uj1zS+
-# DVWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkCOdC0b7mzVrqyaUDXChkCt0
+# MkugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -560,11 +562,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXAjS9vSmsSkfD4WafQ2lYQ9ryiYwDQYJ
-# KoZIhvcNAQEBBQAEggEAHxWF6kLrI3uTLxpnaz8UZJ/g1yfwdJF7nCJ6ulFGjuBe
-# 7pw0S868ZguQcBFPa3DquqP9cZ61/Jsc7piC97xb3NQ/zBIfhjcr9fShEs+9fgZn
-# ji89qb8P0ZCNBBKbFYP8QXA8e9hHgoDUqM8aOJkHU5ewcap8mWniOcrPBMknLlUz
-# LmOxTLjhVCEKErOKwDPfjZdjWN9fpDZMB6ch+xJ4thS33ngmUtlkKZ075qHRRwC3
-# 8rbTl2+FqKmdB/uwHl8LqL6tj7y+BOKyAbx/5X/4SEHDKy8lDM6cRLNWzOlAFkH5
-# vrnUu4Dkaj5bysyqzY3pFBHC5bQy70EBerR9m79nKQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUY0OEikZDIQ6zhwSszihNhuGUILwwDQYJ
+# KoZIhvcNAQEBBQAEggEAhOl+LDZFE0DPbZjYa22WKGXcaYvQukUBXHTzZ4lUuqNL
+# H33MpOJcG7cR4IBfcIg4AXyCPy+gNRHMlDPfMQ8iAXQ1d7zz5lwLd531sGKpV9nk
+# gXLR26EMLadq3XKU2XR4qdAREadwwyHRh5QRiWl8X3e9Acra7hxSD5UpDRf8G9Ap
+# ST3YyVd6T+csXmEKs/NJ6ycJtK0wKImhBcRLWz2E/1OEc5ypTNg1GbBFvr69HMQA
+# VsfcBbOy1wskjRcipGySx7LwkOzCQjGawoNsenKIIQdmZjj0shG8z+ugkDEiNRFG
+# rDn5d4fpLi5IZwdiiaAkodon/o/aiF060jbeHdpk7Q==
 # SIG # End signature block
