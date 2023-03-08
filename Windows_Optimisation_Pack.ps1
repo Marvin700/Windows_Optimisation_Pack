@@ -58,6 +58,8 @@ New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\DiagTrack" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value 00000005 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "NetworkThrottlingIndex" -Type "DWORD" -Value 268435455 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Type "DWORD" -Value 00000000 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type "DWORD" -Value 00000006 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force
@@ -528,8 +530,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbq62im28pmzd6cePTxvjCbF8
-# EUGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYHrbzdr5YG5WbLbPPu+8dMKj
+# ZISgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -549,11 +551,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVoQSRRXBmqhLZZZa8ZKMWcnS8/gwDQYJ
-# KoZIhvcNAQEBBQAEggEAgZiBNa2gslnFGUFsuXivtkT5Z8yRh6MnWodbwtQaS7Yf
-# BJLRNzqgd4W19GGoorkC70035MiM0wRgAt8t9wQM+Z6iPXKXCTzSiMKv8GYsF4nq
-# m8Mh73kHmks09ccmZGfgjpCFTTCx9Jqhj+p/X8PEonFnDXBjWB5p3Yotly77ILMa
-# mVqHkxzxWu5dJyUZ931kBBBYnK18SjJBb39YsyoexgFzlqr13WR/J8+m1tY1AIJ2
-# BTlbr2hUgKqY/D9hQkum0L1lk/T3rz/ZEVwGfPgecM2hYq+DfBrTW8U4ZgWJ4ULm
-# PSTKj0zuSv7D0ZtvrNY87NjogHCGSEJnzRIDi96cEg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQULsAnp8RRWGVIU07bS78IGkKkxXowDQYJ
+# KoZIhvcNAQEBBQAEggEAvHyhKEGqfS93iF9C5JcgeoS7fCFON5kTpmEXZHeT2qFC
+# VO1Uj6XsoI9DH2C2P2xKRLYJLGPo5Kyj7ucu/FUJdjCXRayff7u+msUflt7W0yXf
+# s4ikSsi4FnmccfbcjaiaHVDTjc3Q75IJjvUnIgcZs8yIGgvzIfFrovnLgpm9RdFq
+# PvAyHqLZyedtCE9+xSXc9LaC6svcFXspH2d8FRy8CPpea/CzN2ybRBV/JedNtr1W
+# C46idLo584qO+m7l914CU1FvIyBZLzrCjqxNWh+AOGNd5WTKX72wYqX/HovqKFFx
+# Zm8ATNMxbk1IhW3YjJPo6QJU5M1m0nbVpGoz56d22g==
 # SIG # End signature block
