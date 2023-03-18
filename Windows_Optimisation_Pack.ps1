@@ -293,7 +293,7 @@ if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $tru
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
-if ($System_Maintance.Checked)              {$hash.System_Maintance = $true}    
+if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
 if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
@@ -537,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUf4WOP3IlBKcsB+ZOv0LDobVX
-# iY+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHrflvZ8ZltkXKdsPTfHC3xve
+# cfqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUaDwlI+uHTiFrjnp9bWaJeZdYEJ0wDQYJ
-# KoZIhvcNAQEBBQAEggEAsIHTIT04OwecHoj+4n6NM/TUrBzT8+Pom3t/81ZnYA39
-# aRUu8QmaxXxiVFezcNEygluLy5U1busT92qM4tLwa8md7W3eYi5A2+oMLD69dSFz
-# 44IoDyhfvcAXa0EfMam1slgq8s72t1OZyxpUYziEbXPjSfjyhcgoh9bQY5Fi2wTK
-# x+zwhubRU8vTkNyobzarFDquGBhKBX0VvymTNa20aFE7SUknoMD1fiy5aMQVdKCj
-# wUGAhBrMBVoTErnJqhfTRxECvSWjFUYa9OIAizSicNC1M32R8CYPoxvUjA6+Ya5U
-# TyGAvZkMjkK4STHnuKVsDER0wxQAmdUeLOldd2QkZQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUt1xZFFnLuaUSGUUTATPYQLOCNvswDQYJ
+# KoZIhvcNAQEBBQAEggEAsa43nYrbc7WocYK1ZB7uvcYZHL/Rm8unVOtWr+IU2jt8
+# XwT45VBR1TbFt6+j3+eQyuf6PW+ISZ3YP0l1rRbZDsHfdmBzgaoccSpOdQQA6t44
+# Iex1bz2GkxQmWF8MEWFjgnlFXxRJifUkzqK+jlvxQOYaOAZJxIark0F1twE63Tub
+# baj3gFbV9zS0w1MwCKdR0HnleObpyP3ysdmsRe9s9vM4vnWVncScWESMYD4XhdVK
+# ls45MkxGvlm39JhENXa5aVwrfI/OqL8mMFsbhOt2Pr9RY+Oal6GlDgd01BKWgwlk
+# 6y0lqJ3LlTf79HgBX0zxza1ntGOl3EzmnfXkyg4c/w==
 # SIG # End signature block
