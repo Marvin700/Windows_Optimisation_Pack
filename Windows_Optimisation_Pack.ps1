@@ -510,6 +510,7 @@ $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() } Out-Null
 
 function Choice { 
+Clear-Host
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
