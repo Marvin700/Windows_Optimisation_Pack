@@ -37,8 +37,8 @@ $services = @(
 "WerSvc",
 "wercplsupport")
 foreach ($service in $services){
-Stop-Service $service
-Set-Service $service -StartupType Disabled}}
+Stop-Service $service -ErrorAction SilentlyContinue
+Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -117,12 +117,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -match "Microsoft Windows 11") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.1/Sophia.Script.for.Windows.11.v6.4.1.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.11.v6.3.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.1/Sophia.Script.for.Windows.10.v5.16.1.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.10.v5.15.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
@@ -135,7 +135,7 @@ Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
 function SystemPoint{
-if($hash.System_Maintance){vssadmin delete shadows /all /quiet}
+if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -148,7 +148,6 @@ Write-Warning " No supported operating system! Windows 10 or Windows 11 required
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
 Clear-Host
-"Internet connection Test..."
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
 Write-Warning " The Script cant Apply all Tweaks !!!"
@@ -537,8 +536,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHrflvZ8ZltkXKdsPTfHC3xve
-# cfqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoy3MRTr7hUM1skyQQhcgO4Qs
+# zv2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +557,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUt1xZFFnLuaUSGUUTATPYQLOCNvswDQYJ
-# KoZIhvcNAQEBBQAEggEAsa43nYrbc7WocYK1ZB7uvcYZHL/Rm8unVOtWr+IU2jt8
-# XwT45VBR1TbFt6+j3+eQyuf6PW+ISZ3YP0l1rRbZDsHfdmBzgaoccSpOdQQA6t44
-# Iex1bz2GkxQmWF8MEWFjgnlFXxRJifUkzqK+jlvxQOYaOAZJxIark0F1twE63Tub
-# baj3gFbV9zS0w1MwCKdR0HnleObpyP3ysdmsRe9s9vM4vnWVncScWESMYD4XhdVK
-# ls45MkxGvlm39JhENXa5aVwrfI/OqL8mMFsbhOt2Pr9RY+Oal6GlDgd01BKWgwlk
-# 6y0lqJ3LlTf79HgBX0zxza1ntGOl3EzmnfXkyg4c/w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWHwZxJH85SH4IOO8XHdwkl4CLyIwDQYJ
+# KoZIhvcNAQEBBQAEggEAoGpu4oBTBH6X60DUJFQXIOrvkdlvrQ1MIZiDhp3ou5sa
+# 5r1MpS1kdXC30WbjTvXCPOJciuNbXDF/mdd8pFZUMOpn6uEpbN8Z8ybGzRz4etYo
+# xvjA4djwuSf8v9ZnG9/8jcu6MKD8hVlLKVxVxXKbeUFn1XPe2VHFm8PIBz7SZ7j+
+# Agp7sy8gla3m8CgW0/OmXuW0RB6AJzfwPN+6M7+Bu+1V6+h3jpAnXnkFYNlR9LQ0
+# TtOmVErgNqvJUF56zUOjSF8DOxiRSjuLu4e/+6maFchI7ZnZMxnDLEBI3DyeGC3f
+# H7kFKJ1Bo82kBlaNfkFDEUFieLI8YdXaXmNKWPsuhw==
 # SIG # End signature block
