@@ -212,7 +212,6 @@ $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\M
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 lodctr /r
 lodctr /r
-Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear(); Clear-Host
 Clear-Host
 Write-Host "Datentraeger Bereinigung wird gestartet..."
 Start-Process cleanmgr.exe /sagerun:1 -Wait}
@@ -538,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8zmAaGcPvqHKKoGOwwLpmLLW
-# eg6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtLLCg2YJN+/MNNw/tLCBxNtU
+# iJygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -559,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU2miSLlsHs12Fm31PKpNgO/RL02EwDQYJ
-# KoZIhvcNAQEBBQAEggEAPUW21udJYw10TINpHQq9AA7f3N5+OK5sIkEvsJvkdEgH
-# YFDtTSJ/D7Wy3G6bngDDM0dyPL9bOPxjaJjKnybiDJLVoFulEvoP6KTSNBAZ5W80
-# UrNn4t3lJ86Y42Q+ThM1vT8o/3NynTAA86r005/wJjxoWKH26+AHLA3BhcM5Fhj2
-# vGsxzigiEN9rMWfMjbayUiyID6LD0dk+JaBHOk5fZ32hQ5wiVauSHsueeSUYJnyc
-# DHyFSuM7QWqK3/5sPSNgl+fBVROyUeg6+CNkoE71SDgEEriKYosBxCKZz46Vl7je
-# aWynKgymA7A07jCJZoYy8uX46m6qk6EVbYvn9Jdk4w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmFr3ogwgfAV3sg06WYmsmuRQvfMwDQYJ
+# KoZIhvcNAQEBBQAEggEAp1Xuj1HZ+ruOgEKsywCz5FRUovbHsLK98kRdQU1Ur0gw
+# 4zH9//fS2mqdDQExsODSLGsGIlG+R9/69GPuI/NN79kE9HkXdlivV+t8cshUFq+V
+# JewZrp5BG92gg/WYp/M+Mwn1Q+HEFJtOb5Hy6SReUQpVfyk4MRcXw3rJiSKhoyNV
+# iZxcbyjpt7tAGU3JNpovkPT/AdXHCs6BMk41gbErWQOwh0NckuOBa/4Z5AoC+UcS
+# A5GW736+qXKbitxJRYljgXEbZbJ579Rdheatqbwxdd8sMC/LTYGiVZ1I5rKflec/
+# aQ0CaujkLGN1j6Fu2dl1QtX0EBy0aISdmxciqZ4Szw==
 # SIG # End signature block
