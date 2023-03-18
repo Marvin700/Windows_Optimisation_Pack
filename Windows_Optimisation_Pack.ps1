@@ -117,12 +117,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -match "Microsoft Windows 11") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.11.v6.3.2.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.1/Sophia.Script.for.Windows.11.v6.4.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.10.v5.15.2.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.1/Sophia.Script.for.Windows.10.v5.16.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
@@ -135,7 +135,7 @@ Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
 function SystemPoint{
-if($hash.WindowsCleanup){vssadmin delete shadows /all /quiet}
+if($hash.System_Maintance){vssadmin delete shadows /all /quiet}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -161,7 +161,7 @@ Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
-function WindowsCleanup{
+function System_Maintance{
 Clear-Host
 gpupdate.exe /force 
 ipconfig /flushdns
@@ -287,7 +287,7 @@ if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $tru
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
-if ($BOX_WindowsCleanup.Checked)            {$hash.WindowsCleanup = $true}    
+if ($System_Maintance.Checked)              {$hash.System_Maintance = $true}    
 if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
@@ -386,18 +386,18 @@ $BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 200,372
 $BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
 $BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
+$BOX_System_Maintance= New-Object System.Windows.Forms.CheckBox
+$BOX_System_Maintance.Size = New-Object Drawing.Point 135,25
+$BOX_System_Maintance.Location = New-Object Drawing.Point 373,248
+$BOX_System_Maintance.Text = "System Maintance"
+$BOX_System_Maintance.ForeColor='#aaaaaa'
+$BOX_System_Maintance.Checked = $true
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 145,25
-$BOX_Runtime.Location = New-Object Drawing.Point 373,248
+$BOX_Runtime.Location = New-Object Drawing.Point 373,279
 $BOX_Runtime.Text = "Runtime Components"
 $BOX_Runtime.ForeColor='#aaaaaa'
 $BOX_Runtime.Checked = $true  
-$BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
-$BOX_WindowsCleanup.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsCleanup.Location = New-Object Drawing.Point 373,279
-$BOX_WindowsCleanup.Text = "Windows Cleanup"
-$BOX_WindowsCleanup.ForeColor='#aaaaaa'
-$BOX_WindowsCleanup.Checked = $true
 $BOX_Remove_ASUS = New-Object System.Windows.Forms.CheckBox
 $BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
 $BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,310
@@ -487,7 +487,7 @@ $form.Controls.Add($BOX_WindowsTweaks_Features)
 $form.Controls.Add($BOX_WindowsTweaks_Services)
 $form.Controls.Add($BOX_WindowsTweaks_Index)
 $form.Controls.Add($BOX_Runtime)
-$form.Controls.Add($BOX_WindowsCleanup)
+$form.Controls.Add($BOX_System_Maintance)
 $form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_TakeOwnership)
 $form.Controls.Add($BOX_Autoruns)
@@ -521,7 +521,7 @@ if($hash.Fan_Control){Fan_Control}
 if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
-if($hash.WindowsCleanup){WindowsCleanup}}
+if($hash.System_Maintance){System_Maintance}}
 
 GUI
 Choice
