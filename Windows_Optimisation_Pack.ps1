@@ -137,9 +137,9 @@ Set-Location $ScriptFolder
 function SystemPoint{
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet}
 Enable-ComputerRestore -Drive "C:\"
-New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force
+New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
@@ -147,7 +147,12 @@ IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
-if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
+"Internet connection Test..."
+IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
+Write-Warning " No internet connection available"
+Write-Warning " The Script cant Apply all Tweaks !!!"
+Start-Sleep 20}
+IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
@@ -531,8 +536,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTl3fjToXvo8WhhVLTc0+aXEI
-# SdWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8zmAaGcPvqHKKoGOwwLpmLLW
+# eg6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -552,11 +557,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUBv+AcUC+BTk72y4v59bXh5v6GyYwDQYJ
-# KoZIhvcNAQEBBQAEggEAhCMxoTZ6JxIhRuPH8R5c41ADTWM2/NJfsBVwObX3kGgw
-# cyBUYLeuuYFRorPEJmQwlw28VOU5EEzr+OORYG/HOCw+DTik/TRPr/CGr0WQsIxs
-# /ZyNMkzd0IuXpCxf14asVeztHH7x59e1MlMMPhO40A+3a4XvgL/V9nMuwH3Xrf2X
-# K/bETcK+gJLkS0nN2A6r//gyliLSrrEgKqniQJwmjw06Rl6kULZBhOcsqCkQU95x
-# wAg/y+hmUu45fAlcyiKOn6DNew/jSA8l6AtSK2XlQuZa6XTfNeDGUSJRFbKeWu1d
-# 7e9qAOOHBI4AiY5SQmWAA/+VVi3NLSYa0vhR8aSveA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU2miSLlsHs12Fm31PKpNgO/RL02EwDQYJ
+# KoZIhvcNAQEBBQAEggEAPUW21udJYw10TINpHQq9AA7f3N5+OK5sIkEvsJvkdEgH
+# YFDtTSJ/D7Wy3G6bngDDM0dyPL9bOPxjaJjKnybiDJLVoFulEvoP6KTSNBAZ5W80
+# UrNn4t3lJ86Y42Q+ThM1vT8o/3NynTAA86r005/wJjxoWKH26+AHLA3BhcM5Fhj2
+# vGsxzigiEN9rMWfMjbayUiyID6LD0dk+JaBHOk5fZ32hQ5wiVauSHsueeSUYJnyc
+# DHyFSuM7QWqK3/5sPSNgl+fBVROyUeg6+CNkoE71SDgEEriKYosBxCKZz46Vl7je
+# aWynKgymA7A07jCJZoYy8uX46m6qk6EVbYvn9Jdk4w==
 # SIG # End signature block
