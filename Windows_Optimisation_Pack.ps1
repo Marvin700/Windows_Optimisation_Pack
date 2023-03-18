@@ -135,7 +135,6 @@ Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
 function SystemPoint{
-Clear-Host
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
@@ -148,6 +147,7 @@ IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
+Clear-Host
 "Internet connection Test..."
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
@@ -537,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtLLCg2YJN+/MNNw/tLCBxNtU
-# iJygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUf4WOP3IlBKcsB+ZOv0LDobVX
+# iY+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmFr3ogwgfAV3sg06WYmsmuRQvfMwDQYJ
-# KoZIhvcNAQEBBQAEggEAp1Xuj1HZ+ruOgEKsywCz5FRUovbHsLK98kRdQU1Ur0gw
-# 4zH9//fS2mqdDQExsODSLGsGIlG+R9/69GPuI/NN79kE9HkXdlivV+t8cshUFq+V
-# JewZrp5BG92gg/WYp/M+Mwn1Q+HEFJtOb5Hy6SReUQpVfyk4MRcXw3rJiSKhoyNV
-# iZxcbyjpt7tAGU3JNpovkPT/AdXHCs6BMk41gbErWQOwh0NckuOBa/4Z5AoC+UcS
-# A5GW736+qXKbitxJRYljgXEbZbJ579Rdheatqbwxdd8sMC/LTYGiVZ1I5rKflec/
-# aQ0CaujkLGN1j6Fu2dl1QtX0EBy0aISdmxciqZ4Szw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUaDwlI+uHTiFrjnp9bWaJeZdYEJ0wDQYJ
+# KoZIhvcNAQEBBQAEggEAsIHTIT04OwecHoj+4n6NM/TUrBzT8+Pom3t/81ZnYA39
+# aRUu8QmaxXxiVFezcNEygluLy5U1busT92qM4tLwa8md7W3eYi5A2+oMLD69dSFz
+# 44IoDyhfvcAXa0EfMam1slgq8s72t1OZyxpUYziEbXPjSfjyhcgoh9bQY5Fi2wTK
+# x+zwhubRU8vTkNyobzarFDquGBhKBX0VvymTNa20aFE7SUknoMD1fiy5aMQVdKCj
+# wUGAhBrMBVoTErnJqhfTRxECvSWjFUYa9OIAizSicNC1M32R8CYPoxvUjA6+Ya5U
+# TyGAvZkMjkK4STHnuKVsDER0wxQAmdUeLOldd2QkZQ==
 # SIG # End signature block
