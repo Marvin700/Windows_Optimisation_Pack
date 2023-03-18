@@ -136,6 +136,7 @@ Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
 
 function SystemPoint{
+Clear-Host
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
@@ -510,7 +511,6 @@ $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() } Out-Null
 
 function Choice { 
-Clear-Host
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
@@ -539,8 +539,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8zmAaGcPvqHKKoGOwwLpmLLW
-# eg6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUr/cFLuQZXgMkxCBxC3L96VzX
+# kz+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -560,11 +560,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU2miSLlsHs12Fm31PKpNgO/RL02EwDQYJ
-# KoZIhvcNAQEBBQAEggEAPUW21udJYw10TINpHQq9AA7f3N5+OK5sIkEvsJvkdEgH
-# YFDtTSJ/D7Wy3G6bngDDM0dyPL9bOPxjaJjKnybiDJLVoFulEvoP6KTSNBAZ5W80
-# UrNn4t3lJ86Y42Q+ThM1vT8o/3NynTAA86r005/wJjxoWKH26+AHLA3BhcM5Fhj2
-# vGsxzigiEN9rMWfMjbayUiyID6LD0dk+JaBHOk5fZ32hQ5wiVauSHsueeSUYJnyc
-# DHyFSuM7QWqK3/5sPSNgl+fBVROyUeg6+CNkoE71SDgEEriKYosBxCKZz46Vl7je
-# aWynKgymA7A07jCJZoYy8uX46m6qk6EVbYvn9Jdk4w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUxrY2Spa3toSh3DKUkmJO0iAmQqEwDQYJ
+# KoZIhvcNAQEBBQAEggEANIwlyfLcapUzGXngSREbgFzjGF2vDKjYBwwMzEL3Gumt
+# eKPAdto0vNDGOgkoCU4t5frouvUoIFMguEaeEig5iHZ5ouUGzSQ/v37OegN+Gy9H
+# p0S6Vd93hiuVk8RURKLOym32ghJ6Lf4bdkllnPJlCQ4eTcupGGly7Ury4yZb9JtC
+# 8u+ttwxcEhbMMz9ELac3u6nGVnbD+kg4QxPI3xR9wCfhikXm/hKnCS+DUqKGhQ0x
+# JN9Q96XuNUb2EyQy/6R+oI3ui/b7YQ2J94wmJZqs+cCbXcZt9LXRokceSXN2Dt1C
+# QqZRd/wzo81LhAPFItLns4NicUcbXR3e0yqHpacDUA==
 # SIG # End signature block
