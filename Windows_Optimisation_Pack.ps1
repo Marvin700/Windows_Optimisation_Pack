@@ -1,3 +1,4 @@
+Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear(); Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
@@ -211,6 +212,7 @@ $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\M
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 lodctr /r
 lodctr /r
+Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear(); Clear-Host
 Clear-Host
 Write-Host "Datentraeger Bereinigung wird gestartet..."
 Start-Process cleanmgr.exe /sagerun:1 -Wait}
