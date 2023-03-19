@@ -1,33 +1,31 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Cleaner | $([char]0x00A9) Marvin700" 
 vssadmin delete shadows /all /quiet | Out-Null
-New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force
-Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F
+Checkpoint-Computer -Description "Windows_Optimisation_Pack Cleaner" -RestorePointType MODIFY_SETTINGS 
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
+ipconfig /flushdns
 sfc /SCANNOW
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
-Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
+Dism.exe /Online /Cleanup-Image /spsuperseded
+Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-$paths = @(
-"$env:temp",
-"$env:windir\Temp",
-"$env:windir\Prefetch",
-"$env:SystemRoot\SoftwareDistribution\Download",
-"$env:ProgramData\Microsoft\Windows\RetailDemo",
-"$env:LOCALAPPDATA\AMD",
-"$env:windir/../AMD/",
-"$env:LOCALAPPDATA\NVIDIA\DXCache",
-"$env:LOCALAPPDATA\NVIDIA\GLCache",
-"$env:APPDATA\..\locallow\Intel\ShaderCache",
-"$env:LOCALAPPDATA\CrashDumps",
-"$env:APPDATA\..\locallow\AMD",
-"$env:windir\..\MSOCache")
-foreach ($path in $paths) {Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+Get-ChildItem -Path $env:temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
+Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
+Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:LOCALAPPDATA\CrashDumps -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:APPDATA\..\locallow\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:windir\..\MSOCache
+Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 taskkill /F /IM EscapeFromTarkov.exe
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
@@ -51,8 +49,8 @@ Write-Warning "The System has been cleaned"
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwbITukb6kS4hCF/1c5fEOl4i
-# PZ+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXinVnvKYUREea3r92VKNgDZB
+# 3qqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -72,11 +70,11 @@ Write-Warning "The System has been cleaned"
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUBNJyZYtEIG1BVd1pwfvdlHK1bbkwDQYJ
-# KoZIhvcNAQEBBQAEggEAH2VjnlNOZ7hpKbVXr8NORLmQMKFcgKFWDL5TeG58JiVL
-# Zveyrl+YHrkLtltHPwxqAvdlkP7mRTOzBwEU2+QipQVGanur+6FGtzDcmsMw+d6m
-# PKx2vISbYMDiHlIgctxpJZgGVxFtgTP/D0Lnu6f9Yln3gGjIM3kXNJmXBsgxJAW1
-# VD+gmIjyKdkfiqifpvmK57WmWi/ZonlypxkmVmOXUoiX8JgyfXgYYkt+X/2wTAYk
-# br+aJPu+nvRmjAl16uO3FCOCYO1N7Yzu+0sgMGCQbJflw55li478HVxwIJrN73df
-# 7cfCqJwxRARA3zs8GoAfhN6pMdEiJqX1tjKHg5eSEg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU6vItnLL0Df/Yn83IpUqsn9vCu+wwDQYJ
+# KoZIhvcNAQEBBQAEggEAM4KtV0sF7t70AL/h44CJumBVeNraKDsrv9YhAzmzkMzZ
+# uVHXB93lcGhU4DW9PG9DtKNQAUDjqcfJMU90R9Oqre0amtMbkdbb0JOYxVSnrnsa
+# Nf2BLOJ/TU8WeuGm1GUBeN+BrpxfMuL5Iz4q8KX+xJBCxOA6r7VvbFK8pjM2ocy1
+# n6rgp5b+iQGM6gGws7umdVxBLfwHJjk0Jn4YcSpM3Nt7ukFJoVGY4mxnzShO1JvF
+# 9U0gh3/2tgBUve8/laC3BdZc+RSx/gRwnCzo9jBtVXvN23d2l4Tg57mWZKh+ZVcz
+# 1C4XbZjzNA99o0GwjzuL6Pb8IBGUQdVkuUpniVt9hQ==
 # SIG # End signature block
