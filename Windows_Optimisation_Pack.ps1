@@ -182,19 +182,19 @@ Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $paths = @(
+"$env:temp",
 "$env:windir\Temp",
 "$env:windir\Prefetch",
 "$env:SystemRoot\SoftwareDistribution\Download",
 "$env:ProgramData\Microsoft\Windows\RetailDemo",
-"$env:LOCALAPPDATA\AMD",
-"$env:windir/../AMD/",
 "$env:LOCALAPPDATA\NVIDIA\DXCache",
 "$env:LOCALAPPDATA\NVIDIA\GLCache",
 "$env:APPDATA\..\locallow\Intel\ShaderCache",
-"$env:LOCALAPPDATA\CrashDumps",
+"$env:LOCALAPPDATA\CrashDumps"
+"$env:LOCALAPPDATA\AMD",
+"$env:windir\..AMD",
 "$env:APPDATA\..\locallow\AMD",
-"$env:windir\..\MSOCache",
-"$env:temp")
+"$env:windir\..\MSOCache")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 taskkill /F /IM EscapeFromTarkov.exe
@@ -536,8 +536,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUILOUtLiGDXTe6rtdHpSdJvFM
-# 2u2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOFI2NloY7AsWxjF5uh1Gn/Wh
+# UGSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -557,11 +557,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUSPpwWOR4/W2vYZdjXTGuSFyS6kowDQYJ
-# KoZIhvcNAQEBBQAEggEAsJSHoJN15t1LmViDHa0WLCuDVXGYI9d2w/DDL9Lr6kBM
-# c9jY7KZQ1v/oFny9WT3JlH4vHiCFkVklrtRZkympiHs91Aim8VXasy3f55Q/7vnm
-# Wt3N5PRl+7dupZ+oPy2AWx/3Xpzy5gSsrzR8pflS0plP6no9HcPi3rh/woCQs1LA
-# iXu8ZSylU8tFf4C6s382nFgc/OMo3SA8LXDh+3JR+hBadFP0CEImoRK2mZNMZswN
-# ZCPp2+eTMpsMgIR28+q8iWTo5J4eSYzgLF2ZLJXhYGBh4+kfq7AwtERbNpvZgCPo
-# V71BEpD2Tx+IqxmdtyP7b/c4VwW9Ybbran83QpXFcw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUchVqCi9WI/NukmxtsQued/fxqfowDQYJ
+# KoZIhvcNAQEBBQAEggEAeadvhPYslLx3giqIRDqTTmzbjiV6JpPurSLl7q/YzlYf
+# rzekqEdtfiCvjfy0C03ucG8cvQ3i9LlKngshEZTvRmf6kmz9ZD23+4h3GVYsF7Du
+# tHXbTxsocqutEWKbaNhC6EZ26TgBpuMd09UKIiAkeUhuHXa0OgsOdOkdIGYHqtQI
+# KRPYjj5T/gMUGHfRrjptpubgxCGCjst78a4b8VQ01qv8F8JwioE6ZaXIGYHJiqCT
+# 3Q65F2iDwr/oHLAy5xAYTwsmsAo6heta5UAJnY0VT8bhpmK9zDicTY1CmlLD7EKs
+# MY27cgbwv6ZUi5+7wGExYHN2AoLyXXV4mLqNnMjfCw==
 # SIG # End signature block
