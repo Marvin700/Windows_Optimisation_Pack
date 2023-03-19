@@ -23,7 +23,7 @@
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
-iex (irm windows-optimisation.de)
+irm windows-optimisation.de | iex
   ```
 
 <img src="https://user-images.githubusercontent.com/98750428/203324846-1b72b5d0-53c3-45f0-9a12-99d4c1beeb35.gif"> 
@@ -40,7 +40,7 @@ Please update the fresh Windows installation first. <BR>
 
 ## Driver-Cleaner
   ```powershell
-iex (irm windows-optimisation.de/drivercleaner)
+irm windows-optimisation.de/drivercleaner | iex
   ```
 * Clean uninstall of GPU Driver
 
