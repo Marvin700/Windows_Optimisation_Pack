@@ -181,8 +181,9 @@ Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Clear-BCCache -Force -ErrorAction SilentlyContinue
+Clear-Host
+" Cache Datein werden geloescht"
 " Bitte warten..."
-" Cache Datein werden gelöscht"
 $paths = @(
 "$env:windir\..\MSOCache",
 "$env:temp",
@@ -190,10 +191,10 @@ $paths = @(
 "$env:windir\Prefetch",
 "$env:SystemRoot\SoftwareDistribution\Download",
 "$env:ProgramData\Microsoft\Windows\RetailDemo",
+"$env:LOCALAPPDATA\CrashDumps",
 "$env:LOCALAPPDATA\NVIDIA\DXCache",
 "$env:LOCALAPPDATA\NVIDIA\GLCache",
 "$env:APPDATA\..\locallow\Intel\ShaderCache",
-"$env:LOCALAPPDATA\CrashDumps"
 "$env:LOCALAPPDATA\AMD",
 "$env:windir\..AMD",
 "$env:APPDATA\..\locallow\AMD")
@@ -538,8 +539,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfeN34ChRSBpQ+S7y3gzk4BFw
-# zPOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCnOLB/lUMfF09xXfA0hMhomA
+# fHOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -559,11 +560,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUB3wWOJkV5x9UlU1eGHY048K0MEswDQYJ
-# KoZIhvcNAQEBBQAEggEAxelBEINjEl503AFwrTM+lZXP/BDKIeFXLruNRYNIx7m3
-# 5eN3wdeExRwz7wkLqX6l1lsckwc9XKvuAHSdzF4txS9DUX4zNvAEKFcE7RtAp0Rx
-# SGGI2LW5JZZJuG3OLLaXVKog/cPd0f1aH1z6yfmEoMiXvqyb32HgvA0fVxOy3uxI
-# hQePxlktxZkTKmIwuwAtSYuPHYSiXzJ0vdZHfrcS70m9aHFbM8ndXb7SqL1LJo7A
-# Ll1zwdcwpblgaGBAVakFFdEQVp9aVcxVEaTyY8aAhwG2M0hNECvI7P/Ae3u0Ory/
-# JRKwEWeBnvmt/8j3ViL/jx2ImM2vV+xA4JV7YLKUuQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUazd+gMiMElOg5GKiZl6vRSINOzEwDQYJ
+# KoZIhvcNAQEBBQAEggEAn0TbHFlme/c/0sfie7zsbOrRr86HufnL+nJMlJF0ZOak
+# A/+KpQDMaUMnD8OV5dQ8o34IPGbyUOoK62ILHWQ/VA3vXBXF+6ZVWgui2QoL73i+
+# sOhmjUAitcqlYU6i8MZVortjPeXlV0oh+6JYjOlohFDo8Qi63bxxMUGLEPskjVIs
+# e0t9MH1D7GO/hXn9ve7a9i4nbXD0xEsVz8YhAzzrOn9/K8BsU02p7daYi9M/NEcv
+# GWS0pI/4+WaL5Crh3MrzCgvO6Rv0rGeMLW2+iVAw629kSOlMVxTleBzFFELWnGcz
+# 57u5VBDHK1nS9d5yHbZ4rr3z/tFF7n8Ko1x9ODE8Uw==
 # SIG # End signature block
