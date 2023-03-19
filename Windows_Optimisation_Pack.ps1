@@ -182,8 +182,8 @@ Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 Clear-Host
-" Cache Datein werden geloescht"
-" Bitte warten..."
+" Cache is clearing"
+" Please Wait..."
 $paths = @(
 "$env:windir\..\MSOCache",
 "$env:temp",
@@ -539,8 +539,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCnOLB/lUMfF09xXfA0hMhomA
-# fHOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8bEXDT1s5QO+V7CTx6Spi8vl
+# f3mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -560,11 +560,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUazd+gMiMElOg5GKiZl6vRSINOzEwDQYJ
-# KoZIhvcNAQEBBQAEggEAn0TbHFlme/c/0sfie7zsbOrRr86HufnL+nJMlJF0ZOak
-# A/+KpQDMaUMnD8OV5dQ8o34IPGbyUOoK62ILHWQ/VA3vXBXF+6ZVWgui2QoL73i+
-# sOhmjUAitcqlYU6i8MZVortjPeXlV0oh+6JYjOlohFDo8Qi63bxxMUGLEPskjVIs
-# e0t9MH1D7GO/hXn9ve7a9i4nbXD0xEsVz8YhAzzrOn9/K8BsU02p7daYi9M/NEcv
-# GWS0pI/4+WaL5Crh3MrzCgvO6Rv0rGeMLW2+iVAw629kSOlMVxTleBzFFELWnGcz
-# 57u5VBDHK1nS9d5yHbZ4rr3z/tFF7n8Ko1x9ODE8Uw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0H60oLIjuxygVh4KkdEhtt//ixgwDQYJ
+# KoZIhvcNAQEBBQAEggEAVCT16jwsVZkGPrgQMCZ7WwD5XE569DJryNY8dvuk+M50
+# 3Aa9RB1yeHpjGkcKh74fpdIUAMsH6p5AW7kelTdk4mNuZxswZACs+FK79LzUygV9
+# HiRrbWpIzX0rfiRMgwL7PNLrBvlee6tKr+COl60oGssAQx9aptIcdq/7bdw+blNl
+# Aj7GHSD6tJEtA+dMXibevl8yLfWp30DQgLTR+iEynputQuCtMsttjIo1aoNkX+iP
+# Nwf5ISUpkXQPa2FkIXsr7lqGTyAoF0OwLDCV0qGrLPg7GIIJOQNOttOgluoc8nnx
+# wSPW8xBRBWRKu6sTHW/2IgKyUpgWLXpcob0Yr8hSrA==
 # SIG # End signature block
