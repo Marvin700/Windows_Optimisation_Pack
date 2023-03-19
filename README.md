@@ -4,8 +4,7 @@
 * Remove Windows Bloatware 
 * Disable Windows Spying
 * Lower CPU and Ram usage
-* Deactivate Cortana and OneDrive
-* Clean Tasks and Autostart
+* Remove Cortana and OneDrive
 * Deactivate unnecessary Windows Components
 * Deactivate Windows Indexing 
 * Install Runtime Components
@@ -15,6 +14,10 @@
 * Deactivate Insider Builds 
 * More Windows Tweaks
 * Take Ownership
+* Maintance Windows
+* Clear Windows and GPU Cache
+* Cleanup Windows Image with DISM
+* Customize and run Disk Cleanup
 
 
 ## Download via Powershell
@@ -34,14 +37,6 @@ Please update the fresh Windows installation first. <BR>
     <img src="https://user-images.githubusercontent.com/98750428/200678853-363ec142-b0ab-4623-97cb-077bff29ca9d.png" width="410" height="340">
     <img src="https://user-images.githubusercontent.com/98750428/203978712-a4273aa4-9402-4dbb-a40f-ff2c508d4935.jpg" width="410" height="340">
 </div>
-
-## Windows-Cleaner
-* Creates a new system point and deletes all others
-* Check System Files
-* Customize and run Disk Cleanup
-* Cleanup Windows Image with DISM
-* Cleanup different Windows Cache FIles
-* Clear GPU Shader Cache
 
 ## Driver-Cleaner
   ```powershell
