@@ -179,8 +179,6 @@ Clear-BCCache -Force -ErrorAction SilentlyContinue
 Clear-Host
 " Cache is clearing"
 " Please Wait..."
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
-Start-Process cleanmgr.exe /sagerun:1
 $paths = @(
 "$env:windir\..\MSOCache",
 "$env:windir\..AMD",
@@ -196,6 +194,8 @@ $paths = @(
 "$env:LOCALAPPDATA\AMD",
 "$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+Start-Process cleanmgr.exe /sagerun:1
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
 IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 taskkill /F /IM EscapeFromTarkov.exe
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
@@ -537,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF9Pd5b2m7ksI3yfxvrzFRHxg
-# RtegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUclI1DflmPMyW5tFdGbRCmsvc
+# Q8mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHxRuliEJcM7f5EI/USuHMtz8fgQwDQYJ
-# KoZIhvcNAQEBBQAEggEADcvRp3QOAruNDWw8bObgNBa/cBZnoJ8bYH+BYxWBqYDt
-# MgRLwdbvN2Tl+4tLt9DG0Er5G3cGm5uS5HLdu53zI829PENirpsBM+gKUVVCWjAz
-# 5FT65/6nouTZVmteGwzX4ro59HvjTFz8HBwjWVTMtv6PIerZYDNjQUTX1f0QfOAc
-# +14zGAuCqHWBzHBucLrLyBCqzI+6jR7LFPdgte/FLbtBngCzTiWMCa54785VGIsV
-# hjLpC3lTeEC9xeqJflAJy0/PzE2Yaw1I+z5zHYc6qHFWQOMS3REMm+wVw6hHKswg
-# XqfL6LqOGq3R1kaqH8CQ0dPcpXsxhbtB34SIcxBDYQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUaByulBZ0xQZGc8uhFgGWiLP8Cx8wDQYJ
+# KoZIhvcNAQEBBQAEggEAm908DnR64p1Hc1byh7ZVXr45cwGcS2SyMrSOESBFGOSk
+# LtRTzQZPf2KS6uIzA+8m3pCKu8DlT9Xu1ExcV1/fm6qlFNxEtGjFfKZLviVP9Dd3
+# kCqFtkkFAG8OixWUxzshqbz6REKwR43RCp6yBymnSyLx4Csst1ef6U85/3bO9qk6
+# +4UqpktKPLi+GAZdp3TiqVKtqOv2pJZGamJvnwWHZoz+U/8zcXxfGK53SQjmvxd2
+# bFJ+JF/9mSe2unZlbhxvs9BdzMjSdobooqjW10rZGQwL2qSJa6AOtIRVnAv5RcKh
+# F7N6LW/Tgpp4W3ntjds69g5bAqCnNjSoj+iRdihTJw==
 # SIG # End signature block
