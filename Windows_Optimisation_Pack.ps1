@@ -170,22 +170,20 @@ function System_Maintance{
 Clear-Host
 gpupdate.exe /force 
 ipconfig /flushdns
-Start-Process -FilePath "cmd.exe"  -ArgumentList '/c "%windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
-sfc /SCANNOW
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
-Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 Clear-Host
 " Cache is clearing"
 " Please Wait..."
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed ... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
+Start-Process cleanmgr.exe /sagerun:1
 $paths = @(
 "$env:windir\..\MSOCache",
+"$env:windir\..AMD",
 "$env:temp",
 "$env:windir\Temp",
 "$env:windir\Prefetch",
@@ -196,7 +194,6 @@ $paths = @(
 "$env:LOCALAPPDATA\NVIDIA\GLCache",
 "$env:APPDATA\..\locallow\Intel\ShaderCache",
 "$env:LOCALAPPDATA\AMD",
-"$env:windir\..AMD",
 "$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
@@ -212,11 +209,12 @@ IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Unin
 taskkill /F /IM cod.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+sfc /SCANNOW
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
+Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
+Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 lodctr /r
-lodctr /r
-Clear-Host
-Write-Host "Datentraeger Bereinigung wird gestartet..."
-Start-Process cleanmgr.exe /sagerun:1 -Wait}
+lodctr /r}
           
 function Runtime{
 winget source update | Out-Null
@@ -539,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8bEXDT1s5QO+V7CTx6Spi8vl
-# f3mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1TZy5riGh2s0AaDptIiva62y
+# mKSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -560,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0H60oLIjuxygVh4KkdEhtt//ixgwDQYJ
-# KoZIhvcNAQEBBQAEggEAVCT16jwsVZkGPrgQMCZ7WwD5XE569DJryNY8dvuk+M50
-# 3Aa9RB1yeHpjGkcKh74fpdIUAMsH6p5AW7kelTdk4mNuZxswZACs+FK79LzUygV9
-# HiRrbWpIzX0rfiRMgwL7PNLrBvlee6tKr+COl60oGssAQx9aptIcdq/7bdw+blNl
-# Aj7GHSD6tJEtA+dMXibevl8yLfWp30DQgLTR+iEynputQuCtMsttjIo1aoNkX+iP
-# Nwf5ISUpkXQPa2FkIXsr7lqGTyAoF0OwLDCV0qGrLPg7GIIJOQNOttOgluoc8nnx
-# wSPW8xBRBWRKu6sTHW/2IgKyUpgWLXpcob0Yr8hSrA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8Q8h1M6nt12YA4u8xiOVUoQeKN8wDQYJ
+# KoZIhvcNAQEBBQAEggEAt0TuSa4kI/8jCr0yuG5PWlfxFcInmzBtSk92JjUPz9Hg
+# 4vfje5x4uWC1U8HCG1riqKtSkxlHrUmvFQYYXxgmXPYpevIqrq25gBoEdl3Gw3jJ
+# sQzgkKaaRbl6cwLT8OCuWNCSmXf1NsbAfOmxuDYIS1e/ELFkL3ixT2gyreXHxoTt
+# rhyQcQlKXLkRIF35kRiXCOh0mPd69TYjJMI3aM0JHlISzwE75ph7gw+jckZipnTa
+# W0GokS+615VTUuPdYjBFF2GfFBwF6WI6voAaCwKs0Jn5H/mLwCGRJIENWihZUlBO
+# Htx7wqWrWezsmnQiTQT+V0+bT2aE0ADcjnu3mmClew==
 # SIG # End signature block
