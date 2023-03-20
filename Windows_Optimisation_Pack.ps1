@@ -170,6 +170,8 @@ function System_Maintance{
 Clear-Host
 ipconfig /flushdns
 gpupdate.exe /force 
+lodctr /r
+lodctr /r
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
@@ -178,7 +180,6 @@ New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWO
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $paths = @(
 "$env:windir\..\MSOCache",
-"$env:windir\..AMD",
 "$env:temp",
 "$env:windir\Temp",
 "$env:windir\Prefetch",
@@ -188,6 +189,7 @@ $paths = @(
 "$env:LOCALAPPDATA\NVIDIA\DXCache",
 "$env:LOCALAPPDATA\NVIDIA\GLCache",
 "$env:APPDATA\..\locallow\Intel\ShaderCache",
+"$env:windir\..AMD",
 "$env:LOCALAPPDATA\AMD",
 "$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
@@ -207,12 +209,10 @@ taskkill /F /IM cod.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 Clear-Host
-sfc /SCANNOW
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
-lodctr /r
-lodctr /r}
+sfc /SCANNOW}
           
 function Runtime{
 winget source update | Out-Null
@@ -535,8 +535,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNwu2kE2iRaSi57C03emf9Mnt
-# xtagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQUoDRyuRFQ4ddoKQSXwcZRD2
+# BWugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -556,11 +556,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQb0xZrqcrr6Re5PFcX+bK7jWnLowDQYJ
-# KoZIhvcNAQEBBQAEggEArd6nZJ/bgew32ubaMS/6Go+Sjr/Q27aa4sMN9a4r3qZR
-# 6RkJCYzt9GGt7zg3r+PglfQsVllo4ruDiETbzwg+wsAlBJVwPuJ1IYnhrBuh+S9X
-# pfsCobolQbBmeST8qcrt50D6sPfBAHvRuXWxb/YUtlDTSiEB2jx62Ip8//XLkIpg
-# FfA22OAeejOLpL7mPalFqf//vFh7qMs0r1Cs2hxysggyyaHmypHzcabWYhVdGdBu
-# Wy+RYyIMlHxLaiN8aL7YjY93xtV1EyFrVqGhw3eMT0bqAnqPgjZsoU2wkeKaZED1
-# uZ9lqT4DKqQf7WMdqH4BGtvLETS88nR5BDY4wpegHg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUT4tKmGkNsEExIKHMg4ngwQQW+dEwDQYJ
+# KoZIhvcNAQEBBQAEggEAMXaETLQsntKja9fclMLtpO+ez1rARlU8bNl/ps32+McD
+# hq+vcg9t+GEVn8msP5xeDNIJm70H3m9h9BUnhWzzl7WTF2FU5/d+cB93VAQ9aEvs
+# /rOP+n/HKMrL4PxQuMWKx8rtLV9WL9waT/RdJsG2RAEsQdVI9vRvgdbLrgfsp8/T
+# lWbSp/P742k9MoGS1kq/ewm2ptmkFVyoOaGgjKZsvNnhchkGWEPY8+IyuXDwR69J
+# nFMyVX2GqcXjwQH7O8u18+Z9oOfDufidQSwziVrMiRH0UhyZsTfla+tPFhgredBI
+# Ca8uwDBNbCWYs56v8j4cH04JHFdI+fa/UsIeUlvpdA==
 # SIG # End signature block
