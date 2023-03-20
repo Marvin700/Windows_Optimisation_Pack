@@ -179,7 +179,7 @@ Clear-BCCache -Force -ErrorAction SilentlyContinue
 Clear-Host
 " Cache is clearing"
 " Please Wait..."
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed ... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
 Start-Process cleanmgr.exe /sagerun:1
 $paths = @(
 "$env:windir\..\MSOCache",
@@ -537,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1TZy5riGh2s0AaDptIiva62y
-# mKSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF9Pd5b2m7ksI3yfxvrzFRHxg
+# RtegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8Q8h1M6nt12YA4u8xiOVUoQeKN8wDQYJ
-# KoZIhvcNAQEBBQAEggEAt0TuSa4kI/8jCr0yuG5PWlfxFcInmzBtSk92JjUPz9Hg
-# 4vfje5x4uWC1U8HCG1riqKtSkxlHrUmvFQYYXxgmXPYpevIqrq25gBoEdl3Gw3jJ
-# sQzgkKaaRbl6cwLT8OCuWNCSmXf1NsbAfOmxuDYIS1e/ELFkL3ixT2gyreXHxoTt
-# rhyQcQlKXLkRIF35kRiXCOh0mPd69TYjJMI3aM0JHlISzwE75ph7gw+jckZipnTa
-# W0GokS+615VTUuPdYjBFF2GfFBwF6WI6voAaCwKs0Jn5H/mLwCGRJIENWihZUlBO
-# Htx7wqWrWezsmnQiTQT+V0+bT2aE0ADcjnu3mmClew==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHxRuliEJcM7f5EI/USuHMtz8fgQwDQYJ
+# KoZIhvcNAQEBBQAEggEADcvRp3QOAruNDWw8bObgNBa/cBZnoJ8bYH+BYxWBqYDt
+# MgRLwdbvN2Tl+4tLt9DG0Er5G3cGm5uS5HLdu53zI829PENirpsBM+gKUVVCWjAz
+# 5FT65/6nouTZVmteGwzX4ro59HvjTFz8HBwjWVTMtv6PIerZYDNjQUTX1f0QfOAc
+# +14zGAuCqHWBzHBucLrLyBCqzI+6jR7LFPdgte/FLbtBngCzTiWMCa54785VGIsV
+# hjLpC3lTeEC9xeqJflAJy0/PzE2Yaw1I+z5zHYc6qHFWQOMS3REMm+wVw6hHKswg
+# XqfL6LqOGq3R1kaqH8CQ0dPcpXsxhbtB34SIcxBDYQ==
 # SIG # End signature block
