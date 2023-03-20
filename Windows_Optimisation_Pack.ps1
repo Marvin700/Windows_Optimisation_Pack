@@ -168,8 +168,8 @@ Start-Process $env:temp\Autoruns64.exe }
 
 function System_Maintance{
 Clear-Host
-gpupdate.exe /force 
 ipconfig /flushdns
+gpupdate.exe /force 
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
@@ -206,6 +206,7 @@ IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Unin
 taskkill /F /IM cod.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+Clear-Host
 sfc /SCANNOW
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
@@ -534,8 +535,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlk9nT3QMO2+jVd+s6xrJa3hK
-# t9SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNwu2kE2iRaSi57C03emf9Mnt
+# xtagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -555,11 +556,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUL16rWpmDUh92gG3DCE42KoS6AXQwDQYJ
-# KoZIhvcNAQEBBQAEggEAlBw/9xYodPEAAMjLQwMn58ApcSuKpi3/9ntmChhXjWP7
-# Ht+X02P6V4ejNm5+ki/eATEu9MealsGXVR4q8wO0m/WodVZeDHE/Rv00dsDrQumV
-# SVtqjNGzuWZs4oejfaDr2g2RLNZQul1TSEr1vSuxphQLAMnI8LCK0+B2Puq5vEVt
-# L3rXpPLWwWcuuvFbE2dxQdN7aAb8CJTu+3ZrzLX+M9JwD8YzUtvc6oZ5ULzWUXhX
-# lNhderBCQUO033tDhJWRcTp2745BHBDUAsN53bHytufjA6JkpBZzqRbFwd6jtUXv
-# RsjHVxQ0Bm6EtKv7RqX0ov8K6oebEnQXB9hYEI90dA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQb0xZrqcrr6Re5PFcX+bK7jWnLowDQYJ
+# KoZIhvcNAQEBBQAEggEArd6nZJ/bgew32ubaMS/6Go+Sjr/Q27aa4sMN9a4r3qZR
+# 6RkJCYzt9GGt7zg3r+PglfQsVllo4ruDiETbzwg+wsAlBJVwPuJ1IYnhrBuh+S9X
+# pfsCobolQbBmeST8qcrt50D6sPfBAHvRuXWxb/YUtlDTSiEB2jx62Ip8//XLkIpg
+# FfA22OAeejOLpL7mPalFqf//vFh7qMs0r1Cs2hxysggyyaHmypHzcabWYhVdGdBu
+# Wy+RYyIMlHxLaiN8aL7YjY93xtV1EyFrVqGhw3eMT0bqAnqPgjZsoU2wkeKaZED1
+# uZ9lqT4DKqQf7WMdqH4BGtvLETS88nR5BDY4wpegHg==
 # SIG # End signature block
