@@ -18,18 +18,20 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 11 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
+$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 
+Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
+
 if ($Functions)
 {
+	Invoke-Command -ScriptBlock {Checks}
 	foreach ($Function in $Functions){
 	Invoke-Expression -Command $Function}
 	exit
 }
-
 
 Checks
 
@@ -397,8 +399,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJ0tlPWYMvRAUnwYwqBGIKI/O
-# Zp+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXv39aqRAdMuF6bwLLeD0+WHg
+# 7VagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -418,11 +420,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUHCW7w8TlmSiKHOhNhNISElsEcZIwDQYJ
-# KoZIhvcNAQEBBQAEggEAQiVOrjdfJcD+Cq9n0dG+lsLmZ9PfYIe3yw7TXeFIMbuZ
-# xttFdQhSD6Ps9Q2LrPve1yhERZN6afpkKUEZit1hGhdOySgJaZqv9HN/M11Z2VN4
-# 6fw2H9RTr222ds+3xsFB6F29ti/FwkBkbDDrImrgXfZjnKYp93uBppqgNBSmzMg3
-# a69qvAqaZTfTcj0e3Ji+o8YUzjGaplp0Ruba+dYeOn3CfDkRBeAYWBGHIMv2Uqsb
-# tqtOV7StX+8mebnIG5ozdsPv9IYfqVVdBLFaPEFwnqcJOzZC7Bguh/R3t24MRUFZ
-# XFAel2bpxEkoIgCWbl4nT93kchHiGnTDpVGMvMc5tg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUvYHhcE1DY/f046xCYp7K+D7DSOMwDQYJ
+# KoZIhvcNAQEBBQAEggEAsFrG4CXk+htPJ6XlqiPC2nGguHMJpbZAQhXN0286/2wQ
+# 15sIFOgkEy9tEdpDOyg9JwPUPElPtQLPKVds5xI4TFeqn4SBuX2vjRVWHoslTQUu
+# 5ieB/1eYCUZKev66pwcvI6o65lYU+3VZ8xeZU6100oXT5lvikkWSz9gMRe5AH9Jf
+# agDFBRBIdAI6xxtjGIVLcgeh4vy4HoBM5C9wO8IjHS5Bfr8sG2fj6dgVVeuUKCy5
+# VpRJa5kl1ybmoRg/7qhApsW62X9Xhbn99h0eonBLS8Ajkb/cW/1v6VCLQWYoJSBW
+# 3KhMH+PrGHJdioP0/8UE1nyltWII42uyg2sGpAEeew==
 # SIG # End signature block

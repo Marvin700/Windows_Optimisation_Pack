@@ -120,12 +120,12 @@ IF($WindowsVersion -match "Microsoft Windows 11") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.11.v6.4.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.10.v5.16.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 }
 
 function ooShutup{
@@ -535,8 +535,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoVUozcY/a7B9l8uLigUKaDiU
-# /VSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7FAUvJmvfOTp62qgb32CzejZ
+# o46gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -556,11 +556,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUo6PY8VT5Cr+yGSqzQKuKrrPLQ94wDQYJ
-# KoZIhvcNAQEBBQAEggEAfLNydMAAJ8p0JgjiI/ModoMsSMfalYAI20NvipUm1zGR
-# TqHG+tphnfPdUlsX+RFNW+PzRIoaGthickfMhyIFf6O+2c+ilCJ5X5/xSpCpf3ix
-# OSyAWnE5A0Zip7GW+4QEC+dNMQ7q8NCp1DIcXWcKBHeaP8+mdC/g2D4aV8VE9jdB
-# kOzUKP7B1JxXIvGqGet8R1dPwwui3gbrFQ7Sx0VmlIkKTwhTCrEsQ+kmUsCsQqLo
-# +1I9NtSRtwQtCYQINKATX/os+fcp6Cenf1DapzhKg80EYuH8dmVVh5UsP4TLZyqu
-# KSfd7gDaGja2sA834KQKsrCk4a4CQkVcTlYdY0GZDw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgWxCRRIHRUnFf2zmR6pw/i31ivUwDQYJ
+# KoZIhvcNAQEBBQAEggEAfTJlED2LSeGmNGJtqfsdjoRjhGx89cXC9NbTqzJ0M8MK
+# QAdl3PLB9g2rHgYldDMFD69Dz4XH6BGx4sUkwOkjWVWO77MIU+CZ+guyhH+Ji2W2
+# 1Dr5QvEgniaMlpnauR/In+EAF7IHZ38y54CPILDGIKsYpqyRjE3I3PQGKh81xTCw
+# tr+F1cm1CQa6vxFy2SCIhhSi+UImX6/Rk7s58eP1hFZsw7ExkUoLcctPP/xyR74W
+# K76gVt5LxEIUoEVb0zkdat0nEEuRcFGu8//eUz3Mi/MKXMZ3GWktqkvEtivBtA7I
+# jEkiwXuhtR0SApYb809adkX9/170Q8G+G46LjxXdvQ==
 # SIG # End signature block
