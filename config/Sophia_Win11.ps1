@@ -1,5 +1,5 @@
 <#
-	Version: v6.4.0
+	Version: v6.4.2
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -27,14 +27,10 @@ Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScri
 
 if ($Functions)
 {
-	Invoke-Command -ScriptBlock {Checkings}
-
-	foreach ($Function in $Functions)
-	{
-		Invoke-Expression -Command $Function
-	}
+	Invoke-Command -ScriptBlock {Checks}
+	foreach ($Function in $Functions){
+	Invoke-Expression -Command $Function}
 	Invoke-Command -ScriptBlock {PostActions; Errors}
-
 	exit
 }
 
