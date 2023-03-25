@@ -23,8 +23,6 @@ $Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) far
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 
-Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Ignore
-
 if ($Functions)
 {
 	foreach ($Function in $Functions){
@@ -424,8 +422,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNUlBhymxX4wsOvCMubvuVdbl
-# csWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyzwDP3QzmEnHewduTFPhiRSd
+# ZOKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -445,11 +443,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUnDp0wbJ5q97cOuXbUg7mWMYOG4UwDQYJ
-# KoZIhvcNAQEBBQAEggEAKaumYfPpZgS+5TkGZeGlr0YbtgVDyy2gyMKPAieIlF6+
-# vzATpdPFlDPab7Nm1dtwM7LjxTMc9af9OLw1Xz2bCfykdN3i+CpPB+W/5aNXQ56o
-# +0psxZktoXdwbOsgTPZs9cie3Iyv2IDe7HkIx0u3JVdN/dx9ZaZ/nJqvU/+1Kw07
-# MxNsMB6/ecunGnWAARxq8ElbmN0Th38X7l9rTXkw5dLiiSUdrIA//TWFN1BNXQGV
-# CS5aoGA4johZfjsw3RBp22fl08bClOC+/y/tE0PISQsOcbvw/FgbwlYqsVFH3fRe
-# EW6+PgzE24cyafJzqF4AfwvYzgCkMsmTQhWtwUZ7rw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUX9jUajgy7psJrIK3tm234qEf0gcwDQYJ
+# KoZIhvcNAQEBBQAEggEAl0yCLTRTmlSrGrBymSrJnqCl/Ryeo+9OxfQyJku+TJG9
+# aYX4aPzD7XoF3wEYedDtDiiMkIBa7u5XMo+Dckps+hS2Yn3s1KsC6mZq3RZObSER
+# 7JmRkVIsqn2VpLDLd2gs8Hcg7VbLSB9FRpNQc1ukY4n9roN9aqfAgVUT+VBuaJjY
+# m1krp6hLkL9gWWH3yjfbRPPEX06Cgk5xE1UyOrYu6HSaSSs/KkAOCzfahG+HoNRG
+# GEnVBgi21qWoBlFPdwHWNuQ16zKMll164UTwbkERDCToxBBlMQ0psqAxqlp5xrcj
+# vh0rNlVP4XpuD+LO7aldqzdtY96LCCKoLODTooe9Zg==
 # SIG # End signature block
