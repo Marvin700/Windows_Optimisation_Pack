@@ -11,7 +11,6 @@
 * Deactivate  Tasks & Components
 * Mouse acceleration Fix
 * Deactivate Insider Builds 
-* Take Ownership
 * More Windows Tweaks
 * Clear Windows and GPU Cache
 * Clean uninstall of GPU Driver
