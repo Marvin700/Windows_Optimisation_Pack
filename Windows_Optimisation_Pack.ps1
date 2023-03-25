@@ -1,11 +1,8 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
-Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
-New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
 $hash = [hashtable]::Synchronized(@{}) 
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
 function WindowsTweaks_Services {
 $services = @(
@@ -169,6 +166,19 @@ Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
+function Preparation{
+Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
+New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
+New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Force
+New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Name ShowInActionCenter -PropertyType DWord -Value 1 -Force
+New-Item -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Force
+New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force
+New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force
+IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)){New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
+else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null}
+
 function System_Maintance{
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Maintance | $([char]0x00A9) Marvin700"
 Clear-Host
@@ -270,28 +280,26 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
-[reflection.assembly]::loadwithpartialname('System.Windows.Forms')
-[reflection.assembly]::loadwithpartialname('System.Drawing')
-$message = new-object system.windows.forms.notifyicon
-$message.icon = [System.Drawing.SystemIcons]::Information
-$message.BalloonTipTitle = "Windows_Optimisation_Pack"
-$message.BalloonTipText = "The Optimisation is done :)"
-$message.Visible = $True
-$message.ShowBalloonTip(250000)
+[xml]$ToastTemplate = @"
+<toast duration="Long">
+<visual>
+<binding template="ToastGeneric">
+<text>The Optimisation is done :)</text>
+</binding>
+</visual>
+<audio src="ms-winsoundevent:notification.default" />
+</toast>
+"@
+$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$ToastXml.LoadXml($ToastTemplate.OuterXml)
+$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
 if($hash.Reboot){Reboot}exit}
 
 function Reboot{
-[reflection.assembly]::loadwithpartialname('System.Windows.Forms')
-[reflection.assembly]::loadwithpartialname('System.Drawing')
-$message = new-object system.windows.forms.notifyicon
-$message.icon = [System.Drawing.SystemIcons]::Information
-$message.BalloonTipTitle = "Windows_Optimisation_Pack"
-$message.BalloonTipText = "The computer will restart in 120 seconds"
-$message.Visible = $True
-$message.ShowBalloonTip(250000)
 Write-Warning " The computer will restart automatically in 120 seconds !!!"
 Start-Sleep 120
-Restart-Computer }
+Restart-Computer}
 
 function GUI {
 Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
@@ -309,7 +317,7 @@ if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}
 if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
-if ($BOX_Runtime.Checked)      		  {$hash.Runtime = $true}   
+if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
 if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
 if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
@@ -528,6 +536,7 @@ $form.ShowDialog() } Out-Null
 function Choice { 
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
+Preparation
 if($hash.SystemPoint){SystemPoint}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
@@ -554,8 +563,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHpV4RS+yE9io4M4l+YiZpyF8
-# tsugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6mdUWNSVzO61CvnVlVMn1s/1
+# G36gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -575,11 +584,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGl7wmomoLT0F0Xi/nXLg1g/31wQwDQYJ
-# KoZIhvcNAQEBBQAEggEAkZQUKFNZmywasiGfalS/UKhARIzjPfxUn0Cq0kZAGoxb
-# tuUfOob7bXvoefY/2QRhz8aDBKt3L1Bau6tdL/8+J1qpBRhkaluxhJzfddQ+h2rF
-# UP56PNwcfK5MYkBEujGhHRomSVgXEW8jSbeJoplIwtkoWVcdLiCOzy0PsfkwLU5z
-# YIp0z19rBWnLSoGBwnp8QQcCh0y/qGuHGGUQM2Q4TMESuSnSnp3mF+kjL/w9kp5Y
-# kTV96mi+UinSN2RYG2dTJ3m2t19irwrEWJlgnlRXDESjhxiuSApylTBjVWP2xjYI
-# KG+qdBcweIzchIXdagQWNErh42ADbsRtXmKESWL0Mw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTcrhqQl+1P5UCBC8/jJV4pz7klYwDQYJ
+# KoZIhvcNAQEBBQAEggEAf3MqqUUTVX68y9RvqSEQZCJ6FlaAsqbKcdcSOr71gSOb
+# jufwjvE6Vk6vCJhZOPCDq06SXwhnwjTk26JrTYzbVmClKjtbNByU3MxIau7k3H91
+# +WvfSIrziX9C0+Unu7zt2i/QYYntfkZiWeLB5S4aFqm7b8Wv5Nc/A6whh4HpF0FL
+# E8SCcPvj2IY+vhY5ZKgqjB+vR6s+fTXBFCzuNGUgZa6Z2bT4Enz/4xOGb84rIZT7
+# L3l3oBKpfXceMesBLsyPsNqLG+79cL87RZkwbc+oRWc6QhpqsaPWhhrn9DD7pmJ1
+# xdb4Xl+cp7OW4J46SN5dqLrCPK+ihS0q+m35NCn0vg==
 # SIG # End signature block
