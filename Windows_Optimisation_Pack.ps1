@@ -1,6 +1,7 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} 
@@ -95,10 +96,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force }
         
 function WindowsTweaks_Tasks{
+Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
+schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
 function WindowsTweaks_Features{
@@ -139,12 +143,12 @@ New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwners
 function SophiaScript{
 Clear-Host
 IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.11.v6.3.2.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.11.v6.3.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.2/Sophia.Script.for.Windows.10.v5.15.2.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.10.v5.15.1.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
@@ -217,11 +221,11 @@ $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsof
 Get-ChildItem -Path $EscapefromTarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
-taskkill /F /IM cod.exe
+taskkill /F /IM iexplore.exe
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
-taskkill /F /IM cod.exe
+taskkill /F /IM iexplore.exe
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 lodctr /r
@@ -544,8 +548,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJH1L3Hd2LYIrwwX+h9pAq3NG
-# QBygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1Qry5twy5tScEXkayrzlh19y
+# YFCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -565,11 +569,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNzphbKsnT+DEuRfCZqJZ5lXRiuQwDQYJ
-# KoZIhvcNAQEBBQAEggEACln7go0YAasdxp7EdME00cTPF22kPo/FpBLiS/PCarTy
-# qrg1xqD/3XLiEmTGuKjKDoPI17Y6QV24HOf+2KvQWetAWCFErcviFlaW83VcDccx
-# +pxEDsunGx0ZbKm36eSz3SCSUwFvfBBWrc2CILlNbL5r2CsA2103baAROBGwS9kb
-# PforKhDHCBiPi2d6OAOnyW2Q8VrgebAkXQa3SkeFIC4vFCan/utkWoVJIxel7rxs
-# hAIDf+FLiMFFL2OJLyAOnDHq5fyHfWy96VH3wfn7ceSCzf5QnUNpNPIAmV9n+Ord
-# EyiKVyb7tROV3a82WVHt2BR2b+V704mb0qCcz1U39A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWQhsfpuqe88rWjnepUzjMuRIECgwDQYJ
+# KoZIhvcNAQEBBQAEggEAlODSVyWfroS7LUkFHIKNEo4/aPYmurESNK49aV55hcpb
+# eTrCe7mKrEgPt123kTlE4nIJ+pHL31VuOkWeTxoopXkdHQkzst+8/xBjBeoVHq7E
+# s5i4zOexNHW2COsyV4xazCQag8tv/WhNvbgpNKCyNgj8UyXAz9iHXgroA7APzYhw
+# VWPT37SzfqnMYYnZ2gFfBIhI7Vb2wZt2O1DTMuUurCp0uiGp2zrJc8/w4VuS3cfH
+# +mC79zANqHzU/UoBBrBPHrFVhSt7x1tw4TSp2rjb737x87CStQPWohtjSTXWQ2rR
+# qRI7b1QtPhd4QGK+zPoaFvs2KquBBUed2EpshRuRTg==
 # SIG # End signature block
