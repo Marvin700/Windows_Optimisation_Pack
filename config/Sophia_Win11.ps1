@@ -266,9 +266,6 @@ DefaultTerminalApp -WindowsTerminal
 # Unpin all Start apps
 UnpinAllStartApps
 
-# Run the Windows PowerShell shortcut from the Start menu as Administrator
-RunPowerShellShortcut -Elevated
-
 # Show more pins on Start (for 22509+ build only)
 StartLayout -ShowMorePins
 
@@ -356,11 +353,8 @@ CastToDeviceContext -Hide
 # Hide the "Share" item from the context menu
 ShareContext -Hide
 
-# Hide the "Edit with Photos" item from the media files context menu
-EditWithPhotosContext -Hide
-
-# Hide the "Create a new video" item in the media files context menu
-CreateANewVideoContext -Hide
+# Hide the "Edit with Clipchamp" item from the media files context menu
+EditWithClipchampContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
@@ -392,8 +386,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUG7E8WuWqbJ4iZD3sLvPRUkr8
-# lLWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi0OIigw1QUXrKspz1H8S+ZDq
+# 9UCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -413,11 +407,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNbuN4xnmSphA4G/6pGdR944d+XkwDQYJ
-# KoZIhvcNAQEBBQAEggEAwyp3mKBvvtERUbQaHB6PHOmqpSSpHQt+xiZ75bSBLlS4
-# 2d6ZZ1iXDtpsM+A0qxUJkfBDS1uVSkGABbqcwcgzpjEIq4iB7JAVo9gxHe/MM6M8
-# CQbBofuvoixB4p8TIsgpiHqqYs0yE89HNk4EzIK5f1p7iWml8G8GypUMd/oyvGoe
-# rwp3F3DXE7t2xvVV72sVrac7oHWStsMYNKYZ6OHQkI9PtYJfhrXV3NW0ttRta/Lz
-# ancRME1fxjzdEwhYDOkR5QaJcVslUTgUEbNo+i6lYshtkQ5zknxwOSP16OcURTvJ
-# E9/dGjBdjQ9MoB9pk6S8OrFeWmUnCwtyIqUCPgu4Rg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmNdtWksE5bl1pkOEC9UdRf5p248wDQYJ
+# KoZIhvcNAQEBBQAEggEAq/VahjyO1DZY/4kNUef9UURcgtiQkfSlM/DoWMmVPN48
+# Ruahg7AEtWqFkLMWu+YpRq2w+M6LM/SvSjJ3INACibD8z0dgtwYXd8ZBfYSy+q3s
+# i2LDyOEN48/xhZ44qx+pVL5ioODsgMBdYpaN/uoq694yS9/5RVnrQW4J5eLyW1be
+# OEUwqPF07J97LZpxiCe4pZxZxW7Cys6KJGQ8XkgZjGnrWUEwI3L8kMrCFlcD/yDf
+# KMsmF36+wvPzAkIAE4khYYlEa90fuY/4NWX0EFhbOnqLuXySz49hy1AS9BWyzAzu
+# rjLclckBZWnIURlNlUQN+fX9IeQotc7raWl5fqBfDQ==
 # SIG # End signature block
