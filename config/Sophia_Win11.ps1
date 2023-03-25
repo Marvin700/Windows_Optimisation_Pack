@@ -23,7 +23,7 @@ $Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 11 | $([char]0x00A9) far
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 
-Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
+Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Ignore
 
 if ($Functions)
 {
@@ -399,8 +399,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUez0ATMg3F3JMMvyr92BAQGnK
-# y9egggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUu5OqkVZOBR/0TqLDQPbiEtSM
+# w/mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -420,11 +420,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0AZH2yCOwFadxYIix20UDs3gQVcwDQYJ
-# KoZIhvcNAQEBBQAEggEAZzvN8E9FCswa/amS3YaU7caiodc6EWjpEjxC9aSZi/9U
-# 2VgF9pZHL2+Yrs8M1e5Q/vTPCbDoCNcJaOJrf/Nd5H/jahwRarD+jt+P/x2qqCdt
-# c3wQEcUcjL+fz4+vTOzh1T6Jx7OcLrAAWlwTFhbYSmZqZm+y65zPbfHq4oMTBZea
-# 0DCB6oQNVwOF3xHAujWwzkOVqFSApmVbNyDq3lQBVggbVGDZnAFCn4gT6tav9C59
-# EI8ufUDXmHtFxhMNRfsHoHzqWGYf35KuUK2xD+8X/WBqydJEumPjP2xDgUinYwQQ
-# qlAssUw+H5T9r1uA2FxW8ruSl20IXM+koBsR2byLRw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU+MOgnWE22STYmInM8+VboprA4Y4wDQYJ
+# KoZIhvcNAQEBBQAEggEApRQtl85EuVMmVreNfmeu26gdDVjVzwm3rFDqpNHVcG2t
+# i6AovjTta2Dfi4zn+VWUY6O2Cxc8nueIje6GHnAVNtSWnQu0fOAR5OMGaA6NtN6L
+# ZdLISoD58eALOjoaX/caAIfsFOds4+jL69O/2TL3eHD9aeeE3BdUooD+XBe5Z5D4
+# bQQB77/hQEVpE6hfBd8EkwtLEaqnvKIST7dRKIlVEBEi7kR/1CEDoArmxAfaVI34
+# KBSUJ6X1sBx/uu2qb9rbgdSosRoHiZNyVH0YXbRIbYEQ6O5fGynm5o1tDAiGj7iX
+# ZnFTzCEp/Ja9l4HqeG/y5WTk0tlKSxUNsU26q3RWbA==
 # SIG # End signature block
