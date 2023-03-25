@@ -95,25 +95,6 @@ function WindowsTweaks_Index {
 Label C: Windows
 $drives = @('C:', 'D:', 'E:', 'F:', 'G:')
 foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
-
-function TakeOwnership{
-New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
-New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command" -force -ea SilentlyContinue
-New-Item "HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership" -force -ea SilentlyContinue
-New-Item "HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command" -force -ea SilentlyContinue
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name '(default)' -Value 'Take Ownership' -PropertyType String -Force| -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'HasLUAShield' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'NoWorkingDirectory' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'Position' -Value 'middle' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command' -Name '(default)' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" && icacls \"%1\" /grant *S-1-3-4:F /c /l'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" && icacls \"%1\" /grant *S-1-3-4:F /c /l'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name '(default)' -Value 'Take Ownership' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'AppliesTo' -Value 'NOT (System.ItemPathDisplay:="C:\Users" OR System.ItemPathDisplay:="C:\ProgramData" OR System.ItemPathDisplay:="C:\Windows" OR System.ItemPathDisplay:="C:\Windows\System32" OR System.ItemPathDisplay:="C:\Program Files" OR System.ItemPathDisplay:="C:\Program Files (x86)")' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'HasLUAShield' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'NoWorkingDirectory' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'Position' -Value 'middle' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name '(default)' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;}
                 
 function SophiaScript{
 Clear-Host
@@ -319,7 +300,7 @@ if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
 if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
 if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
-if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
+if ($BOX_Scheduled_Maintance.Checked)       {$hash.Scheduled_Maintance = $true}    
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
 if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
 if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}  
@@ -423,24 +404,24 @@ $BOX_System_Maintance.Location = New-Object Drawing.Point 373,248
 $BOX_System_Maintance.Text = "System Maintance"
 $BOX_System_Maintance.ForeColor='#aaaaaa'
 $BOX_System_Maintance.Checked = $true
+$BOX_Scheduled_Maintance = New-Object System.Windows.Forms.CheckBox
+$BOX_Scheduled_Maintance.Size = New-Object Drawing.Point 135,25
+$BOX_Scheduled_Maintance.Location = New-Object Drawing.Point 373,279
+$BOX_Scheduled_Maintance.Text = "Scheduled Maintance" 
+$BOX_Scheduled_Maintance.ForeColor='#aaaaaa'
+$BOX_Scheduled_Maintance.Checked = $false
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 145,25
-$BOX_Runtime.Location = New-Object Drawing.Point 373,279
+$BOX_Runtime.Location = New-Object Drawing.Point 373,310
 $BOX_Runtime.Text = "Runtime Components"
 $BOX_Runtime.ForeColor='#aaaaaa'
 $BOX_Runtime.Checked = $true  
 $BOX_Remove_ASUS = New-Object System.Windows.Forms.CheckBox
 $BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
-$BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,310
+$BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,341
 $BOX_Remove_ASUS.Text = "Remove Asus Bloat"
 $BOX_Remove_ASUS.ForeColor='#aaaaaa'
 $BOX_Remove_ASUS.Checked = $false
-$BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
-$BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
-$BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
-$BOX_TakeOwnership.Text = "Take Ownership" 
-$BOX_TakeOwnership.ForeColor='#aaaaaa'
-$BOX_TakeOwnership.Checked = $false
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
 $BOX_Autoruns.Location = New-Object Drawing.Point 373,373
@@ -520,7 +501,7 @@ $form.Controls.Add($BOX_WindowsTweaks_Index)
 $form.Controls.Add($BOX_Runtime)
 $form.Controls.Add($BOX_System_Maintance)
 $form.Controls.Add($BOX_Remove_ASUS)
-$form.Controls.Add($BOX_TakeOwnership)
+$form.Controls.Add($BOX_Scheduled_Maintance)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
 $form.Controls.Add($BOX_Fan_Control)
@@ -545,7 +526,7 @@ if($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
 if($hash.Runtime){Runtime}   
-if($hash.TakeOwnership){TakeOwnership}
+if($hash.Scheduled_Maintance){Scheduled_Maintance}
 if($hash.Remove_ASUS){Remove_ASUS}
 if($hash.Autoruns){Autoruns}    
 if($hash.Winrar){Winrar}    
@@ -563,8 +544,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWS3Hy1gI7/wQWNRk2NtI+t/E
-# umqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUj+7XUi8bR8JG+3ePdtbfX5j
+# NqagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -584,11 +565,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUuIHtcpBmpw/F13W3kQdwOl1PuC8wDQYJ
-# KoZIhvcNAQEBBQAEggEAq/ZFJoQJ94vQ1Vig/OATVQiUrjp6YXsCuhEBBpIfKG64
-# hpvo7g3pFADEIPcXLfiKz0LoFxKAOfH+faNtvys22ikTZ6aMMdLMqB1kfIkgkweV
-# OMYD17tLwWF0062qSygXlYmr2x03rHZQzTdtQGqIWaMed59dm0uhUGFPbNGjzhCN
-# 9kUeXPURdikPmnZYY9OeLbnd7HOyx2j1Uju9Ouv9VUpDg2LkuQZwTyg/0YyvMUBz
-# nieSYQXNccb/PqdO7dMb/Ahetdhzz8IEgE6EbpFpvKpclR91F4F/Q62CHSyYLXLs
-# jjsm+c4Qia8fzbrWgufthe8Vd6a4AsrmgLgta13JuQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUEFUiSEppxMQMbDOjMc8CElW7E7EwDQYJ
+# KoZIhvcNAQEBBQAEggEAt0TadcE3NeVawfUB9ZUG4kgEZ52KiWR7FE8j5HuVBrPZ
+# i1cXSrzE5T8ILoLt2qhgS3AA9G++uSnLnwNRPqk7l/GoqLKXIS25tcJSVppI7daU
+# SZb3o0IPjJcuRCbZkgiRgWWXkwZGmYFaO+jAZAVcfLior33dAMKGNn+b+NXk7c+7
+# V1aHh12ZEaoCiQbLZgxGYYN/BfoapOokwpDxnYXpdbN1DFb3ouYXOWOa2uuFPySW
+# EPsMCunsr88T5CQtR81juPlwYm7bBDYpp7ebbN4rYV8UBW96GRixxeK7DLAheB2k
+# x1YlAMwQjL1/SwHGpSPw/sYVLW1Lk/u+9SXhtBjt5g==
 # SIG # End signature block
