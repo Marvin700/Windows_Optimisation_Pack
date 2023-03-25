@@ -1,5 +1,5 @@
 <#
-	Version: v6.3.1
+	Version: v6.4.2
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -18,26 +18,18 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 11 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
+$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
-
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions)
 {
-	Invoke-Command -ScriptBlock {Checkings}
-
-	foreach ($Function in $Functions)
-	{
-		Invoke-Expression -Command $Function
-	}
-	Invoke-Command -ScriptBlock {PostActions; Errors}
-
+	foreach ($Function in $Functions){
+	Invoke-Expression -Command $Function}
 	exit
 }
-
 
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
@@ -286,9 +278,6 @@ CortanaAutostart -Disable
 # Disable Microsoft Teams autostarting
 TeamsAutostart -Disable
 
-# Check for UWP apps updates
-CheckUWPAppsUpdates
-
 # Disable Xbox Game Bar
 XboxGameBar -Disable
 
@@ -403,8 +392,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8xlfZASL3c0lQORhtP+rR6lU
-# k8ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcYgDpiTszJNae44prgi/1fYX
+# M66gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -424,11 +413,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/IOfe6q0CswLHdjeZdFCwCY4qp0wDQYJ
-# KoZIhvcNAQEBBQAEggEAMaLkgSGwTO2tOK3eySoGBmuIY45gYF/Xp87SZsbQzz+a
-# XM6OPOW2yz0qBwYurPv2ZGDFFm0ZAOXV9GcLf2oJiKRgIR57UNRvMSbtcNrb2pOF
-# JyzV3Vxo7P/Wc+OZBUE5zXinBhqiIVXB2ikRHLsTNo3H0Lt65jTDnGqOWVXNY5nZ
-# TAiZiA0UasrBSp4O7vHKKrBiVnR8H8NQdMW2bisJ20R7eEF9zFR/Qpl5r2hJaAM2
-# H+RQsikrwq+0jTsb1pfYIQfQpRfFvQLyQoaWzXd97iOCLIYIuU1SdcXRBHDYdGBi
-# 96ZZSMEZi2hwq9wdzZzqn4C4kS60TKvxCIEJRNIc0A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUu7HzVdzLiNcrAKni8oqOEr/ufUUwDQYJ
+# KoZIhvcNAQEBBQAEggEAq6X6H/bzVGFt9S74aFw0fCft9VUGcpaTXFYdiUvLxWRV
+# fRUQAh4bb8+x6GxZ3gNlRBoGOOzZ5PbH3VI7VhYihYCmpr67GQMmzJoAPNojPWTW
+# hw0N0gythzRLgJNWXvu6/OysEf9mELeQTofZaH4GYRJjumTzKMaxeXlEu9ajBQlw
+# WHeaoqvAATfKqyzP42Lj4UQ0ZyYehlIcjqOzbsU1UZXiGjngeePGL2UttxzBy92r
+# c2eI2YwhRgiHzSt00YBLesuynNwcSLDg+hAVReluKrPZm8BKh34ezfsazlR3mBsZ
+# 7Jr0Teev6r3FeCkWClrLhXhX0MNhJ6acSPARVDFGHA==
 # SIG # End signature block
