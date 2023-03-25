@@ -22,7 +22,9 @@ $Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) far
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
-
+IF (!(Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
+Write-Warning "";"Thanks for using my configs :)"
+"windows-optimisation.de $([char]0x00A9)Marvin700";pause "Press any key to continue"}
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions)
