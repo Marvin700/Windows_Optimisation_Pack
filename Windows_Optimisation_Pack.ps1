@@ -361,7 +361,7 @@ $BOX_SophiaScript.Checked = $true
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
-$BOX_ooShutup.Text = "O&O ShutUp10++"
+$BOX_ooShutup.Text = "O&O ShutUp"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
@@ -411,13 +411,13 @@ $BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
 $BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,310
 $BOX_Remove_ASUS.Text = "Remove Asus Bloat"
 $BOX_Remove_ASUS.ForeColor='#aaaaaa'
-$BOX_Remove_ASUS.Checked = $true
+$BOX_Remove_ASUS.Checked = $false
 $BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
 $BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
 $BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
 $BOX_TakeOwnership.Text = "Take Ownership" 
 $BOX_TakeOwnership.ForeColor='#aaaaaa'
-$BOX_TakeOwnership.Checked = $true
+$BOX_TakeOwnership.Checked = $false
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
 $BOX_Autoruns.Location = New-Object Drawing.Point 373,373
@@ -538,8 +538,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzkvUawCpF7yi+YKTYN7BH75c
-# ME2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbT73xXE6CmRoLW/teVhbKpu3
+# W1egggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -559,11 +559,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUz7bV4AgkNBkP8fCb0VS3/tzC3pkwDQYJ
-# KoZIhvcNAQEBBQAEggEAOis4DQaVigNk3r1zIKZm1S6DDBgKdu0wACyNEVVvXyrx
-# iNTFJJD5YdbgE7vYGELC7xE0iTCLPBYKyEjRzp1IogjdRClhUBdzO1DFLm1U0NG7
-# aPnIO5XHMwdHwEM08Z2MwBrmZ0UOcY/OAxdROS76VMpIyrYA9M9H1X826xswKM3F
-# dUctZnDe+8c1SfZ3x+DwPabMu2h0bzrUuxjAniuaY4hnd5zj9SF5KhUoiX2bdXhy
-# qpwiDZQ2tBYh/A4APihb8pHVMn3Ler6vWlhCOBw1rG1+BCt9CQgFdncM6AOr/mnv
-# C1MTBNdRx9s+sNqQGplzoczjsBGYmKC5oOoGhpTNjQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGxY7jGOqkRB92Jd1fJDEDMKsZz8wDQYJ
+# KoZIhvcNAQEBBQAEggEATEhohRg6W+I1PO6Xtl8z8gIPZlLv+53+CRVXr92ar2jf
+# Q3qeihNJraZlcH3E6RXry8q3Btv3n4zrILXoZ7mVcEY/XaHJqv7StGrE5M4mdJti
+# A2vCO/qo9RSX5LXDpcfxltBGb62YUs9cDDAbQrgwB/S2oNkAGKM3JjDuI2/T5jtn
+# 2SzgYhf7Q2wVln4JZEmkRDMK/yHU04cz+DIVWsFUqvenQv9bOHEcQvE3dIacgV+W
+# V/Yq1kbTlyKVM2E2F4cu6mfcEIO5sPnd7Ufxv5nnNesdhVs/ntbQjmQ8qIEqAI59
+# qbNfq/h1lelQ3Z60G8i83nPNgY748ZZm63AGv44Muw==
 # SIG # End signature block
