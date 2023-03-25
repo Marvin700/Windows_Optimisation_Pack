@@ -27,14 +27,10 @@ Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScri
 
 if ($Functions)
 {
-	Invoke-Command -ScriptBlock {Checks}
 	foreach ($Function in $Functions){
 	Invoke-Expression -Command $Function}
-	Invoke-Command -ScriptBlock {PostActions; Errors}
 	exit
 }
-
-Checks
 
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
@@ -428,8 +424,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUckOk8bLQszuBD6SANSWXkORW
-# jJSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURjyTYAW+POPl1DWLMSvJWvCl
+# Tb2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -449,11 +445,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUOe1pcGbOEBuh6Qv9wykwQOZb0KUwDQYJ
-# KoZIhvcNAQEBBQAEggEAD0krJy4w7moFWNM/0spm7YcMWH1AwiAJpGp+cQa9sWbo
-# 9hNJhlcx5MViYRKmHiznGhbM9g3qvw644dY28Wv7pAiGmf2uFHxoAM66X+yVOLDJ
-# RTglXjAcI9n4pftOVCgU/eGoQH7md/8F7iKkZ2x+UoCJyBHsHd+E+r920yOg+p0M
-# d/87sGOcj9ghO06dphDxIEHQpS8uY7st865Mb1DVV/4M7Ep+p8iThsmYV/Fsvwaa
-# b3FqV4wmsrLmfYS+fqBVehh4226xdbyVkesV4OwvsNYsp2SZeWty42zOLtnTQtL1
-# V/87fxkWojrB7Asl7NgbhtfzLxJT2zPQo/Rh4wrOrQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb1IXBsuTlnCm+zixE0rf/1ItI7AwDQYJ
+# KoZIhvcNAQEBBQAEggEAVC4zDIPU/7ei6aWjWA2briuDhhYQ6USfjpPa68XkC00x
+# Jqc7Mfs2vmBez3bJozuE8qAAf5voNdN2B2RcamJD5FeCyc3CaoEUzDyoTXujjuDm
+# hfyp2wCBrg68V8U2jiYcALlVcUtbx32pCPdc9xuPVERTgpUtmxddkkUGR8ZlD8yt
+# YYecMo9rjdGTQZTNqRgso+ZmbQZLmeM9tIZzQvBMgeGCWLrxTEz1RflDCYRAt5jr
+# KeQ3WrZ3hkIv5QOWeYfGLN9uu/2DEpJrABizgns+YNPQzgOOC8iNpfaGeUT6VRjd
+# GkKzIifsCHCvE8LNql5VLrb9s4MgglH8vft6skv32Q==
 # SIG # End signature block
