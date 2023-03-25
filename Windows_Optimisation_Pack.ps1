@@ -1,7 +1,7 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
 IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)){New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory | Out-Null}
-else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse | Out-Null}
+else {Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse | Out-Null}
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
@@ -114,7 +114,7 @@ function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
-.\OOSU10.exe ooshutup.cfg /quiet }
+.\OOSU10.exe ooshutup.cfg /quiet}
 
 function SystemPoint{
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
@@ -543,8 +543,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3Te48Itw55KzkOxh6DfMSsOH
-# qlCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXPSfODUqTS1d9HI/dwefj/9F
+# KNqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -564,11 +564,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkkYA8mewUt6SpGUHpPJusLjJnzEwDQYJ
-# KoZIhvcNAQEBBQAEggEAoBuKQn/sOYKxU4z0iGLJthGqcdAZFm6NhItmwJhMj0zl
-# MKEcuZtvSjEPjBxEyMqJlfGUd1c0p7SiyUJ3WVrapGd3CxFaVUu3sk97uXQS6iTn
-# wZKaLBZwhqYboqN3KLJj5SNNene6x8PNh9xkRRUB4Y7DNMBnBAIJ+/ZKz5HBMNwT
-# 2I3ZIAnCFLI9AzfnOIzjUP4QqZH9s13dSvF6dIKoJnWqjVTeNWcTejUvq7KpkvcC
-# yD6KqFGo3GkhzkhHCMvPTkV9eJaHR6ICCQXGw0fQDGQZ2xYOMDJDJQBpsw1ZlpBb
-# 75JuUpNZefis7u4IstLGCNoqSDU2QBULEEH7x7iznw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmLvcOmCp4095bze590jLvLperJUwDQYJ
+# KoZIhvcNAQEBBQAEggEAGdvy9e+g9nzvRVDhJb94AZdl/1UyKdOYjWirppzEDue2
+# xmKptL1fMIkUTUbz+jysVjfnFj+oIqy4kx//dF9BKiMhnXWnYbOGywvBwTG3m69b
+# qdJOIJxgppHeeV6+F9kLQikE+WhZCid1TC0amX9axXLhDi8Fmvrf2crux4l9PKsS
+# KnVWIGEyy3Gkt9f/DLDTuNIPWOq/UCIy1Bf9ZP9qyqaxBh5+13PICHpxCtofQPKR
+# PAkAbyWN/k1+7CArN6S57Eb2eRKSiM5dMwiSrWmpsk7iVkTjmIet+WD3zCcjNgMx
+# /mgaUrFu4phK71Ke38nq6VcUiK6PpzqEzI5PWR80zQ==
 # SIG # End signature block
