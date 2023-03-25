@@ -1,24 +1,19 @@
 <img src="https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png"> 
 
 ## Key Features
+* Maintance Windows
 * Remove Windows Bloatware 
 * Disable Windows Spying
 * Lower CPU and Ram usage
-* Remove Cortana and OneDrive
-* Deactivate unnecessary Windows Components
-* Deactivate Windows Indexing 
-* Install Runtime Components
-* Mouse acceleration and GPU Flickering Fix
 * Sophia Script & O&OShutUp
-* GUI for enable / disable functions
+* Remove Cortana and OneDrive
+* Deactivate Windows Indexing 
+* Deactivate unnecessary Tasks & Components
+* Mouse acceleration and GPU Flickering Fix
 * Deactivate Insider Builds 
-* More Windows Tweaks
 * Take Ownership
-* Maintance Windows
+* More Windows Tweaks
 * Clear Windows and GPU Cache
-* Cleanup Windows Image with DISM
-* Customize and run Disk Cleanup
-
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
