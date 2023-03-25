@@ -1,5 +1,6 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
+New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force -ea SilentlyContinue
 $hash = [hashtable]::Synchronized(@{}) 
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
@@ -268,7 +269,7 @@ Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstal
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Finish{
-REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
 [reflection.assembly]::loadwithpartialname('System.Windows.Forms')
 [reflection.assembly]::loadwithpartialname('System.Drawing')
 $message = new-object system.windows.forms.notifyicon
@@ -277,8 +278,7 @@ $message.BalloonTipTitle = "Windows_Optimisation_Pack"
 $message.BalloonTipText = "The Optimisation is done :)"
 $message.Visible = $True
 $message.ShowBalloonTip(250000)
-exit
-if($hash.Reboot){Reboot}}
+if($hash.Reboot){Reboot}exit}
 
 function Reboot{
 [reflection.assembly]::loadwithpartialname('System.Windows.Forms')
@@ -554,8 +554,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3kkwvLBXkDqp5gDiJ1u76x3R
-# n2ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbBS6nYVOoq4DEGyEMUyx6dix
+# qcegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -575,11 +575,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb7E7xuizAnjDavlSzrmgT5pc07EwDQYJ
-# KoZIhvcNAQEBBQAEggEAKcMDWXx1iW0/3C8li93nhPdZn/EzpVW6jeOc8DHJps5c
-# nCqU3u1YtVTQWh1DkMvclzwgeGGvQuaJoAIedyST8z1bAjx9IRc4Jd08qJ/nfQ/5
-# 2iwrTYf/xYOEnYlgep1tL/67SRIOpv48k8BbkpXulrPLrksYHsUbKyzYUTrm7VeT
-# pn0d5f6SU3K7iKvjJbqzsQEv1VEunZeHAibg1xGlmXCQKbAdQ3JQmAbcO4fo1BWX
-# 8jXJVkLvp9LoGN8DRFtJc5z/NWpdlUn24bFcagS2g8Y82zlnVFcaeandUdJZ7YUk
-# vioqRd4Ob/IO4n57P7svkZebEP6X6/V5QVsq60/TlA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUxehp4iDV50KMsgi5tT8hUCngU0QwDQYJ
+# KoZIhvcNAQEBBQAEggEAxLtVASdD0xo2bqFIivF1LmtJsz4AzuqUb0uuM+bTJxDI
+# ZcA8TEuQIhJXLqDSWtm9AtAtUk1fRa/eQAI2Q8/5ECACE6Rne6Prid37On+Wh06L
+# vtteLXR8oU7p0UpFhIgiIjFOZjUB0CdJtr6KUqUmoSGqRt1sRsFGnv8b978CA7Zu
+# Q3JAUi3u/knM7YnGg4llNa2JwmvSq9wE+PzCaEgykYRaNdhFj3Ar4pLAopN7tN2c
+# HnFosPy4G5sm7Flx9/hzBQHhtK28LxJAw/thWwVyG6dOJ0SqMaULRJgIdNSPVCuM
+# Ha4Di1XEastXttJRrKTgIlxc3Z644yT3UzZzhQ0kOA==
 # SIG # End signature block
