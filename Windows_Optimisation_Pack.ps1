@@ -149,7 +149,6 @@ IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
-Clear-Host
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
 Write-Warning " The Script cant Apply all Tweaks !!!"
@@ -538,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKw50dRS8ADK23v5cPP0wsZOq
-# v3ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCWVKFj2ddWqMFhYKOHEoTf4x
+# GT6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -559,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU5kLeizFvNZ+3IcMSqmeUEdvsom0wDQYJ
-# KoZIhvcNAQEBBQAEggEAPHXeKRk5Ql3z1NJ1uo5lLxWjX42dNUaWt2v4Ms83G7HJ
-# ZDoiIL2BGcw8wV7wLlS9fiW6mPuEulhAyek9pnAnwUXT1lRA+j+46wcYSBw1Mygu
-# Eb5z7uDTLsGVdOTBdJleGIgvNiHijuryo22zAFVa4GQQVqIn9aM6L63U1LAdKLro
-# w7/QKM0iwUgRJ/bOTbzbP8l+W1LxpgHfxgSbvUIc0VOFPBmmfT5ShkMMuPkri5Ll
-# u0tpau/t0oaJS4Aa4uWa0DiSlGl+FMhTZRvc3CrAikajNDwazqqzAS1NIPzTBPVx
-# K+tedpGpqoSqKuazTatNR9zK+6S5RwStsmAX9DS89g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkb/H8SRr4PLTaUMD28jU4GgFcDEwDQYJ
+# KoZIhvcNAQEBBQAEggEAd5sOuJdklaATbyuyqPanyBplNTFh2WtHYCInJLnlFsaB
+# yEMwgXiZTwHPghIbqZQWa/mWyvXstNkzjb1L6kiQE4WDR1jLZI6n1roVyfzcmk6L
+# TCJGMM0+KWlEsXYgERuc0o30mpo/ultm3M/KOKSzlbPJk6FM3oJtKcb6Xk6SHj9a
+# IOxADTb1GKfaKyNKBPUQPyzZX9rNhXC282MVNrQ0qzcYsf122lqZ+pTLaImTUF40
+# TDjvhFXFAZo+FO//nU1RqhWJeERd+VmUgxQg8sp+zJd9BG7UiAkalHpka82ZUfaO
+# AaMyZMzmU4/SFbe5claxscxEmnPjnJ5JMw8AiSb/Lg==
 # SIG # End signature block
