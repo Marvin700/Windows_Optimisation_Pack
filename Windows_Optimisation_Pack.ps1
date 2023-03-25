@@ -269,11 +269,26 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 
 function Finish{
 REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F | Out-Null
-Clear-Host
-"Your system has been successfully optimised by the Windows_Optimisation_Pack" 
+[reflection.assembly]::loadwithpartialname('System.Windows.Forms')
+[reflection.assembly]::loadwithpartialname('System.Drawing')
+$message = new-object system.windows.forms.notifyicon
+$message.icon = [System.Drawing.SystemIcons]::Information
+$message.BalloonTipTitle = "Windows_Optimisation_Pack"
+$message.BalloonTipText = "The Optimisation is done :)"
+$message.Visible = $True
+$message.ShowBalloonTip(250000)
+exit
 if($hash.Reboot){Reboot}}
 
 function Reboot{
+[reflection.assembly]::loadwithpartialname('System.Windows.Forms')
+[reflection.assembly]::loadwithpartialname('System.Drawing')
+$message = new-object system.windows.forms.notifyicon
+$message.icon = [System.Drawing.SystemIcons]::Information
+$message.BalloonTipTitle = "Windows_Optimisation_Pack"
+$message.BalloonTipText = "The computer will restart in 120 seconds"
+$message.Visible = $True
+$message.ShowBalloonTip(250000)
 Write-Warning " The computer will restart automatically in 120 seconds !!!"
 Start-Sleep 120
 Restart-Computer }
@@ -539,8 +554,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUle0eXpeMhimp9Vw0kM4axczN
-# 67mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCHUN6YcdkQLsZafeBl5AXof2
+# ZDOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -560,11 +575,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUcoAWdZaJifqBlAo6gx+/XMp1IZ8wDQYJ
-# KoZIhvcNAQEBBQAEggEAV8RMRxLESiDZN6AyLZ9uQOIw77znB+Q4HOoBP1Ipkqhw
-# LtfYpd+a22u8xk7HS2VV4/uIWPcyl+OU4O5eHPnuW75G9/C/FuT+JaymXe+/gdQB
-# mv6sfzcfb4MDHXZfmcUFb8j+ZeV4rl5IO04SzR54JC8ny++sNTGADoRYDG819+Te
-# PvLjbbqLYSxiQRm52B1mAn6LK6vmtXXKEAPhf10HdGX/EO4QsaIDrtMVTfYD0jjX
-# oeVRQgBLZj7S89kNlwYkA/mVldI5RLDy7OqizAIFisyrcRCOoh80GrPIdjBbgYl2
-# k4+K3zFwxTkMThP5Ybrvmtdow9TcpGDdRY33+XAWoQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUeJ0EydzQLKrUb6H7JfVABehvK1cwDQYJ
+# KoZIhvcNAQEBBQAEggEAhXGLTVf139yX0KIIUD7ckCR7XfpObpJPRUlaWiPNnEod
+# KrF+xFDpCE8BCCuaTXhVanmyYYdJm8IZIEbE8osWW8Zk6M1bzKJq0B1qtPU7wcuG
+# tTvDsS+4J8hHsFg8h+0Usp/6Ulc990V7wFjAVhZ0Wu31vRBLPZQv0odQQ5P65PBI
+# xKaA0CYAjEM0nggsK5Md/QzltT1TIdGQDqMXPj3kfeGH1vNlgDijV+xEqUnm1qdL
+# ywCsuS7W/dHjiKk464wRCPn1dCefaUWK7KS0yWNCG6KFXlbpbL/ZMAW4gJtFCMLj
+# ULDKyP3sHxPv6S1VCde8o3RpVeMLhSk5kzsEwNbVcQ==
 # SIG # End signature block
