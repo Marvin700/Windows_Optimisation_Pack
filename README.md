@@ -8,8 +8,8 @@
 * Sophia Script & O&OShutUp
 * Remove Cortana and OneDrive
 * Deactivate Windows Indexing 
-* Deactivate unnecessary Tasks & Components
-* Mouse acceleration and GPU Flickering Fix
+* Deactivate  Tasks & Components
+* Mouse acceleration Fix
 * Deactivate Insider Builds 
 * Take Ownership
 * More Windows Tweaks
