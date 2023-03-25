@@ -129,7 +129,7 @@ Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 }
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/ooshutup10.cfg" -Destination "$ScriptFolder\ooshutup10.cfg"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup10.cfg" -Destination "$ScriptFolder\ooshutup10.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup10.cfg /quiet }
@@ -535,8 +535,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7FAUvJmvfOTp62qgb32CzejZ
-# o46gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUz+NyDal1wjy/JyUnDEZEy91j
+# nd2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -556,11 +556,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUgWxCRRIHRUnFf2zmR6pw/i31ivUwDQYJ
-# KoZIhvcNAQEBBQAEggEAfTJlED2LSeGmNGJtqfsdjoRjhGx89cXC9NbTqzJ0M8MK
-# QAdl3PLB9g2rHgYldDMFD69Dz4XH6BGx4sUkwOkjWVWO77MIU+CZ+guyhH+Ji2W2
-# 1Dr5QvEgniaMlpnauR/In+EAF7IHZ38y54CPILDGIKsYpqyRjE3I3PQGKh81xTCw
-# tr+F1cm1CQa6vxFy2SCIhhSi+UImX6/Rk7s58eP1hFZsw7ExkUoLcctPP/xyR74W
-# K76gVt5LxEIUoEVb0zkdat0nEEuRcFGu8//eUz3Mi/MKXMZ3GWktqkvEtivBtA7I
-# jEkiwXuhtR0SApYb809adkX9/170Q8G+G46LjxXdvQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUijfDrJfdj2mEGFO1nlDqRKxpNsgwDQYJ
+# KoZIhvcNAQEBBQAEggEAL2NzTUprXwkefK8wB5dvOAzdX/pvdY7xE4IHB5lZ7fGi
+# MK2FGSZLEj8QL2g4eWzxjVF5f0SAKdoS9DDz3Rr0xkOCLNfWOIoGVS+16d6de6zF
+# 6r7KEA+GsqK7J3l0/cYW/SjSpEyNPMwLk98gg+850pYtn59i7BTXWafq3IKO5NIJ
+# ALS5eh9LNLNW0t3FKpbz5Ryrz2NzzRv3AUNU8bLN17aLL2XmrNCybu/IAYH311iB
+# jEt77PcTHLsNnbVCwh68wrlKNbCe6HkOsQCVO7cgprFjk93uFNxUyhwYNwfotm0/
+# KPu22X4hMFfGE9wgK8T05xfGvn20/lclHfv/dJts0Q==
 # SIG # End signature block
