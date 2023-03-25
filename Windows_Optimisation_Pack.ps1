@@ -1,5 +1,7 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
+IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)){New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
+else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
@@ -174,8 +176,6 @@ New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notificat
 New-Item -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Force
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force
-IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)){New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory}
-else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null}
 
@@ -563,8 +563,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6mdUWNSVzO61CvnVlVMn1s/1
-# G36gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUe/gEvihYoMGFhlTqyBTfhhw3
+# R/GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -584,11 +584,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTcrhqQl+1P5UCBC8/jJV4pz7klYwDQYJ
-# KoZIhvcNAQEBBQAEggEAf3MqqUUTVX68y9RvqSEQZCJ6FlaAsqbKcdcSOr71gSOb
-# jufwjvE6Vk6vCJhZOPCDq06SXwhnwjTk26JrTYzbVmClKjtbNByU3MxIau7k3H91
-# +WvfSIrziX9C0+Unu7zt2i/QYYntfkZiWeLB5S4aFqm7b8Wv5Nc/A6whh4HpF0FL
-# E8SCcPvj2IY+vhY5ZKgqjB+vR6s+fTXBFCzuNGUgZa6Z2bT4Enz/4xOGb84rIZT7
-# L3l3oBKpfXceMesBLsyPsNqLG+79cL87RZkwbc+oRWc6QhpqsaPWhhrn9DD7pmJ1
-# xdb4Xl+cp7OW4J46SN5dqLrCPK+ihS0q+m35NCn0vg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUsKk//Zfy3/YtoU17sU9nN1W0EqEwDQYJ
+# KoZIhvcNAQEBBQAEggEANCTNbCkIfhPjGC/oV8YruCPwFilsoySnDvPYxKE3i5xb
+# t+aCJHtQk6QUSRC734Oq/YcoRkc2mgJt0y5CV62/jXEf0oDfRgqTUUaU1uU+VApG
+# WfADFxgGFbymlGDb5LpP9NJE4VK9i3z0DFOuEi3ndOBRCPNKNvSN6o8i4dIePRSe
+# jrBCG0MZfj8jrabuIOVrtBrOhAsEBhuHRnLnnMQbIXs+rqo5PgqTw8gxiO+6CVgJ
+# +pHzuTZWCwiqRE4dHZnwmn4szALRxN8Nw6hHySJPuDoNrlUNlo9r8fWXvAY7seE3
+# O+WNyHh5v3T8LhjiBgUy5MZFJrZ8N8m7g980Us949Q==
 # SIG # End signature block
