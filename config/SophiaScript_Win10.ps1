@@ -23,6 +23,9 @@ $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
+IF (!(Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\Check"))
+{Write-Warning "This Configuration was not executed together with the Windows-Optimisation_Pack"
+Start-Sleep 120;exit}
 
 if ($Functions)
 {
@@ -422,8 +425,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2vxz1O6d2swKyaAkU8DxIo6K
-# 2PKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvns9r9fvirkqq0+lKCAylGA3
+# poGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -443,11 +446,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXL8n4uCEBkP28Ke7Uay7Ducsts8wDQYJ
-# KoZIhvcNAQEBBQAEggEAS8lJ4f/hfNHXt/vaSy3iqLlhkpcrvCSsqMKtpx/zNUm/
-# GEyZChqyH3UCR0jcKU4DVbqz4NSSQb3LSSKzc7ir7/9yIEDO4zGBYmIQxwHLUxNx
-# SNkdylFTrlyWUTMRaMWkJDULKfKdM8qNJ2mCa9aFo9bhCklhvm2dWJDfHTu8h5v3
-# iXs26G8WkHptqV8ouLMUQbcTDIjVj8EbLfPvsUI3pm2TQflcSAmCjTFXleSuohnw
-# 4okkdSkc95+PQfIp79eU5BA5spSPQDx+afjrkpf+6C9GzwSrpUOyOvbX/EAeGabX
-# 5HKTTp/LBs0U1RUAu7HSERUsDnfyc37CHj54guCcPA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVmwmei5R0LzzNKGNcMPQxsC0cicwDQYJ
+# KoZIhvcNAQEBBQAEggEARoR/3uBvRGuOAjjo0OPZFgChWeg5SprjyLDsAusQAZE9
+# QDesTo8ScRE4PG/JOxfgLYDIkciDOVq8U8TzXDFPsL+aGi2YmL4EfqWfS9+x8tjD
+# zRwO+B+HlPwnQWu6pg44eM0edc2VuYrTcOh1S7rNkWWL3q9su5bnU8i6tTOancyX
+# iIaBTd6xa8SVXzu9Qylsx5Zb4Gerb5FkG/1nloPAgSs/T7UCIkQh1nDFw/UkDRuE
+# uGKMC7gHk547yMB1TK8iy6SghmonFfxukoVzxtuX9As8QwVoHn5P1pLHDAccshHm
+# izw17tl7NvEx+dflQ2+WftUZ9VvBewdu14NbMNQYnQ==
 # SIG # End signature block

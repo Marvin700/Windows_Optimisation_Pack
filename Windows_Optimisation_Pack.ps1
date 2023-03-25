@@ -1,6 +1,6 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
-New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force -ea SilentlyContinue
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Check" -Type "DWORD" -Value 1 | Out-Null
 $hash = [hashtable]::Synchronized(@{}) 
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
@@ -269,6 +269,7 @@ Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstal
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Finish{
+REG DELETE "HKLM\SOFTWARE\Windows_Optimisation_Pack" /V "Check" /F | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
 [reflection.assembly]::loadwithpartialname('System.Windows.Forms')
 [reflection.assembly]::loadwithpartialname('System.Drawing')
@@ -554,8 +555,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbBS6nYVOoq4DEGyEMUyx6dix
-# qcegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxDA+ZdmbD/BiRz9TFVfTu2yG
+# IPWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -575,11 +576,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUxehp4iDV50KMsgi5tT8hUCngU0QwDQYJ
-# KoZIhvcNAQEBBQAEggEAxLtVASdD0xo2bqFIivF1LmtJsz4AzuqUb0uuM+bTJxDI
-# ZcA8TEuQIhJXLqDSWtm9AtAtUk1fRa/eQAI2Q8/5ECACE6Rne6Prid37On+Wh06L
-# vtteLXR8oU7p0UpFhIgiIjFOZjUB0CdJtr6KUqUmoSGqRt1sRsFGnv8b978CA7Zu
-# Q3JAUi3u/knM7YnGg4llNa2JwmvSq9wE+PzCaEgykYRaNdhFj3Ar4pLAopN7tN2c
-# HnFosPy4G5sm7Flx9/hzBQHhtK28LxJAw/thWwVyG6dOJ0SqMaULRJgIdNSPVCuM
-# Ha4Di1XEastXttJRrKTgIlxc3Z644yT3UzZzhQ0kOA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUCJwvyvG/orcCNGs9yJFSr2muYcwwDQYJ
+# KoZIhvcNAQEBBQAEggEAkNO7cH3ZclSqRoQ+GlIUtcauNxSPJ3zCtgvJYOHX3EY3
+# M6L8rPammKeD4ahl23vP+jCSV6j3fGDw6vMRrz7xrloDKqyrtXzSvEUUBD1sQgWc
+# xPJMVatRlh3PELrswWPBcfaAnRSur36B6UJ+v3uHFZp0Dqy+p4RJ7jyp3CVU2dU9
+# eLEIttm5lp1EcONkv4euBBiDbHMek5ZMx+xJa+HlGhPwFxC4vEdzwu2hkpjhvH/U
+# AXvRjtz0whthndMs3CIGmwQMJLXMgQkyaogVxSCoksgxVnR6KaIbok3SOKF3R7Sj
+# YCwCyWgTzYto9712+uEldlFGCGrt/hkdza2mMhPUKg==
 # SIG # End signature block
