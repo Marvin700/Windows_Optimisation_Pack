@@ -45,5 +45,4 @@ irm windows-optimisation.de/drivercleaner | iex
 * Clean uninstall of GPU Driver
 
 ## GUI
-<img src="https://user-images.githubusercontent.com/98750428/204111653-663e20f7-0f67-4b2b-9a50-76e65a5d4d20.jpg">
-
+<img src="https://user-images.githubusercontent.com/98750428/227717204-d52b67d1-80f0-4f7f-846d-74acbfd75dc6.jpg">
