@@ -143,6 +143,7 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
+"Compatibility checks are performed ..."
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -537,8 +538,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4UW1ABhpejwQpTh8C7eG47OH
-# XuigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpYI0p7+FCazfF1c3nC8s9GaK
+# 37GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +559,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUCAVUqT9JLG0pIqU1asoSbEuh4oMwDQYJ
-# KoZIhvcNAQEBBQAEggEAZ/pQEz3YMUD79VaAW5427H67IkbXAR05IAApVrc4Jbns
-# DpvDWC+i/LUklp2E7XYs/tY/ZO0RWgCs8LqjLjRT6r/iaAW4gVCCaVeEodZ+KdUY
-# jsTTQjbOIIgiwh8t42TfXRLBnq6JD2ulZMZkLHRcrUQF53LMj5KwkaysPYWgZ0I+
-# OD93Oy1jQzW5L8V0iBTDHX46Am0hI9nxXeCqbQzgvx7RUXvDKH+/XZjM9HiNuna1
-# 1igd0jeZwkq0P1lsD5WU7dCsGee0BlkH5wmCPQToCl1bdBqvOIMpPvl79F6l899b
-# E+wdgsHjPIK/nx/mAsbDLA4vBSKMUDlSRPGgIqO4AA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUOQEylRakanynRSAAzdGtu3U48ywwDQYJ
+# KoZIhvcNAQEBBQAEggEAI1cBt2YbjoLK9W7qUpXvgSDugXS31NYXwo2SIbpZAMVS
+# sY9t7uXRMWS4cmIwFno+O7wo2KhjhkXWcpiAY3EXJ/e6VcwgS17923G0lXjOG9Zy
+# NSKIBjzWYmcYn2K6Vt8dll9qp/NF0yV17hVWZqg2G1POv0Zc9LxFOGJUd3Ekjna0
+# snqAGUDK6wVlSz5rvESZWQHQKltfGx7r0FhZGdzlpA8gr8580aL0PL3h/WSxrhut
+# opIJy08U1ArSyyof7q4TmbkiEneCD31SpyCjVyEE5GwUOGNLZBSIbllWsV8k8IqN
+# rBhbg/ceOy3zcHoCiza9rHq1Jal0XUgc12WwQxRcfg==
 # SIG # End signature block
