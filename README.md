@@ -26,8 +26,6 @@ Run with the **Powershell** / **Windows-Terminal** as **Admin**.
 irm windows-optimisation.de/beta | iex
   ```
 
-<img src="https://user-images.githubusercontent.com/98750428/203324846-1b72b5d0-53c3-45f0-9a12-99d4c1beeb35.gif"> 
-
 > **Note**: <BR> 
 Please update to the latest version of Windows first. <BR>
 
