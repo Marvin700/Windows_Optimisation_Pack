@@ -113,9 +113,6 @@ OneDriveFileExplorerAd -Hide
 # When I snap a window, do not show what I can snap next to it
 SnapAssist -Disable
 
-# Show snap layouts when I hover over a windows's maximaze button (default value)
-SnapAssistFlyout -Enable
-
 # Show the file transfer dialog box in the detailed mode
 FileTransferDialog -Detailed
 
@@ -395,8 +392,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyMxPpwDNgNAU97D+LN93dHdh
-# oXSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUG7E8WuWqbJ4iZD3sLvPRUkr8
+# lLWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -416,11 +413,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQeHu3AkQYF4huPOSnhIqZZ79sGgwDQYJ
-# KoZIhvcNAQEBBQAEggEAj6vrPCzm98oxJn0/W80JayJcq5WfIps8EtziETDmr3tj
-# Vno9HIcNI7vQPPBQkakAD+1MLcIJGY0qWi8WiN88LowFfdLvACoiHgmeI1fsqvy7
-# OreEjaVVoT0keK2jCv25aWB25BZVrSIJ9E7BbhaRsz5hxi3dWYZ4vkJc8yyOqKJQ
-# VAvAilkBmYeQsynYYroHlR86znqsTzXGl/oh9Tu4f3fWI6Fbmp/IxolKQ745NdOf
-# BAI2NjmXksJtdf+VT/5/o4bEzaEc3u97C/llv3BPvNYp9ra2UkjzcprkcbGFJwTm
-# QevEW578pV7VgCIwGkGHpMxhtbgwdMcUdFr/VNN5jQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNbuN4xnmSphA4G/6pGdR944d+XkwDQYJ
+# KoZIhvcNAQEBBQAEggEAwyp3mKBvvtERUbQaHB6PHOmqpSSpHQt+xiZ75bSBLlS4
+# 2d6ZZ1iXDtpsM+A0qxUJkfBDS1uVSkGABbqcwcgzpjEIq4iB7JAVo9gxHe/MM6M8
+# CQbBofuvoixB4p8TIsgpiHqqYs0yE89HNk4EzIK5f1p7iWml8G8GypUMd/oyvGoe
+# rwp3F3DXE7t2xvVV72sVrac7oHWStsMYNKYZ6OHQkI9PtYJfhrXV3NW0ttRta/Lz
+# ancRME1fxjzdEwhYDOkR5QaJcVslUTgUEbNo+i6lYshtkQ5zknxwOSP16OcURTvJ
+# E9/dGjBdjQ9MoB9pk6S8OrFeWmUnCwtyIqUCPgu4Rg==
 # SIG # End signature block
