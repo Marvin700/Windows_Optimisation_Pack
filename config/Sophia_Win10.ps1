@@ -21,10 +21,10 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 IF (!(Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack")){
 Write-Warning "";"Thanks for using my configs :)"
 "windows-optimisation.de $([char]0x00A9)Marvin700";pause "Press any key to continue"}
+Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions)
