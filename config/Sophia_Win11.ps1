@@ -18,7 +18,7 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
@@ -386,8 +386,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi0OIigw1QUXrKspz1H8S+ZDq
-# 9UCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOSwMOj/sbMdFx/Gv/rYW+IkX
+# abmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -407,11 +407,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmNdtWksE5bl1pkOEC9UdRf5p248wDQYJ
-# KoZIhvcNAQEBBQAEggEAq/VahjyO1DZY/4kNUef9UURcgtiQkfSlM/DoWMmVPN48
-# Ruahg7AEtWqFkLMWu+YpRq2w+M6LM/SvSjJ3INACibD8z0dgtwYXd8ZBfYSy+q3s
-# i2LDyOEN48/xhZ44qx+pVL5ioODsgMBdYpaN/uoq694yS9/5RVnrQW4J5eLyW1be
-# OEUwqPF07J97LZpxiCe4pZxZxW7Cys6KJGQ8XkgZjGnrWUEwI3L8kMrCFlcD/yDf
-# KMsmF36+wvPzAkIAE4khYYlEa90fuY/4NWX0EFhbOnqLuXySz49hy1AS9BWyzAzu
-# rjLclckBZWnIURlNlUQN+fX9IeQotc7raWl5fqBfDQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUGi7SvRdfllvddM/zZ2drPEmrQs4wDQYJ
+# KoZIhvcNAQEBBQAEggEAnp3D5i5Q8qG+RC5KWfSN+8TpcHMW+B3Uol9TjACyyLhQ
+# FSjpg8lHQ6PQDey/eYyV0HVMlC2JV9rU7f25RVhaQxnR8H1x1tUOWfIwXk7/3Dun
+# GOcR4lvkSOwXqTbFm/eVFK/Vhkb/kwQLpDF0ioh/gjxeRYRuMOH5XD/tafqEuZVV
+# Ru5E7uceDDBP5iHTe/dDTBEwOsKBfNIJDT80Rap1WMAUOqxcdAOvyhuMdeNTgLOi
+# qHZ1vp9J5w4SJSevKai+Z5JEDdipLB4z6zkkLJ33s6wXQm/x1RsTiABdEcdWSN6f
+# Dj3qX8QDGyMkgIs4ZkCogw+AzZ29gxLWqvdmpqPl+Q==
 # SIG # End signature block

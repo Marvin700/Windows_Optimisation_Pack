@@ -18,7 +18,7 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
@@ -273,11 +273,10 @@ StickyShift -Disable
 Autoplay -Disable
 
 # Enable thumbnail cache removal (default value)
-# Включить удаление кэша миниатюр (значение по умолчанию)
 ThumbnailCacheRemoval -Enable
 
-# Turn off automatically saving my restartable apps when signing out and restart them after signing in (default value)
-SaveRestartableApps -Disable
+# Enable "Network Discovery" and "File and Printers Sharing" for workgroup networks
+NetworkDiscovery -Enable
 
 # Enable "Network Discovery" and "File and Printers Sharing" for workgroup networks
 NetworkDiscovery -Enable
@@ -296,9 +295,6 @@ RecentlyAddedApps -Hide
 
 # Hide app suggestions in the Start menu
 AppSuggestions -Hide
-
-# Run the Windows PowerShell shortcut from the Start menu as Administrator
-RunPowerShellShortcut -Elevated
 
 # Unpin all the Start tiles
 PinToStart -UnpinAll
@@ -426,8 +422,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJNE5W31NUeYvzT0C+TP58kYA
-# 36igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2vxz1O6d2swKyaAkU8DxIo6K
+# 2PKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -447,11 +443,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUEyK16IF81hbsRNkozoYcCHJD35cwDQYJ
-# KoZIhvcNAQEBBQAEggEALBvEzsphHWE/P6ooZBlaDoVcxnFuy18ifWy/S9sEywar
-# zpA1nY+w6PDgQTWfCykF0iZFkTBz7zsytb4vthZBxXu+RzlN0r1WJOnyaDc1XBH1
-# 98XeuutsTczvJwFG/zGM+rxE8OWVl9vFu2jdEFJLHy82KtTBtq/QA1WJTr96M/fu
-# /VVNO3kqrpaQsgOvJw3Ld/e3HTpJH4+2dYIz0QuNqWTNUMfY6zOCtSw77YcuqZYy
-# wkM3kyt8DsZ6iKkzpryhqceCa9830y9DPBqLu8Qy6tlbqWsLzFmpDynd+RHZmrTd
-# PWEd1svUXKymKiqoAaWg+RVK4EMkJT6RySXFixsz+w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXL8n4uCEBkP28Ke7Uay7Ducsts8wDQYJ
+# KoZIhvcNAQEBBQAEggEAS8lJ4f/hfNHXt/vaSy3iqLlhkpcrvCSsqMKtpx/zNUm/
+# GEyZChqyH3UCR0jcKU4DVbqz4NSSQb3LSSKzc7ir7/9yIEDO4zGBYmIQxwHLUxNx
+# SNkdylFTrlyWUTMRaMWkJDULKfKdM8qNJ2mCa9aFo9bhCklhvm2dWJDfHTu8h5v3
+# iXs26G8WkHptqV8ouLMUQbcTDIjVj8EbLfPvsUI3pm2TQflcSAmCjTFXleSuohnw
+# 4okkdSkc95+PQfIp79eU5BA5spSPQDx+afjrkpf+6C9GzwSrpUOyOvbX/EAeGabX
+# 5HKTTp/LBs0U1RUAu7HSERUsDnfyc37CHj54guCcPA==
 # SIG # End signature block
