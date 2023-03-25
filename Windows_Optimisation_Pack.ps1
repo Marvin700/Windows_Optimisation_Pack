@@ -1,6 +1,6 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Check" -Type "DWORD" -Value 1 | Out-Null
+New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
 $hash = [hashtable]::Synchronized(@{}) 
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
@@ -269,7 +269,6 @@ Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstal
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Finish{
-REG DELETE "HKLM\SOFTWARE\Windows_Optimisation_Pack" /V "Check" /F | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
 [reflection.assembly]::loadwithpartialname('System.Windows.Forms')
 [reflection.assembly]::loadwithpartialname('System.Drawing')

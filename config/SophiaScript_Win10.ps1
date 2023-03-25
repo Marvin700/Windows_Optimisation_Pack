@@ -23,9 +23,9 @@ $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
-IF (!(Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\Check"))
-{Write-Warning "This Configuration was not executed together with the Windows-Optimisation_Pack"
-Start-Sleep 120;exit}
+IF (!(Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack"))
+{Write-Warning "Thanks for using my configs :)"
+"windows-optimisation.de $([char]0x00A9) Marvin700"nStart-Sleep 20;}
 
 if ($Functions)
 {
