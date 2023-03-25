@@ -22,14 +22,17 @@ $Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 10 | $([char]0x00A9) far
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
-Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction SilentlyContinue | Out-Null
+Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions)
 {
+	Invoke-Command -ScriptBlock {Checks}
 	foreach ($Function in $Functions){
 	Invoke-Expression -Command $Function}
 	exit
 }
+
+Checks
 
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
@@ -423,8 +426,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUl5P3hDlJ1OEqB1DAnRxMbGcT
-# K7agggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJNE5W31NUeYvzT0C+TP58kYA
+# 36igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -444,11 +447,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0gOmh5MLLx+d6a5Cbv397aF+3K0wDQYJ
-# KoZIhvcNAQEBBQAEggEARzxtdmt5VMfgszY1bT5ymXY/ve9DsCNfKKGkFTWOmnOc
-# IU20Xe6niEqjbQMdqF9rUurYaVsChmqw4OoVBNsSPnOTJ/PxG2Icg7QlOAiv9ePo
-# xw/pHN2fu04wg0utOORpon8R0XUPmCk5OFrhc8bhPS0FXiCYI8SZtJhvPH2aiSHY
-# tbyyJUxS9qrgi6PNuJGU++58TbYfdmi8Uw3lZX6U86IfuY1+bM+Eclml//p/2Vgw
-# 7K0uDesmrEDdBYmP13Z/DxE8s7P9suvms3P3STBtF/WwbWTOfxlw5NSdiW9kfm8f
-# AgGMx642pDZuK7aYPFNlpFoCDCcgDQgnYTIVtwx14g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUEyK16IF81hbsRNkozoYcCHJD35cwDQYJ
+# KoZIhvcNAQEBBQAEggEALBvEzsphHWE/P6ooZBlaDoVcxnFuy18ifWy/S9sEywar
+# zpA1nY+w6PDgQTWfCykF0iZFkTBz7zsytb4vthZBxXu+RzlN0r1WJOnyaDc1XBH1
+# 98XeuutsTczvJwFG/zGM+rxE8OWVl9vFu2jdEFJLHy82KtTBtq/QA1WJTr96M/fu
+# /VVNO3kqrpaQsgOvJw3Ld/e3HTpJH4+2dYIz0QuNqWTNUMfY6zOCtSw77YcuqZYy
+# wkM3kyt8DsZ6iKkzpryhqceCa9830y9DPBqLu8Qy6tlbqWsLzFmpDynd+RHZmrTd
+# PWEd1svUXKymKiqoAaWg+RVK4EMkJT6RySXFixsz+w==
 # SIG # End signature block
