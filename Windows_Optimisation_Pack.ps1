@@ -4,7 +4,7 @@ $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory else { Remove-Item -Path $env:temp\Windows_Optimisation_Pack}} 
+if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}} 
 
 function WindowsTweaks_Services {
 $services = @(
@@ -292,7 +292,7 @@ if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}
 if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
-if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
+if ($BOX_Runtime.Checked)      		  {$hash.Runtime = $true}   
 if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
 if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
 if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
@@ -537,8 +537,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPmAzrSXptEeuGQYrbqioeBVQ
-# cdmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4UW1ABhpejwQpTh8C7eG47OH
+# XuigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +558,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU15E5yKnEaL3X/lo2bhyZdxg1z/IwDQYJ
-# KoZIhvcNAQEBBQAEggEAcbuhkhmGhfHJ68+8726rgvJnbe3c6U001qNnHrQpuGyD
-# Yb17VKQjdc+sp4ngR45Og+UySJ+5gdy7IoPyWwcGemineTXXH29GE/+67vncq7FM
-# rGtqo2dxfJyC98G02Fdf6MoawzCSXGR0zIFSUSQPLeXDE66d3FgTYeXWOds8qI4z
-# gCPPRND9xLHYSquzeDD1vnTsR+8tEXrhdZvoobAXC8Nb0MxHh0IeYnRMd88HmIBj
-# LvB3peUgl5Dz68cN5rRfB0uWLBj4vIWTjqbmvEVdT+8WJkCo227MQO2mu5SgdynW
-# QXATqMa6Dsr/yVK0WkGCTzggrj/DWk59lATEKOyjPw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUCAVUqT9JLG0pIqU1asoSbEuh4oMwDQYJ
+# KoZIhvcNAQEBBQAEggEAZ/pQEz3YMUD79VaAW5427H67IkbXAR05IAApVrc4Jbns
+# DpvDWC+i/LUklp2E7XYs/tY/ZO0RWgCs8LqjLjRT6r/iaAW4gVCCaVeEodZ+KdUY
+# jsTTQjbOIIgiwh8t42TfXRLBnq6JD2ulZMZkLHRcrUQF53LMj5KwkaysPYWgZ0I+
+# OD93Oy1jQzW5L8V0iBTDHX46Am0hI9nxXeCqbQzgvx7RUXvDKH+/XZjM9HiNuna1
+# 1igd0jeZwkq0P1lsD5WU7dCsGee0BlkH5wmCPQToCl1bdBqvOIMpPvl79F6l899b
+# E+wdgsHjPIK/nx/mAsbDLA4vBSKMUDlSRPGgIqO4AA==
 # SIG # End signature block
