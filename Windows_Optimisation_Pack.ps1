@@ -4,7 +4,7 @@ $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}} 
+IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse} 
 
 function WindowsTweaks_Services {
 $services = @(
@@ -538,8 +538,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpYI0p7+FCazfF1c3nC8s9GaK
-# 37GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKw50dRS8ADK23v5cPP0wsZOq
+# v3ugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -559,11 +559,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUOQEylRakanynRSAAzdGtu3U48ywwDQYJ
-# KoZIhvcNAQEBBQAEggEAI1cBt2YbjoLK9W7qUpXvgSDugXS31NYXwo2SIbpZAMVS
-# sY9t7uXRMWS4cmIwFno+O7wo2KhjhkXWcpiAY3EXJ/e6VcwgS17923G0lXjOG9Zy
-# NSKIBjzWYmcYn2K6Vt8dll9qp/NF0yV17hVWZqg2G1POv0Zc9LxFOGJUd3Ekjna0
-# snqAGUDK6wVlSz5rvESZWQHQKltfGx7r0FhZGdzlpA8gr8580aL0PL3h/WSxrhut
-# opIJy08U1ArSyyof7q4TmbkiEneCD31SpyCjVyEE5GwUOGNLZBSIbllWsV8k8IqN
-# rBhbg/ceOy3zcHoCiza9rHq1Jal0XUgc12WwQxRcfg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU5kLeizFvNZ+3IcMSqmeUEdvsom0wDQYJ
+# KoZIhvcNAQEBBQAEggEAPHXeKRk5Ql3z1NJ1uo5lLxWjX42dNUaWt2v4Ms83G7HJ
+# ZDoiIL2BGcw8wV7wLlS9fiW6mPuEulhAyek9pnAnwUXT1lRA+j+46wcYSBw1Mygu
+# Eb5z7uDTLsGVdOTBdJleGIgvNiHijuryo22zAFVa4GQQVqIn9aM6L63U1LAdKLro
+# w7/QKM0iwUgRJ/bOTbzbP8l+W1LxpgHfxgSbvUIc0VOFPBmmfT5ShkMMuPkri5Ll
+# u0tpau/t0oaJS4Aa4uWa0DiSlGl+FMhTZRvc3CrAikajNDwazqqzAS1NIPzTBPVx
+# K+tedpGpqoSqKuazTatNR9zK+6S5RwStsmAX9DS89g==
 # SIG # End signature block
