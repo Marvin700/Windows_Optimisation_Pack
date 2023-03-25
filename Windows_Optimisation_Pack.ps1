@@ -4,7 +4,7 @@ $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse} 
+IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} else { Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 
 function WindowsTweaks_Services {
 $services = @(
@@ -143,7 +143,8 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
-"Compatibility checks are performed ..."
+Clear-Host
+" Compatibility checks are performed ..."
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -537,8 +538,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCWVKFj2ddWqMFhYKOHEoTf4x
-# GT6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzkvUawCpF7yi+YKTYN7BH75c
+# ME2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -558,11 +559,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkb/H8SRr4PLTaUMD28jU4GgFcDEwDQYJ
-# KoZIhvcNAQEBBQAEggEAd5sOuJdklaATbyuyqPanyBplNTFh2WtHYCInJLnlFsaB
-# yEMwgXiZTwHPghIbqZQWa/mWyvXstNkzjb1L6kiQE4WDR1jLZI6n1roVyfzcmk6L
-# TCJGMM0+KWlEsXYgERuc0o30mpo/ultm3M/KOKSzlbPJk6FM3oJtKcb6Xk6SHj9a
-# IOxADTb1GKfaKyNKBPUQPyzZX9rNhXC282MVNrQ0qzcYsf122lqZ+pTLaImTUF40
-# TDjvhFXFAZo+FO//nU1RqhWJeERd+VmUgxQg8sp+zJd9BG7UiAkalHpka82ZUfaO
-# AaMyZMzmU4/SFbe5claxscxEmnPjnJ5JMw8AiSb/Lg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUz7bV4AgkNBkP8fCb0VS3/tzC3pkwDQYJ
+# KoZIhvcNAQEBBQAEggEAOis4DQaVigNk3r1zIKZm1S6DDBgKdu0wACyNEVVvXyrx
+# iNTFJJD5YdbgE7vYGELC7xE0iTCLPBYKyEjRzp1IogjdRClhUBdzO1DFLm1U0NG7
+# aPnIO5XHMwdHwEM08Z2MwBrmZ0UOcY/OAxdROS76VMpIyrYA9M9H1X826xswKM3F
+# dUctZnDe+8c1SfZ3x+DwPabMu2h0bzrUuxjAniuaY4hnd5zj9SF5KhUoiX2bdXhy
+# qpwiDZQ2tBYh/A4APihb8pHVMn3Ler6vWlhCOBw1rG1+BCt9CQgFdncM6AOr/mnv
+# C1MTBNdRx9s+sNqQGplzoczjsBGYmKC5oOoGhpTNjQ==
 # SIG # End signature block
