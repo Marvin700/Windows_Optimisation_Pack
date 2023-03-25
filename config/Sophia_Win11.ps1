@@ -22,8 +22,10 @@ $Host.UI.RawUI.WindowTitle = "Sophia Script for Windows 11 | $([char]0x00A9) far
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
-
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
+IF (!(Test-Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack"))
+{Write-Warning "Thanks for using my configs :)"
+"windows-optimisation.de $([char]0x00A9) Marvin700"nStart-Sleep 20;}
 
 if ($Functions)
 {
