@@ -6,7 +6,7 @@ $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
-function WindowsTweaks_Services {
+function WindowsTweaks_Services{
 $services = @(
 "WpcMonSvc",
 "SharedRealitySvc",
@@ -150,7 +150,7 @@ Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
 function Preparation{
-Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
+Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear()
 New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
 New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Force | Out-Null
 New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Name ShowInActionCenter -PropertyType DWord -Value 1 -Force | Out-Null
@@ -543,8 +543,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXPSfODUqTS1d9HI/dwefj/9F
-# KNqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTomErZbIvEwH3d9ooO23AGM7
+# 6mSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -564,11 +564,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUmLvcOmCp4095bze590jLvLperJUwDQYJ
-# KoZIhvcNAQEBBQAEggEAGdvy9e+g9nzvRVDhJb94AZdl/1UyKdOYjWirppzEDue2
-# xmKptL1fMIkUTUbz+jysVjfnFj+oIqy4kx//dF9BKiMhnXWnYbOGywvBwTG3m69b
-# qdJOIJxgppHeeV6+F9kLQikE+WhZCid1TC0amX9axXLhDi8Fmvrf2crux4l9PKsS
-# KnVWIGEyy3Gkt9f/DLDTuNIPWOq/UCIy1Bf9ZP9qyqaxBh5+13PICHpxCtofQPKR
-# PAkAbyWN/k1+7CArN6S57Eb2eRKSiM5dMwiSrWmpsk7iVkTjmIet+WD3zCcjNgMx
-# /mgaUrFu4phK71Ke38nq6VcUiK6PpzqEzI5PWR80zQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUYOmFaPQXQXEb2jOZAAfJqsu85UMwDQYJ
+# KoZIhvcNAQEBBQAEggEAwxo0zXwnqYp0VNNeP8gG3FEE2EFTplSHT4DUFn+vOJ5R
+# 9/iYSdaQmGTwjYQKIA9ht67R+UgJBSx9Nn48NHF3DSKrU4hW3ndIGLW8K5kamvF6
+# nF3FlLFLp+pKWYDgoUcKGUPBPvID2fuWq49QtlsLxLDOElgDKZov3oTyLQA/nSi4
+# N/8w0jSJa/YC759Xyd4LlmLYAwCYYcNdDhyZPOrPAFlDGt89JI2dwIuDQtKj+szM
+# ubX8HimqQ7I+szRf83wenDF7ogl1oRY/wv3IZFAs/4ZTq+qt4ObnlmAiU39d4obB
+# 6evx/ypMgcKYqMV8Zz06wvoZXrJGx8DEd5q6rUa3YQ==
 # SIG # End signature block
