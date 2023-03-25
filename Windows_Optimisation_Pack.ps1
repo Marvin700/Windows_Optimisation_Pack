@@ -130,10 +130,10 @@ Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 }
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup10.cfg" -Destination "$ScriptFolder\ooshutup10.cfg"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
-.\OOSU10.exe ooshutup10.cfg /quiet }
+.\OOSU10.exe ooshutup.cfg /quiet }
 
 function SystemPoint{
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
