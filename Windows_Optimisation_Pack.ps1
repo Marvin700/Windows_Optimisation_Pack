@@ -191,7 +191,7 @@ ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
-Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear();
+Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear()
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $paths = @(
 "$env:windir\..\MSOCache",
@@ -208,8 +208,6 @@ $paths = @(
 "$env:LOCALAPPDATA\AMD",
 "$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-Start-Process cleanmgr.exe /sagerun:1
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
 IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 taskkill /F /IM EscapeFromTarkov.exe
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
@@ -227,7 +225,8 @@ Clear-Host
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
-sfc /SCANNOW}
+Start-Process cleanmgr.exe /sagerun:1
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
           
 function Runtime{
 winget source update | Out-Null
@@ -294,7 +293,7 @@ $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
-if($hash.Reboot){Reboot}exit}
+if($hash.Reboot){Reboot}exit;}
 
 function Reboot{
 Write-Warning " The computer will restart automatically in 120 seconds !!!"
@@ -536,8 +535,8 @@ $form.ShowDialog() } Out-Null
 function Choice { 
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
-Preparation
 if($hash.SystemPoint){SystemPoint}
+Preparation
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
@@ -556,6 +555,7 @@ if($hash.Controller){Controller}
 if($hash.Process_Lasso){Process_Lasso}
 if($hash.System_Maintance){System_Maintance}}
 
+
 GUI
 Choice
 Finish
@@ -563,8 +563,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNI9FORLFSE7qjzZFhGd94tKC
-# OAqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWS3Hy1gI7/wQWNRk2NtI+t/E
+# umqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -584,11 +584,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUNwDDrWksusjfNpdcCWgAHcl2tfgwDQYJ
-# KoZIhvcNAQEBBQAEggEAPPHBtArQj3NzMA8TrTEFIFiqsXCZmmFQkVUmWPuTnipE
-# La0L7ASdSybI8LTLoZEK73Ys0xVIKbCtYZuee983Gvoz2CfxBIvCpqzu4bOY+Ll4
-# jUbdDT7SkFn2Sd2olwPd9YShBx9HBQs4mql4rQGJ5Xov80oqjILe/7mpWgxU4wED
-# AoP+L7ox6W2D709m1xZ07Ec1tuW5XCek71X4jWDFUjoSSG2H8pAsRtrskwe6HtP/
-# yujZr/9RKR/jjcEzwvOR33Y0bTEWRhDcmCaUS4tmQjkgvuRpgspItFj2PYcJ/vRs
-# 5fAHPyNU6y/ogtTWXwQfi0ZnXpuxQ7USwU6tBVVSgQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUuIHtcpBmpw/F13W3kQdwOl1PuC8wDQYJ
+# KoZIhvcNAQEBBQAEggEAq/ZFJoQJ94vQ1Vig/OATVQiUrjp6YXsCuhEBBpIfKG64
+# hpvo7g3pFADEIPcXLfiKz0LoFxKAOfH+faNtvys22ikTZ6aMMdLMqB1kfIkgkweV
+# OMYD17tLwWF0062qSygXlYmr2x03rHZQzTdtQGqIWaMed59dm0uhUGFPbNGjzhCN
+# 9kUeXPURdikPmnZYY9OeLbnd7HOyx2j1Uju9Ouv9VUpDg2LkuQZwTyg/0YyvMUBz
+# nieSYQXNccb/PqdO7dMb/Ahetdhzz8IEgE6EbpFpvKpclR91F4F/Q62CHSyYLXLs
+# jjsm+c4Qia8fzbrWgufthe8Vd6a4AsrmgLgta13JuQ==
 # SIG # End signature block
