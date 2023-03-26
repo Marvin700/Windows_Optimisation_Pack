@@ -167,7 +167,7 @@ Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
 function Windows_Cleaner{
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Cleaner | $([char]0x00A9) Marvin700"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows Cleaner | $([char]0x00A9) Marvin700"
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
@@ -205,11 +205,13 @@ lodctr /r
 lodctr /r}
 function System_Maintance{
 Clear-Host
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
-Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
-Start-Process cleanmgr.exe /sagerun:1
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+Start-Process powershell.exe -argument {Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart; Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart; Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart; Start-Process cleanmgr.exe /sagerun:1; Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+#Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
+#Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
+#Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
+#Start-Process cleanmgr.exe /sagerun:1
+#Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+}
 
 function Runtime{
 winget source update | Out-Null
@@ -252,7 +254,7 @@ Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstal
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Driver_Cleaner{
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack GPU Driver-Cleaner | $([char]0x00A9) Marvin700" 
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack GPU Driver Cleaner | $([char]0x00A9) Marvin700" 
 Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/DDU.zip" -Destination $env:temp\DDU.zip
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
@@ -562,8 +564,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAAx3J9Otw9PEbElug0n7jx1/
-# y7GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUk1jyfE4hQBJBBowQHQfboIOZ
+# m96gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -583,11 +585,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQURfx76KhnZXG9zRt318Zm0YjzGhQwDQYJ
-# KoZIhvcNAQEBBQAEggEAqHdOmuzysf8EGhIlPdlLxTxpdop3TNbeCEjzeimJEYKD
-# HQGeIYHI0QgeOjvpkFZxz/N9ho3V3HajezXtOugAj0oq1bXpHKmTJZLlG2KArRVF
-# dbITXMXAdq0K38b9RRfWnQmI9L+cQCPpkF3yBt+/hlalH4QOxsELMCspPjE0JWvF
-# oOi74LoE1ePPiXPv0WZ6Lfg6tsX0GRg/t6G6F+9i4funzdcPKsxd/j7VyPAPk8rP
-# h3SvtmiG7tWuUX/eB3IYIyTu5OtV6HnGdpV3DaazB0sboE2Nn8fDINmzMD1uMSJJ
-# 6fBwdO2d0tWRA4x0P0mA1K9BF+FZT7Wj1tjW10EXVQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU4yBFMMIXAk2cb68xFP935PBWg2AwDQYJ
+# KoZIhvcNAQEBBQAEggEAyhq+APbaX/ZU3lCa68T1rhOrYv3zDJRZPB5GvzliNt8O
+# MgYG/6cU3XXy+7FGK4SxyjeiR2rZGJG2NAalIFx+irj9pyMwO7vD5VeuJujgjTor
+# Py4jWxYcy/hi48LsnIKxRpfGmmzngA5TPjIglqJiQT/QQGzbci9mrQ3Y2qt+Wa9U
+# V0aYmVx73kd0WZHtAdgnyRJTSVpyjmmWUjKMX6U3/OKol8V4xsVbh88XhxkTRvaO
+# VjwKZmcPPZldvWkQzk+KbMxV31Fo4iS0I/o5G/XrqooJ2ntD+f8OeffPYjIvmc4F
+# /DLgtEMNbTIUb/pzi9O6tygWfEHOp3exTDN3YMbcmQ==
 # SIG # End signature block
