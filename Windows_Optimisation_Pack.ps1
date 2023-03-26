@@ -1,11 +1,13 @@
 # Windows_Optimisation_Pack @Marvin700
 # windows-optimisation.de
 
-#Branch = "Beta"
+$Branch = "Beta"
 #Version = "2.0"
 
 $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
@@ -98,7 +100,7 @@ ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
             
-function WindowsTweaks_Index {
+function WindowsTweaks_Index{
 Label C: Windows
 $drives = @('C:', 'D:', 'E:', 'F:', 'G:')
 foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
@@ -109,16 +111,16 @@ IF($WindowsVersion -match "Microsoft Windows 11"){
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.11.v6.4.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.10.v5.16.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup.cfg /quiet}
@@ -133,7 +135,6 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -193,7 +194,7 @@ Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_P
 }
 
 function Driver_Cleaner{
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/DDU.zip" -Destination $env:temp\DDU.zip
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/DDU.zip" -Destination $env:temp\DDU.zip
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
@@ -207,10 +208,9 @@ $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
 
-function Runtime{´
+function Runtime{
 winget source update | Out-Null
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
-$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931")){winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.14 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.3 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
@@ -521,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAy/W85MhM0FJI/8uyNcdEoYy
-# I9ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5HvKPWk7Juo33NbBdHNgzn/y
+# +ImgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7J40fZx/ymhR+CHfvOdcY0Xp/AUwDQYJ
-# KoZIhvcNAQEBBQAEggEAbscU4S7D2mOtr4FrYtTDRJAXf2BLfUR4GG7HuIFj9H4b
-# hREhcn0VphccqHebVh0a+RRnVpFkzkqZyGm63vJz9KgXHA7TO2cJEJoXh3/+eW2m
-# 33noQiknchF1sZ5Ut4+7+7TWst87aZ+fgmtqCaFZLZSfLsDzKYtbKktJRC+ebqE6
-# PNdLaGGoZQy2tqAwRVIeVDsZSu4C3w1MFZDRLxou9n1q/c82pmafHtynZ4CtzLmK
-# EsyvBhOhqFMZmeHMA+pycvkMh612ha2RXzgTrmNzK8s+6oV1TizYAXvnSR8G06e1
-# p2LgO9B/I6/OpyB3N7X2YBuUenmpun5GgvrUpzAteA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUp/jrPRUF14QfeW+IGqhxzbpfZowwDQYJ
+# KoZIhvcNAQEBBQAEggEAjj1QbGr49Qx1SRFgYUbXwgSBM8AqxGSiFrT8RNe34zwn
+# uL4yJw2Xjh4CM6J+ZzAf0jmj58+gY5mWvMPrt6c0+vHNXsaF5oX6K4BChQiO5RUH
+# 72p9YvvPS87QYdAx097IHa8Fzfun5OFfIn2bTRz/1owxwIBRs3avT5adTCcqW9iY
+# G0pYjvD2i938X9ZX2wjdiIKnvD7MvxSVD8GiTEWhgFUwLBWOJtWyr8VlP7ENqGPk
+# eTFce3NcyE6V4CKUfE5gk/Emun+g8TIh1eOLq1GKVAYSr06FVxBnH62K+0Vo5qFf
+# pBTlTmK3yKWf38M5M2N2FopZEFZIeDBSR6pVXmE/Og==
 # SIG # End signature block
