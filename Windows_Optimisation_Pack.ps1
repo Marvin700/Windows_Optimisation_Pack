@@ -1,7 +1,7 @@
 # Windows_Optimisation_Pack @Marvin700
 # windows-optimisation.de
 
-$Branch = "Beta"
+#Branch = "Beta"
 #Version = "2.0"
 
 $hash = [hashtable]::Synchronized(@{})
@@ -109,16 +109,16 @@ IF($WindowsVersion -match "Microsoft Windows 11"){
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.11.v6.4.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.10.v5.16.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup.cfg /quiet}
@@ -193,7 +193,7 @@ Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_P
 }
 
 function Driver_Cleaner{
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/DDU.zip" -Destination $env:temp\DDU.zip
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/DDU.zip" -Destination $env:temp\DDU.zip
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
@@ -521,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVFuTAZweTHL0OyMH7weLvJBj
-# JEigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAy/W85MhM0FJI/8uyNcdEoYy
+# I9ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUhNuSZpgwA2UmvERckSrAM0lAynswDQYJ
-# KoZIhvcNAQEBBQAEggEAuIfeeYz9MNUIKAguGlws4Bo9DCtj7d6dA4LmTOPXn7S5
-# k/VkSPRvc4yQJGlOM0h1gkj8OO8sicyJeOHVhjeUPMtEszebaby/zZlHY3N6lR62
-# BIpOl4o7k/WCryOGG/0pH4l5QNEGAWuTZuZ/l/5YFKXeP9qw36ZbofvAvNF+StjJ
-# D9//bXELRmIeFdNkIRecA1xW6Y6J5vo6J1NmlmatYzP9o7uzyNLs0tdWklJH7VyS
-# IUodV6+FB0x+eD9qt8SSETrvBtefDQ329Thi0iO1NaLa/pLDz9YH6gAc7SoIBeoE
-# Xne6lqcAaRY2gUhO4ND2oz4pmflUoyNEapxmOzXPmw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7J40fZx/ymhR+CHfvOdcY0Xp/AUwDQYJ
+# KoZIhvcNAQEBBQAEggEAbscU4S7D2mOtr4FrYtTDRJAXf2BLfUR4GG7HuIFj9H4b
+# hREhcn0VphccqHebVh0a+RRnVpFkzkqZyGm63vJz9KgXHA7TO2cJEJoXh3/+eW2m
+# 33noQiknchF1sZ5Ut4+7+7TWst87aZ+fgmtqCaFZLZSfLsDzKYtbKktJRC+ebqE6
+# PNdLaGGoZQy2tqAwRVIeVDsZSu4C3w1MFZDRLxou9n1q/c82pmafHtynZ4CtzLmK
+# EsyvBhOhqFMZmeHMA+pycvkMh612ha2RXzgTrmNzK8s+6oV1TizYAXvnSR8G06e1
+# p2LgO9B/I6/OpyB3N7X2YBuUenmpun5GgvrUpzAteA==
 # SIG # End signature block
