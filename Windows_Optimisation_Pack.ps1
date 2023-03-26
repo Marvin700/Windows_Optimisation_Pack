@@ -98,7 +98,7 @@ foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLet
                 
 function SophiaScript{
 Clear-Host
-IF($WindowsVersion -match "Microsoft Windows 11") {
+IF($WindowsVersion -match "Microsoft Windows 11"){
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.11.v6.4.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
@@ -117,6 +117,7 @@ Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup.cfg /quiet}
 
 function SystemPoint{
+Clear-Host
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
@@ -125,7 +126,7 @@ REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V 
 
 function Checks{
 Clear-Host
-" Compatibility checks are performed ..."
+" Compatibility checks and preparation are performed ..."
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -142,14 +143,7 @@ Start-Sleep 20;exit}
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 Write-Warning " No admin rights available"
 Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit}}
-
-function Autoruns{
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
-Expand-Archive $env:temp\Autoruns.zip  $env:temp
-Start-Process $env:temp\Autoruns64.exe }
-
-function Preparation{
+Start-Sleep 20;exit}
 Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear()
 New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
 New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Force | Out-Null
@@ -160,7 +154,12 @@ New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimi
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null}
 
-function System_Maintance{
+function Autoruns{
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
+Expand-Archive $env:temp\Autoruns.zip  $env:temp
+Start-Process $env:temp\Autoruns64.exe }
+
+function Windows_Cleaner{
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Maintance | $([char]0x00A9) Marvin700"
 Clear-Host
 ipconfig /flushdns
@@ -198,15 +197,18 @@ IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Unins
 IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+Clear-Host
 gpupdate.exe /force 
 lodctr /r
-lodctr /r
+lodctr /r}
+function System_Maintance{
 Clear-Host
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Start-Process cleanmgr.exe /sagerun:1
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+
           
 function Runtime{
 winget source update | Out-Null
@@ -280,16 +282,16 @@ Write-Warning " The computer will restart automatically in 120 seconds !!!"
 Start-Sleep 120
 Restart-Computer}
 
-function GUI {
+function GUI{
 Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $hash.Cancel = $true
-$handler_BUTTON_Start_Click= {   
+$handler_BUTTON_Start_Click={   
 $hash.Cancel = $false
 if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
 if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
-if ($BOX_Preparation.Checked)               {$hash.Preparation = $true} 
+if ($BOX_Windows_Cleaner.Checked)           {$hash.Windows_Cleaner = $true} 
 if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
 if ($BOX_ooShutup.Checked)                  {$hash.ooShutup = $true}    
 if ($BOX_WindowsTweaks_Registry.Checked)    {$hash.WindowsTweaks_Registry = $true}    
@@ -342,39 +344,38 @@ $Titel_Install.Size = New-Object Drawing.Point 135,25
 $Titel_Install.Location = New-Object Drawing.Point 566,215
 $Titel_Install.text = "Install"
 $Titel_Install.ForeColor='#aaaaaa'
-$BOX_Checks = New-Object System.Windows.Forms.CheckBox
-$BOX_Checks.Size = New-Object Drawing.Point 135,25
-$BOX_Checks.Location = New-Object Drawing.Point 27,248
-$BOX_Checks.Text = "Compability Checks"
-$BOX_Checks.ForeColor='#aaaaaa'
-$BOX_Checks.Checked = $true
-$BOX_Checks.Enabled = $false 
 $BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
 $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
-$BOX_SystemPoint.Location = New-Object Drawing.Point 27,279
+$BOX_SystemPoint.Location = New-Object Drawing.Point 27,248
 $BOX_SystemPoint.Text = "Restore Point" 
 $BOX_SystemPoint.ForeColor='#aaaaaa'
 $BOX_SystemPoint.Checked = $true 
 $BOX_SystemPoint.Enabled = $false 
-$BOX_Preparation = New-Object System.Windows.Forms.CheckBox
-$BOX_Preparation.Size = New-Object Drawing.Point 135,25
-$BOX_Preparation.Location = New-Object Drawing.Point 27,310
-$BOX_Preparation.Text = "Preparation" 
-$BOX_Preparation.ForeColor='#aaaaaa'
-$BOX_Preparation.Checked = $true 
-$BOX_Preparation.Enabled = $false 
+$BOX_Checks = New-Object System.Windows.Forms.CheckBox
+$BOX_Checks.Size = New-Object Drawing.Point 135,25
+$BOX_Checks.Location = New-Object Drawing.Point 27,279
+$BOX_Checks.Text = "Compability Checks"
+$BOX_Checks.ForeColor='#aaaaaa'
+$BOX_Checks.Checked = $true
+$BOX_Checks.Enabled = $false 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
-$BOX_SophiaScript.Location = New-Object Drawing.Point 27,341
+$BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
 $BOX_SophiaScript.Text = "Sophia Script" 
 $BOX_SophiaScript.ForeColor='#aaaaaa'
 $BOX_SophiaScript.Checked = $true 
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
-$BOX_ooShutup.Location = New-Object Drawing.Point 27,372
+$BOX_ooShutup.Location = New-Object Drawing.Point 27,341
 $BOX_ooShutup.Text = "O&O ShutUp"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
+$BOX_Windows_Cleaner = New-Object System.Windows.Forms.CheckBox
+$BOX_Windows_Cleaner.Size = New-Object Drawing.Point 135,25
+$BOX_Windows_Cleaner.Location = New-Object Drawing.Point 27,372
+$BOX_Windows_Cleaner.Text = "Windows Cleaner" 
+$BOX_Windows_Cleaner.ForeColor='#aaaaaa'
+$BOX_Windows_Cleaner.Checked = $true 
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 200,248
@@ -410,7 +411,7 @@ $BOX_System_Maintance.Size = New-Object Drawing.Point 135,25
 $BOX_System_Maintance.Location = New-Object Drawing.Point 373,248
 $BOX_System_Maintance.Text = "System Maintance"
 $BOX_System_Maintance.ForeColor='#aaaaaa'
-$BOX_System_Maintance.Checked = $true
+$BOX_System_Maintance.Checked = $false
 $BOX_Scheduled_Maintance = New-Object System.Windows.Forms.CheckBox
 $BOX_Scheduled_Maintance.Size = New-Object Drawing.Point 135,25
 $BOX_Scheduled_Maintance.Location = New-Object Drawing.Point 373,279
@@ -499,9 +500,9 @@ $form.controls.add($Titel_Extras)
 $form.controls.add($Titel_Install)
 $form.Controls.Add($BOX_Checks)
 $form.Controls.Add($BOX_SystemPoint)
-$form.Controls.Add($BOX_Preparation)
 $form.Controls.Add($BOX_SophiaScript)
 $form.Controls.Add($BOX_ooShutup)
+$form.Controls.Add($BOX_Windows_Cleaner)
 $form.Controls.Add($BOX_WindowsTweaks_Registry)
 $form.Controls.Add($BOX_WindowsTweaks_Tasks)
 $form.Controls.Add($BOX_WindowsTweaks_Features)
@@ -524,9 +525,8 @@ $form.ShowDialog() } Out-Null
 
 function Choice { 
 if($hash.Cancel){exit}
-if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
-if($hash.Preparation){Preparation}
+if($hash.Checks){Checks}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
@@ -543,6 +543,7 @@ if($hash.Fan_Control){Fan_Control}
 if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
+if($hash.Windows_Cleaner){Windows_Cleaner}
 if($hash.System_Maintance){System_Maintance}}
 
 GUI
@@ -552,8 +553,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbBDBsR4JMC9XgL7EkURDCulI
-# TH6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpw/zp1xLe67DzqANUGhV7QhW
+# YqigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -573,11 +574,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMiCbvwgb2+Z59dMWzwjJlBwxbuEwDQYJ
-# KoZIhvcNAQEBBQAEggEAn6XWBqG9iagp0PD2E2O1vAj2zK5cBG7cnCO6Phwl1iiY
-# XW7W2aLRKZSJdmEAs1PiJvrfuNtRfN4iCppI6X8CPD7QQCWTnKqnoJX2UygLzpZX
-# FAcgAvI+B2y3wl/8AYdWO8ISKi/9Rlcu8sT3Qb0ZhPZF/QKux6faicwTRn4Q7vbE
-# nM0y1mEdAGUbeT96WgYKMrf7ebSEFl8UkP6Rva78hDi1AddrfGnSi1UcJMsVj/ZF
-# OmXR9lwP9ZfDcOKRxEZy9qS0N7tUNmBk5LRx/Vk3OEal5pXz8J5Ty0yve29amaea
-# sSzS0VIagi5kAokOVgdifJaIKoEWJjwbFMHp89jT5g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb6pEZqKQyA+L+qqjZU509L58D5UwDQYJ
+# KoZIhvcNAQEBBQAEggEAJgnnW9v25ec4+NYxDo77FIoR5htWGoD8QXP7/CCiRS+m
+# xQ8vgAjw+YXdVyFjyET5er8fJrVLNCi6vQvcn+IpwCW1H5xxoVoWbUpCI6NEN3nE
+# mmvZtwXFHy0rGrSkBjenWiGXdrnSgCtM5nRMQ873g7h47bbTgnsS209r4M3pCP+F
+# Iu+w3Ve/QcZaN/DXWw7Q8FUJnMTEIzgqsb96Ich4Epc/08DJi6wR05875V4XRF/z
+# tEHiadb4wkroG/LDMxnjiHnw3RFWCbM9aA2a0NvBhATFeESm4JaDLuY0JPDpIfRw
+# 0LYnhUXNI8YwPYM1VwjDZLeC/ol6sTPzx7q3lNDj5g==
 # SIG # End signature block
