@@ -186,6 +186,7 @@ Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction Sil
 Clear-Host
 gpupdate.exe /force 
 lodctr /r;lodctr /r
+Clear-Host
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
@@ -194,7 +195,7 @@ Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_P
 }
 
 function Driver_Cleaner{
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/DDU.zip" -Destination $env:temp\DDU.zip
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination $env:temp\DDU.zip
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
@@ -521,8 +522,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5HvKPWk7Juo33NbBdHNgzn/y
-# +ImgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBopHJUvtuemMFd7YoY9OAPUq
+# zyigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +543,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUp/jrPRUF14QfeW+IGqhxzbpfZowwDQYJ
-# KoZIhvcNAQEBBQAEggEAjj1QbGr49Qx1SRFgYUbXwgSBM8AqxGSiFrT8RNe34zwn
-# uL4yJw2Xjh4CM6J+ZzAf0jmj58+gY5mWvMPrt6c0+vHNXsaF5oX6K4BChQiO5RUH
-# 72p9YvvPS87QYdAx097IHa8Fzfun5OFfIn2bTRz/1owxwIBRs3avT5adTCcqW9iY
-# G0pYjvD2i938X9ZX2wjdiIKnvD7MvxSVD8GiTEWhgFUwLBWOJtWyr8VlP7ENqGPk
-# eTFce3NcyE6V4CKUfE5gk/Emun+g8TIh1eOLq1GKVAYSr06FVxBnH62K+0Vo5qFf
-# pBTlTmK3yKWf38M5M2N2FopZEFZIeDBSR6pVXmE/Og==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7o15B2wvCUvZidLU43bw+wIIZG8wDQYJ
+# KoZIhvcNAQEBBQAEggEAoozhMdkzctL9NyYwpDeIulcAtVpuP3+FX5FPVq3tATZ5
+# bPkXpqXBbQ6DJK9sg8byCi22tuRLUrjT3RB2vkIbY8EvG4W6wDLEvQWrCTWGNMVN
+# Oeentfn2iHGCSe308mtgXpnt6s9lBOVPS+UL4rReg1EiCt4FukpM2kFb6WhuhKzZ
+# ScM8xKMVfZBUf+y3dR8nEEvVZo/gpmZrT1pVuQdpgyMXx6b0trNn0MpCqzZhUD3q
+# sJ0g1EfOCU5uXIz+FV3k3OSZUYB3pr1sR8boe/J5tqZTGAtWuqRlJvkgtqcCPodD
+# yaloXCOdHZDBRmbUEWo0N1h2fpLmP+mv7G9StST6mQ==
 # SIG # End signature block
