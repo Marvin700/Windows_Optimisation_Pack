@@ -101,8 +101,8 @@ ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
             
 function WindowsTweaks_Index{
-Label C: Windows
-$drives = @('C:', 'D:', 'E:', 'F:', 'G:')
+Label $env:SystemDrive Windows
+$drives = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
 foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
                 
 function SophiaScript{
@@ -129,7 +129,7 @@ function SystemPoint{
 Clear-Host
 " Compatibility checks and preparation are performed..."
 if($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
-Enable-ComputerRestore -Drive "C:\"
+Enable-ComputerRestore -Drive $env:SystemDrive
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
@@ -226,20 +226,20 @@ Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstal
 
 function Fan_Control{
 Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V152/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
-Expand-Archive $env:temp\FanControl.zip "C:\Program Files\FanControl" -force
+Expand-Archive $env:temp\FanControl.zip "$env:SystemDrive\Program Files\FanControl" -force
 Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
-$Shortcut.TargetPath = "C:\Program Files\FanControl\FanControl.exe"
+$Shortcut.TargetPath = "$env:SystemDrive\Program Files\FanControl\FanControl.exe"
 $Shortcut.Save() }
    
 function Controller{
 Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip "
-Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
+Expand-Archive $env:temp\DS4Windows.zip "$env:SystemDrive\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
-$Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
+$Shortcut.TargetPath = "$env:SystemDrive\Program Files\DS4Windows\DS4Windows.exe"
 $Shortcut.Save() }
 
 function Autoruns{
@@ -521,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPYGhdkVw7Ri8aMDqgdUNkgLo
-# quegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUx5+bYuEk71SzF1SDBYZKiddb
+# FnegggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkO5/vEkc3wQTBkKBlHKP8QMRu0IwDQYJ
-# KoZIhvcNAQEBBQAEggEANRF2vhjkEE8Xn0Mh+UAuUVBbjvTahI6iR9J4ezQUaLfU
-# uTW+LemgiiRy8JxLsEk246MSrhrkyBX3c+dXAYFlefpapfyOB2n2zVHXvo3LC2Br
-# zWj+hxjm/c3xc+hbccWJY5cBAb2LjnG5PBEgigTHaPyv9iiitClV2VEq6CqmgsQB
-# zGaUOSSpEm3LXJcQxXKpv7mpk2Q+MFAJPNaNc0SVWCqa4W3h64DDwEJTH661ZPj+
-# VhL78lLk+Iy+FDdW3A4noxG//eyU9ShpAEIBURFKga9YgwtzroUslK/Hp2mFKWJZ
-# Nu1z8FPo1BSqqo2NlOzPzstPoSPsw5GNkW9Mq9H85Q==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUL9T0lPAKXY/XCP/EWXxxMWikWLwwDQYJ
+# KoZIhvcNAQEBBQAEggEACtTwf77YZSsJbllXxgcJ1Nh/USgRDYPEAUekaeLYxTiz
+# KxBB0nCmXRXkKZYHLnL1fCketZqeQUB3v1IrA0jeNEwaUSCM58Q7oautWlXOc+7d
+# xhc+5/+YlV5F8N2xtwrYMHLXrwZKqbc1W5e00yecg7ZDEBor1jwd8ULRFRAhNog5
+# a3ZbZjxhsgcwWJfGdn4bxA6EjuFnDHMzGh6JL5tnHcduaY3wo6GgSsuc82LuSbFh
+# rBzjgBJfp7i0uFO7vMh03Yi0/PMb6dIZCM2oA+LTNd51Uly0cPAf/WK3sDn368wN
+# dh+8+uQQJYQ6NfcUrFPfYthCvqE1bXp+rOZoeNwBDA==
 # SIG # End signature block
