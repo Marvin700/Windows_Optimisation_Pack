@@ -1,13 +1,14 @@
 # Windows_Optimisation_Pack @Marvin700
 # windows-optimisation.de
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
-$hash = [hashtable]::Synchronized(@{}) 
-IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)){New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory | Out-Null}
-else {Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse | Out-Null}
+$Branch = "Beta"
+#Version = "2.0"
+
+$hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
+IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
+else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 function WindowsTweaks_Services{
 $services = @(
@@ -43,6 +44,24 @@ $services = @(
 foreach ($service in $services){
 Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
+
+function WindowsTweaks_Features{
+$features = @(
+"TFTP",
+"TelnetClient",
+"WCF-TCP-PortSharing45",
+"Microsoft-Hyper-V-All",
+"Microsoft-Hyper-V-Management-Clients",
+"Microsoft-Hyper-V-Tools-All",
+"Microsoft-Hyper-V-Management-PowerShell")
+foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
+
+function WindowsTweaks_Tasks{
+Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
+schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -80,24 +99,6 @@ ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
-        
-function WindowsTweaks_Tasks{
-Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
-schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
-schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
-
-function WindowsTweaks_Features{
-$features = @(
-"TFTP",
-"TelnetClient",
-"WCF-TCP-PortSharing45",
-"Microsoft-Hyper-V-All",
-"Microsoft-Hyper-V-Management-Clients",
-"Microsoft-Hyper-V-Tools-All",
-"Microsoft-Hyper-V-Management-PowerShell")
-foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
             
 function WindowsTweaks_Index {
 Label C: Windows
@@ -110,16 +111,16 @@ IF($WindowsVersion -match "Microsoft Windows 11"){
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.11.v6.4.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.10.v5.16.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
-Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
+Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
 .\OOSU10.exe ooshutup.cfg /quiet}
@@ -134,6 +135,7 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -213,9 +215,10 @@ Start-Process powershell.exe -argument {Dism.exe /Online /Cleanup-Image /Analyze
 #Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 }
 
-function Runtime{
+function Runtime{´
 winget source update | Out-Null
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
+$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931")){winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.14 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.3 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
@@ -255,7 +258,7 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 
 function Driver_Cleaner{
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack GPU Driver Cleaner | $([char]0x00A9) Marvin700" 
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/DDU.zip" -Destination $env:temp\DDU.zip
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/DDU.zip" -Destination $env:temp\DDU.zip
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
@@ -564,8 +567,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUk1jyfE4hQBJBBowQHQfboIOZ
-# m96gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9oCDXUQgDvTIfKEdXMNjNe2U
+# 4j+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -585,11 +588,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU4yBFMMIXAk2cb68xFP935PBWg2AwDQYJ
-# KoZIhvcNAQEBBQAEggEAyhq+APbaX/ZU3lCa68T1rhOrYv3zDJRZPB5GvzliNt8O
-# MgYG/6cU3XXy+7FGK4SxyjeiR2rZGJG2NAalIFx+irj9pyMwO7vD5VeuJujgjTor
-# Py4jWxYcy/hi48LsnIKxRpfGmmzngA5TPjIglqJiQT/QQGzbci9mrQ3Y2qt+Wa9U
-# V0aYmVx73kd0WZHtAdgnyRJTSVpyjmmWUjKMX6U3/OKol8V4xsVbh88XhxkTRvaO
-# VjwKZmcPPZldvWkQzk+KbMxV31Fo4iS0I/o5G/XrqooJ2ntD+f8OeffPYjIvmc4F
-# /DLgtEMNbTIUb/pzi9O6tygWfEHOp3exTDN3YMbcmQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU6Oin6Eo8sofnbyIZxAwG3Jlat+AwDQYJ
+# KoZIhvcNAQEBBQAEggEAjX1SzF9/S2JgS/XnYDchzadwVaKjkKh0goxX8XDoj3cd
+# FbfvTmeuGKBE2yjEYacJu6ncv9tAiktcuNYqFRWxol30Jy5Rc2bzqK9b6mrznHnW
+# xZLSnzXMmoEppguKvqQP177l8TqaURR4xh8F7hnVhDhCV7toZ8xKItvfSyD4sQra
+# Z8ztTWKWV8+dD/yrL3Kv6rlUyfbv9FyJAoW8tdS6YtL06dnDSQ8Jm/WC+CxMvtJG
+# 9dyV6vx6v0LoKCHcXRI1u0Q/jVGrcJoYDsG+PwRPp5gdifD7cLJIM5rEbiy9L7E+
+# OLRGxMSaoigJBC+QT85Z5AYPkms5q2nhDxY9JQVjBQ==
 # SIG # End signature block
