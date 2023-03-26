@@ -126,7 +126,7 @@ Set-Location $ScriptFolder
 function SystemPoint{
 Clear-Host
 " Compatibility checks and preparation are performed..."
-if($hash.Windows_Cleaner){vssadmin delete shadows /all /quiet | Out-Null}
+if($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -162,8 +162,7 @@ New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimi
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null}
 
-function Windows_Cleaner{
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows Cleaner | $([char]0x00A9) Marvin700"
+function Windows_Cleanup{
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
@@ -185,15 +184,12 @@ IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 Clear-Host
 gpupdate.exe /force 
-lodctr /r;lodctr /r}
-function System_Maintance{
-Clear-Host
-Start-Process powershell.exe -argument {Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart; Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart; Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart; Start-Process cleanmgr.exe /sagerun:1; Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
-#Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
-#Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-#Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
-#Start-Process cleanmgr.exe /sagerun:1
-#Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+lodctr /r;lodctr /r
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
+Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
+Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
+Start-Process cleanmgr.exe /sagerun:1
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
 }
 
 function Driver_Cleaner{
@@ -259,7 +255,6 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
-if(!($hash.Driver_Cleaner)){
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
 <text>The Optimisation is done :)</text></binding></visual>
@@ -268,9 +263,7 @@ if(!($hash.Driver_Cleaner)){
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
-if($hash.System_Maintance){System_Maintance}
-if($hash.Driver_Cleaner){Driver_Cleaner}
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
 exit}
 
 function GUI{
@@ -282,7 +275,7 @@ $handler_BUTTON_Start_Click={
 $hash.Cancel = $false
 if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
 if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
-if ($BOX_Windows_Cleaner.Checked)           {$hash.Windows_Cleaner = $true} 
+if ($BOX_Windows_Cleanup.Checked)           {$hash.Windows_Cleanup = $true} 
 if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
 if ($BOX_ooShutup.Checked)                  {$hash.ooShutup = $true}    
 if ($BOX_WindowsTweaks_Registry.Checked)    {$hash.WindowsTweaks_Registry = $true}    
@@ -290,7 +283,6 @@ if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}
 if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
-if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
 if ($BOX_Scheduled_Maintance.Checked)       {$hash.Scheduled_Maintance = $true}  
 if ($BOX_Driver_Cleaner.Checked)      		{$hash.Driver_Cleaner = $true}  
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
@@ -358,15 +350,9 @@ $BOX_SophiaScript.Checked = $true
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
-$BOX_ooShutup.Text = "O&O ShutUp"
+$BOX_ooShutup.Text = "OO ShutUp"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
-$BOX_Windows_Cleaner = New-Object System.Windows.Forms.CheckBox
-$BOX_Windows_Cleaner.Size = New-Object Drawing.Point 135,25
-$BOX_Windows_Cleaner.Location = New-Object Drawing.Point 27,372
-$BOX_Windows_Cleaner.Text = "Windows Cleaner" 
-$BOX_Windows_Cleaner.ForeColor='#aaaaaa'
-$BOX_Windows_Cleaner.Checked = $true 
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 200,248
@@ -397,12 +383,12 @@ $BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 200,372
 $BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
 $BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
-$BOX_System_Maintance= New-Object System.Windows.Forms.CheckBox
-$BOX_System_Maintance.Size = New-Object Drawing.Point 135,25
-$BOX_System_Maintance.Location = New-Object Drawing.Point 373,248
-$BOX_System_Maintance.Text = "System Maintance"
-$BOX_System_Maintance.ForeColor='#aaaaaa'
-$BOX_System_Maintance.Checked = $false
+$BOX_Windows_Cleanup = New-Object System.Windows.Forms.CheckBox
+$BOX_Windows_Cleanup.Size = New-Object Drawing.Point 135,25
+$BOX_Windows_Cleanup.Location = New-Object Drawing.Point 373,248
+$BOX_Windows_Cleanup.Text = "Windows Cleanup" 
+$BOX_Windows_Cleanup.ForeColor='#aaaaaa'
+$BOX_Windows_Cleanup.Checked = $true 
 $BOX_Scheduled_Maintance = New-Object System.Windows.Forms.CheckBox
 $BOX_Scheduled_Maintance.Size = New-Object Drawing.Point 135,25
 $BOX_Scheduled_Maintance.Location = New-Object Drawing.Point 373,279
@@ -487,13 +473,12 @@ $form.Controls.Add($BOX_Checks)
 $form.Controls.Add($BOX_SystemPoint)
 $form.Controls.Add($BOX_SophiaScript)
 $form.Controls.Add($BOX_ooShutup)
-$form.Controls.Add($BOX_Windows_Cleaner)
 $form.Controls.Add($BOX_WindowsTweaks_Registry)
 $form.Controls.Add($BOX_WindowsTweaks_Tasks)
 $form.Controls.Add($BOX_WindowsTweaks_Features)
 $form.Controls.Add($BOX_WindowsTweaks_Services)
 $form.Controls.Add($BOX_WindowsTweaks_Index)
-$form.Controls.Add($BOX_System_Maintance)
+$form.Controls.Add($BOX_Windows_Cleanup)
 $form.Controls.Add($BOX_Scheduled_Maintance)
 $form.Controls.Add($BOX_Runtime)
 $form.Controls.Add($BOX_Driver_Cleaner)
@@ -508,25 +493,26 @@ $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() } Out-Null
 
 function Choice { 
-if($hash.Cancel){exit}
-if($hash.SystemPoint){SystemPoint}
-if($hash.Checks){Checks}
-if($hash.SophiaScript){SophiaScript}
-if($hash.ooShutup){ooShutup}
-if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
-if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
-if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
-if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
-if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-if($hash.Scheduled_Maintance){Scheduled_Maintance}
-if($hash.Runtime){Runtime}   
-if($hash.Autoruns){Autoruns}   
-if($hash.Winrar){Winrar} 
-if($hash.Fan_Control){Fan_Control}
-if($hash.Controller){Controller} 
-if($hash.Process_Lasso){Process_Lasso}
-if($hash.Remove_ASUS){Remove_ASUS}
-if($hash.Windows_Cleaner){Windows_Cleaner}}
+IF($hash.Cancel){exit}
+IF($hash.SystemPoint){SystemPoint}
+IF($hash.Checks){Checks}
+IF($hash.SophiaScript){SophiaScript}
+IF($hash.ooShutup){ooShutup}
+IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
+IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
+IF($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
+IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
+IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
+IF($hash.Scheduled_Maintance){Scheduled_Maintance}
+IF($hash.Runtime){Runtime}   
+IF($hash.Autoruns){Autoruns}   
+IF($hash.Winrar){Winrar} 
+IF($hash.Fan_Control){Fan_Control}
+IF($hash.Controller){Controller} 
+IF($hash.Process_Lasso){Process_Lasso}
+IF($hash.Remove_ASUS){Remove_ASUS}
+IF($hash.Windows_Cleanup){Windows_Cleanup}
+IF($hash.Driver_Cleaner){Driver_Cleaner}}
 
 GUI
 Choice
@@ -535,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVcCBPekqfuj10/wBvLsEOww7
-# PbmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVFuTAZweTHL0OyMH7weLvJBj
+# JEigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -556,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/uPbUO4qxfK2Bvmc9AZZoA7qr2MwDQYJ
-# KoZIhvcNAQEBBQAEggEAcQaG/48cyxvkvpR+adqqc7et27e8GbY12SGWy7sD9qnH
-# iHV+zuapQ4Co7/mCmij9LuouDbf4xzqkMKxvHKs0a5L8sqKLtrqN4QrxbBh7WXH0
-# FRNEPGBgIedvZUl7JzAMUkZxOBgwDuoL2TAAuthz7GW81Xrdh7++8AGAnkRTiP8h
-# XcR4ODS50MIU6A1jg1V8qJhVjvfTQEEojL1d0AfiZAK07Ek9bLalQDrsplzgUpg8
-# phGOZMb1CC2iH8+M/4X0oi9BxbpOgxiinkGA+JhUO1EoZdzXX75s/u9nSzgtnXuO
-# tz9gvDqQLxTEf8WZe5QELOIKWgsiOQFUWZpMSGTOhw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUhNuSZpgwA2UmvERckSrAM0lAynswDQYJ
+# KoZIhvcNAQEBBQAEggEAuIfeeYz9MNUIKAguGlws4Bo9DCtj7d6dA4LmTOPXn7S5
+# k/VkSPRvc4yQJGlOM0h1gkj8OO8sicyJeOHVhjeUPMtEszebaby/zZlHY3N6lR62
+# BIpOl4o7k/WCryOGG/0pH4l5QNEGAWuTZuZ/l/5YFKXeP9qw36ZbofvAvNF+StjJ
+# D9//bXELRmIeFdNkIRecA1xW6Y6J5vo6J1NmlmatYzP9o7uzyNLs0tdWklJH7VyS
+# IUodV6+FB0x+eD9qt8SSETrvBtefDQ329Thi0iO1NaLa/pLDz9YH6gAc7SoIBeoE
+# Xne6lqcAaRY2gUhO4ND2oz4pmflUoyNEapxmOzXPmw==
 # SIG # End signature block
