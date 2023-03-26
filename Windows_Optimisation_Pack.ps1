@@ -225,7 +225,7 @@ Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
 Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
 
 function Fan_Control{
-Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V145/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
+Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V152/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
 Expand-Archive $env:temp\FanControl.zip "C:\Program Files\FanControl" -force
 Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
@@ -255,6 +255,7 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
+IF(!($hash.Driver_Cleaner)){
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
 <text>The Optimisation is done :)</text></binding></visual>
@@ -263,7 +264,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Success
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
 exit}
 
 function GUI{
@@ -521,8 +522,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNVWZJ9rdEBTrD43WQ9e1QBfR
-# 0XugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgW3z/aZ+X03HQqHx0aBcs/pH
+# 9+SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +543,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUL6VJyiu9LEWGDBClFUqacuOvFSkwDQYJ
-# KoZIhvcNAQEBBQAEggEAml5TQ/XbDSwULtbpu18PpWFN/pWSPAKLN9VMFZrfC34L
-# 58h/YB50t+Kyk5sR76m/aZzDWGM03CrTis/SruKrVsO7TFET4tnuPJy1hI5LYv6R
-# rjfIfLb+w6yr0DDLSj7qaAo4TMUROru6uoEPMePCAO6T91KNnz2d4ErinCJ5ITAq
-# FDOgHLVODBJAIS7ZA3/28zvb7wLdfjnbY7hHjFju5Usf59GLKzvle6OC6TZ1ZD6R
-# BBenjPhx+6gDuQTZH2sPVacesvOJZ8LNQlLzMilq3hXSQZm5i9XbpAhQ3qSPLhbe
-# 5ctQ+rp6xDgcUjbs1fuw9Y1pJWSCSxIV8abi2irsnQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUKp1Kwuency0H9HqGP0UKzTULSSswDQYJ
+# KoZIhvcNAQEBBQAEggEAfEyrgwfPHOzivLgX9j5/n1YnwmHzdkBqHLOQXPFArGmC
+# AJvkHmXDUhREBZqHLm8MOpbtJcTtKkW6YMcvl9wZBwGmivXFfEHuuTuH1hrrPu/C
+# 8g0jyINl61ww3PZ8H9/687K+Gtc/nFaNJ+JHO3xjEzNqXXE8ZXwygNXC4OBGIF4O
+# kXjxfSY0Vm9WEGnIaSJxWM/gl30yBe9dszaXVCIedyF1UYPQ+vXupn6vOxyGkGYU
+# iiIN2k3vMrA90SFp/08G9QvmGZSgbWY79XKI/j5XlInPfUct4If3fzxHLezxjzAf
+# 9kwd5jrcmpnsG5d+zLt/pwQo6IDL4/z4/3/PFIKOKw==
 # SIG # End signature block
