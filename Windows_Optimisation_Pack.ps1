@@ -160,7 +160,7 @@ Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
 function Windows_Cleaner{
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Maintance | $([char]0x00A9) Marvin700"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Cleaner | $([char]0x00A9) Marvin700"
 Clear-Host
 ipconfig /flushdns
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
@@ -188,7 +188,7 @@ IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Unins
 IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $EscapefromTarkov\Logs -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:temp\"Battlestate Games" .\.gitconfig-Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+Get-ChildItem -Path $env:temp\"Battlestate Games" -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
 IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
@@ -553,8 +553,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpw/zp1xLe67DzqANUGhV7QhW
-# YqigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHFjgZExasOBWOWonzpF+/iLf
+# dxWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -574,11 +574,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUb6pEZqKQyA+L+qqjZU509L58D5UwDQYJ
-# KoZIhvcNAQEBBQAEggEAJgnnW9v25ec4+NYxDo77FIoR5htWGoD8QXP7/CCiRS+m
-# xQ8vgAjw+YXdVyFjyET5er8fJrVLNCi6vQvcn+IpwCW1H5xxoVoWbUpCI6NEN3nE
-# mmvZtwXFHy0rGrSkBjenWiGXdrnSgCtM5nRMQ873g7h47bbTgnsS209r4M3pCP+F
-# Iu+w3Ve/QcZaN/DXWw7Q8FUJnMTEIzgqsb96Ich4Epc/08DJi6wR05875V4XRF/z
-# tEHiadb4wkroG/LDMxnjiHnw3RFWCbM9aA2a0NvBhATFeESm4JaDLuY0JPDpIfRw
-# 0LYnhUXNI8YwPYM1VwjDZLeC/ol6sTPzx7q3lNDj5g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9/cUNu4Dxq5+r61iDHhyo3FdRzUwDQYJ
+# KoZIhvcNAQEBBQAEggEAHcQHy0ncA+o/KPGQh5ugZj7Mkkc/u5k2I6e0UtRD0ehr
+# HiZPalGFmQwGrSOpncoTM4Yv5jLH+Duf6VE9drtWSNwJCbMYsqA18ePJGqAhfjmX
+# Z+LktqKjhPSGvGrLhcZa0q+kGMLcNUOIhQWW5ETNnd4f7EjtacTJ6Vnjcprtt38v
+# cOSagrSeabvmKOUjLb006I5Wa03tyjrmAwjqNKMdVfUv2eWp+zTXLxYGWqjpccQ9
+# 1jchMzQVtsDtusw+MzuppN3CeldcYNxsyChSDlQXfzGgiETWmSD8Q7SOYz5GmtYw
+# JMJNPW/2h6dPc/9NSBLMV0NLwWH0UUYh0f4HAtqLlg==
 # SIG # End signature block
