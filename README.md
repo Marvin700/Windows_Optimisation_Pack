@@ -1,6 +1,6 @@
 > **Warning**: <BR>
 This branch and the uploaded files are not stable. <BR>
-If you want to test/use the beta, I recommend the beta release :)
+If you want to test/use the beta, I recommend the releases marked as pre-release :)
 
 <BR>
 
