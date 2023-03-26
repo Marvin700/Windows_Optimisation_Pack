@@ -118,6 +118,7 @@ Set-Location $ScriptFolder
 
 function SystemPoint{
 Clear-Host
+" Compatibility checks and preparation are performed ..."
 if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
@@ -125,8 +126,6 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
-Clear-Host
-" Compatibility checks and preparation are performed ..."
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -209,7 +208,6 @@ Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Start-Process cleanmgr.exe /sagerun:1
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
-          
 function Runtime{
 winget source update | Out-Null
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
@@ -226,16 +224,7 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
 $Shortcut.TargetPath = "C:\Program Files\FanControl\FanControl.exe"
 $Shortcut.Save() }
-
-function AutoActions{
-Start-BitsTransfer -Source "https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip" -Destination $env:temp\AutoActions.zip 
-Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
-Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
-$Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
-$Shortcut.Save() }
-    
+   
 function Controller{
 Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip "
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
@@ -258,6 +247,15 @@ Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
 Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe" }
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
+
+function Driver_Cleaner{
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack GPU Driver-Cleaner | $([char]0x00A9) Marvin700" 
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/DDU.zip" -Destination $env:temp\DDU.zip
+Expand-Archive $env:temp\DDU.zip $env:temp
+Set-Location $env:temp\DDU\
+& '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
+Write-Warning "Please Wait..."
+Write-Warning "The Driver Removal takes up to 10 Minutes"}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
@@ -299,14 +297,14 @@ if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}
 if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
-if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
 if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
+if ($BOX_Scheduled_Maintance.Checked)       {$hash.Scheduled_Maintance = $true}  
+if ($BOX_Driver_Cleaner.Checked)      		{$hash.Driver_Cleaner = $true}  
+if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
 if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
-if ($BOX_Scheduled_Maintance.Checked)       {$hash.Scheduled_Maintance = $true}    
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
 if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
 if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}  
-if ($BOX_AutoActions.Checked)               {$hash.AutoActions = $true}
 if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
 if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
 if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
@@ -339,11 +337,11 @@ $Titel_Extras.Size = New-Object Drawing.Point 135,25
 $Titel_Extras.Location = New-Object Drawing.Point 393,215
 $Titel_Extras.text = "Extras"
 $Titel_Extras.ForeColor='#aaaaaa'
-$Titel_Install = New-Object Windows.Forms.Label
-$Titel_Install.Size = New-Object Drawing.Point 135,25
-$Titel_Install.Location = New-Object Drawing.Point 566,215
-$Titel_Install.text = "Install"
-$Titel_Install.ForeColor='#aaaaaa'
+$Titel_Software = New-Object Windows.Forms.Label
+$Titel_Software.Size = New-Object Drawing.Point 135,25
+$Titel_Software.Location = New-Object Drawing.Point 566,215
+$Titel_Software.text = "Software"
+$Titel_Software.ForeColor='#aaaaaa'
 $BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
 $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
 $BOX_SystemPoint.Location = New-Object Drawing.Point 27,248
@@ -419,42 +417,42 @@ $BOX_Scheduled_Maintance.Text = "Scheduled Maintance"
 $BOX_Scheduled_Maintance.ForeColor='#aaaaaa'
 $BOX_Scheduled_Maintance.Checked = $false
 $BOX_Scheduled_Maintance.Enabled = $false 
+$BOX_Driver_Cleaner= New-Object System.Windows.Forms.CheckBox
+$BOX_Driver_Cleaner.Size = New-Object Drawing.Point 135,25
+$BOX_Driver_Cleaner.Location = New-Object Drawing.Point 373,310
+$BOX_Driver_Cleaner.Text = "Driver Cleaner"
+$BOX_Driver_Cleaner.ForeColor='#aaaaaa'
+$BOX_Driver_Cleaner.Checked = $false
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 145,25
-$BOX_Runtime.Location = New-Object Drawing.Point 373,310
+$BOX_Runtime.Location = New-Object Drawing.Point 373,341
 $BOX_Runtime.Text = "Runtime Components"
 $BOX_Runtime.ForeColor='#aaaaaa'
 $BOX_Runtime.Checked = $true  
 $BOX_Remove_ASUS = New-Object System.Windows.Forms.CheckBox
 $BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
-$BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,341
+$BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,372
 $BOX_Remove_ASUS.Text = "Remove Asus Bloat"
 $BOX_Remove_ASUS.ForeColor='#aaaaaa'
 $BOX_Remove_ASUS.Checked = $false
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
-$BOX_Autoruns.Location = New-Object Drawing.Point 373,373
+$BOX_Autoruns.Location = New-Object Drawing.Point 546,248
 $BOX_Autoruns.Text = "Autoruns" 
 $BOX_Autoruns.ForeColor='#aaaaaa'
 $BOX_Autoruns.Checked = $false
 $BOX_Winrar = New-Object System.Windows.Forms.CheckBox
 $BOX_Winrar.Size = New-Object Drawing.Point 135,25
-$BOX_Winrar.Location = New-Object Drawing.Point 546,248
+$BOX_Winrar.Location = New-Object Drawing.Point 546,279
 $BOX_Winrar.Text = "Winrar"
 $BOX_Winrar.ForeColor='#aaaaaa'
 $BOX_Winrar.Checked = $true
 $BOX_Fan_Control = New-Object System.Windows.Forms.CheckBox
 $BOX_Fan_Control.Size = New-Object Drawing.Point 135,25
-$BOX_Fan_Control.Location = New-Object Drawing.Point 546,279
+$BOX_Fan_Control.Location = New-Object Drawing.Point 546,310
 $BOX_Fan_Control.Text = "Fan Control"
 $BOX_Fan_Control.ForeColor='#aaaaaa'
 $BOX_Fan_Control.Checked = $false  
-$BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
-$BOX_AutoActions.Size = New-Object Drawing.Point 135,25
-$BOX_AutoActions.Location = New-Object Drawing.Point 546,310
-$BOX_AutoActions.Text = "AutoActions"
-$BOX_AutoActions.ForeColor='#aaaaaa'
-$BOX_AutoActions.Checked = $false 
 $BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
 $BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
 $BOX_Process_Lasso.Location = New-Object Drawing.Point 546,341
@@ -497,7 +495,7 @@ $form.controls.add($Titel_Compability)
 $form.controls.add($Titel_Essentials)
 $form.controls.add($Titel_Tweaks)
 $form.controls.add($Titel_Extras)
-$form.controls.add($Titel_Install)
+$form.controls.add($Titel_Software)
 $form.Controls.Add($BOX_Checks)
 $form.Controls.Add($BOX_SystemPoint)
 $form.Controls.Add($BOX_SophiaScript)
@@ -508,14 +506,14 @@ $form.Controls.Add($BOX_WindowsTweaks_Tasks)
 $form.Controls.Add($BOX_WindowsTweaks_Features)
 $form.Controls.Add($BOX_WindowsTweaks_Services)
 $form.Controls.Add($BOX_WindowsTweaks_Index)
-$form.Controls.Add($BOX_Runtime)
 $form.Controls.Add($BOX_System_Maintance)
-$form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_Scheduled_Maintance)
+$form.Controls.Add($BOX_Runtime)
+$form.Controls.Add($BOX_Driver_Cleaner)
+$form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
 $form.Controls.Add($BOX_Fan_Control)
-$form.Controls.Add($BOX_AutoActions)
 $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BOX_Reboot)
@@ -540,11 +538,11 @@ if($hash.Remove_ASUS){Remove_ASUS}
 if($hash.Autoruns){Autoruns}    
 if($hash.Winrar){Winrar}    
 if($hash.Fan_Control){Fan_Control}
-if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
 if($hash.Windows_Cleaner){Windows_Cleaner}
-if($hash.System_Maintance){System_Maintance}}
+if($hash.System_Maintance){System_Maintance}
+if($hash.Driver_Cleaner){Driver_Cleaner}}
 
 GUI
 Choice
@@ -553,8 +551,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHFjgZExasOBWOWonzpF+/iLf
-# dxWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8UoRKVXlt8wWwtbNxCWIW5vv
+# mXugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -574,11 +572,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9/cUNu4Dxq5+r61iDHhyo3FdRzUwDQYJ
-# KoZIhvcNAQEBBQAEggEAHcQHy0ncA+o/KPGQh5ugZj7Mkkc/u5k2I6e0UtRD0ehr
-# HiZPalGFmQwGrSOpncoTM4Yv5jLH+Duf6VE9drtWSNwJCbMYsqA18ePJGqAhfjmX
-# Z+LktqKjhPSGvGrLhcZa0q+kGMLcNUOIhQWW5ETNnd4f7EjtacTJ6Vnjcprtt38v
-# cOSagrSeabvmKOUjLb006I5Wa03tyjrmAwjqNKMdVfUv2eWp+zTXLxYGWqjpccQ9
-# 1jchMzQVtsDtusw+MzuppN3CeldcYNxsyChSDlQXfzGgiETWmSD8Q7SOYz5GmtYw
-# JMJNPW/2h6dPc/9NSBLMV0NLwWH0UUYh0f4HAtqLlg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUB9cZuzQOnXO0c4UcDw7omTAVYukwDQYJ
+# KoZIhvcNAQEBBQAEggEAo8yzTswGmOR3hRXurXmZZsLNlDPcFMHkYQJO4ExsB7Ws
+# HmQqjPLFu257hT82qS1fZw06DlJsG/L+DXbSNS2QTiwMYSqXEqvYrOoFMAg/IWh+
+# l6cD860LUQKL95yoGKOJIkyTfFg43xJ25/6gt0XelardP96Lfm2GGnl0V6yrRHGc
+# CBLBJ8aQnkEyOtY4cMfidHAaxERORZ0Ff1zvSFnXJanvaZn01u1/5moZjSEob7qn
+# JC26ag4WK5D1ke893wSxnw86nXA/DjhcUlM0X+tFvDedklid7UHpjBSTd0W9S5yd
+# xnNoXCb2H74qtojrGkcqwvjaK56A7ABYv2WW/FG1zg==
 # SIG # End signature block
