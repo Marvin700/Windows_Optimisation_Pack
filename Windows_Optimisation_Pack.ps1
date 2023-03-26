@@ -257,11 +257,25 @@ Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pa
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
-[System.Windows.Forms.MessageBox]::Show("Please Wait... $([System.Environment]::NewLine)$([System.Environment]::NewLine)The GPU Driver is Uninstalling...","Windows_Pptimisation_Pack Driver Cleaner",0,[System.Windows.Forms.MessageBoxIcon]::Exclamation)
-}
+[xml]$ToastTemplate = @"
+<toast duration="Long">
+<visual>
+<binding template="ToastGeneric">
+<text>Please Wait...</text>
+<text>The GPU Driver is Clean Uninstalling</text>
+</binding>
+</visual>
+<audio src="ms-winsoundevent:notification.default" />
+</toast>
+"@
+$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$ToastXml.LoadXml($ToastTemplate.OuterXml)
+$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
+if(!($hash.Driver_Cleaner)){
 [xml]$ToastTemplate = @"
 <toast duration="Long">
 <visual>
@@ -275,7 +289,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Success
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
 if($hash.System_Maintance){System_Maintance}
 if($hash.Driver_Cleaner){Driver_Cleaner}
 exit}
@@ -548,8 +562,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPj7J2wZHTPuj+bamVYCjGHd5
-# TtygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU702Zo0E7lO0tJBdcQ3gkt9oN
+# OmqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -569,11 +583,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8LNnOvg0+wTAukxlZDgXlu58UkEwDQYJ
-# KoZIhvcNAQEBBQAEggEAsmQdGeMh7BWW9mQu1SwU7NHWRkZq8kpbYmiHgud8bSyi
-# QuW2d5RC2zdcNFThWw4cNAuwfC/twEnHfwJDHyOZZWvJNkE+ZDpG5Hs+BNH5WAt5
-# corfFevvyB0MGLWTNe3iBMcxavvHc0WxUsSKdAdCgx46ZYl/moSqSSCH2RLxGbm9
-# Fupcc21zmkqnjm4Rw5w9jqeH6Il7+lvsr8qVnCGFtJKK+38Ypg92aavGRDs6FqwC
-# cpBa4sW7kCWqkp39OTlWdruNogg9jTnHPBUPRUIGZ5annB65EpZd4rYXQ89o6CZf
-# xb9nZ67PJkgSBN2pWfIol0YunF4WLxAeQIFlqx2nMA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUsFlnVwdOu1n+yFFMqh1ltKTdvB0wDQYJ
+# KoZIhvcNAQEBBQAEggEAWdG+P+rZAD0ATCct0QCloMH4qIi1MVXxLd0cb6K+AnFr
+# SDWqAb1HCMjQtcQ5EPqYUvxZYIOys0G5u++0D9zD75p6osBqLPpYH90MSU+cF9Q3
+# HTsJUCGA8l0sB+Oce6hP9zT5af2YeE1F9+PIpQYArIF/msFO4OTrwzqxrPPjjtXD
+# 342v8CzJeUQXK1zhW1Luf9mGso9woLkF4HAfSwU1hLAmtKjCYqZMgT2zPoMyi4CV
+# Y36lbcrLLWKOIUUnUSbFV1TE3uQ1ZkuzOlC7s8FuAQuxmoLoNmQOwqOiH1Tdo8QL
+# qrMRBc6iK7/0BmOqmkDp8Cts1k9aT6SOllr2WDGrxg==
 # SIG # End signature block
