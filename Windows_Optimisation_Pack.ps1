@@ -164,15 +164,11 @@ function System_Maintance{
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Maintance | $([char]0x00A9) Marvin700"
 Clear-Host
 ipconfig /flushdns
-gpupdate.exe /force 
-lodctr /r
-lodctr /r
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
-Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear()
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $paths = @(
 "$env:windir\..\MSOCache",
@@ -189,19 +185,22 @@ $paths = @(
 "$env:LOCALAPPDATA\AMD",
 "$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
-taskkill /F /IM EscapeFromTarkov.exe
+IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
+IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $EscapefromTarkov\Logs -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:temp\"Battlestate Games" .\.gitconfig-Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
-taskkill /F /IM cod.exe
+IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-IF ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
-taskkill /F /IM cod.exe
+IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+gpupdate.exe /force 
+lodctr /r
+lodctr /r
 Clear-Host
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
@@ -290,6 +289,7 @@ $handler_BUTTON_Start_Click= {
 $hash.Cancel = $false
 if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
 if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
+if ($BOX_Preparation.Checked)               {$hash.Preparation = $true} 
 if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
 if ($BOX_ooShutup.Checked)                  {$hash.ooShutup = $true}    
 if ($BOX_WindowsTweaks_Registry.Checked)    {$hash.WindowsTweaks_Registry = $true}    
@@ -356,15 +356,22 @@ $BOX_SystemPoint.Text = "Restore Point"
 $BOX_SystemPoint.ForeColor='#aaaaaa'
 $BOX_SystemPoint.Checked = $true 
 $BOX_SystemPoint.Enabled = $false 
+$BOX_Preparation = New-Object System.Windows.Forms.CheckBox
+$BOX_Preparation.Size = New-Object Drawing.Point 135,25
+$BOX_Preparation.Location = New-Object Drawing.Point 27,310
+$BOX_Preparation.Text = "Preparation" 
+$BOX_Preparation.ForeColor='#aaaaaa'
+$BOX_Preparation.Checked = $true 
+$BOX_Preparation.Enabled = $false 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
-$BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
+$BOX_SophiaScript.Location = New-Object Drawing.Point 27,341
 $BOX_SophiaScript.Text = "Sophia Script" 
 $BOX_SophiaScript.ForeColor='#aaaaaa'
 $BOX_SophiaScript.Checked = $true 
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
-$BOX_ooShutup.Location = New-Object Drawing.Point 27,341
+$BOX_ooShutup.Location = New-Object Drawing.Point 27,372
 $BOX_ooShutup.Text = "O&O ShutUp"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
@@ -410,6 +417,7 @@ $BOX_Scheduled_Maintance.Location = New-Object Drawing.Point 373,279
 $BOX_Scheduled_Maintance.Text = "Scheduled Maintance" 
 $BOX_Scheduled_Maintance.ForeColor='#aaaaaa'
 $BOX_Scheduled_Maintance.Checked = $false
+$BOX_Scheduled_Maintance.Enabled = $false 
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 145,25
 $BOX_Runtime.Location = New-Object Drawing.Point 373,310
@@ -491,6 +499,7 @@ $form.controls.add($Titel_Extras)
 $form.controls.add($Titel_Install)
 $form.Controls.Add($BOX_Checks)
 $form.Controls.Add($BOX_SystemPoint)
+$form.Controls.Add($BOX_Preparation)
 $form.Controls.Add($BOX_SophiaScript)
 $form.Controls.Add($BOX_ooShutup)
 $form.Controls.Add($BOX_WindowsTweaks_Registry)
@@ -517,7 +526,7 @@ function Choice {
 if($hash.Cancel){exit}
 if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
-Preparation
+if($hash.Preparation){Preparation}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
@@ -543,8 +552,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTomErZbIvEwH3d9ooO23AGM7
-# 6mSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbBDBsR4JMC9XgL7EkURDCulI
+# TH6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -564,11 +573,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUYOmFaPQXQXEb2jOZAAfJqsu85UMwDQYJ
-# KoZIhvcNAQEBBQAEggEAwxo0zXwnqYp0VNNeP8gG3FEE2EFTplSHT4DUFn+vOJ5R
-# 9/iYSdaQmGTwjYQKIA9ht67R+UgJBSx9Nn48NHF3DSKrU4hW3ndIGLW8K5kamvF6
-# nF3FlLFLp+pKWYDgoUcKGUPBPvID2fuWq49QtlsLxLDOElgDKZov3oTyLQA/nSi4
-# N/8w0jSJa/YC759Xyd4LlmLYAwCYYcNdDhyZPOrPAFlDGt89JI2dwIuDQtKj+szM
-# ubX8HimqQ7I+szRf83wenDF7ogl1oRY/wv3IZFAs/4ZTq+qt4ObnlmAiU39d4obB
-# 6evx/ypMgcKYqMV8Zz06wvoZXrJGx8DEd5q6rUa3YQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMiCbvwgb2+Z59dMWzwjJlBwxbuEwDQYJ
+# KoZIhvcNAQEBBQAEggEAn6XWBqG9iagp0PD2E2O1vAj2zK5cBG7cnCO6Phwl1iiY
+# XW7W2aLRKZSJdmEAs1PiJvrfuNtRfN4iCppI6X8CPD7QQCWTnKqnoJX2UygLzpZX
+# FAcgAvI+B2y3wl/8AYdWO8ISKi/9Rlcu8sT3Qb0ZhPZF/QKux6faicwTRn4Q7vbE
+# nM0y1mEdAGUbeT96WgYKMrf7ebSEFl8UkP6Rva78hDi1AddrfGnSi1UcJMsVj/ZF
+# OmXR9lwP9ZfDcOKRxEZy9qS0N7tUNmBk5LRx/Vk3OEal5pXz8J5Ty0yve29amaea
+# sSzS0VIagi5kAokOVgdifJaIKoEWJjwbFMHp89jT5g==
 # SIG # End signature block
