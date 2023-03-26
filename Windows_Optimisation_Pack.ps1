@@ -151,8 +151,8 @@ New-Item -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_P
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force | Out-Null
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force | Out-Null
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
-[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null}
-
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
+[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null}
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
@@ -254,6 +254,7 @@ Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pa
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
+[System.Windows.Forms.MessageBox]::Show("Please Wait... $([System.Environment]::NewLine)$([System.Environment]::NewLine)The GPU Driver is Uninstalling...","Windows_Pptimisation_Pack Driver Cleaner",0,[System.Windows.Forms.MessageBoxIcon]::Exclamation)
 }
 
 function Finish{
@@ -544,8 +545,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUymPzgXtb3IsRrGMhEw7IqZ0
-# 8qSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURP8pWKoWkk6LgbcYnMCLwS5R
+# IACgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -565,11 +566,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7fgV5GPSAkzvX1S6zSGMxc4ic1kwDQYJ
-# KoZIhvcNAQEBBQAEggEAm7uRntq7gmmy6euGRV19CsdwK0VKYMmE0uzYW4sLCgoa
-# r6fZpcDU26Fd74SROl6zDw5DtGTmaqiosoHiRGrDs8LiepJpw0x1a/kQSdZBXJnK
-# DeifA58C5+4gfCMRZUOA677dFOQviNwyhr51GKakDAHWzBJnErBENZo5+8BQKAcN
-# CPoOfGzcVFxS2ErVpaEeq3aB5Fm4AjkzYuc5PCk1ZtSVgZ38Iqomcrsg5v+wN/9S
-# Malg0mvTqlfdObX+/l0qlDnRzLB/EunSrOrI3F0ADegyfUlwzWAuZSm3zKAncY/j
-# CMEwd2oaT8FbZQdYwMER3/xBvVUgTbcgNE6+wOLKgA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVG6s09qyl1SUl3CEXrjZCq5mppcwDQYJ
+# KoZIhvcNAQEBBQAEggEAUueb8oLzF8SEcm25ne2/JDORjk0EwoNSubfEnAQAlDem
+# 3eWbx6iL0ZJdxTU7xPcwibfwYA8YPqc+v8tCLEzlsE2DnDyBCHf+8jRVxH45wDkv
+# KjMQravqzjrhIbgfT9fZvN6BiB8wo37p1TJ8nZJTGf63aHYxgUQQPOBxi570W8Bq
+# 6/YRIYSQoQ/W264/y/iaia8nVFyfwYQOU0DZ1Bk99h1J6obstPl7UhkKsRWA1Phm
+# ZGqYDUvULWTUH6RHNLAOotGbn3W8waCtcSzVp0B8a5+H5zE2eI605L1DCI54dTO6
+# +FeTkSI+SIxc5ZJJwj3LH3LIFkUvnX/zGtPthxlNHQ==
 # SIG # End signature block
