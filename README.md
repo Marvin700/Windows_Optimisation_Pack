@@ -1,6 +1,7 @@
 <img src="https://user-images.githubusercontent.com/98750428/227787371-541dfeb1-d8a5-40b4-ad34-9c2a03b3ab1c.png">
 
 ## Key Features
+* Wwindows Cleanup
 * Maintance Windows
 * Remove Windows Bloatware 
 * Disable Windows Spying
@@ -11,7 +12,6 @@
 * Deactivate Tasks & Components
 * Mouse acceleration Fix
 * More Windows Tweaks
-* Clear Windows and GPU Cache
 * Clean uninstall of GPU Driver
 
 ## Download via Powershell
