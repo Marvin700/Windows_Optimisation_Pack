@@ -255,16 +255,15 @@ function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreem
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
-IF(!($hash.Driver_Cleaner)){
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
-<text>The Optimisation is done :)</text></binding></visual>
+<text>Your Windows is now optimised :)</text></binding></visual>
 <audio src="ms-winsoundevent:notification.default" /></toast>
 "@
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
 exit}
 
 function GUI{
@@ -522,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgW3z/aZ+X03HQqHx0aBcs/pH
-# 9+SgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUV31fQu3dh2MPqd9EssUo1X0+
+# XB2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -543,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUKp1Kwuency0H9HqGP0UKzTULSSswDQYJ
-# KoZIhvcNAQEBBQAEggEAfEyrgwfPHOzivLgX9j5/n1YnwmHzdkBqHLOQXPFArGmC
-# AJvkHmXDUhREBZqHLm8MOpbtJcTtKkW6YMcvl9wZBwGmivXFfEHuuTuH1hrrPu/C
-# 8g0jyINl61ww3PZ8H9/687K+Gtc/nFaNJ+JHO3xjEzNqXXE8ZXwygNXC4OBGIF4O
-# kXjxfSY0Vm9WEGnIaSJxWM/gl30yBe9dszaXVCIedyF1UYPQ+vXupn6vOxyGkGYU
-# iiIN2k3vMrA90SFp/08G9QvmGZSgbWY79XKI/j5XlInPfUct4If3fzxHLezxjzAf
-# 9kwd5jrcmpnsG5d+zLt/pwQo6IDL4/z4/3/PFIKOKw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUzQ+PbNo9Op0RAEy1ICnZPqohYxEwDQYJ
+# KoZIhvcNAQEBBQAEggEAjeA0ABjajdCysMrY6ySB07FD2855kNsXA0AoG1QPpb+h
+# zIQqhlFi4zWYSht9kCRSf/VO/Z/2W9GU6nUIokAtVj3grSN7w6Kz0NovTnNdmqLx
+# V1OJt8JMH/F/KdMqTPV6DOtxAJkfkNYRvXBEiR/P/Obb4WxulDdfmRpFFungDmRp
+# G3elpLRNkUA8jS3+V8pnTmtwMAk3NZGaXKKkER3+orKg3Rx8PDqULE9KG/84r7Jn
+# x0Yju9+hKqoMcBQy5lvnlTvVEK0Y1hvFLOsqC3sJYApY0Omew2lnSbPVJ7ruXvDl
+# rS129iTv0yENAFpJ92SGw4he+tChyik2Zvkg2f3HAg==
 # SIG # End signature block
