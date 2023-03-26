@@ -94,8 +94,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
-$Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
-ForEach($result in $Key)
+ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
@@ -127,8 +126,8 @@ Set-Location $ScriptFolder
 
 function SystemPoint{
 Clear-Host
-" Compatibility checks and preparation are performed ..."
-if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
+" Compatibility checks and preparation are performed..."
+if($hash.Windows_Cleaner){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive "C:\"
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -163,48 +162,31 @@ New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimi
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null}
-function Autoruns{
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
-Expand-Archive $env:temp\Autoruns.zip  $env:temp
-Start-Process $env:temp\Autoruns64.exe }
 
 function Windows_Cleaner{
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows Cleaner | $([char]0x00A9) Marvin700"
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-$paths = @(
-"$env:windir\..\MSOCache",
-"$env:temp",
-"$env:windir\Temp",
-"$env:windir\Prefetch",
-"$env:SystemRoot\SoftwareDistribution\Download",
-"$env:ProgramData\Microsoft\Windows\RetailDemo",
-"$env:LOCALAPPDATA\CrashDumps",
-"$env:LOCALAPPDATA\NVIDIA\DXCache",
-"$env:LOCALAPPDATA\NVIDIA\GLCache",
-"$env:APPDATA\..\locallow\Intel\ShaderCache",
-"$env:windir\..AMD",
-"$env:LOCALAPPDATA\AMD",
-"$env:APPDATA\..\locallow\AMD")
+$paths = @("$env:windir\..\MSOCache","$env:temp","$env:windir\Temp","$env:windir\Prefetch","$env:SystemRoot\SoftwareDistribution\Download","$env:ProgramData\Microsoft\Windows\RetailDemo","$env:LOCALAPPDATA\CrashDumps",
+"$env:LOCALAPPDATA\NVIDIA\DXCache","$env:LOCALAPPDATA\NVIDIA\GLCache","$env:APPDATA\..\locallow\Intel\ShaderCache","$env:windir\..AMD","$env:LOCALAPPDATA\AMD","$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
-IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
+IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
 Get-ChildItem -Path $EscapefromTarkov\Logs -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
 Get-ChildItem -Path $env:temp\"Battlestate Games" -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
+$CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation     
 IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
-$CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
 Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 Clear-Host
 gpupdate.exe /force 
-lodctr /r
-lodctr /r}
+lodctr /r;lodctr /r}
 function System_Maintance{
 Clear-Host
 Start-Process powershell.exe -argument {Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart; Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart; Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart; Start-Process cleanmgr.exe /sagerun:1; Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
@@ -215,6 +197,21 @@ Start-Process powershell.exe -argument {Dism.exe /Online /Cleanup-Image /Analyze
 #Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 }
 
+function Driver_Cleaner{
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/DDU.zip" -Destination $env:temp\DDU.zip
+Expand-Archive $env:temp\DDU.zip $env:temp
+Set-Location $env:temp\DDU\
+& '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
+[xml]$ToastTemplate = @"
+<toast duration="Long"><visual><binding template="ToastGeneric">
+<text>Please Wait...</text><text>The GPU Driver is uninstalling</text></binding></visual>
+<audio src="ms-winsoundevent:notification.default" /></toast>
+"@
+$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$ToastXml.LoadXml($ToastTemplate.OuterXml)
+$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
+
 function Runtime{´
 winget source update | Out-Null
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
@@ -223,6 +220,14 @@ IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.14 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
 IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.3 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
+
+function Remove_ASUS{
+Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/UninstallAI3Tool_1.00.04.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\UninstallAI3Tool.zip"
+Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
+Expand-Archive $env:temp\UninstallAI3Tool.zip $env:temp -force
+Expand-Archive $env:temp\Armoury_Crate_Uninstall_Tool.zip $env:temp -force
+Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
+Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
 
 function Fan_Control{
 Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V145/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
@@ -241,55 +246,25 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "C:\Program Files\DS4Windows\DS4Windows.exe"
 $Shortcut.Save() }
-    
+
+function Autoruns{
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
+Expand-Archive $env:temp\Autoruns.zip  $env:temp
+Start-Process $env:temp\Autoruns64.exe}
+
 function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
-function Remove_ASUS{
-Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/UninstallAI3Tool_1.00.04.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\UninstallAI3Tool.zip"
-Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
-Expand-Archive $env:temp\UninstallAI3Tool.zip $env:temp -force
-Expand-Archive $env:temp\Armoury_Crate_Uninstall_Tool.zip $env:temp -force
-Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
-Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe" }
-
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
-
-function Driver_Cleaner{
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack GPU Driver Cleaner | $([char]0x00A9) Marvin700" 
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/DDU.zip" -Destination $env:temp\DDU.zip
-Expand-Archive $env:temp\DDU.zip $env:temp
-Set-Location $env:temp\DDU\
-& '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
-[xml]$ToastTemplate = @"
-<toast duration="Long">
-<visual>
-<binding template="ToastGeneric">
-<text>Please Wait...</text>
-<text>The GPU Driver is uninstalling</text>
-</binding>
-</visual>
-<audio src="ms-winsoundevent:notification.default" />
-</toast>
-"@
-$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
-$ToastXml.LoadXml($ToastTemplate.OuterXml)
-$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
 if(!($hash.Driver_Cleaner)){
 [xml]$ToastTemplate = @"
-<toast duration="Long">
-<visual>
-<binding template="ToastGeneric">
-<text>The Optimisation is done :)</text>
-</binding>
-</visual>
-<audio src="ms-winsoundevent:notification.default" />
-</toast>
+<toast duration="Long"><visual><binding template="ToastGeneric">
+<text>The Optimisation is done :)</text></binding></visual>
+<audio src="ms-winsoundevent:notification.default" /></toast>
 "@
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
@@ -488,12 +463,6 @@ $Titel_Compability = New-Object Windows.Forms.Label
 $Titel_Compability.Size = New-Object Drawing.Point 160,25
 $Titel_Compability.Location = New-Object Drawing.Point 520,422
 $Titel_Compability.ForeColor='#aaaaaa'
-$BOX_Reboot = New-Object System.Windows.Forms.CheckBox
-$BOX_Reboot.Size = New-Object Drawing.Point 135,25
-$BOX_Reboot.Location = New-Object Drawing.Point 423,422
-$BOX_Reboot.Text = "Reboot"
-$BOX_Reboot.ForeColor='#aaaaaa'
-$BOX_Reboot.Checked = $false
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
@@ -550,14 +519,14 @@ if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks}
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-if($hash.Runtime){Runtime}   
 if($hash.Scheduled_Maintance){Scheduled_Maintance}
-if($hash.Remove_ASUS){Remove_ASUS}
-if($hash.Autoruns){Autoruns}    
-if($hash.Winrar){Winrar}    
+if($hash.Runtime){Runtime}   
+if($hash.Autoruns){Autoruns}   
+if($hash.Winrar){Winrar} 
 if($hash.Fan_Control){Fan_Control}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
+if($hash.Remove_ASUS){Remove_ASUS}
 if($hash.Windows_Cleaner){Windows_Cleaner}}
 
 GUI
@@ -567,8 +536,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9oCDXUQgDvTIfKEdXMNjNe2U
-# 4j+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtNTLhqCwRy0cU7BTJ+tpFqGe
+# NxagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -588,11 +557,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU6Oin6Eo8sofnbyIZxAwG3Jlat+AwDQYJ
-# KoZIhvcNAQEBBQAEggEAjX1SzF9/S2JgS/XnYDchzadwVaKjkKh0goxX8XDoj3cd
-# FbfvTmeuGKBE2yjEYacJu6ncv9tAiktcuNYqFRWxol30Jy5Rc2bzqK9b6mrznHnW
-# xZLSnzXMmoEppguKvqQP177l8TqaURR4xh8F7hnVhDhCV7toZ8xKItvfSyD4sQra
-# Z8ztTWKWV8+dD/yrL3Kv6rlUyfbv9FyJAoW8tdS6YtL06dnDSQ8Jm/WC+CxMvtJG
-# 9dyV6vx6v0LoKCHcXRI1u0Q/jVGrcJoYDsG+PwRPp5gdifD7cLJIM5rEbiy9L7E+
-# OLRGxMSaoigJBC+QT85Z5AYPkms5q2nhDxY9JQVjBQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUzkYQvtWrOdPe7i352heuSn1MrnowDQYJ
+# KoZIhvcNAQEBBQAEggEAkCPLiORWAwFS/+UG48WgFo6NBYlRbTeRb/iQ9EQH9AHh
+# y/nwGoEFMyDh0G/awFEvMd4PtudDsuYzrqNprLVZDc6cAivm29AJuuj3wL87EpYb
+# 3SxL2vx3SsKG/WAfvgqpMGX+vrnaq9ExEXKNd4GdMpyhvHQyzgetvPCpE1pftfUL
+# OIUFDPX0LUYD9+RRdk9inNvMWPMV816o1rIKSmnh+V7jEQL/jt/O5oR+NBk/+eLN
+# 9DJSNDsjf4udY175/95jpQicv0NZ2JEICSp4feaN44ceg9GSc86qBVMaiAlvW/S8
+# XtesXDXeYZGX1vLvN4HZOyWufH4iYdhIZvR796ldfQ==
 # SIG # End signature block
