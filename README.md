@@ -8,9 +8,8 @@
 * Sophia Script & O&OShutUp
 * Remove Cortana and OneDrive
 * Deactivate Windows Indexing 
-* Deactivate  Tasks & Components
+* Deactivate Tasks & Components
 * Mouse acceleration Fix
-* Deactivate Insider Builds 
 * More Windows Tweaks
 * Clear Windows and GPU Cache
 * Clean uninstall of GPU Driver
