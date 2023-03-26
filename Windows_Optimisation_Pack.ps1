@@ -254,8 +254,7 @@ Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pa
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
-Write-Warning "Please Wait..."
-Write-Warning "The Driver Removal takes up to 10 Minutes"}
+}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
@@ -273,12 +272,9 @@ $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
-if($hash.Reboot){Reboot}exit;}
-
-function Reboot{
-Write-Warning " The computer will restart automatically in 120 seconds !!!"
-Start-Sleep 120
-Restart-Computer}
+if($hash.System_Maintance){System_Maintance}
+if($hash.Driver_Cleaner){Driver_Cleaner}
+exit}
 
 function GUI{
 Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
@@ -307,7 +303,7 @@ if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}
 if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}  
 if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
 if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
-if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
+$Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
@@ -516,7 +512,6 @@ $form.Controls.Add($BOX_Winrar)
 $form.Controls.Add($BOX_Fan_Control)
 $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($BOX_Controller)
-$form.Controls.Add($BOX_Reboot)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() } Out-Null
@@ -540,9 +535,7 @@ if($hash.Winrar){Winrar}
 if($hash.Fan_Control){Fan_Control}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
-if($hash.Windows_Cleaner){Windows_Cleaner}
-if($hash.System_Maintance){System_Maintance}
-if($hash.Driver_Cleaner){Driver_Cleaner}}
+if($hash.Windows_Cleaner){Windows_Cleaner}}
 
 GUI
 Choice
@@ -551,8 +544,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8UoRKVXlt8wWwtbNxCWIW5vv
-# mXugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUymPzgXtb3IsRrGMhEw7IqZ0
+# 8qSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -572,11 +565,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUB9cZuzQOnXO0c4UcDw7omTAVYukwDQYJ
-# KoZIhvcNAQEBBQAEggEAo8yzTswGmOR3hRXurXmZZsLNlDPcFMHkYQJO4ExsB7Ws
-# HmQqjPLFu257hT82qS1fZw06DlJsG/L+DXbSNS2QTiwMYSqXEqvYrOoFMAg/IWh+
-# l6cD860LUQKL95yoGKOJIkyTfFg43xJ25/6gt0XelardP96Lfm2GGnl0V6yrRHGc
-# CBLBJ8aQnkEyOtY4cMfidHAaxERORZ0Ff1zvSFnXJanvaZn01u1/5moZjSEob7qn
-# JC26ag4WK5D1ke893wSxnw86nXA/DjhcUlM0X+tFvDedklid7UHpjBSTd0W9S5yd
-# xnNoXCb2H74qtojrGkcqwvjaK56A7ABYv2WW/FG1zg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7fgV5GPSAkzvX1S6zSGMxc4ic1kwDQYJ
+# KoZIhvcNAQEBBQAEggEAm7uRntq7gmmy6euGRV19CsdwK0VKYMmE0uzYW4sLCgoa
+# r6fZpcDU26Fd74SROl6zDw5DtGTmaqiosoHiRGrDs8LiepJpw0x1a/kQSdZBXJnK
+# DeifA58C5+4gfCMRZUOA677dFOQviNwyhr51GKakDAHWzBJnErBENZo5+8BQKAcN
+# CPoOfGzcVFxS2ErVpaEeq3aB5Fm4AjkzYuc5PCk1ZtSVgZ38Iqomcrsg5v+wN/9S
+# Malg0mvTqlfdObX+/l0qlDnRzLB/EunSrOrI3F0ADegyfUlwzWAuZSm3zKAncY/j
+# CMEwd2oaT8FbZQdYwMER3/xBvVUgTbcgNE6+wOLKgA==
 # SIG # End signature block
