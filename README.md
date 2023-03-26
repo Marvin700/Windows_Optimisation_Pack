@@ -1,7 +1,7 @@
 > **Warning**: <BR>
 This branch and the uploaded files are not stable. <BR>
 If you want to test/use the beta, I recommend the releases marked as pre-release :)
-https://github.com/Marvin700/Windows_Optimisation_Pack/releases/download/Beta/Windows_Optimisation_Pack.ps1
+https://github.com/Marvin700/Windows_Optimisation_Pack/releases/download/Beta/
 
 <BR>
 
