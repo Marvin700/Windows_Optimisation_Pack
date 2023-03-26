@@ -95,8 +95,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
 ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches)
-{If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
-$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
+{If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
             
 function WindowsTweaks_Index {
@@ -536,8 +535,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtNTLhqCwRy0cU7BTJ+tpFqGe
-# NxagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVcCBPekqfuj10/wBvLsEOww7
+# PbmgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -557,11 +556,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUzkYQvtWrOdPe7i352heuSn1MrnowDQYJ
-# KoZIhvcNAQEBBQAEggEAkCPLiORWAwFS/+UG48WgFo6NBYlRbTeRb/iQ9EQH9AHh
-# y/nwGoEFMyDh0G/awFEvMd4PtudDsuYzrqNprLVZDc6cAivm29AJuuj3wL87EpYb
-# 3SxL2vx3SsKG/WAfvgqpMGX+vrnaq9ExEXKNd4GdMpyhvHQyzgetvPCpE1pftfUL
-# OIUFDPX0LUYD9+RRdk9inNvMWPMV816o1rIKSmnh+V7jEQL/jt/O5oR+NBk/+eLN
-# 9DJSNDsjf4udY175/95jpQicv0NZ2JEICSp4feaN44ceg9GSc86qBVMaiAlvW/S8
-# XtesXDXeYZGX1vLvN4HZOyWufH4iYdhIZvR796ldfQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/uPbUO4qxfK2Bvmc9AZZoA7qr2MwDQYJ
+# KoZIhvcNAQEBBQAEggEAcQaG/48cyxvkvpR+adqqc7et27e8GbY12SGWy7sD9qnH
+# iHV+zuapQ4Co7/mCmij9LuouDbf4xzqkMKxvHKs0a5L8sqKLtrqN4QrxbBh7WXH0
+# FRNEPGBgIedvZUl7JzAMUkZxOBgwDuoL2TAAuthz7GW81Xrdh7++8AGAnkRTiP8h
+# XcR4ODS50MIU6A1jg1V8qJhVjvfTQEEojL1d0AfiZAK07Ek9bLalQDrsplzgUpg8
+# phGOZMb1CC2iH8+M/4X0oi9BxbpOgxiinkGA+JhUO1EoZdzXX75s/u9nSzgtnXuO
+# tz9gvDqQLxTEf8WZe5QELOIKWgsiOQFUWZpMSGTOhw==
 # SIG # End signature block
