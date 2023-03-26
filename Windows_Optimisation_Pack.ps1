@@ -1,245 +1,219 @@
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{}) 
+IF (!(Test-Path $env:temp\Windows_Optimisation_Pack)){New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory | Out-Null}
+else {Get-ChildItem -Path $env:temp\Windows_Optimisation_Pack -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse | Out-Null}
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-if (!(Test-Path $env:temp\Windows_Optimisation_Pack)) {New-Item -Path $env:temp\Windows_Optimisation_Pack -ItemType Directory} 
-
+$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 
 function WindowsTweaks_Services{
-Stop-Service "WpcMonSvc"
-Stop-Service "SharedRealitySvc"
-Stop-Service "Fax"
-Stop-Service "autotimesvc"
-Stop-Service "wisvc"
-Stop-Service "SDRSVC"
-Stop-Service "MixedRealityOpenXRSvc"
-Stop-Service "WalletService"
-Stop-Service "SmsRouter"
-Stop-Service "SharedAccess"
-Stop-Service "MapsBroker"
-Stop-Service "PhoneSvc"
-Stop-Service "ScDeviceEnum"
-Stop-Service "icssvc"
-Stop-Service "edgeupdatem"
-Stop-Service "edgeupdate"
-Stop-Service "MicrosoftEdgeElevationService"
-Stop-Service "RetailDemo"
-Stop-Service "MessagingService"
-Stop-Service "PimIndexMaintenanceSvc"
-Stop-Service "OneSyncSvc"
-Stop-Service "UnistoreSvc"
-Stop-Service "DiagTrack"
-Stop-Service "dmwappushservice"
-Stop-Service "diagnosticshub.standardcollector.service"
-Stop-Service "diagsvc"
-Stop-Service "WerSvc" 
-Stop-Service "wercplsupport" 
-Set-Service "WpcMonSvc" -StartupType Disabled
-Set-Service "SharedRealitySvc" -StartupType Disabled
-Set-Service "Fax" -StartupType Disabled
-Set-Service "autotimesvc" -StartupType Disabled
-Set-Service "wisvc" -StartupType Disabled
-Set-Service "SDRSVC" -StartupType Disabled
-Set-Service "MixedRealityOpenXRSvc" -StartupType Disabled
-Set-Service "WalletService" -StartupType Disabled
-Set-Service "SmsRouter" -StartupType Disabled
-Set-Service "SharedAccess" -StartupType Disabled
-Set-Service "MapsBroker" -StartupType Disabled
-Set-Service "PhoneSvc" -StartupType Disabled
-Set-Service "ScDeviceEnum" -StartupType Disabled
-Set-Service "TabletInputService" -StartupType Disabled
-Set-Service "icssvc" -StartupType Disabled
-Set-Service "edgeupdatem" -StartupType Disabled
-Set-Service "edgeupdate" -StartupType Disabled
-Set-Service "MicrosoftEdgeElevationService" -StartupType Disabled
-Set-Service "RetailDemo" -StartupType Disabled
-Set-Service "MessagingService" -StartupType Disabled 
-Set-Service "PimIndexMaintenanceSvc" -StartupType Disabled 
-Set-Service "OneSyncSvc" -StartupType Disabled
-Set-Service "UnistoreSvc" -StartupType Disabled
-Set-Service "DiagTrack" -StartupType Disabled
-Set-Service "dmwappushservice" -StartupType Disabled
-Set-Service "diagnosticshub.standardcollector.service" -StartupType Disabled
-Set-Service "diagsvc" -StartupType Disabled 
-Set-Service "WerSvc" -StartupType Disabled
-Set-Service "wercplsupport" -StartupType Disabled }
+$services = @(
+"WpcMonSvc",
+"SharedRealitySvc",
+"Fax",
+"autotimesvc",
+"wisvc",
+"SDRSVC",
+"MixedRealityOpenXRSvc",
+"WalletService",
+"SmsRouter",
+"SharedAccess",
+"MapsBroker",
+"PhoneSvc",
+"ScDeviceEnum",
+"TabletInputService",
+"icssvc",
+"edgeupdatem",
+"edgeupdate",
+"MicrosoftEdgeElevationService",
+"RetailDemo",
+"MessagingService",
+"PimIndexMaintenanceSvc",
+"OneSyncSvc",
+"UnistoreSvc",
+"DiagTrack",
+"dmwappushservice",
+"diagnosticshub.standardcollector.service",
+"diagsvc",
+"WerSvc",
+"wercplsupport")
+foreach ($service in $services){
+Stop-Service $service -ErrorAction SilentlyContinue
+Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Registry{
-#GPU MPO FIx for Flickering
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value "00000005" -Force
-OverlayTestMode
 # MarkC Mouse Acceleration Fix
-Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseXCurve" ([byte[]](0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0xCC, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x80, 0x99, 0x19, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x66, 0x26, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x33, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00))
-Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseYCurve" ([byte[]](0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x70, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA8, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00))
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseXCurve" ([byte[]](0x00,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xC0, 0xCC, 0x0C, 0x00, 0x00, 0x00,
+0x00, 0x00, 0x80, 0x99, 0x19, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x66, 0x26,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x33, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00))
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseYCurve" ([byte[]](0x00,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x00, 0x70, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA8,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00))
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSensitivity" -Type "DWORD" -Value 10 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type "DWORD" -Value 0 -Force
 New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type "DWORD" -Value 0 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
+Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\DiagTrack" -Name "Start" -Type "DWORD" -Value 4 -Force 
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value 00000005 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "NetworkThrottlingIndex" -Type "DWORD" -Value 268435455 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Type "DWORD" -Value 00000000 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type "DWORD" -Value 00000006 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\dmwappushservice" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" -Name "Start" -Type "DWORD" -Value 4 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Value 0 -Type "DWORD" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value "1" -Force }
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force }
         
 function WindowsTweaks_Tasks{
-Get-ScheduledTask -TaskName Consolidator | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName UsbCeip | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
 Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
-schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
-schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
 function WindowsTweaks_Features{
-dism /Online /Disable-Feature /FeatureName:"TelnetClient" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"WCF-TCP-PortSharing45" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"SmbDirect" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"TFTP" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-All" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-Clients" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Tools-All" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"Microsoft-Hyper-V-Management-PowerShell" /NoRestart }
+$features = @(
+"TFTP",
+"TelnetClient",
+"WCF-TCP-PortSharing45",
+"Microsoft-Hyper-V-All",
+"Microsoft-Hyper-V-Management-Clients",
+"Microsoft-Hyper-V-Tools-All",
+"Microsoft-Hyper-V-Management-PowerShell")
+foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
             
-function WindowsTweaks_Index{
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='D:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='E:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
-Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='F:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null }
-
-function TakeOwnership{
-New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership" -force -ea SilentlyContinue
-New-Item "HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command" -force -ea SilentlyContinue
-New-Item "HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership" -force -ea SilentlyContinue
-New-Item "HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command" -force -ea SilentlyContinue
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name '(default)' -Value 'Take Ownership' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'HasLUAShield' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'NoWorkingDirectory' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership' -Name 'Position' -Value 'middle' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command' -Name '(default)' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" && icacls \"%1\" /grant *S-1-3-4:F /c /l'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\*\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" && icacls \"%1\" /grant *S-1-3-4:F /c /l'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name '(default)' -Value 'Take Ownership' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'AppliesTo' -Value 'NOT (System.ItemPathDisplay:="C:\Users" OR System.ItemPathDisplay:="C:\ProgramData" OR System.ItemPathDisplay:="C:\Windows" OR System.ItemPathDisplay:="C:\Windows\System32" OR System.ItemPathDisplay:="C:\Program Files" OR System.ItemPathDisplay:="C:\Program Files (x86)")' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'HasLUAShield' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'NoWorkingDirectory' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership' -Name 'Position' -Value 'middle' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name '(default)' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;
-New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Classes\Directory\shell\TakeOwnership\command' -Name 'IsolatedCommand' -Value 'powershell -windowstyle hidden -command "Start-Process cmd -ArgumentList ''/c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant *S-1-3-4:F /c /l /q'' -Verb runAs' -PropertyType String -Force -ea SilentlyContinue;}
+function WindowsTweaks_Index {
+Label C: Windows
+$drives = @('C:', 'D:', 'E:', 'F:', 'G:')
+foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
                 
 function SophiaScript{
 Clear-Host
-IF($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.11.v6.3.1.zip" -Destination $env:temp\Sophia.zip
+IF($WindowsVersion -match "Microsoft Windows 11"){
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.11.v6.4.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
-else { IF($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.3.1/Sophia.Script.for.Windows.10.v5.15.1.zip" -Destination $env:temp\Sophia.zip
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
+else { IF($WindowsVersion -match "Microsoft Windows 10") {
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.2/Sophia.Script.for.Windows.10.v5.16.2.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/Sophia_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
-Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 } 
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
+Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1 }
 
 function ooShutup{
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/main/config/ooshutup10.cfg" -Destination "$ScriptFolder\ooshutup10.cfg"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/Beta/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
-.\OOSU10.exe ooshutup10.cfg /quiet }
+.\OOSU10.exe ooshutup.cfg /quiet}
 
 function SystemPoint{
-if($hash.WindowsCleanup){vssadmin delete shadows /all /quiet}
+Clear-Host
+" Compatibility checks and preparation are performed ..."
+if($hash.System_Maintance){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive "C:\"
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /T REG_DWORD /D 0 /F
+New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F }
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
 
 function Checks{
-IF(!($WindowsVersion -eq "Microsoft Windows 11 Home" -Or $WindowsVersion -eq "Microsoft Windows 11 Pro" -Or $WindowsVersion -eq "Microsoft Windows 11 Enterprise")) {
-IF(!($WindowsVersion -eq "Microsoft Windows 10 Home" -Or $WindowsVersion -eq "Microsoft Windows 10 Pro" -Or $WindowsVersion -eq "Microsoft Windows 10 Enterprise")) {
+IF(!($WindowsVersion -match "Microsoft Windows 11")) {
+IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
-if ((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
+IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
+Write-Warning " No internet connection available"
+Write-Warning " The Script cant Apply all Tweaks !!!"
+Start-Sleep 20}
+IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 Write-Warning " No admin rights available"
 Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit}}
-
+Start-Sleep 20;exit}
+Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear()
+New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
+New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Force | Out-Null
+New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Name ShowInActionCenter -PropertyType DWord -Value 1 -Force | Out-Null
+New-Item -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Force | Out-Null
+New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force | Out-Null
+New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force | Out-Null
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
+[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null}
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe }
 
-function WindowsCleanup{
+function Windows_Cleaner{
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Cleaner | $([char]0x00A9) Marvin700"
 Clear-Host
-gpupdate.exe /force 
 ipconfig /flushdns
 $Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
 ForEach($result in $Key)
 {If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
 $Regkey = 'HKLM:' + $result.Name.Substring( 18 )
 New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
-sfc /SCANNOW
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
-Dism.exe /Online /Cleanup-Image /spsuperseded
-Dism.exe /online /Cleanup-Image /StartComponentCleanup
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-Get-ChildItem -Path $env:temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:windir\Temp -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:windir\Prefetch -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
-Get-ChildItem -Path $env:ProgramData\Microsoft\Windows\RetailDemo -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:LOCALAPPDATA\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:windir/../AMD/ -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse 
-Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\DXCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:LOCALAPPDATA\NVIDIA\GLCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:APPDATA\..\locallow\Intel\ShaderCache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:LOCALAPPDATA\CrashDumps -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:APPDATA\..\locallow\AMD -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:windir\..\MSOCache
-Get-ChildItem -Path ${env:ProgramFiles(x86)}\Steam\steamapps\common\"Call of Duty HQ"\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
-taskkill /F /IM EscapeFromTarkov.exe
+$paths = @(
+"$env:windir\..\MSOCache",
+"$env:temp",
+"$env:windir\Temp",
+"$env:windir\Prefetch",
+"$env:SystemRoot\SoftwareDistribution\Download",
+"$env:ProgramData\Microsoft\Windows\RetailDemo",
+"$env:LOCALAPPDATA\CrashDumps",
+"$env:LOCALAPPDATA\NVIDIA\DXCache",
+"$env:LOCALAPPDATA\NVIDIA\GLCache",
+"$env:APPDATA\..\locallow\Intel\ShaderCache",
+"$env:windir\..AMD",
+"$env:LOCALAPPDATA\AMD",
+"$env:APPDATA\..\locallow\AMD")
+foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
+IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
-Get-ChildItem -Path $EscapefromTarkov\Logs -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:temp\"Battlestate Games" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
-taskkill /F /IM iexplore.exe
+Get-ChildItem -Path $EscapefromTarkov\Logs -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:temp\"Battlestate Games" -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation 
-Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-if ((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
-taskkill /F /IM iexplore.exe
+Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
-Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-lodctr /r
-lodctr /r
+Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 Clear-Host
-Write-Host "Datentraeger Bereinigung wird gestartet..."
-Start-Process cleanmgr.exe /sagerun:1 -Wait}
-          
+gpupdate.exe /force 
+lodctr /r
+lodctr /r}
+function System_Maintance{
+Clear-Host
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
+Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
+Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
+Start-Process cleanmgr.exe /sagerun:1
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+
 function Runtime{
 winget source update | Out-Null
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
 IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931")){winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements}
-IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.11 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
-IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.0 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
+IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.14 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
+IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.3 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function Fan_Control{
@@ -250,16 +224,7 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
 $Shortcut.TargetPath = "C:\Program Files\FanControl\FanControl.exe"
 $Shortcut.Save() }
-
-function AutoActions{
-Start-BitsTransfer -Source "https://github.com/Codectory/AutoActions/releases/download/1.9.19/Release_AutoActions_1.9.19_x64.zip" -Destination $env:temp\AutoActions.zip 
-Expand-Archive $env:temp\AutoActions.zip "C:\Program Files\AutoActions" -force
-Remove-Item -Path $env:temp\AutoActions.zip  -Force -Recurse
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\AutoActions.lnk")
-$Shortcut.TargetPath = "C:\Program Files\AutoActions\AutoActions.exe"
-$Shortcut.Save() }
-    
+   
 function Controller{
 Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip "
 Expand-Archive $env:temp\DS4Windows.zip "C:\Program Files\" -force
@@ -273,30 +238,55 @@ function Process_Lasso{
 Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
-function Rename_HDD{Label C: Windows}
+function Remove_ASUS{
+Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/UninstallAI3Tool_1.00.04.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\UninstallAI3Tool.zip"
+Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
+Expand-Archive $env:temp\UninstallAI3Tool.zip $env:temp -force
+Expand-Archive $env:temp\Armoury_Crate_Uninstall_Tool.zip $env:temp -force
+Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
+Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe" }
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
+function Driver_Cleaner{
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack GPU Driver-Cleaner | $([char]0x00A9) Marvin700" 
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/DDU.zip" -Destination $env:temp\DDU.zip
+Expand-Archive $env:temp\DDU.zip $env:temp
+Set-Location $env:temp\DDU\
+& '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
+[System.Windows.Forms.MessageBox]::Show("Please Wait... $([System.Environment]::NewLine)$([System.Environment]::NewLine)The GPU Driver is Uninstalling...","Windows_Pptimisation_Pack Driver Cleaner",0,[System.Windows.Forms.MessageBoxIcon]::Exclamation)
+}
+
 function Finish{
-REG ADD "HKLM\SOFTWARE\Windows_Optimisation_Pack\" /V "Successful" /T REG_DWORD /D 1 /F | Out-Null
-Clear-Host
-"Your system has been successfully optimised by the Windows_Optimisation_Pack" 
-if($hash.Reboot){Reboot}}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
+[xml]$ToastTemplate = @"
+<toast duration="Long">
+<visual>
+<binding template="ToastGeneric">
+<text>The Optimisation is done :)</text>
+</binding>
+</visual>
+<audio src="ms-winsoundevent:notification.default" />
+</toast>
+"@
+$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$ToastXml.LoadXml($ToastTemplate.OuterXml)
+$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)
+if($hash.System_Maintance){System_Maintance}
+if($hash.Driver_Cleaner){Driver_Cleaner}
+exit}
 
-function Reboot{
-Write-Warning " The computer will restart automatically in 120 seconds !!!"
-Start-Sleep 120
-Restart-Computer }
-
-function GUI {
+function GUI{
 Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $hash.Cancel = $true
-$handler_BUTTON_Start_Click= {   
+$handler_BUTTON_Start_Click={   
 $hash.Cancel = $false
 if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
 if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
+if ($BOX_Windows_Cleaner.Checked)           {$hash.Windows_Cleaner = $true} 
 if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
 if ($BOX_ooShutup.Checked)                  {$hash.ooShutup = $true}    
 if ($BOX_WindowsTweaks_Registry.Checked)    {$hash.WindowsTweaks_Registry = $true}    
@@ -304,17 +294,17 @@ if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}
 if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
 if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
 if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
+if ($BOX_System_Maintance.Checked)          {$hash.System_Maintance = $true}    
+if ($BOX_Scheduled_Maintance.Checked)       {$hash.Scheduled_Maintance = $true}  
+if ($BOX_Driver_Cleaner.Checked)      		{$hash.Driver_Cleaner = $true}  
 if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
-if ($BOX_WindowsCleanup.Checked)            {$hash.WindowsCleanup = $true}    
-if ($BOX_Rename_HDD.Checked)                {$hash.Rename_HDD = $true} 
-if ($BOX_TakeOwnership.Checked)             {$hash.TakeOwnership = $true}    
+if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
 if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
 if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
 if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}  
-if ($BOX_AutoActions.Checked)               {$hash.AutoActions = $true}
 if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
 if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
-if ($BOX_Reboot.Checked)                    {$hash.Reboot = $true} $Form.Close()}
+$Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
@@ -344,24 +334,25 @@ $Titel_Extras.Size = New-Object Drawing.Point 135,25
 $Titel_Extras.Location = New-Object Drawing.Point 393,215
 $Titel_Extras.text = "Extras"
 $Titel_Extras.ForeColor='#aaaaaa'
-$Titel_Install = New-Object Windows.Forms.Label
-$Titel_Install.Size = New-Object Drawing.Point 135,25
-$Titel_Install.Location = New-Object Drawing.Point 566,215
-$Titel_Install.text = "Install"
-$Titel_Install.ForeColor='#aaaaaa'
+$Titel_Software = New-Object Windows.Forms.Label
+$Titel_Software.Size = New-Object Drawing.Point 135,25
+$Titel_Software.Location = New-Object Drawing.Point 566,215
+$Titel_Software.text = "Software"
+$Titel_Software.ForeColor='#aaaaaa'
+$BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
+$BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
+$BOX_SystemPoint.Location = New-Object Drawing.Point 27,248
+$BOX_SystemPoint.Text = "Restore Point" 
+$BOX_SystemPoint.ForeColor='#aaaaaa'
+$BOX_SystemPoint.Checked = $true 
+$BOX_SystemPoint.Enabled = $false 
 $BOX_Checks = New-Object System.Windows.Forms.CheckBox
 $BOX_Checks.Size = New-Object Drawing.Point 135,25
-$BOX_Checks.Location = New-Object Drawing.Point 27,248
+$BOX_Checks.Location = New-Object Drawing.Point 27,279
 $BOX_Checks.Text = "Compability Checks"
 $BOX_Checks.ForeColor='#aaaaaa'
 $BOX_Checks.Checked = $true
 $BOX_Checks.Enabled = $false 
-$BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
-$BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
-$BOX_SystemPoint.Location = New-Object Drawing.Point 27,279
-$BOX_SystemPoint.Text = "Restore Point" 
-$BOX_SystemPoint.ForeColor='#aaaaaa'
-$BOX_SystemPoint.Checked = $true 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
 $BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
@@ -371,9 +362,15 @@ $BOX_SophiaScript.Checked = $true
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
-$BOX_ooShutup.Text = "O&O ShutUp10++"
+$BOX_ooShutup.Text = "O&O ShutUp"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
+$BOX_Windows_Cleaner = New-Object System.Windows.Forms.CheckBox
+$BOX_Windows_Cleaner.Size = New-Object Drawing.Point 135,25
+$BOX_Windows_Cleaner.Location = New-Object Drawing.Point 27,372
+$BOX_Windows_Cleaner.Text = "Windows Cleaner" 
+$BOX_Windows_Cleaner.ForeColor='#aaaaaa'
+$BOX_Windows_Cleaner.Checked = $true 
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 200,248
@@ -404,54 +401,55 @@ $BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 200,372
 $BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
 $BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
+$BOX_System_Maintance= New-Object System.Windows.Forms.CheckBox
+$BOX_System_Maintance.Size = New-Object Drawing.Point 135,25
+$BOX_System_Maintance.Location = New-Object Drawing.Point 373,248
+$BOX_System_Maintance.Text = "System Maintance"
+$BOX_System_Maintance.ForeColor='#aaaaaa'
+$BOX_System_Maintance.Checked = $false
+$BOX_Scheduled_Maintance = New-Object System.Windows.Forms.CheckBox
+$BOX_Scheduled_Maintance.Size = New-Object Drawing.Point 135,25
+$BOX_Scheduled_Maintance.Location = New-Object Drawing.Point 373,279
+$BOX_Scheduled_Maintance.Text = "Scheduled Maintance" 
+$BOX_Scheduled_Maintance.ForeColor='#aaaaaa'
+$BOX_Scheduled_Maintance.Checked = $false
+$BOX_Scheduled_Maintance.Enabled = $false 
+$BOX_Driver_Cleaner= New-Object System.Windows.Forms.CheckBox
+$BOX_Driver_Cleaner.Size = New-Object Drawing.Point 135,25
+$BOX_Driver_Cleaner.Location = New-Object Drawing.Point 373,310
+$BOX_Driver_Cleaner.Text = "Driver Cleaner"
+$BOX_Driver_Cleaner.ForeColor='#aaaaaa'
+$BOX_Driver_Cleaner.Checked = $false
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
 $BOX_Runtime.Size = New-Object Drawing.Point 145,25
-$BOX_Runtime.Location = New-Object Drawing.Point 373,248
+$BOX_Runtime.Location = New-Object Drawing.Point 373,341
 $BOX_Runtime.Text = "Runtime Components"
 $BOX_Runtime.ForeColor='#aaaaaa'
 $BOX_Runtime.Checked = $true  
-$BOX_WindowsCleanup = New-Object System.Windows.Forms.CheckBox
-$BOX_WindowsCleanup.Size = New-Object Drawing.Point 135,25
-$BOX_WindowsCleanup.Location = New-Object Drawing.Point 373,279
-$BOX_WindowsCleanup.Text = "Windows Cleanup"
-$BOX_WindowsCleanup.ForeColor='#aaaaaa'
-$BOX_WindowsCleanup.Checked = $true
-$BOX_Rename_HDD = New-Object System.Windows.Forms.CheckBox
-$BOX_Rename_HDD.Size = New-Object Drawing.Point 135,25
-$BOX_Rename_HDD.Location = New-Object Drawing.Point 373,310
-$BOX_Rename_HDD.Text = "Rename C Drive"
-$BOX_Rename_HDD.ForeColor='#aaaaaa'
-$BOX_Rename_HDD.Checked = $true
-$BOX_TakeOwnership = New-Object System.Windows.Forms.CheckBox
-$BOX_TakeOwnership.Size = New-Object Drawing.Point 135,25
-$BOX_TakeOwnership.Location = New-Object Drawing.Point 373,341
-$BOX_TakeOwnership.Text = "Take Ownership" 
-$BOX_TakeOwnership.ForeColor='#aaaaaa'
-$BOX_TakeOwnership.Checked = $true
+$BOX_Remove_ASUS = New-Object System.Windows.Forms.CheckBox
+$BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
+$BOX_Remove_ASUS.Location = New-Object Drawing.Point 373,372
+$BOX_Remove_ASUS.Text = "Remove Asus Bloat"
+$BOX_Remove_ASUS.ForeColor='#aaaaaa'
+$BOX_Remove_ASUS.Checked = $false
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
-$BOX_Autoruns.Location = New-Object Drawing.Point 373,373
+$BOX_Autoruns.Location = New-Object Drawing.Point 546,248
 $BOX_Autoruns.Text = "Autoruns" 
 $BOX_Autoruns.ForeColor='#aaaaaa'
-$BOX_Autoruns.Checked = $true
+$BOX_Autoruns.Checked = $false
 $BOX_Winrar = New-Object System.Windows.Forms.CheckBox
 $BOX_Winrar.Size = New-Object Drawing.Point 135,25
-$BOX_Winrar.Location = New-Object Drawing.Point 546,248
+$BOX_Winrar.Location = New-Object Drawing.Point 546,279
 $BOX_Winrar.Text = "Winrar"
 $BOX_Winrar.ForeColor='#aaaaaa'
 $BOX_Winrar.Checked = $true
 $BOX_Fan_Control = New-Object System.Windows.Forms.CheckBox
 $BOX_Fan_Control.Size = New-Object Drawing.Point 135,25
-$BOX_Fan_Control.Location = New-Object Drawing.Point 546,279
+$BOX_Fan_Control.Location = New-Object Drawing.Point 546,310
 $BOX_Fan_Control.Text = "Fan Control"
 $BOX_Fan_Control.ForeColor='#aaaaaa'
 $BOX_Fan_Control.Checked = $false  
-$BOX_AutoActions = New-Object System.Windows.Forms.CheckBox
-$BOX_AutoActions.Size = New-Object Drawing.Point 135,25
-$BOX_AutoActions.Location = New-Object Drawing.Point 546,310
-$BOX_AutoActions.Text = "AutoActions"
-$BOX_AutoActions.ForeColor='#aaaaaa'
-$BOX_AutoActions.Checked = $false 
 $BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
 $BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
 $BOX_Process_Lasso.Location = New-Object Drawing.Point 546,341
@@ -494,35 +492,35 @@ $form.controls.add($Titel_Compability)
 $form.controls.add($Titel_Essentials)
 $form.controls.add($Titel_Tweaks)
 $form.controls.add($Titel_Extras)
-$form.controls.add($Titel_Install)
+$form.controls.add($Titel_Software)
 $form.Controls.Add($BOX_Checks)
 $form.Controls.Add($BOX_SystemPoint)
 $form.Controls.Add($BOX_SophiaScript)
 $form.Controls.Add($BOX_ooShutup)
+$form.Controls.Add($BOX_Windows_Cleaner)
 $form.Controls.Add($BOX_WindowsTweaks_Registry)
 $form.Controls.Add($BOX_WindowsTweaks_Tasks)
 $form.Controls.Add($BOX_WindowsTweaks_Features)
 $form.Controls.Add($BOX_WindowsTweaks_Services)
 $form.Controls.Add($BOX_WindowsTweaks_Index)
+$form.Controls.Add($BOX_System_Maintance)
+$form.Controls.Add($BOX_Scheduled_Maintance)
 $form.Controls.Add($BOX_Runtime)
-$form.Controls.Add($BOX_WindowsCleanup)
-$form.Controls.Add($BOX_Rename_HDD)
-$form.Controls.Add($BOX_TakeOwnership)
+$form.Controls.Add($BOX_Driver_Cleaner)
+$form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
 $form.Controls.Add($BOX_Fan_Control)
-$form.Controls.Add($BOX_AutoActions)
 $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($BOX_Controller)
-$form.Controls.Add($BOX_Reboot)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog() } Out-Null
 
 function Choice { 
 if($hash.Cancel){exit}
-if($hash.Checks){Checks}
 if($hash.SystemPoint){SystemPoint}
+if($hash.Checks){Checks}
 if($hash.SophiaScript){SophiaScript}
 if($hash.ooShutup){ooShutup}
 if($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
@@ -530,16 +528,15 @@ if($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks}
 if($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 if($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 if($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-if($hash.Rename_HDD){Rename_HDD}
 if($hash.Runtime){Runtime}   
-if($hash.TakeOwnership){TakeOwnership}
+if($hash.Scheduled_Maintance){Scheduled_Maintance}
+if($hash.Remove_ASUS){Remove_ASUS}
 if($hash.Autoruns){Autoruns}    
 if($hash.Winrar){Winrar}    
 if($hash.Fan_Control){Fan_Control}
-if($hash.AutoActions){AutoActions}
 if($hash.Controller){Controller} 
 if($hash.Process_Lasso){Process_Lasso}
-if($hash.WindowsCleanup){WindowsCleanup}}
+if($hash.Windows_Cleaner){Windows_Cleaner}}
 
 GUI
 Choice
@@ -548,8 +545,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1Qry5twy5tScEXkayrzlh19y
-# YFCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURP8pWKoWkk6LgbcYnMCLwS5R
+# IACgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -569,11 +566,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWQhsfpuqe88rWjnepUzjMuRIECgwDQYJ
-# KoZIhvcNAQEBBQAEggEAlODSVyWfroS7LUkFHIKNEo4/aPYmurESNK49aV55hcpb
-# eTrCe7mKrEgPt123kTlE4nIJ+pHL31VuOkWeTxoopXkdHQkzst+8/xBjBeoVHq7E
-# s5i4zOexNHW2COsyV4xazCQag8tv/WhNvbgpNKCyNgj8UyXAz9iHXgroA7APzYhw
-# VWPT37SzfqnMYYnZ2gFfBIhI7Vb2wZt2O1DTMuUurCp0uiGp2zrJc8/w4VuS3cfH
-# +mC79zANqHzU/UoBBrBPHrFVhSt7x1tw4TSp2rjb737x87CStQPWohtjSTXWQ2rR
-# qRI7b1QtPhd4QGK+zPoaFvs2KquBBUed2EpshRuRTg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVG6s09qyl1SUl3CEXrjZCq5mppcwDQYJ
+# KoZIhvcNAQEBBQAEggEAUueb8oLzF8SEcm25ne2/JDORjk0EwoNSubfEnAQAlDem
+# 3eWbx6iL0ZJdxTU7xPcwibfwYA8YPqc+v8tCLEzlsE2DnDyBCHf+8jRVxH45wDkv
+# KjMQravqzjrhIbgfT9fZvN6BiB8wo37p1TJ8nZJTGf63aHYxgUQQPOBxi570W8Bq
+# 6/YRIYSQoQ/W264/y/iaia8nVFyfwYQOU0DZ1Bk99h1J6obstPl7UhkKsRWA1Phm
+# ZGqYDUvULWTUH6RHNLAOotGbn3W8waCtcSzVp0B8a5+H5zE2eI605L1DCI54dTO6
+# +FeTkSI+SIxc5ZJJwj3LH3LIFkUvnX/zGtPthxlNHQ==
 # SIG # End signature block
