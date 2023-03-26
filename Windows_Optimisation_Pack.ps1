@@ -74,7 +74,12 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force }
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
+$Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
+ForEach($result in $Key)
+{If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
+$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
+New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
         
 function WindowsTweaks_Tasks{
 Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
@@ -165,11 +170,6 @@ function Windows_Cleaner{
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Windows_Cleaner | $([char]0x00A9) Marvin700"
 Clear-Host
 ipconfig /flushdns
-$Key = Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches
-ForEach($result in $Key)
-{If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{
-$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
-New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $paths = @(
 "$env:windir\..\MSOCache",
@@ -562,8 +562,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPidiqnMQJZPFfo2ayxwpjJ4a
-# xTOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAAx3J9Otw9PEbElug0n7jx1/
+# y7GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -583,11 +583,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU//G4dWJtJqiV0p90IIvdexRsTrUwDQYJ
-# KoZIhvcNAQEBBQAEggEAWq74hZgoZUT7QOh5zOF2fx+ezkKswnLyq4YfRXsHO/1W
-# L4nrJRImJP9KIk43on43VnU5Kx9u9mH3mYhcfL2a+KTKpibzc65WULgydiEO8H2r
-# eCXnJD1uDiBHF/APwLFzmSBrYOP1sK3yWuBIgvPnsXvcY9zark6Fn55oqS5oXxa+
-# t4ch2fsPAbS5/zWSASFEShR9U9oVrtPJZdX7Nf2ybSyViOU+1xDxdnobXoyUn1GK
-# EfCqHXPmv0VxaiikX3MRPw5WfPbird5dJ1efdHPNXoEjqj92UdqW2aOQr+MjHYwm
-# Sp296mVBPz9K/uwAIR+wg3Fe8nycf7AdjDYw7GqdJw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQURfx76KhnZXG9zRt318Zm0YjzGhQwDQYJ
+# KoZIhvcNAQEBBQAEggEAqHdOmuzysf8EGhIlPdlLxTxpdop3TNbeCEjzeimJEYKD
+# HQGeIYHI0QgeOjvpkFZxz/N9ho3V3HajezXtOugAj0oq1bXpHKmTJZLlG2KArRVF
+# dbITXMXAdq0K38b9RRfWnQmI9L+cQCPpkF3yBt+/hlalH4QOxsELMCspPjE0JWvF
+# oOi74LoE1ePPiXPv0WZ6Lfg6tsX0GRg/t6G6F+9i4funzdcPKsxd/j7VyPAPk8rP
+# h3SvtmiG7tWuUX/eB3IYIyTu5OtV6HnGdpV3DaazB0sboE2Nn8fDINmzMD1uMSJJ
+# 6fBwdO2d0tWRA4x0P0mA1K9BF+FZT7Wj1tjW10EXVQ==
 # SIG # End signature block
