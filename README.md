@@ -24,8 +24,7 @@ irm windows-optimisation.de/beta | iex
 Please update to the latest version of Windows first. <BR>
 
   
-## Screenshots
+## Screenshot
 <div>
-    <img src="https://user-images.githubusercontent.com/98750428/200678853-363ec142-b0ab-4623-97cb-077bff29ca9d.png" width="410" height="340">
     <img src="https://user-images.githubusercontent.com/98750428/203978712-a4273aa4-9402-4dbb-a40f-ff2c508d4935.jpg" width="410" height="340">
 </div>
