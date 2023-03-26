@@ -25,7 +25,6 @@ Please update to the latest version of Windows first. <BR>
 <BR>
 
 ## Screenshots
-With Optimised Windows
 <div>
     <img src="https://user-images.githubusercontent.com/98750428/203978712-a4273aa4-9402-4dbb-a40f-ff2c508d4935.jpg" width="620" height="500">
 </div>
