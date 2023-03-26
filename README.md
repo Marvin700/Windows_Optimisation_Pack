@@ -3,7 +3,6 @@ This branch and the uploaded files are not stable. <BR>
 If you want to test/use the beta, I recommend the beta release :)
 
 <BR>
-<BR>
 
 <img src="https://user-images.githubusercontent.com/98750428/227787371-541dfeb1-d8a5-40b4-ad34-9c2a03b3ab1c.png">
 
