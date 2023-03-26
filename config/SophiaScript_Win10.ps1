@@ -30,14 +30,13 @@ Write-Warning "";"Thanks for using my configs :)"
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
-if ($Functions)
-{
-	Invoke-Command -ScriptBlock {Checks}
-	foreach ($Function in $Functions){
-	Invoke-Expression -Command $Function}
-	exit
-}
+IF($Functions){
+Invoke-Command -ScriptBlock {Checks}
+foreach ($Function in $Functions){
+Invoke-Expression -Command $Function}
+exit}
 
+# Compability Checks
 Checks
 
 # Turn off the diagnostics tracking scheduled tasks
@@ -427,8 +426,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUK3MJEcKOlWIJCvy5JzXhUnXY
-# Wl+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYoBpmW3rySku+1mjGRvvLtAF
+# U+OgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -448,11 +447,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUbTK5KPVspFjLhP/yt3mvxzOxfHkwDQYJ
-# KoZIhvcNAQEBBQAEggEAusfTOYAYgiTKrdqE4mSn7aSlDoGDLEiU+Fmrd6WGB7Up
-# f5ncFW5ExVzuo+AXWHTf/veHbTDwvyjMobgnji2k/f8Iu9bQEhqwAL1S72sWZePp
-# /BTuwvSEhcLd9xB4TKuXLgPOxfUiIWF5TFRG2eCmiqFNBWVifa2iqJfDGZA0geHK
-# FErECbk8CKO0q/LpgKIHtnSC6nPnr3Gk3eai8buQBFkdexG1F5KwO3zNdxYjJyKm
-# g2BRmJhF+Oc/zrbqhzsWPnn6uCTt9Q5CQVSbHiytvh9roDe3vGTPEKop09FmikzW
-# LtYe06dxeA18mIoWMYnZuoT9KBD0upzwv3auu41zYA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUr/0p7AI3yToaCPnzU9CIy9/84ZAwDQYJ
+# KoZIhvcNAQEBBQAEggEAtw2anilXe7B2vWguuo3BlzWk0MSZHK+x2MB530Biwt8/
+# 41Z9AO657OC15GiSmtydDxsSRb/jvnQQ5YfZdedNO48C6HMEtioE8KBIu/gBhtAG
+# oIxLX5MvKe/OJzAiWrJAOLbgJqkXOp1OJ9G47WbJNhOX0CEDskgCObIkBDridRaK
+# 4Fphn7LYJoDzOpsWOG32bOpSS4xBl0fbFX1zqEAnBsPTc+l6jai/3aRcVyPKJttF
+# KXnN71Y8XQW84Cbaemz7jMkvrdQmoG7jS++/uTIIq9dNgWAPxuno+aefbHNLEXY8
+# hlT4Hti/B68iNq/BBW9jie4A2tLDKZFLrmES4Q4GVg==
 # SIG # End signature block
