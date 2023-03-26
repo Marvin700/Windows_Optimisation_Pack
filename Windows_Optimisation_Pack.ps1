@@ -190,9 +190,8 @@ Clear-Host
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-Start-Process cleanmgr.exe /sagerun:1
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'
-}
+Start-Process cleanmgr.exe /sagerun:1 -Wait
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Driver_Cleaner{
 Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination $env:temp\DDU.zip
@@ -522,8 +521,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBopHJUvtuemMFd7YoY9OAPUq
-# zyigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNVWZJ9rdEBTrD43WQ9e1QBfR
+# 0XugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -543,11 +542,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7o15B2wvCUvZidLU43bw+wIIZG8wDQYJ
-# KoZIhvcNAQEBBQAEggEAoozhMdkzctL9NyYwpDeIulcAtVpuP3+FX5FPVq3tATZ5
-# bPkXpqXBbQ6DJK9sg8byCi22tuRLUrjT3RB2vkIbY8EvG4W6wDLEvQWrCTWGNMVN
-# Oeentfn2iHGCSe308mtgXpnt6s9lBOVPS+UL4rReg1EiCt4FukpM2kFb6WhuhKzZ
-# ScM8xKMVfZBUf+y3dR8nEEvVZo/gpmZrT1pVuQdpgyMXx6b0trNn0MpCqzZhUD3q
-# sJ0g1EfOCU5uXIz+FV3k3OSZUYB3pr1sR8boe/J5tqZTGAtWuqRlJvkgtqcCPodD
-# yaloXCOdHZDBRmbUEWo0N1h2fpLmP+mv7G9StST6mQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUL6VJyiu9LEWGDBClFUqacuOvFSkwDQYJ
+# KoZIhvcNAQEBBQAEggEAml5TQ/XbDSwULtbpu18PpWFN/pWSPAKLN9VMFZrfC34L
+# 58h/YB50t+Kyk5sR76m/aZzDWGM03CrTis/SruKrVsO7TFET4tnuPJy1hI5LYv6R
+# rjfIfLb+w6yr0DDLSj7qaAo4TMUROru6uoEPMePCAO6T91KNnz2d4ErinCJ5ITAq
+# FDOgHLVODBJAIS7ZA3/28zvb7wLdfjnbY7hHjFju5Usf59GLKzvle6OC6TZ1ZD6R
+# BBenjPhx+6gDuQTZH2sPVacesvOJZ8LNQlLzMilq3hXSQZm5i9XbpAhQ3qSPLhbe
+# 5ctQ+rp6xDgcUjbs1fuw9Y1pJWSCSxIV8abi2irsnQ==
 # SIG # End signature block
