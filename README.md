@@ -1,6 +1,6 @@
 > **Note**: <BR> 
 I am currently working on a major version change. <BR>
-https://window-optimisation.de/beta <BR>
+https://windows-optimisation.de/beta <BR>
 https://github.com/Marvin700/Windows_Optimisation_Pack/tree/Beta
 <BR>
 
