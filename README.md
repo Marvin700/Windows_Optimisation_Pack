@@ -1,3 +1,9 @@
+> **Note**: <BR> 
+I am currently working on a major version change. <BR>
+https://window-optimisation.de/beta <BR>
+https://github.com/Marvin700/Windows_Optimisation_Pack/tree/Beta
+<BR>
+
 <img src="https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png"> 
 
 ## Key Features
