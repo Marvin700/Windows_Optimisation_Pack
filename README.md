@@ -1,6 +1,6 @@
 > **Warning**: <BR>
 The uploaded files in this branch and are unstable. <BR>
-If you want to use the beta, I recommend the Beta release :)
+If you want to use the beta, I recommend the Beta release :) <BR>
 https://github.com/Marvin700/Windows_Optimisation_Pack/releases/tag/Beta
   ```powershell
 irm windows-optimisation.de/beta | iex
