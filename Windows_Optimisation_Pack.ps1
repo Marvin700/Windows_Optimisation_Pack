@@ -140,6 +140,10 @@ IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
+IF(!([System.Environment]::Is64BitOperatingSystem)){
+Write-Warning " You need an 64bit System"
+Write-Warning " The script will be closed in 20 seconds"
+Start-Sleep 20;exit}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
 Write-Warning " The Script cant Apply all Tweaks !!!"
@@ -521,8 +525,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0s/e/As5/QrX/2MfHmWccwQm
-# 7RKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsAXqnqAR9IO2aZurHzFbjMqh
+# ZMigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -542,11 +546,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQVRUhCkYMJk2SWFq9HbIpeBNYyIwDQYJ
-# KoZIhvcNAQEBBQAEggEAt/aqbX6JNOgF5hp9f21GeD0QkMr2MSF3X5t9JZjOoEJ1
-# 1QUYZsLpQDXCEyq4jF2N/lZ7OhJfVAl80P/m0RPefdLvlDW9kSqLGbQSLHy/pAhu
-# 9xmZD6Qiev4X60Fqkv8nFJt0wDdGq6lWcUp5bBmaXrf48LI68cp1igZNC3l/fa5b
-# 8GZCXiApBBrtKO3OlySiNhQo7GyxlS0E1pm8mOPFhq5ew/EEnTZeN3Zqh0VIT5Cq
-# 9LOKI5zeisrFJD7wzPvP8OF37vw+DYXIXlcuPhou49evCG+kD/HXICBp/dkz748T
-# iyZcfpMvc9y06kKdbZapAP9VLhCyxNc9F/WXVLzVoQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0xpRr0nbvZtLwsAzWPxpYgCftUgwDQYJ
+# KoZIhvcNAQEBBQAEggEALjl9Y4BXF+K8SFpy6JU8b9sFWpI+N8wvmKVxIYjilqqq
+# 1pcHjpmq/fOIEetWh0NJOsVWwN+Zz8e7GjYNNCLpqheG4/apvdRPPcyvBcY0oyaj
+# B6qobgwdvMhShsCvCerOFERyGdGKfL8MTgma8Ynu2BJLN8J8A9p5DIkTDD0A/G4a
+# MkeQ1GauHTehf9QK05indNkVYAe39jbu3BQRdMt3BPW93e+11r63hXOGEr6PqaR8
+# ggPzNq02yOYsgMGfP6Us2Ld+YPpG8iPbhuZWHj5W7JHOFT0DUjWu29rgNEMcmCoW
+# NQfvkXtik40UL2nPZ2Z4eFHyvZijpp5kdwOfPM+4Bw==
 # SIG # End signature block

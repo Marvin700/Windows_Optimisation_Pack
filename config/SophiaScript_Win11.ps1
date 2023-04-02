@@ -31,6 +31,7 @@ Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 IF($Functions){
+Invoke-Command -ScriptBlock {Checks}
 foreach ($Function in $Functions){
 Invoke-Expression -Command $Function}
 exit}
@@ -390,8 +391,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQ4anvesm9XlXa1PVHDtPQNqg
-# jkigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUG0oSpGydeDGZdDj0l2VYQ4Es
+# 37+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -411,11 +412,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUH/8TiWOQJXbRLLyrkSS12WRMBkYwDQYJ
-# KoZIhvcNAQEBBQAEggEAQAsLnRVdZq05BCotp5EQRQDDL6NgEFSi5ZaxrLEiZ72G
-# ONC1pg8aZab90DTSGhBnHivk86AFTy2rBti2G++odg4NAPTAxz7CG8Wuk4QDIK6E
-# YHXiL+GFtwIrCKnF+y4hW8dF4wH0Ye3agx0TNM8F1jndPYpdad0krRsvVw7+LOs1
-# qwSLpYRnZXSTTf25BcQjiKrJv2sJODtKgmeqURhuf1+GRLVgL9t0w7KAnLc/78tO
-# EEKjlMHAg0QL3ey05w1AsdznWfbAUOg4dnKxmcpxZ2oG/sqf/NfcnnnjtskQfqlC
-# bQKd1NbDmlWNCADAFs2XywKKkGZEALkaZNy63ADqdQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTXpEH5obB6IpQrT7E8eKa4LnyMMwDQYJ
+# KoZIhvcNAQEBBQAEggEAkesVMLPvPB90pF3tE3Wi3cbcXT6PHcQhMXAbRAu0FB1o
+# g4z/rx/qpY1LTO3YAVmDISGkUrTPs9bvhfy7cd6RzOgd6vFM1oIy/Tpjair+28lp
+# iGydlJQ6xnuVkE4DCSslSGnHfoe46HqAVFd/ieBq3NnP/jwW0BFvr6WRCAq48E3d
+# hgO9NQvAbkSbOXJKv/O2QsTG454tArqg4sl2E5GWIbbtCeH2CWCVoQjIDc9u5lrq
+# hF7DTfthLiK7mqKvylhjOzSQqhDF6JPfGkObhqlZkqigqw4dpUXVMBr6FBlwgEYD
+# 67MNXZsDuCTH3+JLFDk/gpR2cK4lI6HboD8a9wySyA==
 # SIG # End signature block
