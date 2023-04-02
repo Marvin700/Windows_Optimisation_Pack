@@ -29,12 +29,14 @@ Write-Warning "";"Thanks for using my configs :)"
 "windows-optimisation.de $([char]0x00A9)Marvin700";pause "Press any key to continue"}
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
-Get-ChildItem -Path $PSScriptRoot\..\ -File -Recurse -Force | Unblock-File
 
 IF($Functions){
 foreach ($Function in $Functions){
 Invoke-Expression -Command $Function}
 exit}
+
+# The mandatory checks
+Checks
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
@@ -388,8 +390,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQSo/x8YJW9TRzDr8vR2Ozt7b
-# ld6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQ4anvesm9XlXa1PVHDtPQNqg
+# jkigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -409,11 +411,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8VaDQDQDsg3qWy9/WUcxLjc1ZmkwDQYJ
-# KoZIhvcNAQEBBQAEggEASP3IxbBnRkBDAQ6xeScRnNxmcdeV7sZcVFe3qfQUjEGp
-# hDj5HcjomH8Ll3NDwIstnUEDpRH8DWvNMayJB8SwPB0FH0+biYDPc1AXEWIzMbZN
-# H/tTHGzsk1fIO8gUkNB+LTwDKjcrm9aVe6+9TgbCK9nVy1X2aUWqTSuMHaRrIMjn
-# eJXL6DiGrj3iRYNe7TDQSCMZU2BVnEyERyhOYAuxzbgm1rBTrOcRyv9AiuqTtBhi
-# aHhfJy0vLLP9snKg7Jzp1s4P5RnPlwNzi6Y42kcSaL0XvCp9ir/kg01kz6TWN//M
-# 1G5Ruy8Ex36BOHY8UH3eeuH4yLatIz1kfJNIgq/o+A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUH/8TiWOQJXbRLLyrkSS12WRMBkYwDQYJ
+# KoZIhvcNAQEBBQAEggEAQAsLnRVdZq05BCotp5EQRQDDL6NgEFSi5ZaxrLEiZ72G
+# ONC1pg8aZab90DTSGhBnHivk86AFTy2rBti2G++odg4NAPTAxz7CG8Wuk4QDIK6E
+# YHXiL+GFtwIrCKnF+y4hW8dF4wH0Ye3agx0TNM8F1jndPYpdad0krRsvVw7+LOs1
+# qwSLpYRnZXSTTf25BcQjiKrJv2sJODtKgmeqURhuf1+GRLVgL9t0w7KAnLc/78tO
+# EEKjlMHAg0QL3ey05w1AsdznWfbAUOg4dnKxmcpxZ2oG/sqf/NfcnnnjtskQfqlC
+# bQKd1NbDmlWNCADAFs2XywKKkGZEALkaZNy63ADqdQ==
 # SIG # End signature block
