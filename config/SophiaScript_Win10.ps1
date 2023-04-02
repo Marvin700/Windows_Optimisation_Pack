@@ -36,8 +36,12 @@ foreach ($Function in $Functions){
 Invoke-Expression -Command $Function}
 exit}
 
-# Compability Checks
+# The mandatory checks.
 Checks
+
+# Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
+# Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
+DiagTrackService -Disable
 
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
@@ -49,11 +53,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps 
-
-# Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
-# Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
-DiagTrackService -Disable
+UninstallUWPApps
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -426,8 +426,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUu0k2U6GAhW5JCLa6e/8X7VF9
-# gaqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWs94Bo74VhB+7zcMVSvZqKxx
+# vq+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -447,11 +447,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUJ+G4FRohTpW5ggyRj+LbrWW0goUwDQYJ
-# KoZIhvcNAQEBBQAEggEAXuDLJrgrjJVO1+maE8rP8PjLZjhflD47LOY9GeAx1s2r
-# VpZ5uSfLBTAXFWbSntX1lECZovNAT1fDnikXzqUTVmlT8kJJyME41ZO3oekDlHOQ
-# KtdtSUmF+M0PNJDB3+YfFUBoaRrODtgtA9Jqz5C3Lz5E/HTYxt59yCJCq+F6nFXp
-# HhymD31Eyp/Uyfj5UmFWIF2FsRBRViXxi+bM+lPfUECPUiwkDw9SBxJ0F1yJaO7J
-# d7uJ59irIFtSIyHtpMA8w+HNlCdmwn35zApD6aPxQ2ZSk0SlD0Zv2NSC49U1vsOG
-# JSs29sEm3GeRmkX1tQe1ICPOXqBeU61sUkF6FRUbNA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUaNK/pyl8rkuCzgHPJrKBtxpFlxIwDQYJ
+# KoZIhvcNAQEBBQAEggEAa515FMbrjkEG/Jah5GuE3vBKDrYxrvog287oBoF5JRg1
+# Pjlo1Wr88TU0Vn2JUbE7vRPOv1aNhy0VCvp1BbGdmmYf1tmMaNHCW7ZEAu4AG16T
+# M2S7Jjji3+d6Bu0RQ5QD4yxE88nLlXHN4/s4rvrVMFMyaFCQtioeV4I5Bm41JYdQ
+# KlWQTRn26EKEjB1Ob1ikhcSQkpjXQnxy1zNEm2LjDrnS8kZ7PfTHxRJ5cTX12y8R
+# MKGUmxALoiQRPfLHSaPAfbLBefthdPiTkiddZ1w2I1TKSF2S4xrfN0ShpRSXZ79E
+# 6IApWfkH3Aixj3X6pRBokVMcxI4uk/v9uXPSF8CqsA==
 # SIG # End signature block
