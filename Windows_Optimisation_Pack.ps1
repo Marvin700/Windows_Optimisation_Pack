@@ -229,13 +229,16 @@ Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
 Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
 
 function Fan_Control{
+IF(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}){
+Start-BitsTransfer -Source "https://github.com/hirschmann/nbfc/releases/download/1.6.3/NoteBookFanControl.1.6.3.setup.exe" -Destination $env:temp\NoteBookFanControl.exe
+Start-Process $env:temp\NoteBookFanControl.exe} else {
 Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V152/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
 Expand-Archive $env:temp\FanControl.zip "$env:SystemDrive\Program Files\FanControl" -force
 Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\FanControl\FanControl.exe"
-$Shortcut.Save() }
+$Shortcut.Save() }}
    
 function Controller{
 Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip "
@@ -525,8 +528,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsAXqnqAR9IO2aZurHzFbjMqh
-# ZMigggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhws2W/FDBCQ+R6zn834waKGT
+# 8oWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -546,11 +549,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0xpRr0nbvZtLwsAzWPxpYgCftUgwDQYJ
-# KoZIhvcNAQEBBQAEggEALjl9Y4BXF+K8SFpy6JU8b9sFWpI+N8wvmKVxIYjilqqq
-# 1pcHjpmq/fOIEetWh0NJOsVWwN+Zz8e7GjYNNCLpqheG4/apvdRPPcyvBcY0oyaj
-# B6qobgwdvMhShsCvCerOFERyGdGKfL8MTgma8Ynu2BJLN8J8A9p5DIkTDD0A/G4a
-# MkeQ1GauHTehf9QK05indNkVYAe39jbu3BQRdMt3BPW93e+11r63hXOGEr6PqaR8
-# ggPzNq02yOYsgMGfP6Us2Ld+YPpG8iPbhuZWHj5W7JHOFT0DUjWu29rgNEMcmCoW
-# NQfvkXtik40UL2nPZ2Z4eFHyvZijpp5kdwOfPM+4Bw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUj+wPihVZ80wvoWybc5uKMTHCyDowDQYJ
+# KoZIhvcNAQEBBQAEggEAkoUs7EzOI7KtI/yY4p77qlbXKwYb2JXB4xmpYEMQnz8V
+# WrIHaCWR3QD3lsvng2tPZY9NXQqYUP/O3Rd2ICWTfRqTH36lxxqacxrekUqjHzKY
+# N7z9dERO+7FVKDh1dK4dPIx9+0HnYmU+hKOmUj3ujbAk0sj1eIMsZw4uWLYXnlGW
+# ScrFawuPEQaEC5dWD1lVjI2E/5HtC19FpxqwanV3kYnMErqlccOpPgGiBYbCj5lt
+# 4dlh/Af9KP87Vz53AEhG6nbZo9d/yohO7MG1yxGRkUUc9IKuq7fMVtuUaMF8Qv1a
+# h7zTy0tFm+BR6VjhH8WmDDltB+U5pVFg8pMGRrrNIQ==
 # SIG # End signature block
