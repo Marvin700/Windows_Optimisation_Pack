@@ -42,7 +42,9 @@ $services = @(
 "diagnosticshub.standardcollector.service",
 "diagsvc",
 "WerSvc",
-"wercplsupport")
+"wercplsupport",
+"SCardSvr",
+"SEMgrSvc")
 foreach ($service in $services){
 Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
@@ -172,7 +174,7 @@ Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $paths = @("$env:windir\..\MSOCache","$env:temp","$env:windir\Temp","$env:windir\Prefetch","$env:SystemRoot\SoftwareDistribution\Download","$env:ProgramData\Microsoft\Windows\RetailDemo","$env:LOCALAPPDATA\CrashDumps",
-"$env:LOCALAPPDATA\NVIDIA\DXCache","$env:LOCALAPPDATA\NVIDIA\GLCache","$env:APPDATA\..\locallow\Intel\ShaderCache","$env:windir\..AMD","$env:LOCALAPPDATA\AMD","$env:APPDATA\..\locallow\AMD")
+"$env:LOCALAPPDATA\NVIDIA\DXCache","$env:LOCALAPPDATA\NVIDIA\GLCache","$env:APPDATA\..\locallow\Intel\ShaderCache","$env:SystemDrive\AMD","$env:LOCALAPPDATA\AMD","$env:APPDATA\..\locallow\AMD")
 foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
@@ -195,7 +197,7 @@ Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Start-Process cleanmgr.exe /sagerun:1 -Wait
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can go on with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Driver_Cleaner{
 Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination $env:temp\DDU.zip
@@ -528,8 +530,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhws2W/FDBCQ+R6zn834waKGT
-# 8oWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgmaNPUTW22BXpIRpUzAo8d3i
+# WRCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -549,11 +551,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUj+wPihVZ80wvoWybc5uKMTHCyDowDQYJ
-# KoZIhvcNAQEBBQAEggEAkoUs7EzOI7KtI/yY4p77qlbXKwYb2JXB4xmpYEMQnz8V
-# WrIHaCWR3QD3lsvng2tPZY9NXQqYUP/O3Rd2ICWTfRqTH36lxxqacxrekUqjHzKY
-# N7z9dERO+7FVKDh1dK4dPIx9+0HnYmU+hKOmUj3ujbAk0sj1eIMsZw4uWLYXnlGW
-# ScrFawuPEQaEC5dWD1lVjI2E/5HtC19FpxqwanV3kYnMErqlccOpPgGiBYbCj5lt
-# 4dlh/Af9KP87Vz53AEhG6nbZo9d/yohO7MG1yxGRkUUc9IKuq7fMVtuUaMF8Qv1a
-# h7zTy0tFm+BR6VjhH8WmDDltB+U5pVFg8pMGRrrNIQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUrZ1qVt7uWxuW1UpNZjb0MaTlcKwwDQYJ
+# KoZIhvcNAQEBBQAEggEAWZ1TZsF3e2P290KBhuKaS8Me10V/3VCiHiy5TLE/eLMz
+# +AZvvUK+5/cUh0H/Yg8ayk2/70xW8ycztneoPEy8F2I5pTi2NpB4JDB3o6/IDn5M
+# m1+CEOJpiZds7f8eJQED9D/5U+j5q8U/VMvbjRG/K51zyUHcEJLrfBEc4LeGK2ck
+# WplUor/EMeZCoWKFc4hMZ3LQiIzMBs0RhnevopRMESb1kKql3D+uxkhQE44IAZ+U
+# fwgEbw7SUXPcbEhg9WT4ZQj1EvoeDfm0jbmkoAbtcw5kIG0kitP5OJ4Ql4QZtAqG
+# nTdKaMmpASzFYP2wSlGqWgXaRoB6qPgpgnRTfrf1zg==
 # SIG # End signature block
