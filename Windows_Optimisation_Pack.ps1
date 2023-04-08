@@ -134,7 +134,7 @@ if($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive $env:SystemDrive
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /V "SystemRestorePointCreationFrequency" /F | Out-Null }
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
 function Checks{
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
@@ -530,8 +530,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgmaNPUTW22BXpIRpUzAo8d3i
-# WRCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOGT6TgeT+xT83O3JRPm9xXzE
+# XVqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -551,11 +551,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUrZ1qVt7uWxuW1UpNZjb0MaTlcKwwDQYJ
-# KoZIhvcNAQEBBQAEggEAWZ1TZsF3e2P290KBhuKaS8Me10V/3VCiHiy5TLE/eLMz
-# +AZvvUK+5/cUh0H/Yg8ayk2/70xW8ycztneoPEy8F2I5pTi2NpB4JDB3o6/IDn5M
-# m1+CEOJpiZds7f8eJQED9D/5U+j5q8U/VMvbjRG/K51zyUHcEJLrfBEc4LeGK2ck
-# WplUor/EMeZCoWKFc4hMZ3LQiIzMBs0RhnevopRMESb1kKql3D+uxkhQE44IAZ+U
-# fwgEbw7SUXPcbEhg9WT4ZQj1EvoeDfm0jbmkoAbtcw5kIG0kitP5OJ4Ql4QZtAqG
-# nTdKaMmpASzFYP2wSlGqWgXaRoB6qPgpgnRTfrf1zg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUp0SeEwnRyFSRJvpciRwHBNX5dKQwDQYJ
+# KoZIhvcNAQEBBQAEggEAyGjDpL5JOw5qXjFbEgisnAk4POeFy5AqSDekwUQZ5wnr
+# sHZu1AnRfjLgQw+gHqFbA5tVufc/5u+uJIPI+c5XaJwle1TdIyjPO3paWu5mdtmJ
+# e0txXrE//hUF5Mynl18C/0yDsG+25CyeaoU8b+58YP0h5QcHeHCuCgooZiGQFTgP
+# 2GDusJngyeKohBw1XvJfa7PMRQQpt6g2vMSulvod9Gj5CJGIO9zFtdEA/K8zRi9e
+# rNtf5JDj9tEMvfyMB8BM3B9YFoXYFZu7xiBPgI98ZxfmRs+ST/2r+oqdUu19i1cI
+# qbaKqxjCmgZP7uKwvuTTdol3meZO9uZlS5AyzOHZ5w==
 # SIG # End signature block
