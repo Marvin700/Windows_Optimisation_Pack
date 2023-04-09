@@ -36,12 +36,6 @@ exit}
 # The mandatory checks
 Checks
 
-IF($hash.WindowsTweaks_Features){
-$features = @(
-"TFTP","TelnetClient","WCF-TCP-PortSharing45","Printing-XPSServices-Features",
-"WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs","Internet-Explorer-Optional-amd64")
-foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
-
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
 DiagTrackService -Disable
