@@ -477,10 +477,10 @@ function Choice {
 IF($hash.Cancel){exit}
 IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Checks}
-IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.SophiaScript){SophiaScript}
 IF($hash.ooShutup){ooShutup}
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
+IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
@@ -502,8 +502,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1IfpWq20loTB0t1venzZg/O7
-# E2agggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyJrlGQpTdk/tok+lOQGUaXCY
+# qyOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -523,11 +523,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9Jxgc3a1KMHAi2gAaVbLgdH/KBowDQYJ
-# KoZIhvcNAQEBBQAEggEAZoSB1VXfjEt52WYyDfNqgUANyJ4AgNP3d4RKePSn7ixk
-# /2ROqQrjWLkk4TCISggwN8Vo6SyJx4TZnzMAC3rUaQBPWIJ7+7DXbwxPi70K+ncb
-# 18hSj+6wH9rgPXXMNU+Io6t245IoVFMTACy4es+fcQj5KApFb2j27IDF5pCquDFa
-# gmBP0j6pTDunXoZzvMRw+htqWe0/wC9sBxLeez+8qUS6WpqaVHCEA0OpfzRCrMWt
-# sFSGKWGX0j+eTlHOKNldoLAXxzyknjXcryirt+ryedxGYS/pvBMrGzFwUFVNLorw
-# oirlZiGKftDkiBzYYRVFzCSBM0fQ1ctQYI95WYY2nw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUSRa0RGxFd3t/Jr26T6/3r8O3Gb0wDQYJ
+# KoZIhvcNAQEBBQAEggEAdOtF9S4+8ZX+iGaY6I+N676xfoCKxt993TVIYd6CUWet
+# TKLfdPwcLCuBSTxdDLHy/+ePoMYR7T/EB6pkFRL7pUKsrrGJvi2jEjeKyLrsEStP
+# l7adD1deC6YXeb1uXoEYTBuJJvG6qYjQmkFJwRUxPg/4GgFIEmTp8NeiVfPPvP43
+# QfyjBNjuRrlSy4jsyHIGmuUtUhzfBTBG+edR1NwFtxPYvickqO+x+VeiIXYxpObR
+# huMInvNiIdVnRnoF8iQrufU3IRvzvhnb2cE6EM9m1d4kk3lNLRz4jM4/J2RD5ENq
+# 36+T2GUewxai6KFX/QVTNDgOTZbpGpV63JVWXIMFYg==
 # SIG # End signature block

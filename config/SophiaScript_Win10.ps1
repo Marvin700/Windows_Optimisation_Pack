@@ -91,9 +91,6 @@ TailoredExperiences -Disable
 # Disable Bing search in the Start Menu
 BingSearch -Disable
 
-# Hide the "This PC" icon on Desktop (default value)
-ThisPC -Hide
-
 # Do not use item check boxes
 CheckBoxes -Disable
 
@@ -145,13 +142,13 @@ SearchHighlights -Hide
 # Hide People on the taskbar
 PeopleTaskbar -Hide
 
-# Hide seconds on the taskbar clock (default value)
+# Hide seconds on the taskbar clock
 SecondsInSystemClock -Hide
 
 # Hide the Windows Ink Workspace button on the taskbar
 WindowsInkWorkspace -Hide
 
-# Hide all icons in the notification area (default value)
+# Hide all icons in the notification area
 NotificationAreaIcons -Hide
 
 # Hide the Meet Now icon in the notification area
@@ -163,7 +160,7 @@ NewsInterests -Disable
 # Unpin the "Microsoft Edge", "Microsoft Store", or "Mail" shortcuts from the taskbar
 UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail
 
-# View the Control Panel icons by category (default value)
+# View the Control Panel icons by category
 ControlPanelView -Category
 
 # Set the default Windows mode to dark
@@ -194,13 +191,15 @@ ShortcutsSuffix -Disable
 # Use the Print screen button to open screen snipping
 PrtScnSnippingTool -Enable
 
-# Do not use a different input method for each app window (default value)
+# Do not use a different input method for each app window
 AppsLanguageSwitch -Disable
 
-# When I grab a windows's title bar and shake it, minimize all other windows (default value)
+# When I grab a windows's title bar and shake it, minimize all other windows
 AeroShaking -Enable
 
-#region OneDrive
+# Do not group files and folder in the Downloads folder
+FolderGroupBy -None
+
 # Uninstall OneDrive. The OneDrive user folder won't be removed
 OneDrive -Uninstall
 
@@ -214,7 +213,8 @@ StorageSenseFrequency -Month
 StorageSenseTempFiles -Enable
 
 # Disable hibernation. Do not recommend turning it off on laptops
-Hibernation -Disable
+IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}))
+{Hibernation -Disable}
 
 # Disable the Windows 260 characters path limit
 Win32LongPathLimit -Disable
@@ -240,7 +240,7 @@ WindowsManageDefaultPrinter -Disable
 # Receive updates for other Microsoft products when you update Windows
 UpdateMicrosoftProducts -Enable
 
-# Set power plan on "Balanced" (default value)
+# Set power plan on "Balanced"
 PowerPlan -Balanced
 
 # Do not allow the computer to turn off the network adapters to save power
@@ -273,7 +273,7 @@ StickyShift -Disable
 # Don't use AutoPlay for all media and devices
 Autoplay -Disable
 
-# Enable thumbnail cache removal (default value)
+# Enable thumbnail cache removal
 ThumbnailCacheRemoval -Enable
 
 # Enable "Network Discovery" and "File and Printers Sharing" for workgroup networks
@@ -290,6 +290,12 @@ RestartDeviceAfterUpdate -Enable
 
 # Uninstall the "PC Health Check" app and prevent it from installing in the future
 UninstallPCHealthCheck
+
+# List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
+PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
+
+# Prevent all internal SATA drives from showing up as removable media in the taskbar notification area
+SATADrivesRemovableMedia -Disable
 
 # Hide recently added apps in the Start menu
 RecentlyAddedApps -Hide
@@ -330,13 +336,13 @@ SoftwareDistributionTask -Register
 # Only files older than one day will be deleted. The task runs every 60 days
 TempTask -Register
 
-# Disable Microsoft Defender Exploit Guard network protection (default value)
+# Disable Microsoft Defender Exploit Guard network protection
 NetworkProtection -Disable
 
-# Disable detection for potentially unwanted applications and block them (default value)
+# Disable detection for potentially unwanted applications and block them
 PUAppsDetection -Disable
 
-# Disable sandboxing for Microsoft Defender (default value)
+# Disable sandboxing for Microsoft Defender
 DefenderSandbox -Disable
 
 # Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
@@ -366,7 +372,7 @@ AppsSmartScreen -Disable
 # Disable the Attachment Manager marking files that have been downloaded from the Internet as unsafe
 SaveZoneInformation -Disable
 
-# Disable Windows Sandbox (default value)
+# Disable Windows Sandbox
 WindowsSandbox -Disable
 
 # Show the "Extract all" item in the Windows Installer (.msi) context menu
@@ -375,7 +381,7 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Run as different user" item from the .exe filename extensions context menu (default value)
+# Hide the "Run as different user" item from the .exe filename extensions context menu
 RunAsDifferentUserContext -Hide
 
 # Hide the "Cast to Device" item from the media files and folders context menu
@@ -423,8 +429,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlheRFZWgYHebbZeMNjTOY+Sx
-# eKWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULDgh/R8Eg8+fsBlVAJD3l+1q
+# FaygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -444,11 +450,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUIhXHGMXYTwZhHblDJjSbpXFGwJ0wDQYJ
-# KoZIhvcNAQEBBQAEggEAoXAwvMFo7sXFu7fG0PD+TeYPYZqOfhu+g64MQhSyvhHE
-# 0LNN7AWzjQ5ENw/48V9tTuuWCxFGKm/zPeiHOb0GpkXKVSB2pY0mhh3RzKcL3My0
-# 8xsIfsH+H6xaAerbRQLWNths3j9AFAMiwLpcqVzTamnT1AHUWtpUiDduuRJYN9+o
-# riQQr+Z4xw9SLVTmY2qoh9F9b++Oaec1i7nyeRGmqbrjndjwsSptI4GVKIRs7M88
-# fLFBydn+tTupGWsAwfNJWuocW9rAxWbGTBxXB1NT9V4IeH8HdVx7mS7nW69aQosZ
-# cRHvMlcTHD+k+IqjAMi8b/9pOAQYgrGcO3Gv6SLjXg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUoE9Q2r/vcK9ffXA1omFdwysg0gEwDQYJ
+# KoZIhvcNAQEBBQAEggEAiV96ie9RQ0oAJRyFwyoWlxt062885OyAZ0ljLLdsXMBa
+# tFtS1VS5RgpZNNHCnCb6FK6J9Kt52HjUGOoH6Vobd049q8+kjtZ9P82+TpFHyqjF
+# KwUdknRzOwNPvk4QCYaaI9rlQ+NS8AUaLvMmT00wIc0vvwzyHo37zgl6xnFqG14l
+# bvhgaLFDeClV8hwO/RJaNHTaV0H+16WBV4F1C8wbwk9a0et47fXEqUBC+qIDNORF
+# KRDofkWoHGZ7mqB7HTTmGT1guri96GcCbTHNYw0GA4wbud/JF8L0NkzMRqPIDihL
+# YW/d67R8iPeESVFGyD20GamTYYd3WOXOjQcHDkrp+A==
 # SIG # End signature block

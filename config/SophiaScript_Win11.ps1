@@ -91,9 +91,6 @@ TailoredExperiences -Disable
 # Disable Bing search in the Start Menu
 BingSearch -Disable
 
-# Hide the "This PC" icon on Desktop (default value)
-ThisPC -Hide
-
 # Do not use item check boxes
 CheckBoxes -Disable
 
@@ -106,7 +103,7 @@ FileExtensions -Show
 # Show folder merge conflicts
 MergeConflicts -Show
 
-# Disable the File Explorer compact mode (default value)
+# Disable the File Explorer compact mode
 FileExplorerCompactMode -Disable
 
 # Do not show sync provider notification within File Explorer
@@ -145,7 +142,7 @@ TaskbarChat -Hide
 # Unpin the "Microsoft Edge", "Microsoft Store" shortcuts from the taskbar
 UnpinTaskbarShortcuts -Shortcuts Edge, Store
 
-# View the Control Panel icons by category (default value)
+# View the Control Panel icons by category
 ControlPanelView -Category
 
 # Set the default Windows mode to dark
@@ -169,11 +166,14 @@ ShortcutsSuffix -Disable
 # Use the Print screen button to open screen snipping
 PrtScnSnippingTool -Enable
 
-# Do not use a different input method for each app window (default value)
+# Do not use a different input method for each app window
 AppsLanguageSwitch -Disable
 
 # When I grab a windows's title bar and shake it, minimize all other windows
 AeroShaking -Enable
+
+# Do not group files and folder in the Downloads folder
+FolderGroupBy -None
 
 # Uninstall OneDrive. The OneDrive user folder won't be removed
 OneDrive -Uninstall
@@ -188,7 +188,8 @@ StorageSenseFrequency -Month
 StorageSenseTempFiles -Enable
 
 # Disable hibernation. Do not recommend turning it off on laptops
-Hibernation -Disable
+IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}))
+{Hibernation -Disable}
 
 # Disable the Windows 260 characters path limit
 Win32LongPathLimit -Disable
@@ -214,7 +215,7 @@ WindowsManageDefaultPrinter -Disable
 # Receive updates for other Microsoft products
 UpdateMicrosoftProducts -Enable
 
-# Set power plan on "Balanced" (default value)
+# Set power plan on "Balanced"
 PowerPlan -Balanced
 
 # Do not allow the computer to turn off the network adapters to save power
@@ -247,10 +248,10 @@ StickyShift -Disable
 # Don't use AutoPlay for all media and devices
 Autoplay -Disable
 
-# Enable thumbnail cache removal (default value)
+# Enable thumbnail cache removal
 ThumbnailCacheRemoval -Enable
 
-# Turn off automatically saving my restartable apps and restart them when I sign back in (default value)
+# Turn off automatically saving my restartable apps and restart them when I sign back in
 SaveRestartableApps -Disable
 
 # Enable "Network Discovery" and "File and Printers Sharing" for workgroup networks
@@ -264,6 +265,12 @@ RestartDeviceAfterUpdate -Enable
 
 # Set Windows Terminal as default terminal app to host the user interface for command-line applications
 DefaultTerminalApp -WindowsTerminal
+
+# List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
+PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
+
+# Prevent all internal SATA drives from showing up as removable media in the taskbar notification area
+SATADrivesRemovableMedia -Disable
 
 # Unpin all Start apps
 UnpinAllStartApps
@@ -281,7 +288,6 @@ TeamsAutostart -Disable
 XboxGameBar -Disable
 
 # Disable Xbox Game Bar tips
-# Отключить советы Xbox Game Bar
 XboxGameTips -Disable
 
 # Turn on hardware-accelerated GPU scheduling. Restart needed
@@ -299,10 +305,10 @@ SoftwareDistributionTask -Register
 # Only files older than one day will be deleted. The task runs every 60 days
 TempTask -Register
 
-# Disable Microsoft Defender Exploit Guard network protection (default value)
+# Disable Microsoft Defender Exploit Guard network protection
 NetworkProtection -Disable
 
-# Disable detection for potentially unwanted applications and block them (default value)
+# Disable detection for potentially unwanted applications and block them
 PUAppsDetection -Disable
 
 # Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
@@ -333,11 +339,10 @@ AppsSmartScreen -Disable
 # Disable the Attachment Manager marking files that have been downloaded from the Internet as unsafe
 SaveZoneInformation -Disable
 
-# Disable Windows Sandbox (default value)
+# Disable Windows Sandbox
 WindowsSandbox -Disable
 
 # Enable DNS-over-HTTPS for IPv4
-# The valid IPv4 addresses: 1.0.0.1, 1.1.1.1, 149.112.112.112, 8.8.4.4, 8.8.8.8, 9.9.9.9
 DNSoverHTTPS -Enable -PrimaryDNS 1.0.0.1 -SecondaryDNS 1.1.1.1
 
 # Show the "Extract all" item in the Windows Installer (.msi) context menu
@@ -346,7 +351,7 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Run as different user" item from the .exe filename extensions context menu (default value)
+# Hide the "Run as different user" item from the .exe filename extensions context menu
 RunAsDifferentUserContext -Hide
 
 # Hide the "Cast to Device" item from the media files and folders context menu
@@ -376,20 +381,20 @@ MultipleInvokeContext -Enable
 # Hide the "Look for an app in the Microsoft Store" item in the "Open with" dialog
 UseStoreOpenWith -Hide
 
-# Show the "Open in Windows Terminal" item in the folders context menu (default value)
+# Show the "Open in Windows Terminal" item in the folders context menu
 OpenWindowsTerminalContext -Show
 
 # Open Windows Terminal in context menu as administrator by default
 OpenWindowsTerminalAdminContext -Enable
 
-# Disable the Windows 10 context menu style (default value)
+# Disable the Windows 10 context menu style
 Windows10ContextMenu -Disable
 
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUY8pDiTrDlFpYp8s+vVLmm4Kl
-# qVugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXST0MzZYZfvxt2Qu9x87StxA
+# BIWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -409,11 +414,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUExAEuwZ2rNTb5qMp2oTpaUBRHXIwDQYJ
-# KoZIhvcNAQEBBQAEggEAKhh1UOOoiOTxiD+jETWyjWphQWADu6/5uOY4YPC347hg
-# pphPlEObn0eEXU+8OYveUXKoNyJ3o+ceSJ/OCfqlT+QWPbpPArCKMOEqcJQ/XgMC
-# /ha3wk/3HmfPbfVIByJqLfMteObO7bKF22sN8ArnmtgP+5Yn5jYyUOZoBoHL2IGz
-# +d9oc4TvN/jifuCnIDZJsmGwbUedo1+IDBxarGx1yDKnpYMAWVRZx0N8BNHmeWfP
-# Ddy0vQbDYprven0pKcTML6z7L27fob4ruKHI2XOkMzIkI08GPrxKLgPd3xjISfs5
-# /luQi4g4ShYNykFKCwiEL8qlRMtn9kEUJOE0t6yRmQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUEwC/2G27nad4LBmJFfBw6cginj8wDQYJ
+# KoZIhvcNAQEBBQAEggEAq7NUsPlj1CE7+FmL/c0cUyO5NBQIjwDoWexQrePJnEIu
+# DqTgWeKOFVf6TPgSyOjg9N66rl8VqZshs0LmmgzmaNUg2xIVy3WuRU4YQbwG28bo
+# lfHMyR2a+ikXFLHpuR/PYys3qL8ZyEvb+c16KeFjJKbYd0Ms4Hyv9XqRruUi3oa8
+# DrQe01eafKYNUy8dgA9TlOkZ3zlw7uyitCm7ZZVPLGCbyVgE63P/nEKyWCQo9J2y
+# +7oWnQDiit0IzAe9wZxiRbETvuvjpSTi5kvEs9bcYaLUVS9RaNbKumwPuXcFjh6w
+# AtmkSzixkTyeQKVaTYTM3r7wVyNrTOGLrIpi12JWUQ==
 # SIG # End signature block
