@@ -4,11 +4,11 @@
 $Branch = "Beta"
 #Version = "1.9"
 
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
@@ -25,7 +25,11 @@ function WindowsTweaks_Features{
 $features = @(
 "TFTP","TelnetClient","WCF-TCP-PortSharing45","Printing-XPSServices-Features",
 "WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs","Internet-Explorer-Optional-amd64")
-foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
+foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
+$capability = @(
+"App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","Language.OCR*",
+"Language.TextToSpeech*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
+foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
 $tasks = @(
@@ -498,8 +502,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUd1Y0hv4EG61Xi/tjK8Nqxpom
-# tXagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1IfpWq20loTB0t1venzZg/O7
+# E2agggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -519,11 +523,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUjZ+0ySopN67tDF4nMU/mAr4t/+swDQYJ
-# KoZIhvcNAQEBBQAEggEAWsh+k8YTTcunUzo1QEjbD2Qb7h2tcRQhbHgjbglfL9j3
-# ujk+H2nqgsl8rgQX2FaOsv8fCDRGnB2FenIybc6D1gIBVZnFmmj+wPQvQk96yfEz
-# kNx4c/Lg/yrxQJbJXvYFH5HuyMLtboRRn2iuM0oO9zpHepHYZ+yXvEiNdCbxDafw
-# z48awfMZCE9YBmQ6JLzVArD3X7iuh3Jgi8g8hJW7fRLk6irHdhNHQsGRVACnSqh5
-# Nr4GhX+HyqDQajPouHkYiciSlnPgHd2liw6zF8GLypdnEGc+8fZvIHN6Tr/bdcxm
-# c/+cMBYwrLaeS9CW4yzdU+FAmG4Tq5KgWAAA0EQwRg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9Jxgc3a1KMHAi2gAaVbLgdH/KBowDQYJ
+# KoZIhvcNAQEBBQAEggEAZoSB1VXfjEt52WYyDfNqgUANyJ4AgNP3d4RKePSn7ixk
+# /2ROqQrjWLkk4TCISggwN8Vo6SyJx4TZnzMAC3rUaQBPWIJ7+7DXbwxPi70K+ncb
+# 18hSj+6wH9rgPXXMNU+Io6t245IoVFMTACy4es+fcQj5KApFb2j27IDF5pCquDFa
+# gmBP0j6pTDunXoZzvMRw+htqWe0/wC9sBxLeez+8qUS6WpqaVHCEA0OpfzRCrMWt
+# sFSGKWGX0j+eTlHOKNldoLAXxzyknjXcryirt+ryedxGYS/pvBMrGzFwUFVNLorw
+# oirlZiGKftDkiBzYYRVFzCSBM0fQ1ctQYI95WYY2nw==
 # SIG # End signature block
