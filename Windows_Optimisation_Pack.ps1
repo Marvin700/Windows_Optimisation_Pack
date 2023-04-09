@@ -80,7 +80,6 @@ $drives = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
 foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
                 
 function SophiaScript{
-Clear-Host
 IF($WindowsVersion -match "Microsoft Windows 11"){
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.4/Sophia.Script.for.Windows.11.v6.4.4.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
@@ -502,8 +501,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyJrlGQpTdk/tok+lOQGUaXCY
-# qyOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnWvKbqOltX9X9ul+FGXxR15w
+# oiGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -523,11 +522,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUSRa0RGxFd3t/Jr26T6/3r8O3Gb0wDQYJ
-# KoZIhvcNAQEBBQAEggEAdOtF9S4+8ZX+iGaY6I+N676xfoCKxt993TVIYd6CUWet
-# TKLfdPwcLCuBSTxdDLHy/+ePoMYR7T/EB6pkFRL7pUKsrrGJvi2jEjeKyLrsEStP
-# l7adD1deC6YXeb1uXoEYTBuJJvG6qYjQmkFJwRUxPg/4GgFIEmTp8NeiVfPPvP43
-# QfyjBNjuRrlSy4jsyHIGmuUtUhzfBTBG+edR1NwFtxPYvickqO+x+VeiIXYxpObR
-# huMInvNiIdVnRnoF8iQrufU3IRvzvhnb2cE6EM9m1d4kk3lNLRz4jM4/J2RD5ENq
-# 36+T2GUewxai6KFX/QVTNDgOTZbpGpV63JVWXIMFYg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUU65/eTU1hyCqJOuGf8jdf0W6+CcwDQYJ
+# KoZIhvcNAQEBBQAEggEAjoe4AWH5fWyw7Nd8Ywhm2r0PEB71ND0ty5Sbc1tESkma
+# 9BQ6iVbSlnxl0GyXfVhxm3NsfjKBBmpdvT32PK26rZwd339GW/sbS61l/sGmLhlX
+# BWjuu/C3H1b7hHsmlyaMCN0lbiwE3SP1jHePKhj2bNhs2iQ9CpUUvSi70xN2GaPg
+# UyCKDVo/yfASwVqlxBh/gt+3dWecrBHtbYroMClKJEgb2Z0EzrhJnEWSB4KDcq15
+# WSLWQgeITp7XaqV2SKacmgO5oe8QKtwroy/NORM5C7VF2miWihvMokf9Zx+LAKuh
+# nnf1N9ZkwrJGQflAOIIR5ZXlGCuulzlX+WkrHB6lFg==
 # SIG # End signature block
