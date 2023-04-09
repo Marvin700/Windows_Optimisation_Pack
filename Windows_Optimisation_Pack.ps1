@@ -27,8 +27,7 @@ $features = @(
 "WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs","Internet-Explorer-Optional-amd64")
 foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
 $capability = @(
-"App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","Language.OCR*",
-"Language.TextToSpeech*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
+"App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
@@ -57,12 +56,12 @@ New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\DiagTrack" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value 00000005 -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\dmwappushservice" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "NetworkThrottlingIndex" -Type "DWORD" -Value 268435455 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Type "DWORD" -Value 00000000 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type "DWORD" -Value 00000006 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\dmwappushservice" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" -Name "Start" -Type "DWORD" -Value 4 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Value 0 -Type "DWORD" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force
@@ -164,9 +163,9 @@ Clear-Host
 gpupdate.exe /force 
 lodctr /r;lodctr /r
 Clear-Host
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
-Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
-Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
+Start-Process powershell.exe "Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart" -Wait
+Start-Process powershell.exe "Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart" -Wait
+Start-Process powershell.exe "Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart" -Wait
 Start-Process cleanmgr.exe /sagerun:1 -Wait
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
@@ -470,7 +469,7 @@ $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
-$form.ShowDialog() } Out-Null
+$form.ShowDialog()} Out-Null
 
 function Choice { 
 IF($hash.Cancel){exit}
@@ -501,8 +500,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnWvKbqOltX9X9ul+FGXxR15w
-# oiGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUiMUTXzU8h+bB0NZOLuoX9Ols
+# 7iugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -522,11 +521,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUU65/eTU1hyCqJOuGf8jdf0W6+CcwDQYJ
-# KoZIhvcNAQEBBQAEggEAjoe4AWH5fWyw7Nd8Ywhm2r0PEB71ND0ty5Sbc1tESkma
-# 9BQ6iVbSlnxl0GyXfVhxm3NsfjKBBmpdvT32PK26rZwd339GW/sbS61l/sGmLhlX
-# BWjuu/C3H1b7hHsmlyaMCN0lbiwE3SP1jHePKhj2bNhs2iQ9CpUUvSi70xN2GaPg
-# UyCKDVo/yfASwVqlxBh/gt+3dWecrBHtbYroMClKJEgb2Z0EzrhJnEWSB4KDcq15
-# WSLWQgeITp7XaqV2SKacmgO5oe8QKtwroy/NORM5C7VF2miWihvMokf9Zx+LAKuh
-# nnf1N9ZkwrJGQflAOIIR5ZXlGCuulzlX+WkrHB6lFg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUCjuN/FlziaRuX7cUoPQFiLudL6YwDQYJ
+# KoZIhvcNAQEBBQAEggEAdhonWJambn4LAiuBwjxRdnsTmSO4Vk/k7oBvrEcOeD6h
+# MY4rLtL4pDVN+qxG7JlUmomJX+ihRnuzmr+PTUxTbFxOYGNf000WIjuRrK2xXnBb
+# YAlrrr3ikLRpA/c63C9hAF68MkRV3TezHXccii4BwdIFXZtUAjHFrtyaiHg2H17e
+# g2uhEm2faOc7gj0mVMhzHg9uYw6/9fZixZwz9lI21rkZIuq9MEpySNkJZJ9DBPRI
+# SqDx0rJdhcXsG+ySHLqR/ATrSEGmR+14PZAWoZSKAWs3zC0ZvRB96Q9ttc+Rv2Au
+# SWH6uMPdlHqcNT5gzV5mA8PdRYSx2Ghkx15Hpn0jCg==
 # SIG # End signature block
