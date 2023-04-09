@@ -14,56 +14,24 @@ else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Re
 
 function WindowsTweaks_Services{
 $services = @(
-"WpcMonSvc",
-"SharedRealitySvc",
-"Fax",
-"autotimesvc",
-"wisvc",
-"SDRSVC",
-"MixedRealityOpenXRSvc",
-"WalletService",
-"SmsRouter",
-"SharedAccess",
-"MapsBroker",
-"PhoneSvc",
-"ScDeviceEnum",
-"TabletInputService",
-"icssvc",
-"edgeupdatem",
-"edgeupdate",
-"MicrosoftEdgeElevationService",
-"RetailDemo",
-"MessagingService",
-"PimIndexMaintenanceSvc",
-"OneSyncSvc",
-"UnistoreSvc",
-"DiagTrack",
-"dmwappushservice",
-"diagnosticshub.standardcollector.service",
-"diagsvc",
-"WerSvc",
-"wercplsupport",
-"SCardSvr",
-"SEMgrSvc")
-foreach ($service in $services){
+"WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc","ScDeviceEnum",
+"TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc",
+"UnistoreSvc","DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WerSvc","wercplsupport","SCardSvr","SEMgrSvc")
+foreach($service in $services){
 Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Features{
 $features = @(
-"TFTP",
-"TelnetClient",
-"WCF-TCP-PortSharing45",
-"Microsoft-Hyper-V-All",
-"Microsoft-Hyper-V-Management-Clients",
-"Microsoft-Hyper-V-Tools-All",
-"Microsoft-Hyper-V-Management-PowerShell")
+"TFTP","TelnetClient","WCF-TCP-PortSharing45","Printing-XPSServices-Features",
+"WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs","Internet-Explorer-Optional-amd64")
 foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
 
 function WindowsTweaks_Tasks{
-Get-ScheduledTask -TaskName DmClient | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskName DmClientOnScenarioDownload | Disable-ScheduledTask -ErrorAction SilentlyContinue
-Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+$tasks = @(
+"ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
+"FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload""'\Microsoft\Windows\Customer Experience Improvement Program\'")
+foreach($task in $tasks){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
 
@@ -505,10 +473,11 @@ function Choice {
 IF($hash.Cancel){exit}
 IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Checks}
+IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
+IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.SophiaScript){SophiaScript}
 IF($hash.ooShutup){ooShutup}
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
-IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
@@ -530,8 +499,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOGT6TgeT+xT83O3JRPm9xXzE
-# XVqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUY32eS1Cn7ycdoNfh6Z+B72ve
+# hoygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -551,11 +520,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUp0SeEwnRyFSRJvpciRwHBNX5dKQwDQYJ
-# KoZIhvcNAQEBBQAEggEAyGjDpL5JOw5qXjFbEgisnAk4POeFy5AqSDekwUQZ5wnr
-# sHZu1AnRfjLgQw+gHqFbA5tVufc/5u+uJIPI+c5XaJwle1TdIyjPO3paWu5mdtmJ
-# e0txXrE//hUF5Mynl18C/0yDsG+25CyeaoU8b+58YP0h5QcHeHCuCgooZiGQFTgP
-# 2GDusJngyeKohBw1XvJfa7PMRQQpt6g2vMSulvod9Gj5CJGIO9zFtdEA/K8zRi9e
-# rNtf5JDj9tEMvfyMB8BM3B9YFoXYFZu7xiBPgI98ZxfmRs+ST/2r+oqdUu19i1cI
-# qbaKqxjCmgZP7uKwvuTTdol3meZO9uZlS5AyzOHZ5w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUvT4bylVE+agmaqlwiT34bjxBWWYwDQYJ
+# KoZIhvcNAQEBBQAEggEAUwO4lVG1CeZhdEHq/9Cq2FzwpKQS4U791pVaIOqr4F3P
+# 7uZ63SxbQ2LDAHAwGOlQ9E/0cwkEW19j9oR+OXunlhVLZ458cenvWWuKALjm6psv
+# uX5IcBvuXbmlue1995xVl7BR6p6Gb25+4mZis78iail2qH9b9/NuYG3syPJRyXKU
+# ++kIHqk32Ua0lL2V+X07SvN3gEo86tx5fJz1e8rXqq8lyS1TGgUxAY5q4jLyMr56
+# oc0uj+5jttEFLBJ6hoh0LNzJLYuGEHWLd8RTAQRpZyt6bZBo6vHE+XkGVEjC4NKQ
+# HuuaUf0qyh255m8Q406hP0erzWUoaOo9tcbWrNftFA==
 # SIG # End signature block
