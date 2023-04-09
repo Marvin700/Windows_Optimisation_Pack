@@ -29,7 +29,7 @@ foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feat
 
 function WindowsTweaks_Tasks{
 $tasks = @(
-"ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
+"ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor","FODCleanupTask",
 "FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
 foreach($task in $tasks){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
@@ -66,9 +66,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
-ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches)
-{If($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder"){}Else{$Regkey = 'HKLM:' + $result.Name.Substring( 18 )
-New-ItemProperty -Path $Regkey -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
+ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches){
+If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
+New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
             
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
@@ -111,7 +111,7 @@ Write-Warning " No supported operating system! Windows 10 or Windows 11 required
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
 IF(!([System.Environment]::Is64BitOperatingSystem)){
-Write-Warning " You need an 64bit System"
+Write-Warning " You need an 64-Bit System"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
@@ -126,11 +126,11 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 Write-Warning " No admin rights available"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
-Remove-Variable * -ErrorAction SilentlyContinue; Remove-Module *; $error.Clear()
-New-Item "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
-New-Item -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Force | Out-Null
+New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Force | Out-Null
+New-Item -Path "Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "DWORD" -Value 19 | Out-Null
 New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Name ShowInActionCenter -PropertyType DWord -Value 1 -Force | Out-Null
-New-Item -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Force | Out-Null
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force | Out-Null
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force | Out-Null
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
@@ -498,8 +498,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwEyDSNhhmbJ6iQ2yYuE+gpWE
-# SvOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUd1Y0hv4EG61Xi/tjK8Nqxpom
+# tXagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -519,11 +519,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUkhgZI6aQRY6Iush7JJfSJmZL8XkwDQYJ
-# KoZIhvcNAQEBBQAEggEAi4UGz3T4VZ2iMs2pUt0anWtzLjp6t5l1TnuvtH6mgE//
-# YwY36op6CrtuzrC/rFW379BezQwUHGBR5WpCdz0PNbzngWIs6QKOZqR4sZs98lnx
-# glhKlaKB3MHtBtqH+i5NH9MNL7jRVWG6O7O4FhmH7v3x9623bFBht7+hGVFq0KNZ
-# 27a5oA8qOFRJ4dviPD1ul9mJmcimmfti6fgRuqnckms6WWZrjGB3niwTTbH0H9Xg
-# 3DqGaIPW2hUeB6YEZByI+PNOGixw+f0J+zf8unLLVRn+HB/GQvzq5aOXOH/a39Gf
-# jGhxpNWbMUQun2JFHzJ+OrkVg19H9b8gE1Jwjz76hA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUjZ+0ySopN67tDF4nMU/mAr4t/+swDQYJ
+# KoZIhvcNAQEBBQAEggEAWsh+k8YTTcunUzo1QEjbD2Qb7h2tcRQhbHgjbglfL9j3
+# ujk+H2nqgsl8rgQX2FaOsv8fCDRGnB2FenIybc6D1gIBVZnFmmj+wPQvQk96yfEz
+# kNx4c/Lg/yrxQJbJXvYFH5HuyMLtboRRn2iuM0oO9zpHepHYZ+yXvEiNdCbxDafw
+# z48awfMZCE9YBmQ6JLzVArD3X7iuh3Jgi8g8hJW7fRLk6irHdhNHQsGRVACnSqh5
+# Nr4GhX+HyqDQajPouHkYiciSlnPgHd2liw6zF8GLypdnEGc+8fZvIHN6Tr/bdcxm
+# c/+cMBYwrLaeS9CW4yzdU+FAmG4Tq5KgWAAA0EQwRg==
 # SIG # End signature block
