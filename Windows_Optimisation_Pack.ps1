@@ -163,9 +163,9 @@ Clear-Host
 gpupdate.exe /force 
 lodctr /r;lodctr /r
 Clear-Host
-Start-Process powershell.exe "Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart" -Wait
-Start-Process powershell.exe "Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart" -Wait
-Start-Process powershell.exe "Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart" -Wait
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
+Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
+Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 Start-Process cleanmgr.exe /sagerun:1 -Wait
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
@@ -500,8 +500,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUiMUTXzU8h+bB0NZOLuoX9Ols
-# 7iugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKJdxkRevsFNbVe6FuSBQCu1y
+# jiCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -521,11 +521,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUCjuN/FlziaRuX7cUoPQFiLudL6YwDQYJ
-# KoZIhvcNAQEBBQAEggEAdhonWJambn4LAiuBwjxRdnsTmSO4Vk/k7oBvrEcOeD6h
-# MY4rLtL4pDVN+qxG7JlUmomJX+ihRnuzmr+PTUxTbFxOYGNf000WIjuRrK2xXnBb
-# YAlrrr3ikLRpA/c63C9hAF68MkRV3TezHXccii4BwdIFXZtUAjHFrtyaiHg2H17e
-# g2uhEm2faOc7gj0mVMhzHg9uYw6/9fZixZwz9lI21rkZIuq9MEpySNkJZJ9DBPRI
-# SqDx0rJdhcXsG+ySHLqR/ATrSEGmR+14PZAWoZSKAWs3zC0ZvRB96Q9ttc+Rv2Au
-# SWH6uMPdlHqcNT5gzV5mA8PdRYSx2Ghkx15Hpn0jCg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQT71AoPICLsqXLoJFv/Anx6YnOgwDQYJ
+# KoZIhvcNAQEBBQAEggEAlihP+ctbMRGbQOIsRginKGxYYmFX8Y51y7F9c+uwsQ6M
+# qPdAXGRadTyimIp7aPXKvSMAKK4jhsd4+QmOWDr4hfvtq69oxdeittTmR2g81JPk
+# a9OquvEZc6mFF2CPGfLH8dmEu3SQ1PCppgWccPdrlurt+J1jMMHfrFb14+cZc1e7
+# aRj+FPBxgmd9J6FTsRP9MmvyTuPU6u1j1kya5tdtkUU52BhN/zL2QOJu5xKp+Fpx
+# AGuba3ozppr0cpUzPG7MKnMM8OGBXpysBGEaWdf1nS+M4SfNq/oMnRV9twKTsjwG
+# mVnst3zT0qUnQTkg0eEzqZj5WfsFdls00Wwv1YoNfQ==
 # SIG # End signature block
