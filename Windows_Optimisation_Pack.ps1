@@ -473,12 +473,12 @@ function Choice {
 IF($hash.Cancel){exit}
 IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Checks}
-#IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
-IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.SophiaScript){SophiaScript}
 IF($hash.ooShutup){ooShutup}
-IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
+IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
+IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
+IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
 IF($hash.Scheduled_Maintance){Scheduled_Maintance}
 IF($hash.Runtime){Runtime}   
