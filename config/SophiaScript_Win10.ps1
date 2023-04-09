@@ -29,8 +29,8 @@ Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScri
 
 IF($Functions){
 Invoke-Command -ScriptBlock {Checks}
-foreach ($Function in $Functions){
-Invoke-Expression -Command $Function}
+foreach ($Function in $Functions)
+{Invoke-Expression -Command $Function}
 exit}
 
 # The mandatory checks
@@ -429,8 +429,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULDgh/R8Eg8+fsBlVAJD3l+1q
-# FaygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUo+MYvDkjymy9fGihcN/kMxEF
+# rHagggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -450,11 +450,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUoE9Q2r/vcK9ffXA1omFdwysg0gEwDQYJ
-# KoZIhvcNAQEBBQAEggEAiV96ie9RQ0oAJRyFwyoWlxt062885OyAZ0ljLLdsXMBa
-# tFtS1VS5RgpZNNHCnCb6FK6J9Kt52HjUGOoH6Vobd049q8+kjtZ9P82+TpFHyqjF
-# KwUdknRzOwNPvk4QCYaaI9rlQ+NS8AUaLvMmT00wIc0vvwzyHo37zgl6xnFqG14l
-# bvhgaLFDeClV8hwO/RJaNHTaV0H+16WBV4F1C8wbwk9a0et47fXEqUBC+qIDNORF
-# KRDofkWoHGZ7mqB7HTTmGT1guri96GcCbTHNYw0GA4wbud/JF8L0NkzMRqPIDihL
-# YW/d67R8iPeESVFGyD20GamTYYd3WOXOjQcHDkrp+A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUG2I0fPzdE4xg3g+/BuASoW4DPkcwDQYJ
+# KoZIhvcNAQEBBQAEggEAIkJft3CN7V2MYkSAoQR3ojTJcEdvpAxCUrqSBJg/puOy
+# Rh/jPwxhHl+8WBaLqUUFx4qbIDOl/ePTJSJlBhnz0X2W3brL/JcObhgdKMeKnKIW
+# 5ipgESahYpPDv1TuRNP7ZE6LLxRaOJDMFMHvkr53cOBQocC5icO3IHTqW25+FZFK
+# dxR0r9OI1I6RPQJY09BH8R03fn/ueJ3N6/I57/bgXdj6HyPzp/u0vyr1z6EboUV9
+# mzWkvNiwNH5odcWqpyc2z3N3BuMqNWi4zo1tT43ascwA2iKaVKEJCCtX5Nnu5/4D
+# o1dspfe7mjRMILcOkUGerfadiFCipLLwHtgViDj8uQ==
 # SIG # End signature block
