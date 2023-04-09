@@ -25,12 +25,12 @@ function WindowsTweaks_Features{
 $features = @(
 "TFTP","TelnetClient","WCF-TCP-PortSharing45","Printing-XPSServices-Features",
 "WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs","Internet-Explorer-Optional-amd64")
-foreach ($feature in $features) {dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
+foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}}
 
 function WindowsTweaks_Tasks{
 $tasks = @(
 "ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
-"FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload""'\Microsoft\Windows\Customer Experience Improvement Program\'")
+"FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
 foreach($task in $tasks){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
@@ -473,12 +473,11 @@ function Choice {
 IF($hash.Cancel){exit}
 IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Checks}
-IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
+#IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.SophiaScript){SophiaScript}
 IF($hash.ooShutup){ooShutup}
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
-IF($hash.WindowsTweaks_Features){WindowsTweaks_Features} 
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
 IF($hash.Scheduled_Maintance){Scheduled_Maintance}
