@@ -95,11 +95,11 @@ function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
 Set-Location $ScriptFolder
-.\OOSU10.exe ooshutup.cfg /quiet}
+Start-Process powershell.exe ".\OOSU10.exe ooshutup.cfg /quiet"}
 
 function SystemPoint{
 Clear-Host
-" Compatibility checks and preparation are performed..."
+" Compatibility checks and preparations are performed..."
 if($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive $env:SystemDrive
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
@@ -500,8 +500,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKJdxkRevsFNbVe6FuSBQCu1y
-# jiCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU52HlyU2MEBLcUkmZzbusBNmT
+# v6GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -521,11 +521,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUQT71AoPICLsqXLoJFv/Anx6YnOgwDQYJ
-# KoZIhvcNAQEBBQAEggEAlihP+ctbMRGbQOIsRginKGxYYmFX8Y51y7F9c+uwsQ6M
-# qPdAXGRadTyimIp7aPXKvSMAKK4jhsd4+QmOWDr4hfvtq69oxdeittTmR2g81JPk
-# a9OquvEZc6mFF2CPGfLH8dmEu3SQ1PCppgWccPdrlurt+J1jMMHfrFb14+cZc1e7
-# aRj+FPBxgmd9J6FTsRP9MmvyTuPU6u1j1kya5tdtkUU52BhN/zL2QOJu5xKp+Fpx
-# AGuba3ozppr0cpUzPG7MKnMM8OGBXpysBGEaWdf1nS+M4SfNq/oMnRV9twKTsjwG
-# mVnst3zT0qUnQTkg0eEzqZj5WfsFdls00Wwv1YoNfQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUuLoHWXo0krtIg/NN4PacMcQYjM4wDQYJ
+# KoZIhvcNAQEBBQAEggEADZxWxmVGpx6rP+fzSv9ONR3kJ7igoQcZpBqpklU8fHoc
+# oA3YCQJN5RGFhbdv+DK0kpy7So1noyeWfiXW8VRtlNsCtOGi05znQK57Hlz4sDkT
+# lgmN7SeqLDmT3VsCC/JR2pYRrcha1CLOtfBWNRCyjYfPwe91j0Iza25y2DZrrLq3
+# zbU49sa7q9FEITDBbudzEo7GjLOveMu/KqDXmWFsKYerEF7UeDG4H/njBUOs+FIM
+# ota4YkJBpQVuv70zG7LsumJwYWAJ0bqRP6qLlA7TXNoAkpAqdm2CdBSsh3meh970
+# tI444P3Foa4CpHX17gzpqLlV4EAAksj1r8JafpHkEw==
 # SIG # End signature block
