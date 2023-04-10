@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 $Branch = "Beta"
-#Version = "1.9"
+$Version = "1.9"
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
@@ -13,30 +13,26 @@ IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory 
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 function WindowsTweaks_Services{
-$services = @(
-"WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc","ScDeviceEnum",
-"TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc",
+$services = @("WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc",
+"ScDeviceEnum","TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc",
 "UnistoreSvc","DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WerSvc","wercplsupport","SCardSvr","SEMgrSvc")
 foreach($service in $services){
 Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Features{
-$features = @(
-"TFTP","TelnetClient","WCF-TCP-PortSharing45","Printing-XPSServices-Features",
-"WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs")
+$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45",
+"Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure")
 foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
-$capability = @(
-"App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
+$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
-$tasks = @(
-"ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor","FODCleanupTask",
-"FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
-foreach($task in $tasks){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}
+schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
-schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE }
+$tasks = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
+"FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
+foreach($task in $tasks){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -83,13 +79,16 @@ IF($WindowsVersion -match "Microsoft Windows 11"){
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.4/Sophia.Script.for.Windows.11.v6.4.4.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" }
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
 else { IF($WindowsVersion -match "Microsoft Windows 10") {
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.4/Sophia.Script.for.Windows.10.v5.16.4.zip" -Destination $env:temp\Sophia.zip
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1" } }
-Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Sophia_Script" -Type "DWORD" -Value 0 | Out-Null
+Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1
+IF(!((Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Name "Sophia_Script") -eq 1))
+{"error"}}
 
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
@@ -128,11 +127,11 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 Write-Warning " No admin rights available"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
-New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -force | Out-Null
+New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Force | Out-Null
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "DWORD" -Value 19 | Out-Null
-New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack -Name ShowInActionCenter -PropertyType DWord -Value 1 -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Name "ShowInActionCenter" -Type "DWORD" -Value 1 -Force | Out-Null
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force | Out-Null
 New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force | Out-Null
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
@@ -293,7 +292,7 @@ $Titel_Essentials.text = "Essentials"
 $Titel_Essentials.ForeColor='#aaaaaa'
 $Titel_Tweaks = New-Object Windows.Forms.Label
 $Titel_Tweaks.Size = New-Object Drawing.Point 135,25
-$Titel_Tweaks.Location = New-Object Drawing.Point 223,215
+$Titel_Tweaks.Location = New-Object Drawing.Point 210,215
 $Titel_Tweaks.text = "Advaced Tweaks"
 $Titel_Tweaks.ForeColor='#aaaaaa'
 $Titel_Extras = New-Object Windows.Forms.Label
@@ -471,7 +470,7 @@ $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
 $form.ShowDialog()} Out-Null
 
-function Choice { 
+function Choice{ 
 IF($hash.Cancel){exit}
 IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Checks}
@@ -500,8 +499,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfD5Ukc2LSJ6qg9Oh/34msEEX
-# uEqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAVJtfb8Lxsqhu9h6jtjn4PIJ
+# OLKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -521,11 +520,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9+dgvd4wwjiwA8D67/nK0cVmZpAwDQYJ
-# KoZIhvcNAQEBBQAEggEADjUBkHte2a8hg884o6mZ2FTon5FqF0guGzecVRPM4MYi
-# BExVCJvoZB8iQWgJnHUkv9harQmTSg2Ti3dPTuCIaUznlj3TTZdL8SESpBLl357X
-# dYJkv41rbiM3qNI69xu1/fx2HFsG6x52akAOPY0R1WyVl3P7zWa2V0Mi4EEIQj7c
-# 5tSITh4OJhfhJYcXSxaXJmiXsbI7aZvoaBr5QM2TbWWL1/emk5Gx5/8BbrpKCEZt
-# TzUmU5eSW9WOtkcS3gqyVvkYeE+XNzAEkPNyQcdt4oFKBYGDNgV3EVkjWTow2WnP
-# brauiPaK9ap9hAqGwd33vZnX9B8mlyT9oedv4FessA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUr06sw4CAkBFtRqgTK31JpyRSS+EwDQYJ
+# KoZIhvcNAQEBBQAEggEAc8zmXy9CYfjDd+GQgoaNeJDhPtpaoqraAD5JmyK2H/QA
+# 7S2Z/h+fO77tfqZhONp3D7EMncY6q1jRhyam8SVLIU2nvSFvZWLsTtKfjivsYz/f
+# Etg2O2mmVKqlQUxSIw8p58wE2zq8f+zVFxv2fN/zTnuVBVnX95PjjolgJ5b7mzC+
+# 2XcRE2vosGJy/nNhpKTtw4ADoayc1KOklJtDxKXae08EnFNvPPCAKAr+wou6qoRy
+# Hkrp8Jswb8F0/Ifd88ycrCyhODhSJDCGZmF/YweLY1qesFwEmcxLcP44Uj7tYrw5
+# FcHWXMlm/8zb0kRm2LqPrXWUIE8EFbMPuZTfFxerLw==
 # SIG # End signature block
