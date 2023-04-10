@@ -24,7 +24,7 @@ Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 function WindowsTweaks_Features{
 $features = @(
 "TFTP","TelnetClient","WCF-TCP-PortSharing45","Printing-XPSServices-Features",
-"WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs","Internet-Explorer-Optional-amd64")
+"WorkFolders-Client","MSRDC-Infrastructure","NetFx4-AdvSrvs")
 foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
 $capability = @(
 "App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
@@ -294,7 +294,7 @@ $Titel_Essentials.ForeColor='#aaaaaa'
 $Titel_Tweaks = New-Object Windows.Forms.Label
 $Titel_Tweaks.Size = New-Object Drawing.Point 135,25
 $Titel_Tweaks.Location = New-Object Drawing.Point 223,215
-$Titel_Tweaks.text = "Tweaks"
+$Titel_Tweaks.text = "Advaced Tweaks"
 $Titel_Tweaks.ForeColor='#aaaaaa'
 $Titel_Extras = New-Object Windows.Forms.Label
 $Titel_Extras.Size = New-Object Drawing.Point 135,25
@@ -500,8 +500,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU52HlyU2MEBLcUkmZzbusBNmT
-# v6GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfD5Ukc2LSJ6qg9Oh/34msEEX
+# uEqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -521,11 +521,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUuLoHWXo0krtIg/NN4PacMcQYjM4wDQYJ
-# KoZIhvcNAQEBBQAEggEADZxWxmVGpx6rP+fzSv9ONR3kJ7igoQcZpBqpklU8fHoc
-# oA3YCQJN5RGFhbdv+DK0kpy7So1noyeWfiXW8VRtlNsCtOGi05znQK57Hlz4sDkT
-# lgmN7SeqLDmT3VsCC/JR2pYRrcha1CLOtfBWNRCyjYfPwe91j0Iza25y2DZrrLq3
-# zbU49sa7q9FEITDBbudzEo7GjLOveMu/KqDXmWFsKYerEF7UeDG4H/njBUOs+FIM
-# ota4YkJBpQVuv70zG7LsumJwYWAJ0bqRP6qLlA7TXNoAkpAqdm2CdBSsh3meh970
-# tI444P3Foa4CpHX17gzpqLlV4EAAksj1r8JafpHkEw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU9+dgvd4wwjiwA8D67/nK0cVmZpAwDQYJ
+# KoZIhvcNAQEBBQAEggEADjUBkHte2a8hg884o6mZ2FTon5FqF0guGzecVRPM4MYi
+# BExVCJvoZB8iQWgJnHUkv9harQmTSg2Ti3dPTuCIaUznlj3TTZdL8SESpBLl357X
+# dYJkv41rbiM3qNI69xu1/fx2HFsG6x52akAOPY0R1WyVl3P7zWa2V0Mi4EEIQj7c
+# 5tSITh4OJhfhJYcXSxaXJmiXsbI7aZvoaBr5QM2TbWWL1/emk5Gx5/8BbrpKCEZt
+# TzUmU5eSW9WOtkcS3gqyVvkYeE+XNzAEkPNyQcdt4oFKBYGDNgV3EVkjWTow2WnP
+# brauiPaK9ap9hAqGwd33vZnX9B8mlyT9oedv4FessA==
 # SIG # End signature block
