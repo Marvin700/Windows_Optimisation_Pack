@@ -106,15 +106,19 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
 function Checks{
+IF(!([System.Environment]::Is64BitOperatingSystem)){
+Write-Warning " You need an 64-Bit System"
+Write-Warning " The script will be closed in 20 seconds"
+Start-Sleep 20;exit}
 IF(!($WindowsVersion -match "Microsoft Windows 11")) {
 IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
-IF(!([System.Environment]::Is64BitOperatingSystem)){
-Write-Warning " You need an 64-Bit System"
-Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit}
+IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 22621)){
+IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 19048)){
+Write-Warning " Outdated Windows Version !!!"
+Write-Warning " Update Windows / Continue Windows Modified Verison"}}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
 Write-Warning " The Script cant Apply all Tweaks !!!"
@@ -499,8 +503,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAVJtfb8Lxsqhu9h6jtjn4PIJ
-# OLKgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUO2bAKYME0RYNpinN5R7d0xcu
+# +GOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -520,11 +524,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUr06sw4CAkBFtRqgTK31JpyRSS+EwDQYJ
-# KoZIhvcNAQEBBQAEggEAc8zmXy9CYfjDd+GQgoaNeJDhPtpaoqraAD5JmyK2H/QA
-# 7S2Z/h+fO77tfqZhONp3D7EMncY6q1jRhyam8SVLIU2nvSFvZWLsTtKfjivsYz/f
-# Etg2O2mmVKqlQUxSIw8p58wE2zq8f+zVFxv2fN/zTnuVBVnX95PjjolgJ5b7mzC+
-# 2XcRE2vosGJy/nNhpKTtw4ADoayc1KOklJtDxKXae08EnFNvPPCAKAr+wou6qoRy
-# Hkrp8Jswb8F0/Ifd88ycrCyhODhSJDCGZmF/YweLY1qesFwEmcxLcP44Uj7tYrw5
-# FcHWXMlm/8zb0kRm2LqPrXWUIE8EFbMPuZTfFxerLw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUhvyImgWDOOGBcIrTYteos2oX6oAwDQYJ
+# KoZIhvcNAQEBBQAEggEAhmoDwz6u7nSlrWCnF8P/zOyuEtxWSVB3PTms69mK4nCj
+# vh/lfE6iO2LE0EkEQU20yps7FIH1qgB1ZFnRdMP8Ty6zyEuGjywvTML1X/3IphDl
+# xM5V/LVb6dL2Zz31T96FTTMkEMy2UFF4r240P9nIN0amr796FXKhrsPZ2iVvaI+g
+# ictVaPaj/McYoOzhqDwuMr1RdhAwTm2I3I3QWJoGb1uaqUo3b06NyX1ovJEecCZ/
+# r9BU5TSndYTEfOQwTlR/neQspwsXpBlL5PnHo449PMst0+5jidtGqasNUNb1Cg7X
+# tk1kZdw+yaTP6OvxDwn668q1ZFCkT9JNoAX0pFh46A==
 # SIG # End signature block
