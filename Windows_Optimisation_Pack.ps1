@@ -115,10 +115,10 @@ IF(!($WindowsVersion -match "Microsoft Windows 10")) {
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}} 
-IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 22621)){
-IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 19048)){
-Write-Warning " Outdated Windows Version !!!"
-Write-Warning " Update Windows / Continue Windows Modified Verison"}}
+#IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 22621)){
+#IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 19048)){
+#Write-Warning " Outdated Windows Version !!!"
+#Write-Warning " Update Windows / Continue Windows Modified Verison"}}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
 Write-Warning " The Script cant Apply all Tweaks !!!"
@@ -503,8 +503,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUO2bAKYME0RYNpinN5R7d0xcu
-# +GOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/twFZVw8tNLTZbSNkxIjnjNL
+# 6vCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -524,11 +524,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUhvyImgWDOOGBcIrTYteos2oX6oAwDQYJ
-# KoZIhvcNAQEBBQAEggEAhmoDwz6u7nSlrWCnF8P/zOyuEtxWSVB3PTms69mK4nCj
-# vh/lfE6iO2LE0EkEQU20yps7FIH1qgB1ZFnRdMP8Ty6zyEuGjywvTML1X/3IphDl
-# xM5V/LVb6dL2Zz31T96FTTMkEMy2UFF4r240P9nIN0amr796FXKhrsPZ2iVvaI+g
-# ictVaPaj/McYoOzhqDwuMr1RdhAwTm2I3I3QWJoGb1uaqUo3b06NyX1ovJEecCZ/
-# r9BU5TSndYTEfOQwTlR/neQspwsXpBlL5PnHo449PMst0+5jidtGqasNUNb1Cg7X
-# tk1kZdw+yaTP6OvxDwn668q1ZFCkT9JNoAX0pFh46A==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU1jFafsAl/MPtEySYZPc67gNEWoEwDQYJ
+# KoZIhvcNAQEBBQAEggEAQKI4Y3C6/1JqA4H3NNRvJeDNQx/siHDg8UVsXbhR5uhY
+# hRRtlBi+a5ah+yCg8kMzFDaCEhB+eygrVqfUrVqqYSHzHfbc3g4Re1ZqjfL0hscy
+# dYGuv2tuen0vU/x5yiq4Qm4XkbUNzv5gf7spY/NTfvgFBup3qDKcQirW9yhOuWqs
+# /iPJ9kAQHTFqAgez2Ics3dmGvMmDlg7fa1Z5WdwQ1iYG9bBAV9coPx/Hzn3JeJZN
+# Lqn2lLIXFinIip+YHC/LuYqTyAaQUNOojPQGzBLLxGNDtFUg0EM3eszbDEHECflr
+# rjLfitEA/W5Ghei21pX9k+mMQIK8fNp8oEtJMB/2uQ==
 # SIG # End signature block
