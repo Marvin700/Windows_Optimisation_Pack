@@ -7,8 +7,8 @@ $Version = "1.9"
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-$WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
-$BuildNumber = (Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber
+$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
+$BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
 #$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
@@ -68,12 +68,12 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
 ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
 If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
-New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
+New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}}
             
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
 $drives = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
-foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
+foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
                 
 function SophiaScript{
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
@@ -114,7 +114,7 @@ Start-Sleep 20;exit}
 IF(!($WindowsVersion -match "Microsoft Windows 11" -Or $WindowsVersion -match "Microsoft Windows 10")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Start-Sleep 20;exit}
-IF(!($BuildNumber -eq "22621" -Or $WindowsVersion -eq "19048")){
+IF(!($BuildNumber -eq "22621" -Or $BuildNumber -eq "19048")){
 Write-Warning " Outdated Windows Version !!!"
 Start-Sleep 20}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
@@ -142,9 +142,9 @@ function Windows_Cleanup{
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-$paths = @("$env:windir\..\MSOCache","$env:temp","$env:windir\Temp","$env:windir\Prefetch","$env:SystemRoot\SoftwareDistribution\Download","$env:ProgramData\Microsoft\Windows\RetailDemo","$env:LOCALAPPDATA\CrashDumps",
-"$env:LOCALAPPDATA\NVIDIA\DXCache","$env:LOCALAPPDATA\NVIDIA\GLCache","$env:APPDATA\..\locallow\Intel\ShaderCache","$env:SystemDrive\AMD","$env:LOCALAPPDATA\AMD","$env:APPDATA\..\locallow\AMD")
-foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+#$paths = @("$env:windir\..\MSOCache","$env:temp","$env:windir\Temp","$env:windir\Prefetch","$env:SystemRoot\SoftwareDistribution\Download","$env:ProgramData\Microsoft\Windows\RetailDemo","$env:LOCALAPPDATA\CrashDumps",
+#"$env:LOCALAPPDATA\NVIDIA\DXCache","$env:LOCALAPPDATA\NVIDIA\GLCache","$env:APPDATA\..\locallow\Intel\ShaderCache","$env:SystemDrive\AMD","$env:LOCALAPPDATA\AMD","$env:APPDATA\..\locallow\AMD")
+#foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
@@ -152,12 +152,10 @@ Get-ChildItem -Path $EscapefromTarkov\Logs -Force -ErrorAction SilentlyContinue 
 Get-ChildItem -Path $env:temp\"Battlestate Games" -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation     
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
-Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe}
-Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 Clear-Host
 gpupdate.exe /force 
 lodctr /r;lodctr /r
@@ -498,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKRKX4xAULGQ6OJJYaDmbNRni
-# EA+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3E8bqNJk5ZUykD9noL925HdW
+# LE+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -519,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7oZHoRkjkds0BzmzfpLgmrd8HDEwDQYJ
-# KoZIhvcNAQEBBQAEggEANvVbBMnBmH3nfp2+9AX1Ak3Vg+mKgoT1nNb9DgEWHNHg
-# 463c/4zm2Qa7FiYy4vU14ibDFRrc82RGxZt+nxmbLZ7JsO2WkKsTsZGT2BY69Hu5
-# V+LIrnAjHKzw9JVI8qjIl7I/ZJ+AbHGwSvLRyBkc6NPjzHc3UhkeD+9pRTXTutLU
-# mIxRMcPsF+VXV6+r0zWAMXd48T/fV8j4yILqpqCa3+ctfLHIR9FfTHxGwT1a6/vz
-# mM8KLlSxSHtsrP48SOcqAs71NTyIiM05ev45ES6tFSMhvZaTeCbjSbjcxQ1StVUl
-# pN4+1EkG/iwTShAlxeDsK7vzQ9Gk0pmBovlGCySQxQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU6ikpREeYpGPQ9GO27VgKqn4nPUkwDQYJ
+# KoZIhvcNAQEBBQAEggEAXBW4q95KmxCfuBKRNtA+IMEyawYbFUljKE5UJxXfeFBA
+# V8MDmQuneosSA3ZEOAZ0MaDRSYTZf4B/WtNz66AfRf+hDTbhgxCFxt/5eZ7Ulon2
+# ZQoYR/z9zrcx5mqlqyGRaiJvrXSJH32ouTtPfG0mfICT33WPmQCrbT/UtE3AUbu9
+# nouwAzQtSaSIQA4aBsBs7y3cxyeHN657IqeSuViwUPJkHugIwi9nhIW1ZZZhwj9K
+# VxxyF6J+0t175z+AP5+D9EHonmDpDwsw7cYPWE+eYRcWE37Vci5ST8qZXrsnO3rp
+# lIJ86iUI7kNhWW6iP8XsrQ5hv1zUA0+xC1WwQxSDag==
 # SIG # End signature block
