@@ -9,7 +9,7 @@ $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber
-$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
+#$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
@@ -81,27 +81,27 @@ IF($WindowsVersion -match "Microsoft Windows 11"){
 $LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_11_PowerShell_5_1
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.11.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
 IF($WindowsVersion -match "Microsoft Windows 10"){
 $LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_10_PowerShell_5_1
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.10.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
-Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination $ScriptFolder\OOSU10.exe
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\OOSU10.exe"
 Set-Location $ScriptFolder
 Start-Process .\OOSU10.exe ooshutup.cfg /quiet}
 
 function SystemPoint{
 Clear-Host
 " Compatibility checks and preparations are performed..."
-if($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
+IF($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 Enable-ComputerRestore -Drive $env:SystemDrive
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
@@ -169,7 +169,7 @@ Start-Process cleanmgr.exe /sagerun:1 -Wait
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Driver_Cleaner{
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination $env:temp\DDU.zip
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination "$env:temp\DDU.zip"
 Expand-Archive $env:temp\DDU.zip $env:temp
 Set-Location $env:temp\DDU\
 & '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
@@ -186,47 +186,47 @@ $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 function Runtime{
 winget source update | Out-Null
 winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
-IF(!($InstalledSoftware -Contains "Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.34.31931")){winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements}
-IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 6.0.14 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements}
-IF(!($InstalledSoftware -Contains "Microsoft Windows Desktop Runtime - 7.0.3 (x64)")){winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements}
+winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
+winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
 function Remove_ASUS{
 Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/UninstallAI3Tool_1.00.04.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\UninstallAI3Tool.zip"
 Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
-Expand-Archive $env:temp\UninstallAI3Tool.zip $env:temp -force
-Expand-Archive $env:temp\Armoury_Crate_Uninstall_Tool.zip $env:temp -force
+Expand-Archive "$env:temp\UninstallAI3Tool.zip" "$env:temp" -force
+Expand-Archive "$env:temp\Armoury_Crate_Uninstall_Tool.zip" "$env:temp" -force
 Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
 Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
 
 function Fan_Control{
 IF(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}){
-Start-BitsTransfer -Source "https://github.com/hirschmann/nbfc/releases/download/1.6.3/NoteBookFanControl.1.6.3.setup.exe" -Destination $env:temp\NoteBookFanControl.exe
+Start-BitsTransfer -Source "https://github.com/hirschmann/nbfc/releases/download/1.6.3/NoteBookFanControl.1.6.3.setup.exe" -Destination "$env:temp\NoteBookFanControl.exe"
 Start-Process $env:temp\NoteBookFanControl.exe} else {
-Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V152/FanControl_net_7_0.zip" -Destination $env:temp\FanControl.zip 
+Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V152/FanControl_net_7_0.zip" -Destination "$env:temp\FanControl.zip"
 Expand-Archive $env:temp\FanControl.zip "$env:SystemDrive\Program Files\FanControl" -force
 Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\FanControl\FanControl.exe"
-$Shortcut.Save() }}
+$Shortcut.Save()}}
    
 function Controller{
-Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip "
+Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip"
 Expand-Archive $env:temp\DS4Windows.zip "$env:SystemDrive\Program Files\" -force
 Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\DS4Windows\DS4Windows.exe"
-$Shortcut.Save() }
+$Shortcut.Save()}
 
 function Autoruns{
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination $env:temp\Autoruns.zip
+Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe}
 
 function Process_Lasso{
-Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination $env:temp\ProcesslassoSetup64.exe
+Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination "$env:temp\ProcesslassoSetup64.exe"
 Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
@@ -245,31 +245,31 @@ $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 exit}
 
 function GUI{
-Invoke-WebRequest 'https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png' -OutFile $ScriptFolder\Picture.png
+Start-BitsTransfer -Source "https://user-images.githubusercontent.com/98750428/194409138-97880567-7645-4dc3-b031-74e2dae6da35.png" -Destination "$ScriptFolder\Picture.png"
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $hash.Cancel = $true
 $handler_BUTTON_Start_Click={   
 $hash.Cancel = $false
-if ($BOX_Checks.Checked)                    {$hash.Checks = $true}
-if ($BOX_SystemPoint.Checked)               {$hash.SystemPoint = $true} 
-if ($BOX_Windows_Cleanup.Checked)           {$hash.Windows_Cleanup = $true} 
-if ($BOX_SophiaScript.Checked)              {$hash.SophiaScript = $true}
-if ($BOX_ooShutup.Checked)                  {$hash.ooShutup = $true}    
-if ($BOX_WindowsTweaks_Registry.Checked)    {$hash.WindowsTweaks_Registry = $true}    
-if ($BOX_WindowsTweaks_Tasks.Checked)       {$hash.WindowsTweaks_Tasks = $true}   
-if ($BOX_WindowsTweaks_Features.Checked)    {$hash.WindowsTweaks_Features = $true}   
-if ($BOX_WindowsTweaks_Services.Checked)    {$hash.WindowsTweaks_Services = $true}
-if ($BOX_WindowsTweaks_Index.Checked)       {$hash.WindowsTweaks_Index = $true}
-if ($BOX_Scheduled_Maintance.Checked)       {$hash.Scheduled_Maintance = $true}  
-if ($BOX_Driver_Cleaner.Checked)      		{$hash.Driver_Cleaner = $true}  
-if ($BOX_Runtime.Checked)      		        {$hash.Runtime = $true}   
-if ($BOX_Remove_ASUS.Checked)               {$hash.Remove_ASUS = $true} 
-if ($BOX_Autoruns.Checked)                  {$hash.Autoruns = $true} 
-if ($BOX_Winrar.Checked)                    {$hash.Winrar = $true}    
-if ($BOX_Fan_Control.Checked)               {$hash.Fan_Control = $true}  
-if ($BOX_Process_Lasso.Checked)             {$hash.Process_Lasso = $true}     
-if ($BOX_Controller.Checked)                {$hash.Controller = $true} 
+IF($BOX_Checks.Checked)                 {$hash.Checks = $true}
+IF($BOX_SystemPoint.Checked)            {$hash.SystemPoint = $true} 
+IF($BOX_Windows_Cleanup.Checked)        {$hash.Windows_Cleanup = $true} 
+IF($BOX_SophiaScript.Checked)           {$hash.SophiaScript = $true}
+IF($BOX_ooShutup.Checked)               {$hash.ooShutup = $true}    
+IF($BOX_WindowsTweaks_Registry.Checked) {$hash.WindowsTweaks_Registry = $true}    
+IF($BOX_WindowsTweaks_Tasks.Checked)    {$hash.WindowsTweaks_Tasks = $true}   
+IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}   
+IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
+IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
+IF($BOX_Scheduled_Maintance.Checked)    {$hash.Scheduled_Maintance = $true}  
+IF($BOX_Driver_Cleaner.Checked)      	{$hash.Driver_Cleaner = $true}  
+IF($BOX_Runtime.Checked)      		    {$hash.Runtime = $true}   
+IF($BOX_Remove_ASUS.Checked)            {$hash.Remove_ASUS = $true} 
+if($BOX_Autoruns.Checked)               {$hash.Autoruns = $true} 
+IF($BOX_Winrar.Checked)                 {$hash.Winrar = $true}    
+IF($BOX_Fan_Control.Checked)            {$hash.Fan_Control = $true}  
+IF($BOX_Process_Lasso.Checked)          {$hash.Process_Lasso = $true}     
+IF($BOX_Controller.Checked)             {$hash.Controller = $true} 
 $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
@@ -432,9 +432,8 @@ $BUTTON_Start.Size = New-Object Drawing.Point 75,24
 $BUTTON_Start.Location = New-Object Drawing.Point 225,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
-If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
-{$BUTTON_Start.Enabled = $false
-$Titel_Compability.text = "NO ADMIN AVAILABLE" }
+IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
+$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "NO ADMIN AVAILABLE" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 320,422
@@ -468,7 +467,7 @@ $form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
-$form.ShowDialog()} Out-Null
+$form.ShowDialog() | Out-Null }
 
 function Choice{ 
 IF($hash.Cancel){exit}
@@ -499,8 +498,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8z1rrUXt9WWfXwX8U0CewV9m
-# lOugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKRKX4xAULGQ6OJJYaDmbNRni
+# EA+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -520,11 +519,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlhVDAFS9jwqYV3QZY3FfVXDyURQwDQYJ
-# KoZIhvcNAQEBBQAEggEAObwx3ymkhANgXogpn2Vp4WhEDffoK9cDeSdKe8Ec2ptu
-# LO2ns91maRA+05WtpL5FfeAqkAn2GVRXzt3u1seMgUtcsbvrIBks7El+LgcHIzAj
-# YNCzcIUYA7o4IwereL8+WWIEx95AQ2oPii8GXPxZva8W/u479WnZz6ezHDojw435
-# oEjgG2Q2vNe2yLwp+tnTNHaczl2EA+FYXB8nmHksEBJW4eEUzL1Ug0k5xNI6nIjx
-# P4qOQkB50bBRqdBQT4B5Hd74aZBXUDO74Fsc67CcPzDJVSwEqp88lbmbUWOYd1kp
-# qJzDRlcp1oZf6wdfu9JwagJEJ/XxY0B6VfdW2H9w8g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU7oZHoRkjkds0BzmzfpLgmrd8HDEwDQYJ
+# KoZIhvcNAQEBBQAEggEANvVbBMnBmH3nfp2+9AX1Ak3Vg+mKgoT1nNb9DgEWHNHg
+# 463c/4zm2Qa7FiYy4vU14ibDFRrc82RGxZt+nxmbLZ7JsO2WkKsTsZGT2BY69Hu5
+# V+LIrnAjHKzw9JVI8qjIl7I/ZJ+AbHGwSvLRyBkc6NPjzHc3UhkeD+9pRTXTutLU
+# mIxRMcPsF+VXV6+r0zWAMXd48T/fV8j4yILqpqCa3+ctfLHIR9FfTHxGwT1a6/vz
+# mM8KLlSxSHtsrP48SOcqAs71NTyIiM05ev45ES6tFSMhvZaTeCbjSbjcxQ1StVUl
+# pN4+1EkG/iwTShAlxeDsK7vzQ9Gk0pmBovlGCySQxQ==
 # SIG # End signature block
