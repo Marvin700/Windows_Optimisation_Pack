@@ -8,6 +8,7 @@ $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin
 $hash = [hashtable]::Synchronized(@{})
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -class Win32_OperatingSystem).Caption
+$BuildNumber = (Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber
 $InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
@@ -44,11 +45,11 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "SmoothMouseYCurve" ([b
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x70, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA8,
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0x00, 0x00, 0x00, 0x00, 0x00))
-New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSensitivity" -Type "DWORD" -Value 10 -Force
-New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type "DWORD" -Value 0 -Force
-New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type "DWORD" -Value 0 -Force
-New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type "DWORD" -Value 0 -Force
-New-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type "DWORD" -Value 0 -Force
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSensitivity" -Type "DWORD" -Value 10 -Force
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Type "DWORD" -Value 0 -Force
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type "DWORD" -Value 0 -Force
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type "DWORD" -Value 0 -Force
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\DiagTrack" -Name "Start" -Type "DWORD" -Value 4 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value 00000005 -Force
@@ -65,7 +66,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
-ForEach($result in Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches){
+ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
 If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
 New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}}
             
@@ -75,20 +76,21 @@ $drives = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
 foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null}}
                 
 function SophiaScript{
+$LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
 IF($WindowsVersion -match "Microsoft Windows 11"){
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.4/Sophia.Script.for.Windows.11.v6.4.4.zip" -Destination $env:temp\Sophia.zip
+$LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_11_PowerShell_5_1
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.11.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
-else { IF($WindowsVersion -match "Microsoft Windows 10") {
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/6.4.4/Sophia.Script.for.Windows.10.v5.16.4.zip" -Destination $env:temp\Sophia.zip
+IF($WindowsVersion -match "Microsoft Windows 10"){
+$LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_10_PowerShell_5_1
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.10.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}}
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Sophia_Script" -Type "DWORD" -Value 0 | Out-Null
-Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1
-IF(!((Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Name "Sophia_Script") -eq 1))
-{"error"}}
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination $ScriptFolder\Sophia_Script\
+Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
@@ -108,36 +110,30 @@ Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sy
 function Checks{
 IF(!([System.Environment]::Is64BitOperatingSystem)){
 Write-Warning " You need an 64-Bit System"
-Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
-IF(!($WindowsVersion -match "Microsoft Windows 11")) {
-IF(!($WindowsVersion -match "Microsoft Windows 10")) {
+IF(!($WindowsVersion -match "Microsoft Windows 11" -Or $WindowsVersion -match "Microsoft Windows 10")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
-Write-Warning " The script will be closed in 20 seconds"
-Start-Sleep 20;exit}} 
-IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 22621)){
-IF(!(((Get-CimInstance -ClassName CIM_OperatingSystem).BuildNumber)-eq 19048)){
+Start-Sleep 20;exit}
+IF(!($BuildNumber -eq "22621" -Or $WindowsVersion -eq "19048")){
 Write-Warning " Outdated Windows Version !!!"
-Write-Warning " Update Windows / Continue Windows Modified Verison"}}
+Start-Sleep 20}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
 Write-Warning " No internet connection available"
-Write-Warning " The Script cant Apply all Tweaks !!!"
 Start-Sleep 20}
 IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
-Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
-If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
+IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 Write-Warning " No admin rights available"
-Write-Warning " The script will be closed in 20 seconds"
 Start-Sleep 20;exit}
+New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT"
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Force | Out-Null
-New-Item -Path "Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
+New-Item -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Name "ShowInActionCenter" -Type "DWORD" -Value 1 -Force | Out-Null
-New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name DisplayName -Value Windows_Optimisation_Pack -PropertyType String -Force | Out-Null
-New-ItemProperty -Path Registry::HKEY_CLASSES_ROOT\AppUserModelId\Windows_Optimisation_Pack -Name ShowInSettings -Value 0 -PropertyType DWord -Force | Out-Null
+Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "DisplayName" -Value "Windows_Optimisation_Pack" -Type "STRING" -Force | Out-Null
+Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "ShowInSettings" -Value 0 -Type "STRING" -Force | Out-Null
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null}
@@ -503,8 +499,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU86zoCYJ4ckKa1hcCKxcuGmAJ
-# feSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8z1rrUXt9WWfXwX8U0CewV9m
+# lOugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -524,11 +520,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUrGHcE9t9e7GWZ7nP1cFyKJL7oBowDQYJ
-# KoZIhvcNAQEBBQAEggEAqn/jkttkDG5ABjumxTS3OGujYyOwvTey1cgEvM5SDqbW
-# s0xWKigChMjgZLjHKcwd0bkZ60S09IsNiBzupj1MlXNofgRhfL9V2oDGhngM237B
-# Zmy7QSHabyjJ3ac87nz70AY5XUSDn8yDJrxI02RzdeflYkQDvm0q7K0nhqqb7Pnx
-# QGOSLKM96QiiFIQh+nkAUyeifeNu4WRMOuM+7XnKipt8bvjCxJbc3s1UVSwxyHG5
-# EcaGr/ocgyOwtvQ4i6DBak25Dc/ZN9npuvlHUUPCM0UqmOKFLxi9hdYI7FA/2BW0
-# zyxoNv7rIqNR8fjpuDpzctrJWriUHr8MFMcAsodSmA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlhVDAFS9jwqYV3QZY3FfVXDyURQwDQYJ
+# KoZIhvcNAQEBBQAEggEAObwx3ymkhANgXogpn2Vp4WhEDffoK9cDeSdKe8Ec2ptu
+# LO2ns91maRA+05WtpL5FfeAqkAn2GVRXzt3u1seMgUtcsbvrIBks7El+LgcHIzAj
+# YNCzcIUYA7o4IwereL8+WWIEx95AQ2oPii8GXPxZva8W/u479WnZz6ezHDojw435
+# oEjgG2Q2vNe2yLwp+tnTNHaczl2EA+FYXB8nmHksEBJW4eEUzL1Ug0k5xNI6nIjx
+# P4qOQkB50bBRqdBQT4B5Hd74aZBXUDO74Fsc67CcPzDJVSwEqp88lbmbUWOYd1kp
+# qJzDRlcp1oZf6wdfu9JwagJEJ/XxY0B6VfdW2H9w8g==
 # SIG # End signature block
