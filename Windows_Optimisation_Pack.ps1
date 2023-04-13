@@ -14,10 +14,10 @@ IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory 
 else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 function WindowsTweaks_Services{
-$services = @("WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc",
+$service = @("WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc",
 "ScDeviceEnum","TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc",
 "UnistoreSvc","DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WerSvc","wercplsupport","SCardSvr","SEMgrSvc")
-foreach($service in $services){
+foreach($service in $service){
 Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
@@ -31,9 +31,9 @@ foreach($capability in $capability){Get-WindowsCapability -online | where-object
 function WindowsTweaks_Tasks{
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
-$tasks = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
+$task = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
 "FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
-foreach($task in $tasks){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
+foreach($task in $task){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -72,8 +72,8 @@ New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlag
             
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
-$drives = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
-foreach($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
+$drive = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
+foreach($drive in $drive) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
                 
 function SophiaScript{
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA+9pDHulpt38LRDZNNX1TgiC
-# Y4mgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoflspfgecA4MIMGLZgB7/4+i
+# glSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUf2J+kBuzi5b/7u4AYV7NkrFMsuAwDQYJ
-# KoZIhvcNAQEBBQAEggEAeAOkMKjzNdnG207uAnbX1KcyBEy9cYiiNgIc+lLbLpbP
-# RuHuYgv2F7ohzhO3XyxyaLKkYNEG8+1seriPEDExEjOSUAkvZX4JcbmdC6Fcl6EM
-# unVRY5pefDjhO76GvP+QFSo62kuQ0t3cw3JCYXeFD06APODlLSSdAUwDFUxCk05d
-# IT+sPlX1WuatMk9gs4keAd8DjIclml1sjeaUyD85PIXX5LjX1u3q/EfZzFdKKeXS
-# TCXGtXvKO1CnHFdweEEuyay1uTm/lxEAGqa3MT1C3W1xZGrytqjvOz3Vj4FQ+bhq
-# NWcU9ivqRncGBeun8g4omQ/wvuzjfuS8MyklRXNHKg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUbtrfWWHUKMPQZqnc28X+vATQA4wwDQYJ
+# KoZIhvcNAQEBBQAEggEAuEc07joTEBtWJtA25s09cbTk5NLU5MAsD+1wnKq0BEIR
+# nSF80iEmdfl5a9udtw4oQSu94XJHqV4DHVa0BnNHP7UJsAfFyGr9I/VATNsLVjtu
+# Fy18sdNVCzq4e9aZW/MsncSkiFnTYl9EM3d1ymGroUXqx6UIRNLjCURRNznr2rYy
+# OiThnw+2E9Bp0hr72nsd4w2MkXw1vZnau2Ux8YvWEvIzJeDyY6Wxvqmgh3cYsH60
+# AhLlh+i4P+PbgZ1NifWlcV5SQuglqhDHW+S/F0Fqo3VfbjVk2LjJxbRtrl0utsHB
+# 5Llg31DI3mZbX4ZSq3Ysxdg51YBFTgGIzBfOa8glZw==
 # SIG # End signature block
