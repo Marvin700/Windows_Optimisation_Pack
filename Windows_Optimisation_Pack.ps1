@@ -114,7 +114,7 @@ Start-Sleep 20;exit}
 IF(!($WindowsVersion -match "Microsoft Windows 11" -Or $WindowsVersion -match "Microsoft Windows 10")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Start-Sleep 20;exit}
-IF(!($BuildNumber -eq "22621" -Or $BuildNumber -eq "19048")){
+IF(!($BuildNumber -eq "22621" -Or $BuildNumber -eq "19045" -Or $BuildNumber -eq "19048")){
 Write-Warning " Outdated Windows Version !!!"
 Start-Sleep 20}
 IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4inZxE9SWNeshYvtKFq6ZD06
-# TISgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtVIKliHBsK6JtfVcuwM4TZRu
+# u0GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUT5K2P6fuIaALehs/DaUM2EcjCk0wDQYJ
-# KoZIhvcNAQEBBQAEggEAh91Wjkn+XBgomBJCTeLeabARWa0MDYHY7ueU+GpzFu/5
-# 4BUMyGJiYhKvOJc4VxRMvZJ70yX8jO3RYv8ra9NuTdRwiWec9kYDJ+z5UydY+Sv9
-# EpR+44DQIe+C8UUodwnKyTEMAoxqGJdTZ9bMPsTYSWB6RcURcuVqNEH3aERtq6GB
-# mxWTuRuh4+mEZVLsL5gtamfi3YqjcUNWKCuFn94u56AO0cvFa60ksTfANtcXE78F
-# pjTBPrhKfMp+cRHrbhys2/Zh5SY3kvTf+lw7ABVn/JZPL0iTo9YULo+3VrJiWmZh
-# DWunkEhuVtbchgeY/RW1aKKAU/81bwTbETRaN1+YPQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0kb9Aj3ov056KXK0IFl8MiY0r9MwDQYJ
+# KoZIhvcNAQEBBQAEggEAcCs6n72lf88qq6y18wQ6Q//YjPZFZIyWjdCHTEijoImY
+# 3JjUGiQTU2iA2fXGHxQyYDeKpj2MDbizUMNuZUXfHIB/In9a37sAfi5fwTn/B8BY
+# tYrInycYDc6tHaWJ2hcTcIFK3ljjj1Vlcf82Ylh1t3VfhFX55SMwx1OPFD7uRhMf
+# WNh8d4ab0unqrR1g4DQLIjm4kcD4e4ZpRY/v+K8Vd+PvqRSOP01aw5dh0lwTcNmU
+# IlNfIkTUCdLb2JT2EirdO6TwUxXxvky294jtXr9eGuW+E6RC6aVF9O0odgCCa4y2
+# a6xAEPvT/2UR55W3i/RNp6cnAISNXoDraMkzc2u2Ww==
 # SIG # End signature block
