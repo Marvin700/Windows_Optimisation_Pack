@@ -24,7 +24,7 @@ Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 function WindowsTweaks_Features{
 $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45",
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure")
-foreach ($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
+foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
@@ -73,7 +73,7 @@ New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlag
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
 $drives = @('$env:SystemDrive','C:', 'D:', 'E:', 'F:', 'G:')
-foreach ($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
+foreach($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
                 
 function SophiaScript{
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
@@ -142,9 +142,9 @@ function Windows_Cleanup{
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-#$paths = @("$env:windir\..\MSOCache","$env:temp","$env:windir\Temp","$env:windir\Prefetch","$env:SystemRoot\SoftwareDistribution\Download","$env:ProgramData\Microsoft\Windows\RetailDemo","$env:LOCALAPPDATA\CrashDumps",
-#"$env:LOCALAPPDATA\NVIDIA\DXCache","$env:LOCALAPPDATA\NVIDIA\GLCache","$env:APPDATA\..\locallow\Intel\ShaderCache","$env:SystemDrive\AMD","$env:LOCALAPPDATA\AMD","$env:APPDATA\..\locallow\AMD")
-#foreach ($path in $paths) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+$path = @("$env:windir\..\MSOCache\","$env:temp\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\",
+"$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","$env:windir\Temp\")
+foreach($path in $path) {Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3E8bqNJk5ZUykD9noL925HdW
-# LE+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTHDU+ERbx39gs48oQwhS+i3R
+# nRSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU6ikpREeYpGPQ9GO27VgKqn4nPUkwDQYJ
-# KoZIhvcNAQEBBQAEggEAXBW4q95KmxCfuBKRNtA+IMEyawYbFUljKE5UJxXfeFBA
-# V8MDmQuneosSA3ZEOAZ0MaDRSYTZf4B/WtNz66AfRf+hDTbhgxCFxt/5eZ7Ulon2
-# ZQoYR/z9zrcx5mqlqyGRaiJvrXSJH32ouTtPfG0mfICT33WPmQCrbT/UtE3AUbu9
-# nouwAzQtSaSIQA4aBsBs7y3cxyeHN657IqeSuViwUPJkHugIwi9nhIW1ZZZhwj9K
-# VxxyF6J+0t175z+AP5+D9EHonmDpDwsw7cYPWE+eYRcWE37Vci5ST8qZXrsnO3rp
-# lIJ86iUI7kNhWW6iP8XsrQ5hv1zUA0+xC1WwQxSDag==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI2AAtA+1WBN8onTWOnEnBZeQ0PQwDQYJ
+# KoZIhvcNAQEBBQAEggEAmYZSfAliHRu9MdphmIiJaKMSM34vn7Dg52y5crSGsA76
+# heqmZbyyvq5QWD6DBwCeniswQzOsHLssCaLV15Fc3kHXr1jam626Kv+zlnGSLXMF
+# PgyUz9vCXz0bLJz++L8stNKqhGwEQ58CTUALUdwWWqOdmjVmS3l3ME/dz1pxrjwy
+# pAIWELhev+Z3MfHTnDo/DIFEPtdwSFB50bzoMVun/TLNsSQ9ADK6UcdIO1kFx+pS
+# KcrP96njJlrVXh1889TyJzAMy6McDJpXav6J7k9PteU3PFgyWt2m/8KDYpDUiuLP
+# Nemg+BuaJ/Kc0G6o+wBsIOlnED5TMtqabNF3GkX2pA==
 # SIG # End signature block
