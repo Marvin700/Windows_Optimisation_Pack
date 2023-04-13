@@ -95,8 +95,7 @@ Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\OOSU10.exe"
-Set-Location $ScriptFolder
-Start-Process .\OOSU10.exe ooshutup.cfg /quiet}
+Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet"}
 
 function SystemPoint{
 Clear-Host
@@ -496,8 +495,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtVIKliHBsK6JtfVcuwM4TZRu
-# u0GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZHGWYN/kUwMUGaAucQjmO/2l
+# FI6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +516,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU0kb9Aj3ov056KXK0IFl8MiY0r9MwDQYJ
-# KoZIhvcNAQEBBQAEggEAcCs6n72lf88qq6y18wQ6Q//YjPZFZIyWjdCHTEijoImY
-# 3JjUGiQTU2iA2fXGHxQyYDeKpj2MDbizUMNuZUXfHIB/In9a37sAfi5fwTn/B8BY
-# tYrInycYDc6tHaWJ2hcTcIFK3ljjj1Vlcf82Ylh1t3VfhFX55SMwx1OPFD7uRhMf
-# WNh8d4ab0unqrR1g4DQLIjm4kcD4e4ZpRY/v+K8Vd+PvqRSOP01aw5dh0lwTcNmU
-# IlNfIkTUCdLb2JT2EirdO6TwUxXxvky294jtXr9eGuW+E6RC6aVF9O0odgCCa4y2
-# a6xAEPvT/2UR55W3i/RNp6cnAISNXoDraMkzc2u2Ww==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUEVmWHqdZje4KmycyV+5s5n5G1EowDQYJ
+# KoZIhvcNAQEBBQAEggEAjh+TPh3VpapM6O+LbqCYnvBwRsS5c6pD1wgIv0B1gwbI
+# EmnZ76+pOTR0uiGkPGuXWhCUwo9DvUxx2UMAIGEIUfOM91TnDoqYSwtkOIGoI07a
+# Th4FF33T/IQk6eYI/E/Oxhtvc0tEO//SJPwMtnxa/33ty9EAz1DTMS/neTzw33oq
+# RNFlgjHr344SYU1i7r5XRNfgQyZqK4VuZorxMp9MosSwJPxV6I6jwDPFmj8mIa9B
+# /Fi/mozTK1CR1MvvyQsArJlOP3mlMN0P02SJWj1hDLOlS16khGhf9IGumqDR0P2Q
+# H1A+RXnktRmH0fWeM7GmNuKPDeERSdwgzkkRqesiAw==
 # SIG # End signature block
