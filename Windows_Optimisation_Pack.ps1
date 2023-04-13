@@ -11,11 +11,11 @@ $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
 #$InstalledSoftware = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*).DisplayName
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
-else{Get-ChildItem -Path $ScriptFolder -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
+else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 function WindowsTweaks_Services{
-$service = @("WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc",
-"ScDeviceEnum","TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc",
+$service = @("WpcMonSvc", "SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc"
+"ScDeviceEnum","TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc"
 "UnistoreSvc","DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WerSvc","wercplsupport","SCardSvr","SEMgrSvc")
 foreach($service in $service){
 Stop-Service $service -ErrorAction SilentlyContinue
@@ -31,7 +31,7 @@ foreach($capability in $capability){Get-WindowsCapability -online | where-object
 function WindowsTweaks_Tasks{
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
-$task = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor",
+$task = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor"
 "FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
 foreach($task in $task){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
 
@@ -142,20 +142,20 @@ function Windows_Cleanup{
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
-$path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\,"
+$path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\"
 "$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","$env:temp\")
-foreach($path in $path){Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+foreach($path in $path){Get-ChildItem -Path $path-ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
-Get-ChildItem -Path $EscapefromTarkov\Logs -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:temp\"Battlestate Games" -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+Get-ChildItem -Path $EscapefromTarkov\Logs -ErrorAction SilentlyContinue | Remove-Item -Recurse
+Get-ChildItem -Path $env:temp\"Battlestate Games" -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
 $CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation     
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Steam\shadercache -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
 $CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse}
+IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Battlenet\shadercache -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 Clear-Host
 gpupdate.exe /force 
 lodctr /r;lodctr /r
@@ -163,7 +163,7 @@ Clear-Host
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-Start-Process cleanmgr.exe /sagerun:1 -Wait
+Start-Process cleanmgr.exe /sagerun:1
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Driver_Cleaner{
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoflspfgecA4MIMGLZgB7/4+i
-# glSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoCPqJWb+WYArl61qta+1x3wl
+# l52gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUbtrfWWHUKMPQZqnc28X+vATQA4wwDQYJ
-# KoZIhvcNAQEBBQAEggEAuEc07joTEBtWJtA25s09cbTk5NLU5MAsD+1wnKq0BEIR
-# nSF80iEmdfl5a9udtw4oQSu94XJHqV4DHVa0BnNHP7UJsAfFyGr9I/VATNsLVjtu
-# Fy18sdNVCzq4e9aZW/MsncSkiFnTYl9EM3d1ymGroUXqx6UIRNLjCURRNznr2rYy
-# OiThnw+2E9Bp0hr72nsd4w2MkXw1vZnau2Ux8YvWEvIzJeDyY6Wxvqmgh3cYsH60
-# AhLlh+i4P+PbgZ1NifWlcV5SQuglqhDHW+S/F0Fqo3VfbjVk2LjJxbRtrl0utsHB
-# 5Llg31DI3mZbX4ZSq3Ysxdg51YBFTgGIzBfOa8glZw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVHg9O5+I1rnlOwoa5cIBL00uGv0wDQYJ
+# KoZIhvcNAQEBBQAEggEACLhKCukiws7FQUBFqB0sebk015XmJeR6ao68W0ehTh6E
+# whNgMhG3ab3lm6K5F0sT35dqnF9U9hzpqYTrz/7FH9RSXLfAG8FeXdJEAc22AuBe
+# HSvM/1bSwAbObIZ/7gBbAJO9cXt21hZovRgYKBbg2f5Q1c7QC/zXnlaVfVAV+eT/
+# +9ri+tdKvlqk4BLd9RwIlN1Qssh9x3UC1iimb1vCSr34v4yFnFxJCJON1aoZSZ5Z
+# yX4GSnATr0D7yfYfaOYZ1kMkW+dcDgCoOBrJotO/jOAqTD+nhcXeg1v1wf50sZwl
+# lr3Vvz7geKDD2fLXj3lu+VH5dUYpk4vZpoOcNuw5Zg==
 # SIG # End signature block
