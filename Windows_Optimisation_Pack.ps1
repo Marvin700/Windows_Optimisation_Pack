@@ -126,7 +126,7 @@ Start-Sleep 20;exit}
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 Write-Warning " No admin rights available"
 Start-Sleep 20;exit}
-New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT"
+New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Force | Out-Null
 New-Item -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoCPqJWb+WYArl61qta+1x3wl
-# l52gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4inZxE9SWNeshYvtKFq6ZD06
+# TISgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUVHg9O5+I1rnlOwoa5cIBL00uGv0wDQYJ
-# KoZIhvcNAQEBBQAEggEACLhKCukiws7FQUBFqB0sebk015XmJeR6ao68W0ehTh6E
-# whNgMhG3ab3lm6K5F0sT35dqnF9U9hzpqYTrz/7FH9RSXLfAG8FeXdJEAc22AuBe
-# HSvM/1bSwAbObIZ/7gBbAJO9cXt21hZovRgYKBbg2f5Q1c7QC/zXnlaVfVAV+eT/
-# +9ri+tdKvlqk4BLd9RwIlN1Qssh9x3UC1iimb1vCSr34v4yFnFxJCJON1aoZSZ5Z
-# yX4GSnATr0D7yfYfaOYZ1kMkW+dcDgCoOBrJotO/jOAqTD+nhcXeg1v1wf50sZwl
-# lr3Vvz7geKDD2fLXj3lu+VH5dUYpk4vZpoOcNuw5Zg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUT5K2P6fuIaALehs/DaUM2EcjCk0wDQYJ
+# KoZIhvcNAQEBBQAEggEAh91Wjkn+XBgomBJCTeLeabARWa0MDYHY7ueU+GpzFu/5
+# 4BUMyGJiYhKvOJc4VxRMvZJ70yX8jO3RYv8ra9NuTdRwiWec9kYDJ+z5UydY+Sv9
+# EpR+44DQIe+C8UUodwnKyTEMAoxqGJdTZ9bMPsTYSWB6RcURcuVqNEH3aERtq6GB
+# mxWTuRuh4+mEZVLsL5gtamfi3YqjcUNWKCuFn94u56AO0cvFa60ksTfANtcXE78F
+# pjTBPrhKfMp+cRHrbhys2/Zh5SY3kvTf+lw7ABVn/JZPL0iTo9YULo+3VrJiWmZh
+# DWunkEhuVtbchgeY/RW1aKKAU/81bwTbETRaN1+YPQ==
 # SIG # End signature block
