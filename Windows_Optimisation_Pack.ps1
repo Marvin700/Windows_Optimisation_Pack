@@ -191,8 +191,8 @@ winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 function Remove_ASUS{
 Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/UninstallAI3Tool_1.00.04.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\UninstallAI3Tool.zip"
 Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=ROG%20STRIX%20X570-E%20GAMING" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
-Expand-Archive "$env:temp\UninstallAI3Tool.zip" "$env:temp" -force
-Expand-Archive "$env:temp\Armoury_Crate_Uninstall_Tool.zip" "$env:temp" -force
+Expand-Archive "$env:temp\UninstallAI3Tool.zip" "$env:temp" -Force
+Expand-Archive "$env:temp\Armoury_Crate_Uninstall_Tool.zip" "$env:temp" -Force
 Start-Process $env:temp\UninstallAI3Tool*\RemoveAI3Files.exe
 Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
 
@@ -201,8 +201,8 @@ IF(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -
 Start-BitsTransfer -Source "https://github.com/hirschmann/nbfc/releases/download/1.6.3/NoteBookFanControl.1.6.3.setup.exe" -Destination "$env:temp\NoteBookFanControl.exe"
 Start-Process $env:temp\NoteBookFanControl.exe} else {
 Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V152/FanControl_net_7_0.zip" -Destination "$env:temp\FanControl.zip"
-Expand-Archive $env:temp\FanControl.zip "$env:SystemDrive\Program Files\FanControl" -force
-Remove-Item -Path $env:temp\FanControl.zip  -Force -Recurse
+Expand-Archive $env:temp\FanControl.zip "$env:SystemDrive\Program Files\FanControl" -Force
+Remove-Item -Path $env:temp\FanControl.zip -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\FanControl.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\FanControl\FanControl.exe"
@@ -210,8 +210,9 @@ $Shortcut.Save()}}
    
 function Controller{
 Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip"
-Expand-Archive $env:temp\DS4Windows.zip "$env:SystemDrive\Program Files\" -force
-Remove-Item -Path $env:temp\DS4Windows.zip  -Force -Recurse
+Expand-Archive $env:temp\DS4Windows.zip "$env:SystemDrive\Program Files\" -Force
+Remove-Item -Path $env:temp\DS4Windows.zip  
+-Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\DS4Windows\DS4Windows.exe"
@@ -495,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuCU8nbeUrYn+iNq/hsed6UBa
-# WpugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/+RP7hIUW90MX+4/yYMM4THr
+# SVqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -516,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUDQ7U8hgqVciBf5uKyJjp62B1zPQwDQYJ
-# KoZIhvcNAQEBBQAEggEAqR67Fj8vKVmLljZLg1xrZWtOVgQboM2jmgxcd1Ai5JJM
-# s+XZ2Lm7j9Ck5V2AcncTh2BVu5j9lvndob/UJGiQBRztUUL1UdbMfdxTfEP1YUbS
-# qtCIbWiy8DV2zVpb9HoUpPVgsK5oXzzMUgGeTBNQvhGL1iZN3WPEroOamXWVFaL7
-# FeiMI9ZMGSG1/S7IF2lrcIShiIWOkgLpWoYMzyODGAmDrfhvV2KrI3B6VPUsyf5O
-# xwH+72vYKc/xQhPF8TW8tCVAx5hP+0wEXTZkdYEGuPP8ML1Gdyao9BNVWG3pDQ2b
-# 5wrhAbcYXe85qNt9c05w54cfJ1uCluE0hsoMQz1I/g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUZ4arQpGM2/KP2DaSmBpXcNchLE4wDQYJ
+# KoZIhvcNAQEBBQAEggEAfLSwj/9LRRwp3TYnPcQb9EAmKaSnmc74tPTLix5MFkWd
+# vxNeGHSYEzMFfi/DFFCNfm0zid3dkqUbzNDNQ1dv4+nhscEaXdFtHyBzXWTG24du
+# bnj8IGHDkuUC5xfko3aS/P7194amYCOrK7NqoCbb4ZS6Yfgc9dKUo8cPljlMxK6S
+# dnzKINV/1EX7NYOyNlPpSpmq1FI+GwN7HvfZeWKLubskL2fkolXNM/GyX/C3dGpk
+# z8ADqkkEWR2/hjy5hfnrHYM90U6rJHduRwz1cAo06TvAAzWkkgFoMHoVyjCeNVng
+# X9VIAErEk6rdr9Y0LHSlxtaHULR4U4sJBoyyxoWgvw==
 # SIG # End signature block
