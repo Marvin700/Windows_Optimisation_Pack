@@ -143,7 +143,7 @@ ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 $path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\"
 "$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","$env:temp\")
-foreach($path in $path){Get-ChildItem -Path $path-ErrorAction SilentlyContinue | Remove-Item -Recurse}
+foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse}
 IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
 $EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
 IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/+RP7hIUW90MX+4/yYMM4THr
-# SVqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9AnjpcKmlsV1YLwEbZ/d7VjP
+# 2J2gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUZ4arQpGM2/KP2DaSmBpXcNchLE4wDQYJ
-# KoZIhvcNAQEBBQAEggEAfLSwj/9LRRwp3TYnPcQb9EAmKaSnmc74tPTLix5MFkWd
-# vxNeGHSYEzMFfi/DFFCNfm0zid3dkqUbzNDNQ1dv4+nhscEaXdFtHyBzXWTG24du
-# bnj8IGHDkuUC5xfko3aS/P7194amYCOrK7NqoCbb4ZS6Yfgc9dKUo8cPljlMxK6S
-# dnzKINV/1EX7NYOyNlPpSpmq1FI+GwN7HvfZeWKLubskL2fkolXNM/GyX/C3dGpk
-# z8ADqkkEWR2/hjy5hfnrHYM90U6rJHduRwz1cAo06TvAAzWkkgFoMHoVyjCeNVng
-# X9VIAErEk6rdr9Y0LHSlxtaHULR4U4sJBoyyxoWgvw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlYuk3YFXFOBhVt/M4gYi5W828GowDQYJ
+# KoZIhvcNAQEBBQAEggEALSmjxWH3T2Gmc41nwBAAChKzgz8zGPhiGMb4yUAUL9bY
+# nuMC9caRLk9sPttuEzfHPOhBkSIcSPEDN+aJ6uOqgNkDhtClvybGnujWeFbFsfPY
+# kd6jA8qDeHZlPMEH+GMUmYkpYYLloX0uADua7qClulMPK7Ho8qJiF4H7frergdRz
+# FfQe2PcFFUxHL6fMAh/NpgqrauqQ9DSKlfb70T74ZiEDG/Jubg+1YPktL0eyOg2Y
+# LH95T1PW+AhjZend2LuMBbHg9QXGl7LqdjxrKZxtPaB1xAj40Z3KiROUvIbjFSdG
+# DIEc26HPyFHWS3WI1irC1nKPuAuwAM0Og8UEO96/yQ==
 # SIG # End signature block
