@@ -29,10 +29,12 @@ $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.Interne
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
+schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
-schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE 
+schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
 $task = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor"
-"FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload","'\Microsoft\Windows\Customer Experience Improvement Program\'")
+"FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload")
 foreach($task in $task){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Registry{
@@ -496,8 +498,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUV6HDM0kUo4walFGfMGAA2uCG
-# X8GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUe4gpCOcc2/io3mMysEnc57RA
+# etWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +519,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUR2tkxyjm8AJ+s4egQfTZD1TITskwDQYJ
-# KoZIhvcNAQEBBQAEggEALIzYrYXy1boBp9CiZpYB79Y2Z8g6/YoZDWWF4/U8umNo
-# W/Yq3co3LGv4Hfr2F526k/8YpWonl7+ehnRUgCGQxYfVsTpyZ+Q3RsLXusyQerhz
-# qPwaiTmVn3ulXVZUum+N+r5Unq68hENyEEwRoYcNEPTPlWg2Dc5RBimCDxsJ6Jts
-# xemi9iugaxOs8Qsq18vZvkGoAFtYrZfmfNNlGDYQw6w9CQVTdauBeGaYi+6nPFGi
-# W8yaQUGhwouvSikHTiNZdxuorhkocES876fJvJq5b7sGvPEel2RPTRnwzjbGrc0p
-# MoLgDAT6DAxzJIwm5XudkZdONL4p7ZKyhe3QLET4aA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUs0maLgr6cEKrpQASKR2vMAcLVr4wDQYJ
+# KoZIhvcNAQEBBQAEggEAna8P8STloDj47rB9Pr/BjH+sD4ivNRqpkLJiP7YYPc9S
+# pQQ6AaeUdV2m0HSongndu987xUps9BxqwxS0FbBavwwV72HgT/KTY2TOoder4PPp
+# PlvIWwXztvvbfN2pk0+d380mteqjFLtA7ZAUe8ioizVI/l2Zr1dwyrO9fQ/NPDht
+# BmjFjG+vugWrX8sBqWYzk/HkZCM8HITLTDTYJLG2dkxKFmAeCx861FRHXkBrenkJ
+# 8Nw5r83KhFQ6cgJAY6ifbJResuN2YKs8na0Ero0ST2wY0jgXmidBCFcr0fIeL+B7
+# CHgeTXX/Cy6lZqIW8So2oNzC0cmRVhKujw1toyvDpQ==
 # SIG # End signature block
