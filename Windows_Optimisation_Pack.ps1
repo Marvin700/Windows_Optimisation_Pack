@@ -213,8 +213,7 @@ $Shortcut.Save()}}
 function Controller{
 Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.2.8/DS4Windows_3.2.8_x64.zip" -Destination "$env:temp\DS4Windows.zip"
 Expand-Archive $env:temp\DS4Windows.zip "$env:SystemDrive\Program Files\" -Force
-Remove-Item -Path $env:temp\DS4Windows.zip  
--Force -Recurse
+Remove-Item -Path $env:temp\DS4Windows.zip -Force -Recurse
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\DS4Windows\DS4Windows.exe"
@@ -262,8 +261,8 @@ IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}
 IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
 IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
 IF($BOX_Scheduled_Maintance.Checked)    {$hash.Scheduled_Maintance = $true}  
-IF($BOX_Driver_Cleaner.Checked)      	{$hash.Driver_Cleaner = $true}  
-IF($BOX_Runtime.Checked)      		    {$hash.Runtime = $true}   
+IF($BOX_Driver_Cleaner.Checked)         {$hash.Driver_Cleaner = $true}  
+IF($BOX_Runtime.Checked)                {$hash.Runtime = $true}   
 IF($BOX_Remove_ASUS.Checked)            {$hash.Remove_ASUS = $true} 
 if($BOX_Autoruns.Checked)               {$hash.Autoruns = $true} 
 IF($BOX_Winrar.Checked)                 {$hash.Winrar = $true}    
@@ -498,8 +497,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUG151LXzVc1nczy4MGPv4ta04
-# SQ6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp7ZfMdw00/QGxpJc4NiXxsZ5
+# B+ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -519,11 +518,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUxV+ApdDCUX9C4Zdw+9H9JUfgtsYwDQYJ
-# KoZIhvcNAQEBBQAEggEAn6fh2PBoWfGnskcpRRSrDRtFeDcT677OCoPULA66GVB2
-# AgN9vigerqAWxrWClbgfak6Li8/GsCNiB5Ltx3js9l5TRDt3mtOvdZg8oexp3K49
-# ZLDRmiB5T5zYK/SxD2/8Y0vlUklM7KzBNw8sxQ/8AVUi8YYTWaWEUsRRewehZ5E+
-# ZC2Vlii8Eu7+dHTXNS4VKT8i67sm9TuwW36hzr7xg26b4LCEZm/eSSqZwVn5Fhue
-# oB7PHZvkgOvR4YmOERgnjOzvgCHWUY5k5vAMQjYtJZHWDcqb3rh8X+vFA/DgnHJZ
-# 7qzHYnjeCnqI/2EAZ3EoV0xQVIffgun2XAN4dmdnig==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTXMYI0coAoyqTCHED7VDyFdbSVgwDQYJ
+# KoZIhvcNAQEBBQAEggEAu1HpclGxOoUs6P7g7KsuP//Ea/d1ab129fyZs+h64Esk
+# nXLSaYBFeWIpMvkNU+/W7lXLukjpjYSZDV/rowWn231JxHGhXTqOnT2Dm9uFPvQ3
+# lowbfW5KYBYfG6IqUTAwagjM51aAbmWaqCFC3Is9qO7xEAwzqEohdCWuD50eUdt5
+# 5f37VF0HlVdu3QNaPvsxFF2GQQ07ZHN3XnlVmkgHaCDZFhPZDEwHGlaHCPQOF5Ly
+# xgTPK5foRyUK9WKTorUzy2ZIM4C4Wt+Z7G+Tk7xgcrekya4Li+VgHP9gL3Wu7VT2
+# zuZ3xMW0m+l6oMG8n1aBKg8qGCuUhZ6sq+zc9dGwUQ==
 # SIG # End signature block
