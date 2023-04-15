@@ -1,11 +1,5 @@
 <img src="https://user-images.githubusercontent.com/98750428/232207696-fd8d756e-90b4-4652-a0c9-3dbac3b770e2.jpg">
 
-## Download via Powershell
-Run with the **Powershell** / **Windows-Terminal** as **Admin**.
-  ```powershell
-irm windows-optimisation.de | iex
-  ```
-
 ## Key Features
 * Windows Cleanup
 * Maintance Windows
@@ -20,7 +14,11 @@ irm windows-optimisation.de | iex
 * More Windows Tweaks
 * Clean uninstall of GPU Driver
 
-
-
+## Download via Powershell
+Run with the **Powershell** / **Windows-Terminal** as **Admin**.
+  ```powershell
+irm windows-optimisation.de | iex
+  ```
+  
 > **Note**: <BR> 
 Please update to the latest version of Windows first. <BR>
