@@ -1,8 +1,3 @@
-  ```powershell
-irm windows-optimisation.de | iex
-  ```
-<BR>
-
 <img src="https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png">
 
 ## Key Features
