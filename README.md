@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/98750428/232197446-0bf3a2c1-8a80-4648-9130-e5563e6da38a.jpg">
+<img src="https://user-images.githubusercontent.com/98750428/232207696-fd8d756e-90b4-4652-a0c9-3dbac3b770e2.jpg">
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
