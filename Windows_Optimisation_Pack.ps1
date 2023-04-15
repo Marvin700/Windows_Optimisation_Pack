@@ -326,7 +326,7 @@ $BOX_SophiaScript.Checked = $true
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
-$BOX_ooShutup.Text = "OO ShutUp"
+$BOX_ooShutup.Text = "OO ShutUp10++"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/q5XrHqkfw2ThH5RPzYXRBFM
-# xnugggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHG+75q60ig9piYTWfzf+O50x
+# dLSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUvdq9cTvyK13iej2x1mTSrxYJyTAwDQYJ
-# KoZIhvcNAQEBBQAEggEAD+Y0dcckezepnny4XLUY+AQX8qjHEh/eYxeAnhoVu3V7
-# OleZEN8IBwDviuCQAPt3ntF1kOx+IHbCQRybAiY+bzLrla2Wu2yaVTm8nm2Ph8tw
-# I5bR43BbBJqjEc3L0PF6i9w3aFrrbCsEwvtHON+Cc4FLEiYBRPy9ZSfltSycFlsu
-# yWwaUu1Kn9HKLvckl815tqxLolAF8FALT+hWOrJkrhqRL7TCJd2QL1JKC2nx1vWi
-# g712hDY/UL0G5Tb2l+KXP2Oewd5pbvDme6eFIiXR78Ot9DpfG9CHCpAPZiaW6dki
-# 9fp8LYYkzmXRgewUQ6XILfhlo0oLWUyIvfO/YPCJCw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUiOUwHOn8q9XbcSapeojCDVlNI7MwDQYJ
+# KoZIhvcNAQEBBQAEggEAkZFtxwnmPsG3Ty+WZ/E3NV/g1bkwQg85vf8E2OywHgRb
+# UaoxqbY2QHFhmsbMkOg68ssR2F4IIB+qMk9/BbnSii8ZM4mL9CNjl7BrcEyjXUlt
+# vlaaCRnWcTJahMW6EVCBznSuZcamY8RtW+W964Vucbje+UAU8ONyv397H5TgOWEe
+# CLVPDXV2YSKTkFAjzOd7FFS6heYUY9Q9EOlKcGEJF7bEIlarRgaueqLUc/Yo/Qi7
+# JWa/oSWBiaI1VjU4kh9YS+EqUN4obo+yV85b8nL3eM7M/BdmcmGDdofp4emq2zCh
+# iTPiHCD3Orx05wMypP6mOlrNRBsXMLTryod2gpC8Lg==
 # SIG # End signature block
