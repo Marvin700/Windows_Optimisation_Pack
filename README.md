@@ -13,7 +13,7 @@ irm windows-optimisation.de/beta | iex
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
-irm windows-optimisation.de | iex
+irm windows-optimisation.de/beta | iex
   ```
 
 ## Key Features
