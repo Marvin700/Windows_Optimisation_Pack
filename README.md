@@ -1,10 +1,5 @@
-> **Warning**: <BR>
-Please use the Beta release :) <BR>
-https://github.com/Marvin700/Windows_Optimisation_Pack/releases/tag/Beta <BR>
-The directly uploaded files in this branch are unstable. <BR>
-
   ```powershell
-irm windows-optimisation.de/beta | iex
+irm windows-optimisation.de | iex
   ```
 <BR>
 
