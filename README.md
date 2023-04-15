@@ -34,4 +34,4 @@ irm windows-optimisation.de/beta | iex
 Please update to the latest version of Windows first. <BR>
 <BR>
 
-<img src="https://user-images.githubusercontent.com/98750428/227787371-541dfeb1-d8a5-40b4-ad34-9c2a03b3ab1c.png">
+<img src="https://user-images.githubusercontent.com/98750428/232197446-0bf3a2c1-8a80-4648-9130-e5563e6da38a.jpg">
