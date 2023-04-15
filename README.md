@@ -8,7 +8,7 @@ irm windows-optimisation.de/beta | iex
   ```
 <BR>
 
-<img src="https://user-images.githubusercontent.com/98750428/227787371-541dfeb1-d8a5-40b4-ad34-9c2a03b3ab1c.png">
+<img src="https://user-images.githubusercontent.com/98750428/232197170-af97f694-ea7c-4001-974d-d351efe44355.png">
 
 ## Key Features
 * Windows Cleanup
@@ -33,3 +33,5 @@ irm windows-optimisation.de/beta | iex
 > **Note**: <BR> 
 Please update to the latest version of Windows first. <BR>
 <BR>
+
+<img src="https://user-images.githubusercontent.com/98750428/227787371-541dfeb1-d8a5-40b4-ad34-9c2a03b3ab1c.png">
