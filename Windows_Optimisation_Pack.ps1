@@ -243,7 +243,7 @@ $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 exit}
 
 function GUI{
-Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232197486-dd061e90-b8d5-4f49-8c9c-40c6fac6a74f.png" -OutFile "$ScriptFolder\Picture.png"
+Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png" -OutFile "$ScriptFolder\Picture.png"
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $hash.Cancel = $true
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqZLsv5p1esse/MAuGFV0xohz
-# 84agggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZU395xMLcfpSKR+CtxZtB2gI
+# PeqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUB9pfEawptP3b7zHfgunhznuoAe4wDQYJ
-# KoZIhvcNAQEBBQAEggEADfOtMREHqFRFykwP8s45Vu+P6Hc2Cjz3RQ3FYGTfyJcU
-# bowX0RVA7oNqrnMkK6SO9ge2eYetuKOlfgz3alpYZefVlhLRTw0Qhm9JgGEzzmE3
-# CMZpnfws+gS0otR+P2CqXnaLuCqX9rS8Bl/soCyaUYGNM1jc/v7i1udeS4uJihVT
-# hkr1vmRkhYMpXsWYjFe3VlZ/syU8qWghxHRnllD5/d+fp+WjqOuiCyldFMhKg4W/
-# D1NBG1Z0FBgbuLLfYw47Gxo7b5n33ueKqozR78aF7UFeWCGGSknPrw56S46dWxYw
-# rsAER8rbcod5fw6y7tMzNgnucj6GpcOZKa7rSBEgNg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI2hurtRUkshc5Apk1c5xCMqN5e4wDQYJ
+# KoZIhvcNAQEBBQAEggEAfZLWBMAoiCdL9iZb1evFajrEhjY57PD1h8ghHt12/yv/
+# raHxqpFXqn7aos4lIpTy/i80/B84pV6pi3KYUn9pyl8Mhtkmk6nk9st3oTxuzKgI
+# bkA0KZCfsC0kxG7GyAlN69s7IxVGITPjnqZtYK10lI/JTkESUOTuZv6eEuZQpsPC
+# v+a5/1nYb9ITkx2o5ibO73YPpXB2aHBactSBDafSbtWsfieAA2NrOGsaAwwNWN5b
+# cyiKMvFF3pnT48LVNljH/hdg4R8gW3o664ZronJeCkpb71gglWv19HHEVy1JZ8GC
+# n2NGIYL+L383GSZAF53oF9Xsg5Xn8Z0MgH5yd8o/Hw==
 # SIG # End signature block
