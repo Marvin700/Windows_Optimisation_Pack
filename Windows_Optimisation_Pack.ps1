@@ -427,14 +427,14 @@ $Titel_Compability.ForeColor='#aaaaaa'
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
-$BUTTON_Start.Location = New-Object Drawing.Point 225,422
+$BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
 $BUTTON_Start.Enabled = $false;$Titel_Compability.text = "NO ADMIN AVAILABLE" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
-$BUTTON_Cancel.Location = New-Object Drawing.Point 320,422
+$BUTTON_Cancel.Location = New-Object Drawing.Point 360,422
 $BUTTON_Cancel.ForeColor='#aaaaaa'
 $BUTTON_Cancel.Text = "Cancel"
 $BUTTON_Cancel.add_click{$hash.Cancel = $true; $Form.Close()}
@@ -496,8 +496,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZU395xMLcfpSKR+CtxZtB2gI
-# PeqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUV6HDM0kUo4walFGfMGAA2uCG
+# X8GgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -517,11 +517,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI2hurtRUkshc5Apk1c5xCMqN5e4wDQYJ
-# KoZIhvcNAQEBBQAEggEAfZLWBMAoiCdL9iZb1evFajrEhjY57PD1h8ghHt12/yv/
-# raHxqpFXqn7aos4lIpTy/i80/B84pV6pi3KYUn9pyl8Mhtkmk6nk9st3oTxuzKgI
-# bkA0KZCfsC0kxG7GyAlN69s7IxVGITPjnqZtYK10lI/JTkESUOTuZv6eEuZQpsPC
-# v+a5/1nYb9ITkx2o5ibO73YPpXB2aHBactSBDafSbtWsfieAA2NrOGsaAwwNWN5b
-# cyiKMvFF3pnT48LVNljH/hdg4R8gW3o664ZronJeCkpb71gglWv19HHEVy1JZ8GC
-# n2NGIYL+L383GSZAF53oF9Xsg5Xn8Z0MgH5yd8o/Hw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUR2tkxyjm8AJ+s4egQfTZD1TITskwDQYJ
+# KoZIhvcNAQEBBQAEggEALIzYrYXy1boBp9CiZpYB79Y2Z8g6/YoZDWWF4/U8umNo
+# W/Yq3co3LGv4Hfr2F526k/8YpWonl7+ehnRUgCGQxYfVsTpyZ+Q3RsLXusyQerhz
+# qPwaiTmVn3ulXVZUum+N+r5Unq68hENyEEwRoYcNEPTPlWg2Dc5RBimCDxsJ6Jts
+# xemi9iugaxOs8Qsq18vZvkGoAFtYrZfmfNNlGDYQw6w9CQVTdauBeGaYi+6nPFGi
+# W8yaQUGhwouvSikHTiNZdxuorhkocES876fJvJq5b7sGvPEel2RPTRnwzjbGrc0p
+# MoLgDAT6DAxzJIwm5XudkZdONL4p7ZKyhe3QLET4aA==
 # SIG # End signature block
