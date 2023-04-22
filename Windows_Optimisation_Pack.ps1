@@ -25,7 +25,7 @@ function WindowsTweaks_Features{
 $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45",
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure")
 foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
-$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
+$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
@@ -497,8 +497,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQ+OvOPucekMZwi5saltGGOUf
-# ueSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/gy/dMCmCi1nwRuiCI+f3avw
+# jLygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -518,11 +518,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUsYdfO673DdZ4Jf1XkUMaDqt7br4wDQYJ
-# KoZIhvcNAQEBBQAEggEAhn49Eu8/tG/xmjtbu3zahyd9Kiue3VQtYjlguKQbjfl9
-# by6KLKvZdrvX8mO2mefZqgH8QGBEh0+IawBI7QBDQG01L9D4dsaqXHzd/6wfu78g
-# Oju7cGvyl76+q1olepOnqixwJZKqnYqknfrs7knm2idcjhTm6fI0mLL+XDyP26Ys
-# q3DhcpDYm3ommLNNVfXU2v4YLH2E3GAZr6mdYivMPwYrWMtFhqCLSozWZDnMpQ42
-# Ep1yyQuUaULk1Egm+KC/+FmwgSJ2q90FF1Uyx/d+6D+18I7/pN8Mw3rMr+uappzx
-# de9BBl5LKMjjZ59/F6B9MFF1zSA8IMTY96TVYS9z0w==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWLwUht1QM9FGVVBZKKe3Fks4nxswDQYJ
+# KoZIhvcNAQEBBQAEggEAe3XG0xk6scXspw5kgA2/91GESHmjdbU9Z2DqzgwBcSh0
+# Ws/KJ7r6qU856xbFqoNJEjHmmZ8Oz7oB35h2wzQ/cLvt/vCX7SvXc38zaC9GoHZ+
+# lDLKTlJp0JTv5e4Vm5cE8I03Y8Zo6ZV4UVmweJ9ruUf3w5OTww8lknYbx4Yp3eHM
+# QXHoVWj8j/4IbPWdQOGT/mYXocCrhjtKjA2Oxri7nNZuQ+LF1aUOvO+iC5wG7vJX
+# 7upOU/hlRheGq85hOQS/SQk/Gk5/TRGHNp79/f7GOcRr+d74RHuz6Nld2mz/hQzy
+# b3ufgD6+s8v5NoB4bZ03GgVIehwnc96XujT0xsue8g==
 # SIG # End signature block
