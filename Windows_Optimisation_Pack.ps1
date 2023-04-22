@@ -22,10 +22,10 @@ Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Features{
-$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45",
-"Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure")
+$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root"
+"Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
-$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
+$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
@@ -125,7 +125,7 @@ IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based S
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " Powershell is not started as Administrator"
+Write-Warning " No admin rights available"
 Start-Sleep 20;exit}
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
@@ -432,7 +432,7 @@ $BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "Powershell is not started as Administrator" }
+$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "NO ADMIN AVAILABLE" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 360,422
@@ -497,8 +497,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/gy/dMCmCi1nwRuiCI+f3avw
-# jLygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwDcXutYN4vbv8j70zFh9AXha
+# b+igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -518,11 +518,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUWLwUht1QM9FGVVBZKKe3Fks4nxswDQYJ
-# KoZIhvcNAQEBBQAEggEAe3XG0xk6scXspw5kgA2/91GESHmjdbU9Z2DqzgwBcSh0
-# Ws/KJ7r6qU856xbFqoNJEjHmmZ8Oz7oB35h2wzQ/cLvt/vCX7SvXc38zaC9GoHZ+
-# lDLKTlJp0JTv5e4Vm5cE8I03Y8Zo6ZV4UVmweJ9ruUf3w5OTww8lknYbx4Yp3eHM
-# QXHoVWj8j/4IbPWdQOGT/mYXocCrhjtKjA2Oxri7nNZuQ+LF1aUOvO+iC5wG7vJX
-# 7upOU/hlRheGq85hOQS/SQk/Gk5/TRGHNp79/f7GOcRr+d74RHuz6Nld2mz/hQzy
-# b3ufgD6+s8v5NoB4bZ03GgVIehwnc96XujT0xsue8g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUJiH1lk9zicwiM2MzQujC2OedUX4wDQYJ
+# KoZIhvcNAQEBBQAEggEAlK9nxGAOf25XUaWJzSwpHB4PBJ5T/Rz89RhPYPZzcXnL
+# khcbAXZN1+N8HLVjmfAgOQugPq7nMqt44TFL25rNdFnASLRaVr/mjlJuTMxHS+Mr
+# a9EJ1+M9KCXP/DiwA/ujSlWVO5Ny91vSxNK23MWOj6EeXODYoQTM4SgpsYcqB0WU
+# Aed8YkTT5UZgsCkxNPvyMhLLPOul0+syvyCObS5U24UHIKPRqOaOVEOeE9PyWwDA
+# r8IU7cAhUYzR5gHVtCYp5Baxnnxs3gdUtksBYOlquf0B+DSfmNicMLDKLAY1VenD
+# ArkP00JyCgFrExFXOaLngQNpRphdLezLFFqWQVpfDg==
 # SIG # End signature block
