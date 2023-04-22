@@ -125,7 +125,7 @@ IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based S
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " No admin rights available"
+Write-Warning " Powershell is not started as Administrator"
 Start-Sleep 20;exit}
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
@@ -432,7 +432,7 @@ $BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "NO ADMIN AVAILABLE" }
+$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "Powershell is not started as Administrator" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 360,422
@@ -497,8 +497,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp7ZfMdw00/QGxpJc4NiXxsZ5
-# B+ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQ+OvOPucekMZwi5saltGGOUf
+# ueSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -518,11 +518,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTXMYI0coAoyqTCHED7VDyFdbSVgwDQYJ
-# KoZIhvcNAQEBBQAEggEAu1HpclGxOoUs6P7g7KsuP//Ea/d1ab129fyZs+h64Esk
-# nXLSaYBFeWIpMvkNU+/W7lXLukjpjYSZDV/rowWn231JxHGhXTqOnT2Dm9uFPvQ3
-# lowbfW5KYBYfG6IqUTAwagjM51aAbmWaqCFC3Is9qO7xEAwzqEohdCWuD50eUdt5
-# 5f37VF0HlVdu3QNaPvsxFF2GQQ07ZHN3XnlVmkgHaCDZFhPZDEwHGlaHCPQOF5Ly
-# xgTPK5foRyUK9WKTorUzy2ZIM4C4Wt+Z7G+Tk7xgcrekya4Li+VgHP9gL3Wu7VT2
-# zuZ3xMW0m+l6oMG8n1aBKg8qGCuUhZ6sq+zc9dGwUQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUsYdfO673DdZ4Jf1XkUMaDqt7br4wDQYJ
+# KoZIhvcNAQEBBQAEggEAhn49Eu8/tG/xmjtbu3zahyd9Kiue3VQtYjlguKQbjfl9
+# by6KLKvZdrvX8mO2mefZqgH8QGBEh0+IawBI7QBDQG01L9D4dsaqXHzd/6wfu78g
+# Oju7cGvyl76+q1olepOnqixwJZKqnYqknfrs7knm2idcjhTm6fI0mLL+XDyP26Ys
+# q3DhcpDYm3ommLNNVfXU2v4YLH2E3GAZr6mdYivMPwYrWMtFhqCLSozWZDnMpQ42
+# Ep1yyQuUaULk1Egm+KC/+FmwgSJ2q90FF1Uyx/d+6D+18I7/pN8Mw3rMr+uappzx
+# de9BBl5LKMjjZ59/F6B9MFF1zSA8IMTY96TVYS9z0w==
 # SIG # End signature block
