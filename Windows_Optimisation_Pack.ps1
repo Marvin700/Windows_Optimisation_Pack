@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 $Branch = "main"
-$Version = "1.9"
+$Version = "1.9.1"
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
@@ -26,7 +26,16 @@ $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","Microso
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
-foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
+foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}
+Add-Type -AssemblyName 'System.Windows.Forms'
+Start-Process $env:windir\system32\control.exe -ArgumentList '/name Microsoft.DefaultPrograms /page pageDefaultProgram\'
+Start-Sleep 3
+[System.Windows.Forms.SendKeys]::SendWait("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{Enter}")
+Start-Sleep 10
+[System.Windows.Forms.SendKeys]::SendWait("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{Enter}{Enter}")
+Start-Sleep 1
+[System.Windows.Forms.SendKeys]::SendWait("{Enter}")
+}
 
 function WindowsTweaks_Tasks{
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
@@ -125,7 +134,7 @@ IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based S
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " No admin rights available"
+Write-Warning " PowerShell is not started as an Administrator"
 Start-Sleep 20;exit}
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
@@ -184,7 +193,7 @@ $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 
 function Runtime{
 winget source update | Out-Null
-winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
+winget install --id=Microsoft.DotNet.Framework.DeveloperPack_4 --exact --accept-source-agreements
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements
@@ -224,9 +233,7 @@ Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe}
 
-function Process_Lasso{
-Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination "$env:temp\ProcesslassoSetup64.exe"
-Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
+function Google_Chrome{winget install --id=Google.Chrome --exact --accept-source-agreements}
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
@@ -267,7 +274,7 @@ IF($BOX_Remove_ASUS.Checked)            {$hash.Remove_ASUS = $true}
 if($BOX_Autoruns.Checked)               {$hash.Autoruns = $true} 
 IF($BOX_Winrar.Checked)                 {$hash.Winrar = $true}    
 IF($BOX_Fan_Control.Checked)            {$hash.Fan_Control = $true}  
-IF($BOX_Process_Lasso.Checked)          {$hash.Process_Lasso = $true}     
+IF($BOX_Google_Chrome.Checked)          {$hash.Google_Chrome = $true}     
 IF($BOX_Controller.Checked)             {$hash.Controller = $true} 
 $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
@@ -409,12 +416,12 @@ $BOX_Fan_Control.Location = New-Object Drawing.Point 546,310
 $BOX_Fan_Control.Text = "Fan Control"
 $BOX_Fan_Control.ForeColor='#aaaaaa'
 $BOX_Fan_Control.Checked = $false  
-$BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
-$BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
-$BOX_Process_Lasso.Location = New-Object Drawing.Point 546,341
-$BOX_Process_Lasso.Text = "Process Lasso"
-$BOX_Process_Lasso.ForeColor='#aaaaaa'
-$BOX_Process_Lasso.Checked = $false  
+$BOX_Google_Chrome = New-Object System.Windows.Forms.CheckBox
+$BOX_Google_Chrome.Size = New-Object Drawing.Point 135,25
+$BOX_Google_Chrome.Location = New-Object Drawing.Point 546,341
+$BOX_Google_Chrome.Text = "Google Chrome"
+$BOX_Google_Chrome.ForeColor='#aaaaaa'
+$BOX_Google_Chrome.Checked = $false  
 $BOX_Controller = New-Object System.Windows.Forms.CheckBox
 $BOX_Controller.Size = New-Object Drawing.Point 135,25
 $BOX_Controller.Location = New-Object Drawing.Point 546,372
@@ -422,9 +429,9 @@ $BOX_Controller.Text =  "Controller Support"
 $BOX_Controller.ForeColor='#aaaaaa'
 $BOX_Controller.Checked = $false 
 $Titel_Compability = New-Object Windows.Forms.Label
-$Titel_Compability.Size = New-Object Drawing.Point 160,25
-$Titel_Compability.Location = New-Object Drawing.Point 520,422
-$Titel_Compability.ForeColor='#aaaaaa'
+$Titel_Compability.Size = New-Object Drawing.Point 300,25
+$Titel_Compability.Location = New-Object Drawing.Point 500,422
+$Titel_Compability.ForeColor='#e8272f'
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
@@ -432,7 +439,7 @@ $BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "NO ADMIN AVAILABLE" }
+$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "PowerShell is not Administrator" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 360,422
@@ -462,7 +469,7 @@ $form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
 $form.Controls.Add($BOX_Fan_Control)
-$form.Controls.Add($BOX_Process_Lasso)
+$form.Controls.Add($BOX_Google_Chrome)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
@@ -485,7 +492,7 @@ IF($hash.Autoruns){Autoruns}
 IF($hash.Winrar){Winrar} 
 IF($hash.Fan_Control){Fan_Control}
 IF($hash.Controller){Controller} 
-IF($hash.Process_Lasso){Process_Lasso}
+IF($hash.Google_Chrome){Google_Chrome}
 IF($hash.Remove_ASUS){Remove_ASUS}
 IF($hash.Windows_Cleanup){Windows_Cleanup}
 IF($hash.Driver_Cleaner){Driver_Cleaner}}
@@ -497,8 +504,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwDcXutYN4vbv8j70zFh9AXha
-# b+igggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxS99pY7Xlns/3C4DKOaPWKEp
+# dA+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -518,11 +525,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUJiH1lk9zicwiM2MzQujC2OedUX4wDQYJ
-# KoZIhvcNAQEBBQAEggEAlK9nxGAOf25XUaWJzSwpHB4PBJ5T/Rz89RhPYPZzcXnL
-# khcbAXZN1+N8HLVjmfAgOQugPq7nMqt44TFL25rNdFnASLRaVr/mjlJuTMxHS+Mr
-# a9EJ1+M9KCXP/DiwA/ujSlWVO5Ny91vSxNK23MWOj6EeXODYoQTM4SgpsYcqB0WU
-# Aed8YkTT5UZgsCkxNPvyMhLLPOul0+syvyCObS5U24UHIKPRqOaOVEOeE9PyWwDA
-# r8IU7cAhUYzR5gHVtCYp5Baxnnxs3gdUtksBYOlquf0B+DSfmNicMLDKLAY1VenD
-# ArkP00JyCgFrExFXOaLngQNpRphdLezLFFqWQVpfDg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUoE+2jNsQd7HyGHpTybU7xSQxVHYwDQYJ
+# KoZIhvcNAQEBBQAEggEAYKFq6ulxN1FjBP6DLuKiG9GgTr9vD3PeXnKGVpDZAJeh
+# 3T6l6GkKx6t+JJkfonO6Hx9rojCpaamEbCtgnw6rCkehzWsdYmS8l/7Kql79yQ9+
+# njF3N4KPGmiQW2uPdXG87lVQ4QYycoa5OM4XrOCp0Ps24JPQsOjCCDKY3OFrVA3A
+# uAJViITZ9A/OOJXd1Py9b3jDSll7mTc0nA7vtBr7nLRyv+vCURG6DMJ8zAUTd3QJ
+# DDoPVGXioQJTalqWheT7eIfMj3n7uaecI0VjJ4VKFLdbQxuQJE3Xf6J8t1+KTBV6
+# Su0qnmfVqgvDqFS2Ob6HBuEN2GJzi3gTK03bmH2wBg==
 # SIG # End signature block
