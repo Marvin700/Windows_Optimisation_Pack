@@ -27,14 +27,14 @@ $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","Microso
 foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}
-$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 IF($WindowsVersion -match "Microsoft Windows 10"){
+taskkill /F /IM SystemSettings.exe
 Clear-Host;Write-Warning "Shortcut fix beeing Applied...";Write-Warning "PLEASE DONT MOVE YOUR MOUSE UNTIL FINISHED!";Start-Sleep 2
 Add-Type -AssemblyName "System.Windows.Forms"
 Start-Process $env:windir\system32\control.exe -ArgumentList "/name Microsoft.DefaultPrograms /page pageDefaultProgram\";Start-Sleep 3
 [System.Windows.Forms.SendKeys]::SendWait("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{Enter}");Start-Sleep 10
 [System.Windows.Forms.SendKeys]::SendWait("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{Enter}");Start-Sleep 1
-[System.Windows.Forms.SendKeys]::SendWait("{Enter}");Write-Warning "Done :)";Start-Sleep 2}}
+[System.Windows.Forms.SendKeys]::SendWait("{Enter}");Write-Warning "Done :)";Start-Sleep 2;taskkill /F /IM SystemSettings.exe}}
 
 function WindowsTweaks_Tasks{
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
@@ -503,8 +503,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNR9lU1aWlk5IrtqgVAPIzW5Z
-# 4+KgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcXSbQbIKVYLfsRnUMoQ+xyxu
+# iuWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -524,11 +524,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/eYp4mirx+oGY97ybovEJqWFtI4wDQYJ
-# KoZIhvcNAQEBBQAEggEAmt6iNfN+JB48LZwjkI4yl3128xhsHkTkfMrZdiRq9g8o
-# OR+s7ACP2sdWFa9PWNHRLn4IbiknMojpLczuNzn5BAntkOIrDQItsk9M7fvgkeeZ
-# 8kMma0nParSW/K2dUy8SqHzj+WJVxZP2CKXujzvlktXER+ekgSSP5guWovA2W/vv
-# QqQhHtal6IVuW5B7cmLd2zz6ng51z/RIUq+JtOH0SHs3pP/4Thykarez9arADBRp
-# Xm6CzSfnT9uqMK1JHhwBNNfBJYjUDvl6zg4qgxusT7IzEcAvs3PIbj3R0jBZ/Wev
-# MLaqZjwO7oFbeGTH1EW7ncNFOtTYTdqVzt18ZBveaQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUD8Sd9CXG6yh/axoBVSR3Ho217YkwDQYJ
+# KoZIhvcNAQEBBQAEggEAVUhHSqiyHKdJ4pwdLjWjvhAtPsoWlwruA7Kgt9Ny4q6W
+# p/Wn3GrWK3dOttFZOWpfAXF/FGS5ZVSF3DV6Vbj3TDBVf36aMe1At3g5A6k6Ujlt
+# EPUJeYmVNylq5m0VhNELHHjCJQe22YrPmJxxbPSYuRviw5qlZGq28VX8LMwppjpp
+# DZTHldgavxc0pU66BtzY4zkwzdvi+4U+krh21L36hesRau3mry5IhHnvYChBraD+
+# +Hlx5/oCFRuFcydti+UsyOplrAL0iHBm3OpR5MPjXRNIDC35Vqxloyj1qUvaAU0b
+# KeNMgk0mb72n8C7pHIcCiYaIiF+bPAgs6KtdclXqWA==
 # SIG # End signature block
