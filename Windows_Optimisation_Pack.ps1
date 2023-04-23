@@ -227,11 +227,6 @@ $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
 $Shortcut.TargetPath = "$env:SystemDrive\Program Files\DS4Windows\DS4Windows.exe"
 $Shortcut.Save()}
 
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Fix Steam Shortcuts.lnk")
-$Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command 'irm windows-optimisation.de/beta | iex'"
-$Shortcut.Save()
-
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
@@ -508,8 +503,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIjFP4At6h/rl8cYvjqMuZgYe
-# ruqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNR9lU1aWlk5IrtqgVAPIzW5Z
+# 4+KgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -529,11 +524,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUai2vl2Ir18kOw6wAv7S8cHkpYBQwDQYJ
-# KoZIhvcNAQEBBQAEggEAj9/swkxaLOcHSXdgCtEtIBDmtFJbstLywtlTD8T5REtA
-# TrF7DJLOBLV7rp/huQ7YFW+Tvye0BpZc5jcBaiJK83Dcq9pw+tuThWuKPtTlx+RB
-# dpC5V0l3SQr7ZLJz73p+Vyaadew0I7W1vnk9i2TgECjgBxLUsivpj8CNiieI7BOC
-# 590F6/qAAQtRnREzRzf8KJgdvhLHKMllUnVOMXmnUMjLe0PYjQHDIPp/pDzRSCbl
-# lLQjJqc1+tK7oU1p3hrv0nHCIkF0ju0U5wGa1LZ4p09OKqVSd3x7xq+zMtWkgC1T
-# 1s+yZf1YtxmHybSXpdSNyOXNsUTMTGF7OPTfCdSqEw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/eYp4mirx+oGY97ybovEJqWFtI4wDQYJ
+# KoZIhvcNAQEBBQAEggEAmt6iNfN+JB48LZwjkI4yl3128xhsHkTkfMrZdiRq9g8o
+# OR+s7ACP2sdWFa9PWNHRLn4IbiknMojpLczuNzn5BAntkOIrDQItsk9M7fvgkeeZ
+# 8kMma0nParSW/K2dUy8SqHzj+WJVxZP2CKXujzvlktXER+ekgSSP5guWovA2W/vv
+# QqQhHtal6IVuW5B7cmLd2zz6ng51z/RIUq+JtOH0SHs3pP/4Thykarez9arADBRp
+# Xm6CzSfnT9uqMK1JHhwBNNfBJYjUDvl6zg4qgxusT7IzEcAvs3PIbj3R0jBZ/Wev
+# MLaqZjwO7oFbeGTH1EW7ncNFOtTYTdqVzt18ZBveaQ==
 # SIG # End signature block
