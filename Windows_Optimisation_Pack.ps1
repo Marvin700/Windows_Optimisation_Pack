@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 $Branch = "main"
-$Version = "1.9.1"
+$Version = "1.9"
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
@@ -22,19 +22,11 @@ Stop-Service $service -ErrorAction SilentlyContinue
 Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Features{
-$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root"
-"Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
+$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45",
+"Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure")
 foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
-$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
-foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}
-IF($WindowsVersion -match "Microsoft Windows 10"){
-taskkill /F /IM SystemSettings.exe
-Clear-Host;Write-Warning "Shortcut fix beeing Applied...";Write-Warning "PLEASE DONT MOVE YOUR MOUSE UNTIL FINISHED!";Start-Sleep 2
-Add-Type -AssemblyName "System.Windows.Forms"
-Start-Process $env:windir\system32\control.exe -ArgumentList "/name Microsoft.DefaultPrograms /page pageDefaultProgram\";Start-Sleep 3
-[System.Windows.Forms.SendKeys]::SendWait("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{Enter}");Start-Sleep 10
-[System.Windows.Forms.SendKeys]::SendWait("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{Enter}");Start-Sleep 1
-[System.Windows.Forms.SendKeys]::SendWait("{Enter}");Write-Warning "Done :)";Start-Sleep 2;taskkill /F /IM SystemSettings.exe}}
+$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*")
+foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Tasks{
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
@@ -116,12 +108,6 @@ New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\System
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
-version_check{
-$Version = "1.9"
-IF((Get-ItemPropertyValue "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -name "Version") -match $Version)
-{ Write-Warning "test"}
-}
-
 function Checks{
 IF(!([System.Environment]::Is64BitOperatingSystem)){
 Write-Warning " You need an 64-Bit System"
@@ -139,7 +125,7 @@ IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based S
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " PowerShell is not started as an Administrator"
+Write-Warning " No admin rights available"
 Start-Sleep 20;exit}
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
@@ -182,23 +168,23 @@ Start-Process cleanmgr.exe /sagerun:1
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Driver_Cleaner{
-Clear-Host
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU1.zip" -Destination "$env:temp\DDU.zip"
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination "$env:temp\DDU.zip"
 Expand-Archive $env:temp\DDU.zip $env:temp
-cmd.exe /c "bcdedit /set {current} safeboot minimal"
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Normal_Boot" -Value 'cmd.exe /c "bcdedit /deletevalue {current} safeboot"'
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Driver_Cleaner" -Value 'Powershell.exe -command "Set-Location $env:temp\DDU\;& .\DisplayDriverUninstaller.exe -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart"'
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Driver is Uninstalling.... Please Wait  The installation for AMD starts after the restart'"
-IF((Get-WmiObject -Class Win32_VideoController).VideoProcessor -match "qAMD"){
-" Downloading GPU Driver";" Please Wait ..."
-Start-BitsTransfer -Source "https://dlgbit.winfuture.de/03dM54K9KygBvDnAhT63-w/1682910187/3517/software/Radeon%20Crimson/whql-amd-software-adrenalin-edition-23.4.3-win10-win11-apr27.exe" -Destination "$env:temp\GPU_Driver.exe"
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Driver_Installer" -Value "$env:temp\GPU_Driver.exe -INSTALL -boot"} else {Write-Warning "Automatic Installer works only for AMD";Start-Sleep 20}
-Clear-Host
-[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");[System.Windows.Forms.MessageBox]::Show("For Driver Reinstallation restart the PC","Windows_Optimisation_Pack",0,[System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null}
+Set-Location $env:temp\DDU\
+& '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
+[xml]$ToastTemplate = @"
+<toast duration="Long"><visual><binding template="ToastGeneric">
+<text>Please Wait...</text><text>The GPU Driver is uninstalling</text></binding></visual>
+<audio src="ms-winsoundevent:notification.default" /></toast>
+"@
+$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$ToastXml.LoadXml($ToastTemplate.OuterXml)
+$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
 
 function Runtime{
 winget source update | Out-Null
-winget install --id=Microsoft.DotNet.Framework.DeveloperPack_4 --exact --accept-source-agreements
+winget install --id=Microsoft.dotNetFramework --exact --accept-source-agreements 
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.6 --architecture x64 --exact --accept-source-agreements
 winget install --id=Microsoft.DotNet.DesktopRuntime.7 --architecture x64 --exact --accept-source-agreements
@@ -238,7 +224,9 @@ Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe}
 
-function Google_Chrome{winget install --id=Google.Chrome --exact --accept-source-agreements}
+function Process_Lasso{
+Start-BitsTransfer -Source "https://dl.bitsum.com/files/processlassosetup64.exe" -Destination "$env:temp\ProcesslassoSetup64.exe"
+Start-Process -FilePath "$env:temp\ProcesslassoSetup64.exe" -ArgumentList "/S /language=German"}
 
 function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
@@ -279,7 +267,7 @@ IF($BOX_Remove_ASUS.Checked)            {$hash.Remove_ASUS = $true}
 if($BOX_Autoruns.Checked)               {$hash.Autoruns = $true} 
 IF($BOX_Winrar.Checked)                 {$hash.Winrar = $true}    
 IF($BOX_Fan_Control.Checked)            {$hash.Fan_Control = $true}  
-IF($BOX_Google_Chrome.Checked)          {$hash.Google_Chrome = $true}     
+IF($BOX_Process_Lasso.Checked)          {$hash.Process_Lasso = $true}     
 IF($BOX_Controller.Checked)             {$hash.Controller = $true} 
 $Form.Close()}
 $form = New-Object System.Windows.Forms.Form
@@ -388,7 +376,7 @@ $BOX_Scheduled_Maintance.Enabled = $false
 $BOX_Driver_Cleaner= New-Object System.Windows.Forms.CheckBox
 $BOX_Driver_Cleaner.Size = New-Object Drawing.Point 135,25
 $BOX_Driver_Cleaner.Location = New-Object Drawing.Point 373,310
-$BOX_Driver_Cleaner.Text = "Clean Driver Installer"
+$BOX_Driver_Cleaner.Text = "Driver Cleaner"
 $BOX_Driver_Cleaner.ForeColor='#aaaaaa'
 $BOX_Driver_Cleaner.Checked = $false
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
@@ -421,12 +409,12 @@ $BOX_Fan_Control.Location = New-Object Drawing.Point 546,310
 $BOX_Fan_Control.Text = "Fan Control"
 $BOX_Fan_Control.ForeColor='#aaaaaa'
 $BOX_Fan_Control.Checked = $false  
-$BOX_Google_Chrome = New-Object System.Windows.Forms.CheckBox
-$BOX_Google_Chrome.Size = New-Object Drawing.Point 135,25
-$BOX_Google_Chrome.Location = New-Object Drawing.Point 546,341
-$BOX_Google_Chrome.Text = "Google Chrome"
-$BOX_Google_Chrome.ForeColor='#aaaaaa'
-$BOX_Google_Chrome.Checked = $false  
+$BOX_Process_Lasso = New-Object System.Windows.Forms.CheckBox
+$BOX_Process_Lasso.Size = New-Object Drawing.Point 135,25
+$BOX_Process_Lasso.Location = New-Object Drawing.Point 546,341
+$BOX_Process_Lasso.Text = "Process Lasso"
+$BOX_Process_Lasso.ForeColor='#aaaaaa'
+$BOX_Process_Lasso.Checked = $false  
 $BOX_Controller = New-Object System.Windows.Forms.CheckBox
 $BOX_Controller.Size = New-Object Drawing.Point 135,25
 $BOX_Controller.Location = New-Object Drawing.Point 546,372
@@ -434,9 +422,9 @@ $BOX_Controller.Text =  "Controller Support"
 $BOX_Controller.ForeColor='#aaaaaa'
 $BOX_Controller.Checked = $false 
 $Titel_Compability = New-Object Windows.Forms.Label
-$Titel_Compability.Size = New-Object Drawing.Point 300,25
-$Titel_Compability.Location = New-Object Drawing.Point 500,422
-$Titel_Compability.ForeColor='#e8272f'
+$Titel_Compability.Size = New-Object Drawing.Point 160,25
+$Titel_Compability.Location = New-Object Drawing.Point 520,422
+$Titel_Compability.ForeColor='#aaaaaa'
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
@@ -444,7 +432,7 @@ $BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "PowerShell is not Administrator" }
+$BUTTON_Start.Enabled = $false;$Titel_Compability.text = "NO ADMIN AVAILABLE" }
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
 $BUTTON_Cancel.Location = New-Object Drawing.Point 360,422
@@ -474,7 +462,7 @@ $form.Controls.Add($BOX_Remove_ASUS)
 $form.Controls.Add($BOX_Autoruns)
 $form.Controls.Add($BOX_Winrar)
 $form.Controls.Add($BOX_Fan_Control)
-$form.Controls.Add($BOX_Google_Chrome)
+$form.Controls.Add($BOX_Process_Lasso)
 $form.Controls.Add($BOX_Controller)
 $form.Controls.Add($BUTTON_Start)
 $form.Controls.Add($BUTTON_Cancel)
@@ -497,7 +485,7 @@ IF($hash.Autoruns){Autoruns}
 IF($hash.Winrar){Winrar} 
 IF($hash.Fan_Control){Fan_Control}
 IF($hash.Controller){Controller} 
-IF($hash.Google_Chrome){Google_Chrome}
+IF($hash.Process_Lasso){Process_Lasso}
 IF($hash.Remove_ASUS){Remove_ASUS}
 IF($hash.Windows_Cleanup){Windows_Cleanup}
 IF($hash.Driver_Cleaner){Driver_Cleaner}}
@@ -509,8 +497,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUe8t54M36Xv1hzeShtzT+bjql
-# ht6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp7ZfMdw00/QGxpJc4NiXxsZ5
+# B+ygggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -530,11 +518,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMo89DV/KtIvA5HzYtYn/o7LNytUwDQYJ
-# KoZIhvcNAQEBBQAEggEAnNhhhnQpxKJRJV/W8LYPauv+ysj5bs7qzMJMzEf6bDZ1
-# u1pfuYwfTYFIKbOwAIEgeTEJat6mURRUr69TSd1UtHopF/0AKzQrGdg2CQ09brMR
-# +vtOkX6yExAtI10sc0awCXkAC2/qz4SshafCwn3QKYiEWew/cgUscvTfKj1vta9W
-# e0G9nYRgvQEi1Mrv78EVvT07ybDF8xNH/01FHboodJaHVAMqVHfXQkehEM9yYg5Q
-# vQp4YOlfikinJlt4sQehslAedOUpcFeKG7Ll+jOV4Ru8tgwDg5Pv9+yz68FMO8Ka
-# vrbgia0uAcS+WJboc5NX6xi5swwuJe7s27U4ANxrmg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUTXMYI0coAoyqTCHED7VDyFdbSVgwDQYJ
+# KoZIhvcNAQEBBQAEggEAu1HpclGxOoUs6P7g7KsuP//Ea/d1ab129fyZs+h64Esk
+# nXLSaYBFeWIpMvkNU+/W7lXLukjpjYSZDV/rowWn231JxHGhXTqOnT2Dm9uFPvQ3
+# lowbfW5KYBYfG6IqUTAwagjM51aAbmWaqCFC3Is9qO7xEAwzqEohdCWuD50eUdt5
+# 5f37VF0HlVdu3QNaPvsxFF2GQQ07ZHN3XnlVmkgHaCDZFhPZDEwHGlaHCPQOF5Ly
+# xgTPK5foRyUK9WKTorUzy2ZIM4C4Wt+Z7G+Tk7xgcrekya4Li+VgHP9gL3Wu7VT2
+# zuZ3xMW0m+l6oMG8n1aBKg8qGCuUhZ6sq+zc9dGwUQ==
 # SIG # End signature block
