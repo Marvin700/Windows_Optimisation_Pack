@@ -116,6 +116,12 @@ New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\System
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
+version_check{
+$Version = "1.9"
+IF((Get-ItemPropertyValue "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -name "Version") -match $Version)
+{ Write-Warning "test"}
+}
+
 function Checks{
 IF(!([System.Environment]::Is64BitOperatingSystem)){
 Write-Warning " You need an 64-Bit System"
@@ -176,19 +182,19 @@ Start-Process cleanmgr.exe /sagerun:1
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Driver_Cleaner{
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination "$env:temp\DDU.zip"
+Clear-Host
+Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU1.zip" -Destination "$env:temp\DDU.zip"
 Expand-Archive $env:temp\DDU.zip $env:temp
-Set-Location $env:temp\DDU\
-& '.\Display Driver Uninstaller.exe' -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart
-[xml]$ToastTemplate = @"
-<toast duration="Long"><visual><binding template="ToastGeneric">
-<text>Please Wait...</text><text>The GPU Driver is uninstalling</text></binding></visual>
-<audio src="ms-winsoundevent:notification.default" /></toast>
-"@
-$ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
-$ToastXml.LoadXml($ToastTemplate.OuterXml)
-$ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
-[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Windows_Optimisation_Pack").Show($ToastMessage)}
+cmd.exe /c "bcdedit /set {current} safeboot minimal"
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Normal_Boot" -Value 'cmd.exe /c "bcdedit /deletevalue {current} safeboot"'
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Driver_Cleaner" -Value 'Powershell.exe -command "Set-Location $env:temp\DDU\;& .\DisplayDriverUninstaller.exe -silent -removemonitors -cleannvidia -cleanamd -cleanintel -removephysx -removegfe -removenvbroadcast -removenvcp -removeintelcp -removeamdcp -restart"'
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Driver is Uninstalling.... Please Wait  The installation for AMD starts after the restart'"
+IF((Get-WmiObject -Class Win32_VideoController).VideoProcessor -match "qAMD"){
+" Downloading GPU Driver";" Please Wait ..."
+Start-BitsTransfer -Source "https://dlgbit.winfuture.de/03dM54K9KygBvDnAhT63-w/1682910187/3517/software/Radeon%20Crimson/whql-amd-software-adrenalin-edition-23.4.3-win10-win11-apr27.exe" -Destination "$env:temp\GPU_Driver.exe"
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Driver_Installer" -Value "$env:temp\GPU_Driver.exe -INSTALL -boot"} else {Write-Warning "Automatic Installer works only for AMD";Start-Sleep 20}
+Clear-Host
+[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");[System.Windows.Forms.MessageBox]::Show("For Driver Reinstallation restart the PC","Windows_Optimisation_Pack",0,[System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null}
 
 function Runtime{
 winget source update | Out-Null
@@ -382,7 +388,7 @@ $BOX_Scheduled_Maintance.Enabled = $false
 $BOX_Driver_Cleaner= New-Object System.Windows.Forms.CheckBox
 $BOX_Driver_Cleaner.Size = New-Object Drawing.Point 135,25
 $BOX_Driver_Cleaner.Location = New-Object Drawing.Point 373,310
-$BOX_Driver_Cleaner.Text = "Driver Cleaner"
+$BOX_Driver_Cleaner.Text = "Clean Driver Installer"
 $BOX_Driver_Cleaner.ForeColor='#aaaaaa'
 $BOX_Driver_Cleaner.Checked = $false
 $BOX_Runtime = New-Object System.Windows.Forms.CheckBox
@@ -503,8 +509,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcXSbQbIKVYLfsRnUMoQ+xyxu
-# iuWgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUe8t54M36Xv1hzeShtzT+bjql
+# ht6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -524,11 +530,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUD8Sd9CXG6yh/axoBVSR3Ho217YkwDQYJ
-# KoZIhvcNAQEBBQAEggEAVUhHSqiyHKdJ4pwdLjWjvhAtPsoWlwruA7Kgt9Ny4q6W
-# p/Wn3GrWK3dOttFZOWpfAXF/FGS5ZVSF3DV6Vbj3TDBVf36aMe1At3g5A6k6Ujlt
-# EPUJeYmVNylq5m0VhNELHHjCJQe22YrPmJxxbPSYuRviw5qlZGq28VX8LMwppjpp
-# DZTHldgavxc0pU66BtzY4zkwzdvi+4U+krh21L36hesRau3mry5IhHnvYChBraD+
-# +Hlx5/oCFRuFcydti+UsyOplrAL0iHBm3OpR5MPjXRNIDC35Vqxloyj1qUvaAU0b
-# KeNMgk0mb72n8C7pHIcCiYaIiF+bPAgs6KtdclXqWA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUMo89DV/KtIvA5HzYtYn/o7LNytUwDQYJ
+# KoZIhvcNAQEBBQAEggEAnNhhhnQpxKJRJV/W8LYPauv+ysj5bs7qzMJMzEf6bDZ1
+# u1pfuYwfTYFIKbOwAIEgeTEJat6mURRUr69TSd1UtHopF/0AKzQrGdg2CQ09brMR
+# +vtOkX6yExAtI10sc0awCXkAC2/qz4SshafCwn3QKYiEWew/cgUscvTfKj1vta9W
+# e0G9nYRgvQEi1Mrv78EVvT07ybDF8xNH/01FHboodJaHVAMqVHfXQkehEM9yYg5Q
+# vQp4YOlfikinJlt4sQehslAedOUpcFeKG7Ll+jOV4Ru8tgwDg5Pv9+yz68FMO8Ka
+# vrbgia0uAcS+WJboc5NX6xi5swwuJe7s27U4ANxrmg==
 # SIG # End signature block
