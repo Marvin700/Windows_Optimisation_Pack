@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.4.4
+	Version: v6.5.4
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -33,9 +33,6 @@ foreach ($Function in $Functions)
 {Invoke-Expression -Command $Function}
 exit}
 
-# The mandatory checks
-Checks
-
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
 DiagTrackService -Disable
@@ -60,6 +57,9 @@ ErrorReporting -Disable
 
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
+
+# Do not show websites from your browsing history in the Start menu
+BrowsingHistory -Hide
 
 # Do not use sign-in info to automatically finish setting up device after an update
 SigninInfo -Disable
@@ -390,8 +390,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpb1l1CpJIBRcWhVE6VXKJq3M
-# ZX6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURDkZwq8rQFqwjDrTxxSkBfAw
+# Vo+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -411,11 +411,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUdl6aACDE0Rnw6GxTiu+e+noeey0wDQYJ
-# KoZIhvcNAQEBBQAEggEAPCfH6MYSaTCjiEdIFL22sod+pp5ke10TPmiteZ4g1Ymg
-# kYM2tHOw0vLL2HJOLLO/jJTRHig59QgSawXM4mVQ9eolwtjcdaKY/mQbMzXROuXO
-# PGsGpiZF685HpgJGnIiVm7Z9mGoLrWtDGf6dr38m4ig0JmQ5S2ls6nwx6JsczjoU
-# 4aFZ7Xws+yLpNC+x5oIY6zCBGUIesd2w88LOEeGEEZN+Kl0O+mMHUL1wF9pYC2Pu
-# kLxSdavW3Jkrtcocko8HaLpsN4UDGNqFlQJ5RSgS3Fa+wCNOuRbcVDCpHHevtyiH
-# 7CCctjKyyx6e73Kuyl5kX09iCQCfFLtUrRNvmkywHQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/Q/KMNDGq7TKp+ANWNrpnWK7enAwDQYJ
+# KoZIhvcNAQEBBQAEggEAq/OwSMxj8JyPwa+UM94IncD3nN7FK7SlP7GFmp7dtk6A
+# sVYNDlOJ6nrv9myK6n7fR/aAoXxfrf9C/f4wBXjoOTFGJosXL1AXO/kvGrl7p1Vb
+# Ray3WTu5TNNvkL8QTytGDy4iM+jJYMB3pw6UfXMZSKo8znSha3xrIxOoDWlRrVTv
+# 1dt/IuLuvRhaO75r9B9JHUs+yE4wfRSq3EIJFGL6DYYp5+wCp8xobyrCJCJIw+kS
+# gSb81wIgnCOOauvjtJ0a7zuT4pibkB9ZOjF5sqWYQd1MudRk8Xc/M9JEzuG/xLp5
+# 8ElYcKtBuP8SzotFPwjoCSd+XMjHSmDsiYlHrOcC/g==
 # SIG # End signature block

@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.16.4
+	Version: v5.17.4
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -33,9 +33,6 @@ foreach ($Function in $Functions)
 {Invoke-Expression -Command $Function}
 exit}
 
-# The mandatory checks
-Checks
-
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
 DiagTrackService -Disable
@@ -60,6 +57,9 @@ ErrorReporting -Disable
 
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
+
+#Expand the File Explorer ribbon
+FileExplorerRibbon -Expanded
 
 # Do not use sign-in info to automatically finish setting up device and reopen apps after an update or restart
 SigninInfo -Disable
@@ -114,9 +114,6 @@ SnapAssist -Disable
 
 # Show the file transfer dialog box in the detailed mode
 FileTransferDialog -Detailed
-
-# Expand the File Explorer ribbon
-FileExplorerRibbon -Expanded
 
 # Display the recycle bin files delete confirmation dialog
 RecycleBinDeleteConfirmation -Enable
@@ -426,8 +423,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU65hoqdic/4NbIS+rHRKa9/FZ
-# cQqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUehDyUz5b49DT+dL4dl3FbwX1
+# zXSgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -447,11 +444,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8fJx7DEbNvPex2xguKid8rS+5bEwDQYJ
-# KoZIhvcNAQEBBQAEggEAfFgBu+A6uoHX6xKWK6s6g7oMNW9xfF3u9Vm1lZnKRJJo
-# Vc4OfM73hDvlDRsBZehdkmvev1TowIxZjhz+6XOs75fzzfIDOLieaIz7ZCi9i/rG
-# lZXAYJMtKkawvqaCdU/4CuYy5te0Usp2qkki0zhb/PSqQWFMtXcit+4VhBlXWIhf
-# SLQwIZ9o+lhguk1+Tv+nlTrr+bNpLpYSLom+CyJnTk9KYQq19WaJsA1czi+BHnR5
-# qFEtuu5SrGGdXtS/0spqybkeSLLW/FNM8zsLzGSnZGCjvrJROTVxhRc6mIjvi2s/
-# 4X8UNcEGxikaqHiybduNzM4nvsrGAoAPf1Vsex58GA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUbxhFnbg5syRUZinbjEOKMw3WlogwDQYJ
+# KoZIhvcNAQEBBQAEggEAnadrGYqhbYc1i5ZBuFYyGETyk9jJbgPIRr1NwvSpdfi1
+# 3WLpDhelt12BVME5/55g6rFJhRf6RB/q7XuBlKChrf1h7FJsrzN2z9qSRTmsaAOR
+# TkDgmi9W3ctJRqL3nFk/mCVd6ExfL+slp3eIo7bBN6yuIp8kibgQNU5dYS4I9Oja
+# Z5woMBwW3fQbP2sNx+jRzo0qm2PJEeWNII8cSjCYFv2kj7jnzD11FdQ83/z5BDjR
+# mC0voYG/7Ck852Ou47k4AAnuzgazbgHgIfX6ObBCVUDK8iMN2xdNzdD5Dnu0xSEY
+# gOV9e/6wRCKd9IjNrX3H4vp5lfTYD4+rLpUHmAONYA==
 # SIG # End signature block
