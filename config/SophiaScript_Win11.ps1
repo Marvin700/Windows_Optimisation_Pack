@@ -27,10 +27,11 @@ Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
-IF($Functions){
-Invoke-Command -ScriptBlock {Checks}
+if ($Functions){
+Invoke-Command -ScriptBlock {InitialActions}
 foreach ($Function in $Functions)
 {Invoke-Expression -Command $Function}
+Invoke-Command -ScriptBlock {Errors}
 exit}
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
@@ -387,11 +388,14 @@ OpenWindowsTerminalAdminContext -Enable
 # Disable the Windows 10 context menu style
 Windows10ContextMenu -Disable
 
+# Errors output
+Errors
+
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURDkZwq8rQFqwjDrTxxSkBfAw
-# Vo+gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2IRvN3pOPwR9RfDiWgJLI6Tf
+# mzOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -411,11 +415,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/Q/KMNDGq7TKp+ANWNrpnWK7enAwDQYJ
-# KoZIhvcNAQEBBQAEggEAq/OwSMxj8JyPwa+UM94IncD3nN7FK7SlP7GFmp7dtk6A
-# sVYNDlOJ6nrv9myK6n7fR/aAoXxfrf9C/f4wBXjoOTFGJosXL1AXO/kvGrl7p1Vb
-# Ray3WTu5TNNvkL8QTytGDy4iM+jJYMB3pw6UfXMZSKo8znSha3xrIxOoDWlRrVTv
-# 1dt/IuLuvRhaO75r9B9JHUs+yE4wfRSq3EIJFGL6DYYp5+wCp8xobyrCJCJIw+kS
-# gSb81wIgnCOOauvjtJ0a7zuT4pibkB9ZOjF5sqWYQd1MudRk8Xc/M9JEzuG/xLp5
-# 8ElYcKtBuP8SzotFPwjoCSd+XMjHSmDsiYlHrOcC/g==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUbXP5ivyKjjswhJDMHyEBSlCdYhgwDQYJ
+# KoZIhvcNAQEBBQAEggEAXupf5Iqnk1NFuemq6ao4MyemCuhhLvgaUPYtW/DMjn4y
+# uE9qLZxluOmbqNM37oV9J3E01vSw4zQgq4VSOqD+2AhGn5zqrSI7/0bGxzxHPMpe
+# b9gzhsQNYki1+GQOFWqn9xrbct4s04V/KdH+NtuWCWYqokK5cJ9t3JlC8l3SNgKI
+# UyiIWMElFoogUezgsO6mwspFBaKuJ6bSjl+TchREUjLt+mD8swAwqpkihnoI0Uhe
+# fLQREn8rK8g0rV94nMhJaPAQAUcWrS++SMBWFFqv7foEh3DG7TRTCMbXo5q2fDn8
+# ataKs/Hp9TFlw2mnFDsxFdLD9hmHHsT1iKkbOz8NbA==
 # SIG # End signature block
