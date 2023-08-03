@@ -189,8 +189,7 @@ IF((Get-WmiObject -Class Win32_VideoController).VideoProcessor -match "AMD"){
 Clear-Host
 " Downloading GPU Driver";" Please Wait ..."
 Start-BitsTransfer -Source "https://dlgbit.winfuture.de/RMwf2YRjJvno9C3TySNGyg/1691099075/3517/software/Radeon%20Crimson/whql-amd-software-adrenalin-edition-23.7.2-win10-win11-july25.exe" -Destination "$env:temp\GPU_Driver.exe"
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Driver_Installer" -Value "cmd.exe /c cd %tmp% && GPU_Driver.exe -install -boot"
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Install_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Stage 2/2 Driver is Installing. Please Wait...'"
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Driver_Installer" -Value "cmd.exe /c echo Stage 2/2 Driver is Installing. && echo Please Wait... && cd %tmp% && GPU_Driver.exe -install -boot"
 } else {Write-Warning "Automatic Installer works only for AMD";Start-Sleep 20}
 Clear-Host
 [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");[System.Windows.Forms.MessageBox]::Show("For Driver Reinstallation restart the PC","Windows_Optimisation_Pack",0,[System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null}}
@@ -508,8 +507,8 @@ Finish
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoFKRIhGVfue6S9JVXuKO6Ejt
-# XVCgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHeVbSAJCFZWMkvAVLBoFtaEb
+# 53CgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -529,11 +528,11 @@ Finish
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUeyG7Nt3fmF3fFpu7E89p2c7OM5owDQYJ
-# KoZIhvcNAQEBBQAEggEAkPnTXTnVJXz6dwP0iVKVL8WbyoV9DHaICXRZwXwMK1AZ
-# 1eOlXBW3bcY0kgW7W5L4667mix/jt9leALTv3VEMX8sCPaHrltoKfFiydrlze2cz
-# 7jGiUfkliMDMxbaOlb4QZln2HOw9yql9Yz8ByiRVqA9tx34Gz3M+9jR24+HC6CnV
-# uKgQvbVPZprrNIyNrwooYnHjNt0ZO/Imlu2M9hfKOOS0ICVN4SHd6vZf4kEpttuq
-# Wrd6MNQwqDEHPv8BwwwF4/PFxcAmSzWIn20UvnfcFfuqL7GSaAKdtgiWOoDqNUY5
-# d93Nr7kkIEX8Fq7qHQlwkamQy1pMJUvPCkm8QfuOyg==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU/CI+9C/INsCwTc3l2Pki9e0nl6swDQYJ
+# KoZIhvcNAQEBBQAEggEADZmxtlSITyKnCood9Cnjo9p7q/3pfjhcksBtWL2EI0Qq
+# uU/EUKA/634BPBA2etSEDTqLo01s0n72HBxR3+Ycd/416InwdCFq6CFXCBTnZ4/z
+# UlRd1qeojkrnOTFa7Ko8tYWp0tYAVW/gaYE3/7Ndenbmku7TdUDtpdLvAwgy0k9m
+# kbr7VxL/+FgTfJ1YHWWY5pNNJ1fEh6stcvjMA3LGkWvf+2ZqBPfhEAqYudNKlsEQ
+# cBEAS3g4IRYTEDN4oqrZyA9enOdloSsqI41RpkSHEHu3Umei6U2pWU1NopN/m+SR
+# Olcq2amz0cSXxxF/nA/fYRS15BtdfgFfdN7hf6tbFw==
 # SIG # End signature block
