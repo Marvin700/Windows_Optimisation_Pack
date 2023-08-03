@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/98750428/232207696-fd8d756e-90b4-4652-a0c9-3dbac3b770e2.jpg">
+<img src="https://github.com/Marvin700/Windows_Optimisation_Pack/assets/98750428/07637477-3b97-4e2f-9f24-ad17e48e8fc4">
 
 ## Key Features
 * Windows Cleanup
