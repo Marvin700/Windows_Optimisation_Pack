@@ -22,7 +22,7 @@ irm windows-optimisation.de/beta | iex
 * Deactivate Tasks & Components
 * Mouse acceleration Fix
 * More Windows Tweaks
-* Clean reinstall of GPU Driver
+* Clean install of GPU Driver
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
