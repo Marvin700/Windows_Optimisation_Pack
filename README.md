@@ -12,7 +12,7 @@
 * Deactivate Tasks & Components
 * Mouse acceleration Fix
 * More Windows Tweaks
-* Clean uninstall of GPU Driver
+* Clean reinstall of GPU Driver
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
