@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.16.4
+	Version: v5.17.4
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -27,14 +27,14 @@ Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
-IF($Functions){
-Invoke-Command -ScriptBlock {Checks}
+if ($Functions){
+Invoke-Command -ScriptBlock {InitialActions}
 foreach ($Function in $Functions)
 {Invoke-Expression -Command $Function}
 exit}
 
 # The mandatory checks
-Checks
+InitialActions
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
@@ -60,6 +60,9 @@ ErrorReporting -Disable
 
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
+
+#Expand the File Explorer ribbon
+FileExplorerRibbon -Expanded
 
 # Do not use sign-in info to automatically finish setting up device and reopen apps after an update or restart
 SigninInfo -Disable
@@ -114,9 +117,6 @@ SnapAssist -Disable
 
 # Show the file transfer dialog box in the detailed mode
 FileTransferDialog -Detailed
-
-# Expand the File Explorer ribbon
-FileExplorerRibbon -Expanded
 
 # Display the recycle bin files delete confirmation dialog
 RecycleBinDeleteConfirmation -Enable
@@ -426,8 +426,8 @@ UseStoreOpenWith -Hide
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU65hoqdic/4NbIS+rHRKa9/FZ
-# cQqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZelmKPpQL76UArf687XJW2hL
+# ncOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -447,11 +447,11 @@ UseStoreOpenWith -Hide
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU8fJx7DEbNvPex2xguKid8rS+5bEwDQYJ
-# KoZIhvcNAQEBBQAEggEAfFgBu+A6uoHX6xKWK6s6g7oMNW9xfF3u9Vm1lZnKRJJo
-# Vc4OfM73hDvlDRsBZehdkmvev1TowIxZjhz+6XOs75fzzfIDOLieaIz7ZCi9i/rG
-# lZXAYJMtKkawvqaCdU/4CuYy5te0Usp2qkki0zhb/PSqQWFMtXcit+4VhBlXWIhf
-# SLQwIZ9o+lhguk1+Tv+nlTrr+bNpLpYSLom+CyJnTk9KYQq19WaJsA1czi+BHnR5
-# qFEtuu5SrGGdXtS/0spqybkeSLLW/FNM8zsLzGSnZGCjvrJROTVxhRc6mIjvi2s/
-# 4X8UNcEGxikaqHiybduNzM4nvsrGAoAPf1Vsex58GA==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU4tZ5STNpEkHIxgxZtPXeb2Xw/aQwDQYJ
+# KoZIhvcNAQEBBQAEggEAKo4nsTrKd/Y6sgBbAZ/W9dbdFYimrbQ8RfWfwx9/ap+M
+# 1ZsYWBwyxUAzmumDcaxSkRZ2i9x58zVi6I1RFuvuJ/PPKJC62qzh+Ruqs0aaBlAs
+# YfVlf3FO7W+xojiglG9Y/vRZTZYmr8AG+KP7+DBB+syK/7AAHhz0b6WZbqQVegcy
+# P1bItjsYU8ebfJwXFDD2TGTSfRGjzARSgdVIN1gGvnxgGEm+03QOpxWw8oeiBrbp
+# cs5I5VcXySMp0Q2BUBvf4aR/Uf/OhhNlesLHtxRiO+VHcHpJMuDnhDlGfIDcQDOL
+# 8lqnIx14kZcOihQLEJ3QJSkUEsv5HTnVQLP53/lJfw==
 # SIG # End signature block

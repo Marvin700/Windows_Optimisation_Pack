@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.4.4
+	Version: v6.5.4
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -27,14 +27,14 @@ Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
-IF($Functions){
-Invoke-Command -ScriptBlock {Checks}
+if ($Functions){
+Invoke-Command -ScriptBlock {InitialActions}
 foreach ($Function in $Functions)
 {Invoke-Expression -Command $Function}
 exit}
 
 # The mandatory checks
-Checks
+InitialActions
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
@@ -60,6 +60,9 @@ ErrorReporting -Disable
 
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
+
+# Do not show websites from your browsing history in the Start menu
+BrowsingHistory -Hide
 
 # Do not use sign-in info to automatically finish setting up device after an update
 SigninInfo -Disable
@@ -390,8 +393,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpb1l1CpJIBRcWhVE6VXKJq3M
-# ZX6gggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWg1Y0C/st+2z506dDDYDJCZ8
+# wXGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -411,11 +414,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUdl6aACDE0Rnw6GxTiu+e+noeey0wDQYJ
-# KoZIhvcNAQEBBQAEggEAPCfH6MYSaTCjiEdIFL22sod+pp5ke10TPmiteZ4g1Ymg
-# kYM2tHOw0vLL2HJOLLO/jJTRHig59QgSawXM4mVQ9eolwtjcdaKY/mQbMzXROuXO
-# PGsGpiZF685HpgJGnIiVm7Z9mGoLrWtDGf6dr38m4ig0JmQ5S2ls6nwx6JsczjoU
-# 4aFZ7Xws+yLpNC+x5oIY6zCBGUIesd2w88LOEeGEEZN+Kl0O+mMHUL1wF9pYC2Pu
-# kLxSdavW3Jkrtcocko8HaLpsN4UDGNqFlQJ5RSgS3Fa+wCNOuRbcVDCpHHevtyiH
-# 7CCctjKyyx6e73Kuyl5kX09iCQCfFLtUrRNvmkywHQ==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI61GkTu695DUawmjvqNxMEMOAfcwDQYJ
+# KoZIhvcNAQEBBQAEggEApiXYUnzxBeP+v01iLeP3rRzp2ziSRwz4NFlqpv4JkEBv
+# S5tdbo7mdPqqLqO5q4HUYj3lCzCw1dfOarl+IBWO8kDfEGAPWiFfw3/n48ml3F34
+# LDJpqxSCvO2o44uqZHGQR4jNt4/NL69Y3wbeIwwZ8iwWZtAIZ8r9g5w8CJGVd3QK
+# ysmrO9cab87xFRsxzvUkVQ9Tv6itrAa7n268nr5BYZT/sp8EO/MMs4z3+TEhHiR2
+# F1g90syPtLCPRVrnY+Mq9++BBypt3ZdImiOfyvh4zffQooBNkY3rZKVt3C4LzY7X
+# kyrY46/8u48tVb5dDO2lNOC0Xs/EBCjyIX9H6kG+Zw==
 # SIG # End signature block
