@@ -276,7 +276,7 @@ PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 SATADrivesRemovableMedia -Disable
 
 # Unpin all Start apps
-UnpinAllStartApps
+#UnpinAllStartApps
 
 # Show more pins on Start (for 22509+ build only)
 StartLayout -ShowMorePins
