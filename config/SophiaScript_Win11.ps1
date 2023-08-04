@@ -275,9 +275,6 @@ PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 # Prevent all internal SATA drives from showing up as removable media in the taskbar notification area
 SATADrivesRemovableMedia -Disable
 
-# Unpin all Start apps
-UnpinAllStartApps
-
 # Show more pins on Start (for 22509+ build only)
 StartLayout -ShowMorePins
 
@@ -393,8 +390,8 @@ Windows10ContextMenu -Disable
 # SIG # Begin signature block
 # MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWg1Y0C/st+2z506dDDYDJCZ8
-# wXGgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUt6ht8y+FLK3Vf1or8HMKrr9e
+# q5qgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
 # AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
 # MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
 # cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
@@ -414,11 +411,11 @@ Windows10ContextMenu -Disable
 # JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
 # +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
 # BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUI61GkTu695DUawmjvqNxMEMOAfcwDQYJ
-# KoZIhvcNAQEBBQAEggEApiXYUnzxBeP+v01iLeP3rRzp2ziSRwz4NFlqpv4JkEBv
-# S5tdbo7mdPqqLqO5q4HUYj3lCzCw1dfOarl+IBWO8kDfEGAPWiFfw3/n48ml3F34
-# LDJpqxSCvO2o44uqZHGQR4jNt4/NL69Y3wbeIwwZ8iwWZtAIZ8r9g5w8CJGVd3QK
-# ysmrO9cab87xFRsxzvUkVQ9Tv6itrAa7n268nr5BYZT/sp8EO/MMs4z3+TEhHiR2
-# F1g90syPtLCPRVrnY+Mq9++BBypt3ZdImiOfyvh4zffQooBNkY3rZKVt3C4LzY7X
-# kyrY46/8u48tVb5dDO2lNOC0Xs/EBCjyIX9H6kG+Zw==
+# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUogvTb5UujUtMzrP8zzOuCv+8qscwDQYJ
+# KoZIhvcNAQEBBQAEggEAceoiZOuvyHxZ+b/gQhv+nprDGRsq7CRQWmsL4qjPursL
+# ImfSUnLGaXT88UCRrir81e1UAGhLATljb0K570vu+iVvITx8VHVSd3EBA4iEVNku
+# /0WyE8hc28s8nf92hbVTnarGc25IWUtFdefys6CHkw0ROq1je/BlqWcMC+PgRpYl
+# mkF572Lpl0bErd4E/8tm/9vbNVEu2eY1KmHf0v474G242hDH/VIbiKvHrEZe2gOr
+# p0eQCP9vGD0J9kNTfm8MHqjOcbk74y19hY7KNbVZu+yhraDXiOITp1EazmSFTZ8k
+# 0FuomLzp8abtjbcozoCyksXR6u6VGqiPzDIk7EWEnQ==
 # SIG # End signature block
