@@ -25,9 +25,8 @@ function WindowsTweaks_Features{
 $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root"
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 foreach($feature in $features){Invoke-Expression "dism /Online /Disable-Feature /FeatureName:$feature /NoRestart"}
-$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*",
-"MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
-foreach ($capability in $capability){Get-WindowsCapability -Online | Where-Object {$_.Name -like $capability} | Remove-WindowsCapability -Online -ErrorAction SilentlyContinue}
+$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
+foreach($capability in $capability){Get-WindowsCapability -Online | Where-Object {$_.Name -like $capability} | Remove-WindowsCapability -Online -ErrorAction SilentlyContinue}
 if($env:WindowsVersion -match "Microsoft Windows 10"){
 taskkill /F /IM SystemSettings.exe
 Clear-Host;Write-Warning "Shortcut fix being Applied...";Write-Warning "PLEASE DON'T MOVE YOUR MOUSE UNTIL FINISHED!";Start-Sleep 2
