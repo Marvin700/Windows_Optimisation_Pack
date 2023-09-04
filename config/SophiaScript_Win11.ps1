@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.5.4
+	Version: v6.5.5
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -225,7 +225,7 @@ PowerPlan -Balanced
 NetworkAdaptersSavePower -Disable
 
 # Disable the Internet Protocol Version 6 (TCP/IPv6) component for all network connections
-IPv6Component -Disable
+# IPv6Component -Disable
 
 # Save screenshots by pressing Win+PrtScr on the Desktop
 WinPrtScrFolder -Desktop
