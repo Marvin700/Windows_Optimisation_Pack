@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.5.5
+	Version: v6.5.7
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -133,6 +133,9 @@ TaskbarAlignment -Left
 # Hide the search button from the taskbar
 TaskbarSearch -Hide
 
+# Hide Copilot button on the taskbar
+CopilotButton -Hide
+
 # Hide the Task view button from the taskbar
 TaskViewButton -Hide
 
@@ -141,6 +144,9 @@ TaskbarWidgets -Hide
 
 # Hide the Chat icon (Microsoft Teams) on the taskbar
 TaskbarChat -Hide
+
+# Combine taskbar buttons and always hide labels (default value)
+TaskbarCombine -Always
 
 # Unpin the "Microsoft Edge", "Microsoft Store" shortcuts from the taskbar
 UnpinTaskbarShortcuts -Shortcuts Edge, Store
