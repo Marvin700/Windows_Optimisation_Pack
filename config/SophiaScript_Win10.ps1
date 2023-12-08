@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.17.7
+	Version: v5.17.8
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
@@ -108,6 +108,9 @@ MergeConflicts -Show
 
 # Hide Cortana button on the taskbar
 CortanaButton -Hide
+
+# Hide Copilot button on the taskbar
+CopilotButton -Hide
 
 # Do not show sync provider notification within File Explorer
 OneDriveFileExplorerAd -Hide

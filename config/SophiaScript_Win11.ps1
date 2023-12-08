@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.5.7
+	Version: v6.5.8
 
 	Copyright (c) 2014—2023 farag
 	Copyright (c) 2019—2023 farag & Inestic
