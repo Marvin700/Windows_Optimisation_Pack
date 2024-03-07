@@ -2,10 +2,10 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.5.8
+	Version: v6.6.2
 
-	Copyright (c) 2014—2023 farag
-	Copyright (c) 2019—2023 farag & Inestic
+	Copyright (c) 2014—2024 farag
+	Copyright (c) 2019—2024 farag & Inestic
 
 	https://github.com/farag2
 	https://github.com/Inestic
@@ -21,7 +21,7 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2024"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
@@ -133,6 +133,9 @@ TaskbarAlignment -Left
 # Hide the search button from the taskbar
 TaskbarSearch -Hide
 
+# Hide search highlights
+SearchHighlights -Hide
+
 # Hide Copilot button on the taskbar
 CopilotButton -Hide
 
@@ -142,8 +145,8 @@ TaskViewButton -Hide
 # Hide the widgets icon on the taskbar
 TaskbarWidgets -Hide
 
-# Hide the Chat icon (Microsoft Teams) on the taskbar
-TaskbarChat -Hide
+# Hide the Chat icon (Microsoft Teams) on the taskbar and prevent Microsoft Teams from installing for new users
+PreventTeamsInstallation -Enable
 
 # Combine taskbar buttons and always hide labels (default value)
 TaskbarCombine -Always
