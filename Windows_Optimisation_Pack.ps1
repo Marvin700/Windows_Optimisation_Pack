@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 $Branch = "main"
-$Version = "1.9.2"
+$Version = "1.9.1"
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
