@@ -10,7 +10,7 @@ $Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.Wind
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
-IF(Test-Connection 1.1.1.1 -Count 1 -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
+IF(Test-Connection https://github.com/Marvin700/Windows_Optimisation_Pack -Count 1 -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
@@ -234,7 +234,7 @@ IF(!(Test-Path $ScriptFolder\Picture.png)){Invoke-WebRequest "https://user-image
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 $hash.Exit = $true
 $handler_BUTTON_Start_Click=
-{   
+{
 $hash.Exit = $false
 IF($BOX_Checks.Checked)                 {$hash.Checks = $true}
 IF($BOX_SystemPoint.Checked)            {$hash.SystemPoint = $true}
@@ -275,31 +275,32 @@ $Titel_Compability = New-Object Windows.Forms.Label
 $Titel_Compability.Size = New-Object Drawing.Point 300,25
 $Titel_Compability.Location = New-Object Drawing.Point 500,422
 $Titel_Compability.ForeColor='#e8272f'
+
 ##Choice
 $Text_Info = New-Object Windows.Forms.Label
 $Text_Info.Size = New-Object Drawing.Point 150,150
 $Text_Info.Location = New-Object Drawing.Point 150,215
+$Text_Info.ForeColor='#aaaaaa'
 $Text_Info.text = "
 Version $Version
 
 $WindowsVersion
 Build $BuildNumber 
 
-Administrator rights
+Administrator Permission
 $Administrator
 
-Internet Connection
+Github Connection
 $InternetConnection
 "
-$Text_Info.ForeColor='#aaaaaa'
 $BUTTON_Optimise = New-Object System.Windows.Forms.Button
-$BUTTON_Optimise.Text = "Optimise your Windows"
+$BUTTON_Optimise.Text = "Optimise Windows"
 $BUTTON_Optimise.Size = New-Object Drawing.Point 169,54
 $BUTTON_Optimise.Location = New-Object Drawing.Point 370,220
 $BUTTON_Optimise.ForeColor='#aaaaaa'
 $BUTTON_Optimise.add_Click{GUI_Optimise}
 $BUTTON_Maintance = New-Object System.Windows.Forms.Button
-$BUTTON_Maintance.Text = "Maintance And Repair"
+$BUTTON_Maintance.Text = "Maintance Windows"
 $BUTTON_Maintance.Size = New-Object Drawing.Point 169,54
 $BUTTON_Maintance.Location = New-Object Drawing.Point 370,300
 $BUTTON_Maintance.ForeColor='#aaaaaa'
@@ -311,6 +312,7 @@ $BUTTON_Exit.Location = New-Object Drawing.Point 270,410
 $BUTTON_Exit.ForeColor='#aaaaaa'
 $BUTTON_Exit.Text = "Exit"
 $BUTTON_Exit.add_Click{$hash.Exit = $true; $Form.Close()}
+
 ##Optimisation
 IF(!($Administrator -eq "True")){$Titel_Compability.text = "PowerShell is not Administrator"}
 $Titel_Essentials = New-Object Windows.Forms.Label
@@ -442,7 +444,7 @@ $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
 $BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
-$BUTTON_Start.add_Click{$handler_button_Start_Click}
+$BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!($Administrator -eq "True")){$BUTTON_Start.Enabled = $false}
 $BUTTON_Cancel = New-Object System.Windows.Forms.Button
 $BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
@@ -462,7 +464,6 @@ $form.Controls.add($BUTTON_Optimise)
 $form.Controls.add($BUTTON_Maintance)
 $form.Controls.add($BUTTON_Exit)
 }
-
 
 function GUI_Optimise
 {
@@ -524,36 +525,3 @@ IF($hash.Driver_Cleaner){Driver_Cleaner}}
 GUI
 Choice
 Finish
-
-# SIG # Begin signature block
-# MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUH7mblSgApasRupF9vjWUmKC+
-# xoqgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
-# AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
-# MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
-# cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
-# AMqbrd2/6x589A5LablKK+Ed5zN+CoIBO/0DtWoJ7mxT+4IWA+0d5kWYTUW/MI7Y
-# BHS5r7kuUe1SX2E90CVKVKk7HVrbMCv707M+PWWQs+D0Q9vrXqMEcuEmoRcrQH7j
-# kTzs+Y4kKAkD/8Je1+5uBpyu6H1FTH9290no+h9bgvCp5UrhzzFJkVyRjCXJLlbV
-# NgLEWPDFa0mMEVNoXxa7m9AwnCNSCUMGEVhPzIMameK0W9jEKPTxfPdXhRWTu4lz
-# 7vzp5HBvn3XdutyJhH1+txCgc6uNJe/kxZENvHTObRWxkMotq8x3GqjuvNpY3t3O
-# MndeMCYiI84GBuixSXeaXf0CAwEAAaNGMEQwDgYDVR0PAQH/BAQDAgWgMBMGA1Ud
-# JQQMMAoGCCsGAQUFBwMDMB0GA1UdDgQWBBSOhOkyv1Z+aPC/kWeVNpKwbI3omjAN
-# BgkqhkiG9w0BAQsFAAOCAQEAku31A0acjtrpBqJn7nwifNv5EmiryXeGZm0RCflv
-# /JRIyvjHMDvo7Mb9p4VTRciZt2kyIDzefda1XU597frO4TgNlBgH816TxMJ4qZlb
-# ScZXc/zhBOu51oA53gt641h0zhp5dJpP/gE8VFhBUV0IVTBPnunEK1hpYmGLftAe
-# 3FjiDRQ+b+q/zT0uUbrFdyYHnlyL40bPl3XVDwVaJhDGW7At/s1K4ZA96Xej5Wxa
-# ffqIOiTEjscTmVeXLCf44EiyxZ0vF20BWwvCosONptr1MyQXFI5azArQOU9BfhYL
-# rJXoqIvVp1G2GWcfqZGLAoxnidVEN1ndnbkEFCpWeNcAkzGCAdkwggHVAgEBMDgw
-# JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
-# +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
-# BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU3RNeBT+UhFJgUcF0x1QPApRQV1swDQYJ
-# KoZIhvcNAQEBBQAEggEAM6MgOuaq4V3LgzVFN2FkLDAaM4Svdg6SlCYJc6ihMpiZ
-# OJnfD+IrsNLkyHzZGYJlUHEKpgzp9Kokbr//SM5kEo0u0+kns0EeKxFt5Ee7ijQF
-# 7BpE7xSUfuOPE2aZePXDTeTcoS8JnELkVA4zZcorifTbOky4v+adpamBViueLD/T
-# XjaJFEfQomZjNfgY2o6tVFsjCwqi7kFdolyB1kimaOE2qDpcBQH6/9zzX3asCzql
-# JqKicEK2KI+LSi2dqtupmwMTlEr2PkMfBgf/HUetsHVaWjQE3wX22qNY8zdZ32+e
-# wmB7CgR71AgWim63E33+lQzjsWAUmZ5V5PHDvXOFlQ==
-# SIG # End signature block
