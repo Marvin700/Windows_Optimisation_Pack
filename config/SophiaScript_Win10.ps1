@@ -2,10 +2,10 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.17.4
+	Version: v5.18.2
 
-	Copyright (c) 2014—2023 farag
-	Copyright (c) 2019—2023 farag & Inestic
+	Copyright (c) 2014—2024 farag
+	Copyright (c) 2019—2024 farag & Inestic
 
 	https://github.com/farag2
 	https://github.com/Inestic
@@ -21,7 +21,7 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2023"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2024"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
@@ -108,6 +108,9 @@ MergeConflicts -Show
 
 # Hide Cortana button on the taskbar
 CortanaButton -Hide
+
+# Hide Copilot button on the taskbar
+CopilotButton -Hide
 
 # Do not show sync provider notification within File Explorer
 OneDriveFileExplorerAd -Hide
@@ -247,7 +250,7 @@ PowerPlan -Balanced
 NetworkAdaptersSavePower -Disable
 
 # Disable the Internet Protocol Version 6 (TCP/IPv6) component for all network connections
-IPv6Component -Disable
+# IPv6Component -Disable
 
 # Save screenshots by pressing Win+PrtScr on the Desktop
 WinPrtScrFolder -Desktop
