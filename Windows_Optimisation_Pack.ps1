@@ -288,7 +288,7 @@ $Version
 $WindowsVersion
 Build $BuildNumber 
 
-GitHub connection
+GitHub Connection
 $InternetConnection
 
 Administrator Permission
