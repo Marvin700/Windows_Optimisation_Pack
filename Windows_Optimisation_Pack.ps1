@@ -10,7 +10,7 @@ $Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.Wind
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
-IF(Test-Connection https://github.com/Marvin700/Windows_Optimisation_Pack -Count 1 -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
+IF(Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
@@ -282,16 +282,17 @@ $Text_Info.Size = New-Object Drawing.Point 150,150
 $Text_Info.Location = New-Object Drawing.Point 150,215
 $Text_Info.ForeColor='#aaaaaa'
 $Text_Info.text = "
-Version $Version
+Version
+$Version
 
 $WindowsVersion
 Build $BuildNumber 
 
+GitHub connection
+$InternetConnection
+
 Administrator Permission
 $Administrator
-
-Github Connection
-$InternetConnection
 "
 $BUTTON_Optimise = New-Object System.Windows.Forms.Button
 $BUTTON_Optimise.Text = "Optimise Windows"
