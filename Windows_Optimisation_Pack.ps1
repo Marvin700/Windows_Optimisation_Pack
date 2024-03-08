@@ -68,10 +68,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
-ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
-If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
-New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force}
             
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
@@ -98,7 +95,7 @@ Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 function ooShutup{
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\OOSU10.exe"
-Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet"}
+Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
 
 function SystemPoint{
 IF($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
@@ -108,7 +105,8 @@ Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType M
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
 function Checks{
- " Compatibility checks and preparations are performed..."
+Clear-Host
+ " Compatibility checks and prerationing are performed..."
 IF(!([System.Environment]::Is64BitOperatingSystem)){
 Write-Warning " You need an 64-Bit System"
 Start-Sleep 20;exit}
@@ -142,6 +140,9 @@ function Windows_Cleanup{
 Clear-Host
 ipconfig /flushdns
 Clear-BCCache -Force -ErrorAction SilentlyContinue
+ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
+If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
+New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}
 $path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
 "$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","C:\ProgramData\Package Cache")
 foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse}
@@ -159,12 +160,7 @@ IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};G
 Clear-Host
 gpupdate.exe /force 
 lodctr /r;lodctr /r
-Clear-Host
-Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
-Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
-Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
-Start-Process cleanmgr.exe /sagerun:1
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
+Start-Process cleanmgr.exe /sagerun:1}
 
 function Driver_Cleaner{
 Clear-Host
@@ -190,30 +186,10 @@ Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Ar
 Expand-Archive "$env:temp\Armoury_Crate_Uninstall_Tool.zip" "$env:temp" -Force
 Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
 
-function Fan_Control{
-IF(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}){
-Start-BitsTransfer -Source "https://github.com/hirschmann/nbfc/releases/download/1.6.3/NoteBookFanControl.1.6.3.setup.exe" -Destination "$env:temp\NoteBookFanControl.exe"
-Start-Process "$env:temp\NoteBookFanControl.exe"} 
-else { Start-BitsTransfer -Source "https://github.com/Rem0o/FanControl.Releases/releases/download/V181/FanControl_181__8_0_Installer.exe" -Destination "$env:temp\FanControl.exe"
-Start-Process "$env:temp\FanControl.exe"}}
-   
-function Controller{
-Start-BitsTransfer -Source "https://github.com/Ryochan7/DS4Windows/releases/download/v3.3.3/DS4Windows_3.3.3_x64.zip" -Destination "$env:temp\DS4Windows.zip"
-Expand-Archive $env:temp\DS4Windows.zip "$env:SystemDrive\Program Files\" -Force
-Remove-Item -Path $env:temp\DS4Windows.zip -Force -Recurse
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\Controller.lnk")
-$Shortcut.TargetPath = "$env:SystemDrive\Program Files\DS4Windows\DS4Windows.exe"
-$Shortcut.Save()}
-
 function Autoruns{
 Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
 Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe}
-
-function Google_Chrome{winget install --id=Google.Chrome --exact --accept-source-agreements}
-
-function Winrar{winget install --id=RARLab.WinRAR --exact --accept-source-agreements}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
@@ -246,15 +222,9 @@ IF($BOX_WindowsTweaks_Tasks.Checked)    {$hash.WindowsTweaks_Tasks = $true}
 IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}   
 IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
 IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
-IF($BOX_Scheduled_Maintance.Checked)    {$hash.Scheduled_Maintance = $true}  
-IF($BOX_Driver_Cleaner.Checked)         {$hash.Driver_Cleaner = $true}  
 IF($BOX_Runtime.Checked)                {$hash.Runtime = $true}   
 IF($BOX_Remove_ASUS.Checked)            {$hash.Remove_ASUS = $true} 
 if($BOX_Autoruns.Checked)               {$hash.Autoruns = $true} 
-IF($BOX_Winrar.Checked)                 {$hash.Winrar = $true}    
-IF($BOX_Fan_Control.Checked)            {$hash.Fan_Control = $true}  
-IF($BOX_Google_Chrome.Checked)          {$hash.Google_Chrome = $true}     
-IF($BOX_Controller.Checked)             {$hash.Controller = $true} 
 $Form.Close()
 }
 $form = New-Object System.Windows.Forms.Form
@@ -279,7 +249,7 @@ $Titel_Compability.ForeColor='#e8272f'
 ##Choice
 $Text_Info = New-Object Windows.Forms.Label
 $Text_Info.Size = New-Object Drawing.Point 150,150
-$Text_Info.Location = New-Object Drawing.Point 150,215
+$Text_Info.Location = New-Object Drawing.Point 150,205
 $Text_Info.ForeColor='#aaaaaa'
 $Text_Info.text = "
 Version
@@ -331,11 +301,6 @@ $Titel_Extras.Size = New-Object Drawing.Point 135,25
 $Titel_Extras.Location = New-Object Drawing.Point 393,215
 $Titel_Extras.text = "Extras"
 $Titel_Extras.ForeColor='#aaaaaa'
-$Titel_Software = New-Object Windows.Forms.Label
-$Titel_Software.Size = New-Object Drawing.Point 135,25
-$Titel_Software.Location = New-Object Drawing.Point 566,215
-$Titel_Software.text = "Software"
-$Titel_Software.ForeColor='#aaaaaa'
 $BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
 $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
 $BOX_SystemPoint.Location = New-Object Drawing.Point 27,248
@@ -412,34 +377,10 @@ $BOX_Remove_ASUS.ForeColor='#aaaaaa'
 $BOX_Remove_ASUS.Checked = $false
 $BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
 $BOX_Autoruns.Size = New-Object Drawing.Point 135,25
-$BOX_Autoruns.Location = New-Object Drawing.Point 546,248
+$BOX_Autoruns.Location = New-Object Drawing.Point 373,341
 $BOX_Autoruns.Text = "Autoruns" 
 $BOX_Autoruns.ForeColor='#aaaaaa'
 $BOX_Autoruns.Checked = $false
-$BOX_Winrar = New-Object System.Windows.Forms.CheckBox
-$BOX_Winrar.Size = New-Object Drawing.Point 135,25
-$BOX_Winrar.Location = New-Object Drawing.Point 546,279
-$BOX_Winrar.Text = "Winrar"
-$BOX_Winrar.ForeColor='#aaaaaa'
-$BOX_Winrar.Checked = $false
-$BOX_Fan_Control = New-Object System.Windows.Forms.CheckBox
-$BOX_Fan_Control.Size = New-Object Drawing.Point 135,25
-$BOX_Fan_Control.Location = New-Object Drawing.Point 546,310
-$BOX_Fan_Control.Text = "Fan Control"
-$BOX_Fan_Control.ForeColor='#aaaaaa'
-$BOX_Fan_Control.Checked = $false  
-$BOX_Google_Chrome = New-Object System.Windows.Forms.CheckBox
-$BOX_Google_Chrome.Size = New-Object Drawing.Point 135,25
-$BOX_Google_Chrome.Location = New-Object Drawing.Point 546,341
-$BOX_Google_Chrome.Text = "Google Chrome"
-$BOX_Google_Chrome.ForeColor='#aaaaaa'
-$BOX_Google_Chrome.Checked = $false  
-$BOX_Controller = New-Object System.Windows.Forms.CheckBox
-$BOX_Controller.Size = New-Object Drawing.Point 135,25
-$BOX_Controller.Location = New-Object Drawing.Point 546,372
-$BOX_Controller.Text =  "Controller Support"
-$BOX_Controller.ForeColor='#aaaaaa'
-$BOX_Controller.Checked = $false 
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
@@ -474,7 +415,6 @@ function GUI_Optimise
     $form.controls.add($Titel_Essentials)
     $form.controls.add($Titel_Tweaks)
     $form.controls.add($Titel_Extras)
-    $form.controls.add($Titel_Software)
     $form.Controls.Add($BOX_Checks)
     $form.Controls.Add($BOX_SystemPoint)
     $form.Controls.Add($BOX_SophiaScript)
@@ -488,12 +428,14 @@ function GUI_Optimise
     $form.Controls.Add($BOX_Runtime)
     $form.Controls.Add($BOX_Remove_ASUS)
     $form.Controls.Add($BOX_Autoruns)
-    $form.Controls.Add($BOX_Winrar)
-    $form.Controls.Add($BOX_Fan_Control)
-    $form.Controls.Add($BOX_Google_Chrome)
-    $form.Controls.Add($BOX_Controller)
     $form.Controls.Add($BUTTON_Start)
     $form.Controls.Add($BUTTON_Cancel)
+}
+
+function GUI_Maintance
+{
+    $form.Controls.Clear()
+    $form.controls.add($Image)
 }
 
 GUI_Choice
@@ -502,23 +444,19 @@ $form.ShowDialog() | Out-Null }
 
 function Choice{ 
 IF($hash.Exit){exit}
-IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Checks}
+IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Preperations}
-IF($hash.SophiaScript){SophiaScript}
 IF($hash.ooShutup){ooShutup}
+IF($hash.SophiaScript){SophiaScript}
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-IF($hash.Scheduled_Maintance){Scheduled_Maintance}
+IF($hash.Advanced_DiskCleanup){Advanced_DiskCleanup}
 IF($hash.Runtime){Runtime}   
 IF($hash.Autoruns){Autoruns}   
-IF($hash.Winrar){Winrar} 
-IF($hash.Fan_Control){Fan_Control}
-IF($hash.Controller){Controller} 
-IF($hash.Google_Chrome){Google_Chrome}
 IF($hash.Remove_ASUS){Remove_ASUS}
 IF($hash.Windows_Cleanup){Windows_Cleanup}
 IF($hash.Driver_Cleaner){Driver_Cleaner}}
