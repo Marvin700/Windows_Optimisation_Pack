@@ -12,7 +12,6 @@
 * Deactivate Tasks & Components
 * Mouse acceleration Fix
 * More Windows Tweaks
-* Clean install of GPU Driver with DDU
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
