@@ -36,7 +36,7 @@ schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compati
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
 $task = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor"
 "FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload")
-foreach($task in $task){Get-ScheduledTask -TaskName $task | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
+foreach($task in $task){Get-ScheduledTask -TaskName $task -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -73,8 +73,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Capabili
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
 $drives = Get-WmiObject Win32_LogicalDisk | Select-Object -ExpandProperty DeviceID
-foreach($drive in $drives) {Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
-                
+foreach($drive in $drives){Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
+
 function SophiaScript{
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
 IF($WindowsVersion -match "Microsoft Windows 11"){
@@ -138,40 +138,17 @@ Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "S
 
 function Windows_Cleanup{
 Clear-Host
-ipconfig /flushdns
-Clear-BCCache -Force -ErrorAction SilentlyContinue
+Write-Output "Removing Cache Files..."
+ipconfig /flushdns > $null
 ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
 If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
 New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}
+Clear-BCCache -Force -ErrorAction SilentlyContinue
 $path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
 "$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","C:\ProgramData\Package Cache")
-foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov")){
-$EscapefromTarkov = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\EscapeFromTarkov' -Name 'InstallLocation').InstallLocation 
-IF(Get-Process EscapeFromTarkov.exe -ErrorAction SilentlyContinue){taskkill /F /IM EscapeFromTarkov.exe}
-Get-ChildItem -Path $EscapefromTarkov\Logs -ErrorAction SilentlyContinue | Remove-Item -Recurse
-Get-ChildItem -Path $env:temp\"Battlestate Games" -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090")){
-$CallofDutyMW2_Steam = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1938090' -Name 'InstallLocation').InstallLocation     
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Steam\_retail_\shadercache -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-IF((Test-Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty")){
-$CallofDutyMW2_Battlenet = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Call of Duty' -Name 'InstallLocation').InstallLocation 
-IF(Get-Process cod.exe -ErrorAction SilentlyContinue){taskkill /F /IM cod.exe};Get-ChildItem -Path $CallofDutyMW2_Battlenet\_retail_\shadercache -ErrorAction SilentlyContinue | Remove-Item -Recurse}
-Clear-Host
-gpupdate.exe /force 
-lodctr /r;lodctr /r
+foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
+lodctr /r
 Start-Process cleanmgr.exe /sagerun:1}
-
-function Driver_Cleaner{
-Clear-Host
-IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){Write-Warning " Reboot Pending ! You can Reinstall GPU Driver after PC Restart";Start-Sleep 10}else{
-Start-BitsTransfer -Source "https://github.com/Marvin700/Windows_Optimisation_Pack/raw/$Branch/config/DDU.zip" -Destination "$env:temp\DDU.zip"
-Expand-Archive $env:temp\DDU.zip $env:temp
-cmd.exe /c "bcdedit /set {current} safeboot minimal"
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Normal_Boot" -Value 'cmd.exe /c "bcdedit /deletevalue {current} safeboot"'
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Driver_Cleaner" -Value 'Powershell.exe -command "Set-Location $env:temp\DDU\;& .\DisplayDriverUninstaller.exe -silent -removemonitors -removephysx -removegfe -removenvbroadcast -cleanallgpus -removenvcp -removeintelcp -removeamdcp -removeamddirs -restart"'
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Driver is Unnstalling. Please Wait...'"
-[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms");[System.Windows.Forms.MessageBox]::Show("For Driver Reinstallation restart the PC","Windows_Optimisation_Pack",0,[System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null}}
 
 function Runtime{
 winget source update | Out-Null
@@ -193,6 +170,7 @@ Start-Process $env:temp\Autoruns64.exe}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
 <text>Your Windows is now optimised :)</text></binding></visual>
@@ -241,12 +219,14 @@ $Image.Width = $img.Size.Width
 $Image.Height = $img.Size.Height
 $Image.Location=New-Object System.Drawing.Point(68,20)
 $Image.Image = $img
-$Titel_Compability = New-Object Windows.Forms.Label
-$Titel_Compability.Size = New-Object Drawing.Point 300,25
-$Titel_Compability.Location = New-Object Drawing.Point 500,422
-$Titel_Compability.ForeColor='#e8272f'
+$Titel_Warning = New-Object Windows.Forms.Label
+$Titel_Warning.Size = New-Object Drawing.Point 200,25
+$Titel_Warning.Location = New-Object Drawing.Point 50,422
+$Titel_Warning.ForeColor='#e8272f'
+IF(!($Administrator -eq "True")){$Titel_Warning.text = "PowerShell is not Administrator"}
 
 ##Choice
+
 $Text_Info = New-Object Windows.Forms.Label
 $Text_Info.Size = New-Object Drawing.Point 150,150
 $Text_Info.Location = New-Object Drawing.Point 150,215
@@ -285,7 +265,6 @@ $BUTTON_Exit.Text = "Exit"
 $BUTTON_Exit.add_Click{$hash.Exit = $true; $Form.Close()}
 
 ##Optimisation
-IF(!($Administrator -eq "True")){$Titel_Compability.text = "PowerShell is not Administrator"}
 $Titel_Essentials = New-Object Windows.Forms.Label
 $Titel_Essentials.Size = New-Object Drawing.Point 135,25
 $Titel_Essentials.Location = New-Object Drawing.Point 50,215
@@ -401,7 +380,7 @@ function GUI_Choice
 $form.Controls.Clear()
 $form.controls.add($Image)
 $form.controls.add($Text_Info)
-$form.controls.add($Titel_Compability)
+$form.controls.add($Titel_Warning)
 $form.Controls.add($BUTTON_Optimise)
 $form.Controls.add($BUTTON_Maintance)
 $form.Controls.add($BUTTON_Exit)
@@ -411,7 +390,7 @@ function GUI_Optimise
 {
     $form.Controls.Clear()
     $form.controls.add($Image)
-    $form.controls.add($Titel_Compability)
+    $form.controls.add($Titel_Warning)
     $form.controls.add($Titel_Essentials)
     $form.controls.add($Titel_Tweaks)
     $form.controls.add($Titel_Extras)
