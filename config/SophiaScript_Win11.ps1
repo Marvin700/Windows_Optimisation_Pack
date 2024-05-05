@@ -4,11 +4,11 @@
 <#
 	Version: v6.6.5
 
-	Copyright (c) 2014—2024 farag
-	Copyright (c) 2019—2024 farag & Inestic
+	Copyright (c) 2014—2024 farag, Inestic & lowl1f3
 
 	https://github.com/farag2
 	https://github.com/Inestic
+	https://github.com/lowl1f3
 #>
 
 [CmdletBinding()]
