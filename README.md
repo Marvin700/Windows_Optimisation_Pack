@@ -18,6 +18,7 @@ irm windows-optimisation.de/beta | iex
 * Maintance Windows
 * Remove Windows Bloatware 
 * Disable Windows Spying
+* Enhance Windows Privacy
 * Lower CPU and Ram usage
 * Sophia Script & O&OShutUp
 * Remove Cortana and OneDrive
