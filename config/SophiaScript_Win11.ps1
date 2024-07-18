@@ -2,9 +2,9 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.6.5
+	Version: v6.6.8
 
-	Copyright (c) 2014—2024 farag, Inestic & lowl1f3
+	Copyright (c) 2014—2025 farag, Inestic & lowl1f3
 
 	https://github.com/farag2
 	https://github.com/Inestic
@@ -50,7 +50,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps
+UninstallUWPApps -ForAllUsers
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -61,8 +61,11 @@ ErrorReporting -Disable
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
 
-# Do not show websites from your browsing history in the Start menu
-BrowsingHistory -Hide
+# Do not show recommendations for tips, shortcuts, new apps, and more in Start menu
+StartRecommendationsTips -Hide
+
+# Do not show Microsoft account-related notifications on Start Menu in Start menu
+StartAccountNotifications -Hide
 
 # Do not use sign-in info to automatically finish setting up device after an update
 SigninInfo -Disable
