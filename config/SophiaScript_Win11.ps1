@@ -25,6 +25,7 @@ $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
+Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions){
@@ -380,6 +381,3 @@ OpenWindowsTerminalContext -Show
 
 # Open Windows Terminal in context menu as administrator by default
 OpenWindowsTerminalAdminContext -Enable
-
-# Disable the Windows 10 context menu style
-Windows10ContextMenu -Disable
