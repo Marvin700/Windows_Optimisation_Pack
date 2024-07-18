@@ -2,13 +2,13 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.6.2
+	Version: v6.6.8
 
-	Copyright (c) 2014—2024 farag
-	Copyright (c) 2019—2024 farag & Inestic
+	Copyright (c) 2014—2025 farag, Inestic & lowl1f3
 
 	https://github.com/farag2
 	https://github.com/Inestic
+	https://github.com/lowl1f3
 #>
 
 [CmdletBinding()]
@@ -21,10 +21,10 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2024"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2024"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
+Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions){
@@ -50,7 +50,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps
+UninstallUWPApps -ForAllUsers
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -61,8 +61,11 @@ ErrorReporting -Disable
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
 
-# Do not show websites from your browsing history in the Start menu
-BrowsingHistory -Hide
+# Do not show recommendations for tips, shortcuts, new apps, and more in Start menu
+StartRecommendationsTips -Hide
+
+# Do not show Microsoft account-related notifications on Start Menu in Start menu
+StartAccountNotifications -Hide
 
 # Do not use sign-in info to automatically finish setting up device after an update
 SigninInfo -Disable
@@ -218,9 +221,6 @@ MappedDrivesAppElevatedAccess -Enable
 # Turn off Delivery Optimization
 DeliveryOptimization -Disable
 
-# Always wait for the network at computer startup and logon for workgroup networks
-WaitNetworkStartup -Enable
-
 # Do not let Windows manage my default printer
 WindowsManageDefaultPrinter -Disable
 
@@ -323,14 +323,7 @@ DismissMSAccount
 # Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
 DismissSmartScreenFilter
 
-# Enable events auditing generated when a process is created (starts)
-AuditProcess -Enable
-
-# Include command line in process creation events
-CommandLineProcessAudit -Enable
-
 # Create the "Process Creation" сustom view in the Event Viewer to log executed processes and their arguments
-# In order this feature to work events auditing (AuditProcess -Enable) and command line (CommandLineProcessAudit -Enable) in process creation events will be enabled
 EventViewerCustomView -Enable
 
 # Enable logging for all Windows PowerShell modules
@@ -357,26 +350,11 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Run as different user" item from the .exe filename extensions context menu
-RunAsDifferentUserContext -Hide
-
-# Hide the "Cast to Device" item from the media files and folders context menu
-CastToDeviceContext -Hide
-
-# Hide the "Share" item from the context menu
-ShareContext -Hide
-
 # Hide the "Edit with Clipchamp" item from the media files context menu
 EditWithClipchampContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
-
-# Hide the "Include in Library" item from the folders and drives context menu
-IncludeInLibraryContext -Hide
-
-# Hide the "Send to" item from the folders context menu
-SendToContext -Hide
 
 # Hide the "Compressed (zipped) Folder" item from the "New" context menu
 CompressedFolderNewContext -Hide
@@ -392,39 +370,3 @@ OpenWindowsTerminalContext -Show
 
 # Open Windows Terminal in context menu as administrator by default
 OpenWindowsTerminalAdminContext -Enable
-
-# Disable the Windows 10 context menu style
-Windows10ContextMenu -Disable
-
-# SIG # Begin signature block
-# MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUt6ht8y+FLK3Vf1or8HMKrr9e
-# q5qgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
-# AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
-# MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
-# cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
-# AMqbrd2/6x589A5LablKK+Ed5zN+CoIBO/0DtWoJ7mxT+4IWA+0d5kWYTUW/MI7Y
-# BHS5r7kuUe1SX2E90CVKVKk7HVrbMCv707M+PWWQs+D0Q9vrXqMEcuEmoRcrQH7j
-# kTzs+Y4kKAkD/8Je1+5uBpyu6H1FTH9290no+h9bgvCp5UrhzzFJkVyRjCXJLlbV
-# NgLEWPDFa0mMEVNoXxa7m9AwnCNSCUMGEVhPzIMameK0W9jEKPTxfPdXhRWTu4lz
-# 7vzp5HBvn3XdutyJhH1+txCgc6uNJe/kxZENvHTObRWxkMotq8x3GqjuvNpY3t3O
-# MndeMCYiI84GBuixSXeaXf0CAwEAAaNGMEQwDgYDVR0PAQH/BAQDAgWgMBMGA1Ud
-# JQQMMAoGCCsGAQUFBwMDMB0GA1UdDgQWBBSOhOkyv1Z+aPC/kWeVNpKwbI3omjAN
-# BgkqhkiG9w0BAQsFAAOCAQEAku31A0acjtrpBqJn7nwifNv5EmiryXeGZm0RCflv
-# /JRIyvjHMDvo7Mb9p4VTRciZt2kyIDzefda1XU597frO4TgNlBgH816TxMJ4qZlb
-# ScZXc/zhBOu51oA53gt641h0zhp5dJpP/gE8VFhBUV0IVTBPnunEK1hpYmGLftAe
-# 3FjiDRQ+b+q/zT0uUbrFdyYHnlyL40bPl3XVDwVaJhDGW7At/s1K4ZA96Xej5Wxa
-# ffqIOiTEjscTmVeXLCf44EiyxZ0vF20BWwvCosONptr1MyQXFI5azArQOU9BfhYL
-# rJXoqIvVp1G2GWcfqZGLAoxnidVEN1ndnbkEFCpWeNcAkzGCAdkwggHVAgEBMDgw
-# JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
-# +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
-# BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUogvTb5UujUtMzrP8zzOuCv+8qscwDQYJ
-# KoZIhvcNAQEBBQAEggEAceoiZOuvyHxZ+b/gQhv+nprDGRsq7CRQWmsL4qjPursL
-# ImfSUnLGaXT88UCRrir81e1UAGhLATljb0K570vu+iVvITx8VHVSd3EBA4iEVNku
-# /0WyE8hc28s8nf92hbVTnarGc25IWUtFdefys6CHkw0ROq1je/BlqWcMC+PgRpYl
-# mkF572Lpl0bErd4E/8tm/9vbNVEu2eY1KmHf0v474G242hDH/VIbiKvHrEZe2gOr
-# p0eQCP9vGD0J9kNTfm8MHqjOcbk74y19hY7KNbVZu+yhraDXiOITp1EazmSFTZ8k
-# 0FuomLzp8abtjbcozoCyksXR6u6VGqiPzDIk7EWEnQ==
-# SIG # End signature block

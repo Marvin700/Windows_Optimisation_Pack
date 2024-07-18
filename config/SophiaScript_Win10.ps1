@@ -2,13 +2,13 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.18.2
+	Version: v5.18.8
 
-	Copyright (c) 2014—2024 farag
-	Copyright (c) 2019—2024 farag & Inestic
+	Copyright (c) 2014—2024 farag, Inestic & lowl1f3
 
 	https://github.com/farag2
 	https://github.com/Inestic
+	https://github.com/lowl1f3
 #>
 
 [CmdletBinding()]
@@ -21,10 +21,10 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag & Inestic, 2014$([char]0x2013)2024"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2025"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
+Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions){
@@ -50,7 +50,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps
+UninstallUWPApps -ForAllUsers
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -348,12 +348,6 @@ DismissMSAccount
 # Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
 DismissSmartScreenFilter
 
-# Enable events auditing generated when a process is created (starts)
-AuditProcess -Enable
-
-# Include command line in process creation events
-CommandLineProcessAudit -Enable
-
 # Create the "Process Creation" сustom view in the Event Viewer to log executed processes and their arguments
 EventViewerCustomView -Enable
 
@@ -378,35 +372,17 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Run as different user" item from the .exe filename extensions context menu
-RunAsDifferentUserContext -Hide
-
-# Hide the "Cast to Device" item from the media files and folders context menu
-CastToDeviceContext -Hide
-
 # Hide the "Share" item from the context menu
 ShareContext -Hide
 
 # Hide the "Edit with Paint 3D" item from the media files context menu
 EditWithPaint3DContext -Hide
 
-# Hide the "Edit with Photos" item from the media files context menu
-EditWithPhotosContext -Hide
-
 # Hide the "Create a new video" item in the media files context menu
 CreateANewVideoContext -Hide
 
-# Hide the "Edit" item from the images context menu
-ImagesEditContext -Hide
-
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
-
-# Hide the "Include in Library" item from the folders and drives context menu
-IncludeInLibraryContext -Hide
-
-# Hide the "Send to" item from the folders context menu
-SendToContext -Hide
 
 # Hide the "Bitmap image" item from the "New" context menu
 BitmapImageNewContext -Hide
@@ -422,36 +398,3 @@ MultipleInvokeContext -Enable
 
 # Hide the "Look for an app in the Microsoft Store" item in the "Open with" dialog
 UseStoreOpenWith -Hide
-
-# SIG # Begin signature block
-# MIIFiwYJKoZIhvcNAQcCoIIFfDCCBXgCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPTBSHWtjOVTtrSCCRHGhuCK7
-# EmOgggMcMIIDGDCCAgCgAwIBAgIQJBEmIU6B/6pL+Icl+8AGsDANBgkqhkiG9w0B
-# AQsFADAkMSIwIAYDVQQDDBlXaW5kb3dzX09wdGltaXNhdGlvbl9QYWNrMB4XDTIy
-# MTAwMzA5NTA0MloXDTMwMTIzMTIyMDAwMFowJDEiMCAGA1UEAwwZV2luZG93c19P
-# cHRpbWlzYXRpb25fUGFjazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
-# AMqbrd2/6x589A5LablKK+Ed5zN+CoIBO/0DtWoJ7mxT+4IWA+0d5kWYTUW/MI7Y
-# BHS5r7kuUe1SX2E90CVKVKk7HVrbMCv707M+PWWQs+D0Q9vrXqMEcuEmoRcrQH7j
-# kTzs+Y4kKAkD/8Je1+5uBpyu6H1FTH9290no+h9bgvCp5UrhzzFJkVyRjCXJLlbV
-# NgLEWPDFa0mMEVNoXxa7m9AwnCNSCUMGEVhPzIMameK0W9jEKPTxfPdXhRWTu4lz
-# 7vzp5HBvn3XdutyJhH1+txCgc6uNJe/kxZENvHTObRWxkMotq8x3GqjuvNpY3t3O
-# MndeMCYiI84GBuixSXeaXf0CAwEAAaNGMEQwDgYDVR0PAQH/BAQDAgWgMBMGA1Ud
-# JQQMMAoGCCsGAQUFBwMDMB0GA1UdDgQWBBSOhOkyv1Z+aPC/kWeVNpKwbI3omjAN
-# BgkqhkiG9w0BAQsFAAOCAQEAku31A0acjtrpBqJn7nwifNv5EmiryXeGZm0RCflv
-# /JRIyvjHMDvo7Mb9p4VTRciZt2kyIDzefda1XU597frO4TgNlBgH816TxMJ4qZlb
-# ScZXc/zhBOu51oA53gt641h0zhp5dJpP/gE8VFhBUV0IVTBPnunEK1hpYmGLftAe
-# 3FjiDRQ+b+q/zT0uUbrFdyYHnlyL40bPl3XVDwVaJhDGW7At/s1K4ZA96Xej5Wxa
-# ffqIOiTEjscTmVeXLCf44EiyxZ0vF20BWwvCosONptr1MyQXFI5azArQOU9BfhYL
-# rJXoqIvVp1G2GWcfqZGLAoxnidVEN1ndnbkEFCpWeNcAkzGCAdkwggHVAgEBMDgw
-# JDEiMCAGA1UEAwwZV2luZG93c19PcHRpbWlzYXRpb25fUGFjawIQJBEmIU6B/6pL
-# +Icl+8AGsDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZ
-# BgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYB
-# BAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU4GeL7r2UKZNKlAD0BOp4cg0+JCowDQYJ
-# KoZIhvcNAQEBBQAEggEAki+EXziVUgvSjDjqy3Ti/YquhIYIeWQFagkO4akHkfnx
-# nwwcfJwJerm1YUShYScy8BbrSkws1mnOg/Ofr75p3eZGp26w2wZkwozlu0UYQhoX
-# YlgdV4JHHIdaadDm5oPOC0umsufuEXFXYGKr+f3/qEJ84dXIPzx0TSRdh6pdA722
-# eqq+fNw266WCm2ZqnXoyJuJmhnOSxui1fqPp/lqcqhyoMJRvtgow8lDGaeOlWg8p
-# KSNXRP7byRsE4bCMzAOJO/96xtvWH9/OSXemJ4Acadnk+MakogDb6J39bQW4sCIq
-# ouxNKfjD7OL4ojrCgNSTI2m8Strw2fdWyJctS4iWEA==
-# SIG # End signature block
