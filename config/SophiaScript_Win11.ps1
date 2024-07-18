@@ -221,9 +221,6 @@ MappedDrivesAppElevatedAccess -Enable
 # Turn off Delivery Optimization
 DeliveryOptimization -Disable
 
-# Always wait for the network at computer startup and logon for workgroup networks
-WaitNetworkStartup -Enable
-
 # Do not let Windows manage my default printer
 WindowsManageDefaultPrinter -Disable
 
@@ -325,12 +322,6 @@ DismissMSAccount
 
 # Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
 DismissSmartScreenFilter
-
-# Enable events auditing generated when a process is created (starts)
-AuditProcess -Enable
-
-# Include command line in process creation events
-CommandLineProcessAudit -Enable
 
 # Create the "Process Creation" сustom view in the Event Viewer to log executed processes and their arguments
 # In order this feature to work events auditing (AuditProcess -Enable) and command line (CommandLineProcessAudit -Enable) in process creation events will be enabled
