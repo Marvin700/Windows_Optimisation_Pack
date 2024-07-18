@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.18.5
+	Version: v5.18.8
 
 	Copyright (c) 2014—2024 farag, Inestic & lowl1f3
 
@@ -21,10 +21,10 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2024"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2025"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
+Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
 if ($Functions){
@@ -50,7 +50,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps
+UninstallUWPApps -ForAllUsers
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -348,12 +348,6 @@ DismissMSAccount
 # Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
 DismissSmartScreenFilter
 
-# Enable events auditing generated when a process is created (starts)
-AuditProcess -Enable
-
-# Include command line in process creation events
-CommandLineProcessAudit -Enable
-
 # Create the "Process Creation" сustom view in the Event Viewer to log executed processes and their arguments
 EventViewerCustomView -Enable
 
@@ -378,9 +372,6 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Cast to Device" item from the media files and folders context menu
-CastToDeviceContext -Hide
-
 # Hide the "Share" item from the context menu
 ShareContext -Hide
 
@@ -392,12 +383,6 @@ CreateANewVideoContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
-
-# Hide the "Include in Library" item from the folders and drives context menu
-IncludeInLibraryContext -Hide
-
-# Hide the "Send to" item from the folders context menu
-SendToContext -Hide
 
 # Hide the "Bitmap image" item from the "New" context menu
 BitmapImageNewContext -Hide

@@ -24,7 +24,6 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2024"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
 
@@ -325,7 +324,6 @@ DismissMSAccount
 DismissSmartScreenFilter
 
 # Create the "Process Creation" сustom view in the Event Viewer to log executed processes and their arguments
-# In order this feature to work events auditing (AuditProcess -Enable) and command line (CommandLineProcessAudit -Enable) in process creation events will be enabled
 EventViewerCustomView -Enable
 
 # Enable logging for all Windows PowerShell modules
@@ -352,20 +350,11 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Cast to Device" item from the media files and folders context menu
-CastToDeviceContext -Hide
-
 # Hide the "Edit with Clipchamp" item from the media files context menu
 EditWithClipchampContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
-
-# Hide the "Include in Library" item from the folders and drives context menu
-IncludeInLibraryContext -Hide
-
-# Hide the "Send to" item from the folders context menu
-SendToContext -Hide
 
 # Hide the "Compressed (zipped) Folder" item from the "New" context menu
 CompressedFolderNewContext -Hide
