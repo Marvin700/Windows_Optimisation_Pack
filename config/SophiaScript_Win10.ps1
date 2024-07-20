@@ -124,9 +124,6 @@ FileTransferDialog -Detailed
 # Display the recycle bin files delete confirmation dialog
 RecycleBinDeleteConfirmation -Enable
 
-# Hide the "3D Objects" folder in "This PC" and Quick access
-3DObjects -Hide
-
 # Hide recently used files in Quick access
 QuickAccessRecentFiles -Hide
 
@@ -233,9 +230,6 @@ MappedDrivesAppElevatedAccess -Enable
 
 # Turn off Delivery Optimization
 DeliveryOptimization -Disable
-
-# Always wait for the network at computer startup and logon for workgroup networks
-WaitNetworkStartup -Enable
 
 # Do not let Windows manage my default printer
 WindowsManageDefaultPrinter -Disable
