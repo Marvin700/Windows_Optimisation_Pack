@@ -306,9 +306,6 @@ CortanaAutostart -Disable
 # Do not let UWP apps run in the background
 BackgroundUWPApps -Disable
 
-# Check for UWP apps updates
-CheckUWPAppsUpdates
-
 # Disable Xbox Game Bar tips
 XboxGameTips -Disable
 
@@ -371,9 +368,6 @@ ShareContext -Hide
 
 # Hide the "Edit with Paint 3D" item from the media files context menu
 EditWithPaint3DContext -Hide
-
-# Hide the "Create a new video" item in the media files context menu
-CreateANewVideoContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
