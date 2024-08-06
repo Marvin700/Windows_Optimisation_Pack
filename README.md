@@ -27,6 +27,7 @@ irm windows-optimisation.de/beta | iex
 * Mouse acceleration Fix
 * More Windows Tweaks
 * Clean install of GPU Driver
+* Winget for Easy Programm Updates
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
