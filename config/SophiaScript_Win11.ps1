@@ -257,9 +257,6 @@ ThumbnailCacheRemoval -Enable
 # Turn off automatically saving my restartable apps and restart them when I sign back in
 SaveRestartableApps -Disable
 
-# Enable "Network Discovery" and "File and Printers Sharing" for workgroup networks
-NetworkDiscovery -Enable
-
 # Automatically adjust active hours for me based on daily usage
 ActiveHours -Automatically
 
