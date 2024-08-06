@@ -209,12 +209,6 @@ IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes
 # Disable the Windows 260 characters path limit
 Win32LongPathLimit -Disable
 
-# Display the Stop error information on the BSoD
-BSoDStopError -Enable
-
-# Choose when to be notified about changes to your computer: never notify
-AdminApprovalMode -Never
-
 # Turn on access to mapped drives from app running with elevated permissions with Admin Approval Mode enabled
 MappedDrivesAppElevatedAccess -Enable
 
