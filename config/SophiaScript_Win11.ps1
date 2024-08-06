@@ -233,9 +233,6 @@ PowerPlan -Balanced
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
 
-# Disable the Internet Protocol Version 6 (TCP/IPv6) component for all network connections
-# IPv6Component -Disable
-
 # Save screenshots by pressing Win+PrtScr on the Desktop
 WinPrtScrFolder -Desktop
 
@@ -311,35 +308,11 @@ SoftwareDistributionTask -Register
 # Only files older than one day will be deleted. The task runs every 60 days
 TempTask -Register
 
-# Disable Microsoft Defender Exploit Guard network protection
-NetworkProtection -Disable
-
-# Disable detection for potentially unwanted applications and block them
-PUAppsDetection -Disable
-
 # Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
 DismissMSAccount
 
 # Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
 DismissSmartScreenFilter
-
-# Create the "Process Creation" сustom view in the Event Viewer to log executed processes and their arguments
-EventViewerCustomView -Enable
-
-# Enable logging for all Windows PowerShell modules
-PowerShellModulesLogging -Enable
-
-# Enable logging for all PowerShell scripts input to the Windows PowerShell event log
-PowerShellScriptsLogging -Enable
-
-# Microsoft Defender SmartScreen doesn't marks downloaded files from the Internet as unsafe
-AppsSmartScreen -Disable
-
-# Disable the Attachment Manager marking files that have been downloaded from the Internet as unsafe
-SaveZoneInformation -Disable
-
-# Disable Windows Sandbox
-WindowsSandbox -Disable
 
 # Enable DNS-over-HTTPS for IPv4
 DNSoverHTTPS -Enable -PrimaryDNS 1.0.0.1 -SecondaryDNS 1.1.1.1
