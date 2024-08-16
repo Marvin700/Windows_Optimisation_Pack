@@ -123,7 +123,7 @@ Start-Sleep 20;exit}}
 
 function Preperations{
 Write-Output ""
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
 Add-AppxPackage "$env:temp\WinGet.msixbundle"
 winget install SomePythonThings.WingetUIStore
 
