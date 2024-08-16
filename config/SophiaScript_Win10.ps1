@@ -218,9 +218,6 @@ IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes
 # Disable the Windows 260 characters path limit
 Win32LongPathLimit -Disable
 
-# Turn on access to mapped drives from app running with elevated permissions with Admin Approval Mode enabled
-MappedDrivesAppElevatedAccess -Enable
-
 # Turn off Delivery Optimization
 DeliveryOptimization -Disable
 

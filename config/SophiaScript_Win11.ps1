@@ -36,10 +36,6 @@ exit}
 # The mandatory checks
 InitialActions
 
-# Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
-# Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
-DiagTrackService -Disable
-
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
 
@@ -51,6 +47,13 @@ WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
 UninstallUWPApps -ForAllUsers
+
+# Uninstall OneDrive. The OneDrive user folder won't be removed
+OneDrive -Uninstall
+
+# Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
+# Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
+DiagTrackService -Disable
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -190,9 +193,6 @@ AeroShaking -Enable
 # Do not group files and folder in the Downloads folder
 FolderGroupBy -None
 
-# Uninstall OneDrive. The OneDrive user folder won't be removed
-OneDrive -Uninstall
-
 # Turn on Storage Sense
 StorageSense -Enable
 
@@ -208,9 +208,6 @@ IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes
 
 # Disable the Windows 260 characters path limit
 Win32LongPathLimit -Disable
-
-# Turn on access to mapped drives from app running with elevated permissions with Admin Approval Mode enabled
-MappedDrivesAppElevatedAccess -Enable
 
 # Turn off Delivery Optimization
 DeliveryOptimization -Disable
@@ -260,6 +257,9 @@ SaveRestartableApps -Disable
 # Automatically adjust active hours for me based on daily usage
 ActiveHours -Automatically
 
+# Do not get the latest updates as soon as they're available (default value)
+WindowsLatestUpdate -Disable
+
 # Restart as soon as possible to finish updating
 RestartDeviceAfterUpdate -Enable
 
@@ -298,6 +298,12 @@ SoftwareDistributionTask -Register
 # Create the "Temp" scheduled task for cleaning up the %TEMP% folder
 # Only files older than one day will be deleted. The task runs every 60 days
 TempTask -Register
+
+#region Microsoft Defender & Security
+NetworkProtection -Enable
+
+# Enable detection for potentially unwanted applications and block them
+PUAppsDetection -Enable
 
 # Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
 DismissMSAccount

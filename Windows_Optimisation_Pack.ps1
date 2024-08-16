@@ -15,17 +15,17 @@ IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory 
 else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 function WindowsTweaks_Services{
-$service = @("WpcMonSvc","SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc"
+$services = @("WpcMonSvc","SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc"
 "ScDeviceEnum","TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc"
 "UnistoreSvc","DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WerSvc","wercplsupport","SCardSvr","SEMgrSvc")
-foreach($service in $service){
-Stop-Service $service -ErrorAction SilentlyContinue
-Set-Service $service -StartupType Disabled -ErrorAction SilentlyContinue}}
+$services | ForEach-Object {
+Stop-Service $_ -ErrorAction SilentlyContinue
+Set-Service $_ -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Features{
 $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root"
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
-foreach($feature in $features){dism /Online /Disable-Feature /FeatureName:$feature /NoRestart}
+$features | ForEach-Object {dism /Online /Disable-Feature /FeatureName:$_ /NoRestart}
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
@@ -34,9 +34,10 @@ schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdate
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
 Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask
-$task = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor"
+$tasks = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor"
 "FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload")
-foreach($task in $task){Get-ScheduledTask -TaskName $task -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
+$tasks | ForEach-Object {Get-ScheduledTask -TaskName $_ -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
+
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -73,7 +74,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Capabili
 function WindowsTweaks_Index{
 Label $env:SystemDrive Windows
 $drives = Get-WmiObject Win32_LogicalDisk | Select-Object -ExpandProperty DeviceID
-foreach($drive in $drives){Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$drive'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
+$drives | ForEach-Object{Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$_'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
 
 function SophiaScript{
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
@@ -118,17 +119,19 @@ Write-Warning " No internet connection available"
 Start-Sleep 20}
 IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
-Start-Sleep 20;exit}
-IF(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
-Write-Warning " PowerShell is not started as an Administrator"
 Start-Sleep 20;exit}}
 
 function Preperations{
+Write-Output ""
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
+Add-AppxPackage "$env:temp\WinGet.msixbundle"
+winget install SomePythonThings.WingetUIStore
+
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Force | Out-Null
 New-Item -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Name "ShowInActionCenter" -Type "DWORD" -Value 1 -Force | Out-Null
 Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "DisplayName" -Value "Windows_Optimisation_Pack" -Type "STRING" -Force | Out-Null
 Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "ShowInSettings" -Value 0 -Type "STRING" -Force | Out-Null
@@ -154,7 +157,6 @@ function Runtime{
 winget source update | Out-Null
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install dotnet-runtime-6 --exact --accept-source-agreements
-winget install dotnet-runtime-7 --exact --accept-source-agreements
 winget install dotnet-runtime-8 --exact --accept-source-agreements
 winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
 
@@ -169,11 +171,10 @@ Expand-Archive $env:temp\Autoruns.zip  $env:temp
 Start-Process $env:temp\Autoruns64.exe}
 
 function Finish{
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Successful" -Type "DWORD" -Value 1 | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
-<text>Your Windows is now optimised :)</text></binding></visual>
+<text>Your Windows is now debloated and optimised :)</text></binding></visual>
 <audio src="ms-winsoundevent:notification.default" /></toast>
 "@
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
@@ -232,7 +233,7 @@ $Text_Info.Size = New-Object Drawing.Point 150,150
 $Text_Info.Location = New-Object Drawing.Point 150,215
 $Text_Info.ForeColor='#aaaaaa'
 $Text_Info.text = "
-Version
+Pack Version
 $Version
 
 $WindowsVersion
@@ -303,7 +304,7 @@ $BOX_SophiaScript.Checked = $true
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
-$BOX_ooShutup.Text = "OO ShutUp10"
+$BOX_ooShutup.Text = "O&&O ShutUp10"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
@@ -377,13 +378,13 @@ $BUTTON_Cancel.add_Click{GUI_Choice}
 
 function GUI_Choice
 {
-$form.Controls.Clear()
-$form.controls.add($Image)
-$form.controls.add($Text_Info)
-$form.controls.add($Titel_Warning)
-$form.Controls.add($BUTTON_Optimise)
-$form.Controls.add($BUTTON_Maintance)
-$form.Controls.add($BUTTON_Exit)
+    $form.Controls.Clear()
+    $form.controls.add($Image)
+    $form.controls.add($Text_Info)
+    $form.controls.add($Titel_Warning)
+    $form.Controls.add($BUTTON_Optimise)
+    $form.Controls.add($BUTTON_Maintance)
+    $form.Controls.add($BUTTON_Exit)
 }
 
 function GUI_Optimise
