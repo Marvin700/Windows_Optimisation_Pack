@@ -3,7 +3,7 @@
 ## Key Features
 * Disable Windows Spying
 * Remove Windows Bloatware
-* * Maintance Windows
+* Maintance Windows
 * Lower CPU and Ram usage
 * [Sophia Script](https://github.com/farag2/Sophia-Script-for-Windows "Sophia Script Documentation") & [O&OShutUp](https://www.oo-software.com/en/shutup10 "O&OShutUp")
 * Remove Cortana and OneDrive
