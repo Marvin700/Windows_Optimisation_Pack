@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.6.8
+	Version: v6.7.2
 
 	Copyright (c) 2014—2025 farag, Inestic & lowl1f3
 
@@ -160,6 +160,9 @@ TaskbarCombine -Always
 # Unpin the "Microsoft Edge", "Microsoft Store" shortcuts from the taskbar
 UnpinTaskbarShortcuts -Shortcuts Edge, Store
 
+# Enable end task in taskbar by right click
+TaskbarEndTask -Enable
+
 # View the Control Panel icons by category
 ControlPanelView -Category
 
@@ -281,7 +284,7 @@ CortanaAutostart -Disable
 # Disable Microsoft Teams autostarting
 TeamsAutostart -Disable
 
-# Disable Xbox Game Bar tips
+#Disable Game Bar tips
 XboxGameTips -Disable
 
 # Turn on hardware-accelerated GPU scheduling. Restart needed
@@ -322,6 +325,9 @@ CABInstallContext -Show
 
 # Hide the "Edit with Clipchamp" item from the media files context menu
 EditWithClipchampContext -Hide
+
+# Hide the "Edit with Photos" item from the media files context menu
+EditWithPhotosContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide

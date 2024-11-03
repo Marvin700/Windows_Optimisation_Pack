@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v5.18.8
+	Version: 5.19.2
 
 	Copyright (c) 2014—2024 farag, Inestic & lowl1f3
 
@@ -162,6 +162,9 @@ UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail
 
 # View the Control Panel icons by category
 ControlPanelView -Category
+
+#	Enable DNS-over-HTTPS for IPv4
+DNSoverHTTPS -Enable -PrimaryDNS 1.0.0.1 -SecondaryDNS 1.1.1
 
 # Set the default Windows mode to dark
 WindowsColorMode -Dark
