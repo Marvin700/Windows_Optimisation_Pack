@@ -123,8 +123,9 @@ Start-Sleep 20;exit}}
 
 function Preperations{
 Write-Output ""
-try { winget --version} catch
-{Write-Host "Installing Windows Package Manager"
+
+IF(!(Get-Command "winget" -ErrorAction SilentlyContinue)){
+Write-Host " Installing Windows Package Manager"
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
 Add-AppxPackage "$env:temp\WinGet.msixbundle"
 winget source update
