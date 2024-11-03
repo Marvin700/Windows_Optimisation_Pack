@@ -430,12 +430,12 @@ IF($hash.Checks){Checks}
 IF($hash.SystemPoint){SystemPoint}
 IF($hash.Checks){Preperations}
 IF($hash.ooShutup){ooShutup}
-IF($hash.SophiaScript){SophiaScript}
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks} 
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
+IF($hash.SophiaScript){SophiaScript}
 IF($hash.Advanced_DiskCleanup){Advanced_DiskCleanup}
 IF($hash.Runtime){Runtime}   
 IF($hash.Autoruns){Autoruns}   
