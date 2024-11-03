@@ -23,7 +23,7 @@ Stop-Service $_ -ErrorAction SilentlyContinue
 Set-Service $_ -StartupType Disabled -ErrorAction SilentlyContinue}}
 
 function WindowsTweaks_Features{
-$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root"
+$features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root","Recall"
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 $features | ForEach-Object {dism /Online /Disable-Feature /FeatureName:$_ /NoRestart}
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
@@ -123,9 +123,12 @@ Start-Sleep 20;exit}}
 
 function Preperations{
 Write-Output ""
+try { winget --version} catch
+{Write-Host "Installing Windows Package Manager"
 Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
 Add-AppxPackage "$env:temp\WinGet.msixbundle"
-winget install SomePythonThings.WingetUIStore
+winget source update
+}
 
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
@@ -154,7 +157,6 @@ lodctr /r
 Start-Process cleanmgr.exe /sagerun:1}
 
 function Runtime{
-winget source update | Out-Null
 winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
 winget install dotnet-runtime-6 --exact --accept-source-agreements
 winget install dotnet-runtime-8 --exact --accept-source-agreements
