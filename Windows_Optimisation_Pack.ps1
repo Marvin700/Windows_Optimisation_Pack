@@ -124,13 +124,6 @@ Start-Sleep 20;exit}}
 function Preperations{
 Write-Output ""
 
-IF(!(Get-Command "winget" -ErrorAction SilentlyContinue)){
-Write-Host " Installing Windows Package Manager"
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
-Add-AppxPackage "$env:temp\WinGet.msixbundle"
-winget source update
-}
-
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
@@ -158,10 +151,16 @@ lodctr /r
 Start-Process cleanmgr.exe /sagerun:1}
 
 function Runtime{
-winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements
-winget install dotnet-runtime-6 --exact --accept-source-agreements
-winget install dotnet-runtime-8 --exact --accept-source-agreements
-winget install --id=Microsoft.DirectX --exact --accept-source-agreements}
+
+IF(!(Get-Command "winget" -ErrorAction SilentlyContinue)){
+Write-Host " Installing Windows Package Manager"
+Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
+Add-AppxPackage "$env:temp\WinGet.msixbundle"
+winget source update winget source update --disable-interactivity
+}  
+IF(!(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\DirectX\' -Name 'Version' -ErrorAction SilentlyContinue )){winget install --id=Microsoft.DirectX --exact --accept-source-agreements --no-upgrade --disable-interactivity --silent --nowarn --ignore-warnings}
+winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements --no-upgrade --disable-interactivity --silent --nowarn --ignore-warnings
+}
 
 function Remove_ASUS{
 Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=Armoury%20Crate" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
