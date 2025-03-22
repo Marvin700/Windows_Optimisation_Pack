@@ -4,11 +4,8 @@
 <#
 	Version: v6.8.3
 
-	Copyright (c) 2014—2025 farag, Inestic & lowl1f3
+	(c) 2014—2025 Team Sophia
 
-	https://github.com/farag2
-	https://github.com/Inestic
-	https://github.com/lowl1f3
 #>
 
 [CmdletBinding()]
