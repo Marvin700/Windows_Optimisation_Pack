@@ -6,6 +6,10 @@
 
 	(c) 2014—2025 Team Sophia
 
+	https://github.com/farag2
+	https://github.com/Inestic
+	https://github.com/lowl1f3
+
 #>
 
 [CmdletBinding()]
