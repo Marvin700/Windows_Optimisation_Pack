@@ -149,11 +149,11 @@ TaskViewButton -Hide
 # Hide the widgets icon on the taskbar
 TaskbarWidgets -Hide
 
-# Combine taskbar buttons and always hide labels (default value)
+# Combine taskbar buttons and always hide labels
 TaskbarCombine -Always
 
 # Unpin Microsoft Edge, Microsoft Store, and Outlook shortcuts from the taskbar
-UnpinTaskbarShortcuts -Shortcuts Edge, Store, Outlook
+# UnpinTaskbarShortcuts -Shortcuts Edge, Store, Outlook
 
 # Enable end task in taskbar by right click
 TaskbarEndTask -Enable
