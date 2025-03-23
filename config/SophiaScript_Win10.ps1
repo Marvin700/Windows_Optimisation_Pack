@@ -155,9 +155,6 @@ MeetNow -Hide
 # Disable "News and Interests" on the taskbar
 NewsInterests -Disable
 
-# Unpin the "Microsoft Edge", "Microsoft Store", or "Mail" shortcuts from the taskbar
-UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail
-
 # View the Control Panel icons by category
 ControlPanelView -Category
 
