@@ -2,13 +2,14 @@
 # windows-optimisation.de
 
 <#
-	Version: 5.19.2
+	Version: 5.20.3
 
-	Copyright (c) 2014—2024 farag, Inestic & lowl1f3
+	(c) 2014—2025 Team Sophia
 
 	https://github.com/farag2
 	https://github.com/Inestic
 	https://github.com/lowl1f3
+
 #>
 
 [CmdletBinding()]
@@ -21,16 +22,16 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2025"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2025"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
-Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
+Import-LocalizedData -BindingVariable Global:Localization -UICulture $PSUICulture -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Stop
 
 if ($Functions){
 Invoke-Command -ScriptBlock {InitialActions}
-foreach ($Function in $Functions)
-{Invoke-Expression -Command $Function}
+foreach ($Function in $Functions){
+Invoke-Expression -Command $Function}
 exit}
 
 # The mandatory checks
@@ -109,9 +110,6 @@ MergeConflicts -Show
 # Hide Cortana button on the taskbar
 CortanaButton -Hide
 
-# Hide Copilot button on the taskbar
-CopilotButton -Hide
-
 # Do not show sync provider notification within File Explorer
 OneDriveFileExplorerAd -Hide
 
@@ -156,9 +154,6 @@ MeetNow -Hide
 
 # Disable "News and Interests" on the taskbar
 NewsInterests -Disable
-
-# Unpin the "Microsoft Edge", "Microsoft Store", or "Mail" shortcuts from the taskbar
-UnpinTaskbarShortcuts -Shortcuts Edge, Store, Mail
 
 # View the Control Panel icons by category
 ControlPanelView -Category
@@ -207,12 +202,6 @@ OneDrive -Uninstall
 
 # Turn on Storage Sense
 StorageSense -Enable
-
-# Run Storage Sense every month
-StorageSenseFrequency -Month
-
-# Delete temporary files that apps aren't using
-StorageSenseTempFiles -Enable
 
 # Disable hibernation. Do not recommend turning it off on laptops
 IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}))
@@ -275,9 +264,6 @@ UninstallPCHealthCheck
 # List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
 PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 
-# Prevent all internal SATA drives from showing up as removable media in the taskbar notification area
-SATADrivesRemovableMedia -Disable
-
 # Hide recently added apps in the Start menu
 RecentlyAddedApps -Hide
 
@@ -325,6 +311,9 @@ ShareContext -Hide
 
 # Hide the "Edit with Paint 3D" item from the media files context menu
 EditWithPaint3DContext -Hide
+
+# Hide the "Edit" item from the images context menu
+ImagesEditContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide

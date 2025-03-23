@@ -2,13 +2,14 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.7.2
+	Version: v6.8.3
 
-	Copyright (c) 2014—2025 farag, Inestic & lowl1f3
+	(c) 2014—2025 Team Sophia
 
 	https://github.com/farag2
 	https://github.com/Inestic
 	https://github.com/lowl1f3
+
 #>
 
 [CmdletBinding()]
@@ -21,16 +22,16 @@ param
 
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) farag, Inestic & lowl1f3, 2014$([char]0x2013)2024"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2025"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
-Import-LocalizedData -BindingVariable Global:Localization -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia
+Import-LocalizedData -BindingVariable Global:Localization -UICulture $PSUICulture -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Stop
 
 if ($Functions){
 Invoke-Command -ScriptBlock {InitialActions}
-foreach ($Function in $Functions)
-{Invoke-Expression -Command $Function}
+foreach ($Function in $Functions){
+Invoke-Expression -Command $Function}
 exit}
 
 # The mandatory checks
@@ -142,23 +143,14 @@ TaskbarSearch -Hide
 # Hide search highlights
 SearchHighlights -Hide
 
-# Hide Copilot button on the taskbar
-CopilotButton -Hide
-
 # Hide the Task view button from the taskbar
 TaskViewButton -Hide
 
 # Hide the widgets icon on the taskbar
 TaskbarWidgets -Hide
 
-# Hide the Chat icon (Microsoft Teams) on the taskbar and prevent Microsoft Teams from installing for new users
-PreventTeamsInstallation -Enable
-
-# Combine taskbar buttons and always hide labels (default value)
+# Combine taskbar buttons and always hide labels
 TaskbarCombine -Always
-
-# Unpin the "Microsoft Edge", "Microsoft Store" shortcuts from the taskbar
-UnpinTaskbarShortcuts -Shortcuts Edge, Store
 
 # Enable end task in taskbar by right click
 TaskbarEndTask -Enable
@@ -190,6 +182,9 @@ PrtScnSnippingTool -Enable
 # Do not use a different input method for each app window
 AppsLanguageSwitch -Disable
 
+# Remove Recommended section in Start Menu. Not applicable to Home edition
+StartRecommendedSection -Hide
+
 # When I grab a windows's title bar and shake it, minimize all other windows
 AeroShaking -Enable
 
@@ -198,12 +193,6 @@ FolderGroupBy -None
 
 # Turn on Storage Sense
 StorageSense -Enable
-
-# Run Storage Sense every month
-StorageSenseFrequency -Month
-
-# Turn on automatic cleaning up temporary system and app files
-StorageSenseTempFiles -Enable
 
 # Disable hibernation. Do not recommend turning it off on laptops
 IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}))
@@ -272,17 +261,11 @@ DefaultTerminalApp -WindowsTerminal
 # List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
 PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 
-# Prevent all internal SATA drives from showing up as removable media in the taskbar notification area
-SATADrivesRemovableMedia -Disable
-
 # Show more pins on Start (for 22509+ build only)
 StartLayout -ShowMorePins
 
 # Disable Cortana autostarting
 CortanaAutostart -Disable
-
-# Disable Microsoft Teams autostarting
-TeamsAutostart -Disable
 
 #Disable Game Bar tips
 XboxGameTips -Disable
@@ -328,6 +311,9 @@ EditWithClipchampContext -Hide
 
 # Hide the "Edit with Photos" item from the media files context menu
 EditWithPhotosContext -Hide
+
+# Hide the "Edit with Paint" item from the media files context menu
+EditWithPaintContext -Hide
 
 # Hide the "Print" item from the .bat and .cmd context menu
 PrintCMDContext -Hide
