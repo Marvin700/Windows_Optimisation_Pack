@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: 5.20.3
+	Version: 5.20.4
 
 	(c) 2014—2025 Team Sophia
 
@@ -136,9 +136,6 @@ TaskViewButton -Hide
 
 # Hide search highlights
 SearchHighlights -Hide
-
-# Hide People on the taskbar
-PeopleTaskbar -Hide
 
 # Hide seconds on the taskbar clock
 SecondsInSystemClock -Hide
