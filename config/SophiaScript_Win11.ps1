@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.8.3
+	Version: v6.8.4
 
 	(c) 2014—2025 Team Sophia
 
@@ -263,9 +263,6 @@ PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 
 # Show more pins on Start (for 22509+ build only)
 StartLayout -ShowMorePins
-
-# Disable Cortana autostarting
-CortanaAutostart -Disable
 
 #Disable Game Bar tips
 XboxGameTips -Disable
