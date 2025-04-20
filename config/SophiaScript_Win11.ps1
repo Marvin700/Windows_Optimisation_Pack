@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.8.4
+	Version: v6.8.5
 
 	(c) 2014—2025 Team Sophia
 
@@ -24,8 +24,8 @@ Clear-Host
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2025"
 
-Remove-Module -Name Sophia -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force -ErrorAction Stop
+Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
+Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -UICulture $PSUICulture -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Stop
 
 if ($Functions){
