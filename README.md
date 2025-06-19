@@ -3,7 +3,7 @@ Please use the Beta release :) <BR>
 The directly uploaded files in this branch are unstable and are used for testing. <BR>
 
   ```powershell
-irm beta.windows-optimisation.de | iex
+irm windows-optimisation.de/beta | iex
   ```
 <BR>
 <img src="https://github.com/Marvin700/Windows_Optimisation_Pack/assets/98750428/694ff5ec-a743-4b2c-9db3-1014348bd1e6">
@@ -33,7 +33,7 @@ irm beta.windows-optimisation.de | iex
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
   ```powershell
-irm beta.windows-optimisation.de | iex
+irm windows-optimisation.de/beta | iex
   ```
   
 > **Note**: <BR> 
