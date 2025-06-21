@@ -2,7 +2,8 @@
 # windows-optimisation.de
 
 $Branch = "Beta"
-$Version = "1.9.2"
+$Version = "2.0"
+
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $hash = [hashtable]::Synchronized(@{})
@@ -67,7 +68,6 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\diagnosticshub.s
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Value 0 -Type "DWORD" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force 
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force}
             
@@ -293,7 +293,7 @@ $BOX_SystemPoint.Enabled = $false
 $BOX_Checks = New-Object System.Windows.Forms.CheckBox
 $BOX_Checks.Size = New-Object Drawing.Point 135,25
 $BOX_Checks.Location = New-Object Drawing.Point 27,279
-$BOX_Checks.Text = "Compat Check"
+$BOX_Checks.Text = "System Check"
 $BOX_Checks.ForeColor='#aaaaaa'
 $BOX_Checks.Checked = $true
 $BOX_Checks.Enabled = $false 
