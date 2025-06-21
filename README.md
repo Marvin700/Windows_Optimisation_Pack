@@ -1,6 +1,5 @@
 > **Warning**: <BR>
-Please use the Beta release :) <BR>
-The directly uploaded files in this branch are unstable and are used for testing. <BR>
+Beta Release <BR>
 
   ```powershell
 irm windows-optimisation.de/beta | iex
