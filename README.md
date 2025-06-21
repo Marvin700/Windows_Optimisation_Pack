@@ -1,9 +1,6 @@
 > **Warning**: <BR>
 Beta Release <BR>
 
-  ```powershell
-irm windows-optimisation.de/beta | iex
-  ```
 <BR>
 <img src="https://github.com/Marvin700/Windows_Optimisation_Pack/assets/98750428/694ff5ec-a743-4b2c-9db3-1014348bd1e6">
 <BR>
