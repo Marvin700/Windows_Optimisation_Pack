@@ -24,7 +24,7 @@ Clear-Host
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2025"
 
-Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
+#Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force -ErrorAction Stop
 Import-LocalizedData -BindingVariable Global:Localization -UICulture $PSUICulture -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Stop
 
@@ -35,7 +35,7 @@ Invoke-Expression -Command $Function}
 exit}
 
 # The mandatory checks
-InitialActions
+#InitialActions
 
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
