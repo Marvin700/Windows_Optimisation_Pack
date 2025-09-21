@@ -27,8 +27,15 @@ Beta Release <BR>
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
+Windows Script
   ```powershell
 irm windows-optimisation.de/beta | iex
+  ```
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Windows-Health.ps1 | iex
+  ```
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Clean-GPU.ps1 | iex
   ```
   
 > **Note**: <BR> 
