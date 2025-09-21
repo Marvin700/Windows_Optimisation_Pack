@@ -32,11 +32,14 @@ Windows Script
 irm windows-optimisation.de/beta | iex
   ```
   ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Windows-Health.ps1 | iex
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Windows_Health.ps1 | iex
   ```
   ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Clean-GPU.ps1 | iex
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Clean_GPU.ps1 | iex
   ```
-  
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Advanced_Cleanup.ps1 | iex
+  ```
+
 > **Note**: <BR> 
 Please update to the latest version of Windows first. <BR>
