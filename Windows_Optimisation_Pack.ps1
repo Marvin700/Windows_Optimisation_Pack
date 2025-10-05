@@ -1,21 +1,52 @@
 # Windows_Optimisation_Pack @Marvin700
 # windows-optimisation.de
 
+### Version ###
 $Branch = "Beta"
 $Version = "2.0"
 
-
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
+### Functions ###
 $hash = [hashtable]::Synchronized(@{})
-$Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
-$BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
-IF(Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
-IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
-else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
+
+function SystemPoint{
+# Delete all previous restore points when the function is activated
+IF($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
+# Temporarily modify to create a restore point.
+Enable-ComputerRestore -Drive $env:SystemDrive
+New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
+Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
+
+function Checks{
+# Checks to Run Script
+Clear-Host
+ " Compatibility checks and preparation are performed..."
+IF(!([System.Environment]::Is64BitOperatingSystem)){
+Write-Warning " You need an 64-Bit System"
+Start-Sleep 20;exit}
+IF(!($WindowsVersion -like "Microsoft Windows 11*" -Or $WindowsVersion -like "Microsoft Windows 10*")){
+Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
+Start-Sleep 20;exit}
+IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
+Write-Warning " No internet connection available"
+Start-Sleep 20}
+IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
+Write-Warning " Reboot Pending !"
+Start-Sleep 20;exit}}
+
+function Preperations{
+Write-Output ""
+# Entry for the Used Version and Later Debugging
+New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null}
+
+### Menu: Optimise Windows ###
+
 
 function WindowsTweaks_Services{
+# Disable unnecessary tasks
 $services = @("WpcMonSvc","SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC","MixedRealityOpenXRSvc","WalletService","SmsRouter","SharedAccess","MapsBroker","PhoneSvc"
 "ScDeviceEnum","TabletInputService","icssvc","edgeupdatem","edgeupdate","MicrosoftEdgeElevationService","RetailDemo","MessagingService","PimIndexMaintenanceSvc","OneSyncSvc"
 "UnistoreSvc","DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WerSvc","wercplsupport","SCardSvr","SEMgrSvc")
@@ -23,14 +54,20 @@ $services | ForEach-Object {
 Stop-Service $_ -ErrorAction SilentlyContinue
 Set-Service $_ -StartupType Disabled -ErrorAction SilentlyContinue}}
 
+
 function WindowsTweaks_Features{
+# Disable unnecessary Features
 $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","MicrosoftWindowsPowerShellV2Root","Recall"
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 $features | ForEach-Object {dism /Online /Disable-Feature /FeatureName:$_ /NoRestart}
+
+# Disable unnecessary Features
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
+
 function WindowsTweaks_Tasks{
+# Disable unnecessary Tasks
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE
@@ -56,27 +93,34 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseTrails" -Type "DW
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Type "DWORD" -Value 0 -Force
+
+# Disable Windows Telemetry
 Set-ItemProperty -Path "HKLM:\SYSTEM\ControlSet001\Services\DiagTrack" -Name "Start" -Type "DWORD" -Value 4 -Force 
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value 00000005 -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\dmwappushservice" -Name "Start" -Type "DWORD" -Value 4 -Force 
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "NetworkThrottlingIndex" -Type "DWORD" -Value 268435455 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Type "DWORD" -Value 00000000 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type "DWORD" -Value 00000006 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" -Name "Start" -Type "DWORD" -Value 4 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Value 0 -Type "DWORD" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "LimitEnhancedDiagnosticDataWindowsAnalytics" -Type "DWORD" -Value 0 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" -Name "HideInsiderPage" -Type "DWORD" -Value 1 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" -Name "Value" -Value "Deny" -Force
+
+# Gaming Tweaks
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "OverlayTestMode" -Type "DWORD" -Value 00000005 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "NetworkThrottlingIndex" -Type "DWORD" -Value 268435455 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Type "DWORD" -Value 00000000 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type "DWORD" -Value 00000006 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force
+}
             
 function WindowsTweaks_Index{
+# Disable Windows Indexing
 Label $env:SystemDrive Windows
 $drives = Get-WmiObject Win32_LogicalDisk | Select-Object -ExpandProperty DeviceID
 $drives | ForEach-Object{Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$_'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
 
 function SophiaScript{
+# Download Sophia Script Windows 10
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
 IF($WindowsVersion -match "Microsoft Windows 11"){
 $LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_11_PowerShell_5_1
@@ -84,48 +128,58 @@ Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
+# Download Sophia Script Windows 11
 IF($WindowsVersion -match "Microsoft Windows 10"){
 $LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_10_PowerShell_5_1
 Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.10.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
 Expand-Archive $env:temp\Sophia.zip $env:temp -force
 Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
+# Start Sophia Script
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
+# O&O ShutUp10++
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\OOSU10.exe"
 Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
 
-function SystemPoint{
-IF($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
-Enable-ComputerRestore -Drive $env:SystemDrive
-New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
-Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
-function Checks{
+function Windows_Cleanup{
 Clear-Host
- " Compatibility checks and prerationing are performed..."
-IF(!([System.Environment]::Is64BitOperatingSystem)){
-Write-Warning " You need an 64-Bit System"
-Start-Sleep 20;exit}
-IF(!($WindowsVersion -match "Microsoft Windows 11" -Or $WindowsVersion -match "Microsoft Windows 10")){
-Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
-Start-Sleep 20;exit}
-IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
-Write-Warning " No internet connection available"
-Start-Sleep 20}
-IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
-Write-Warning " Reboot Pending !"
-Start-Sleep 20;exit}}
+Write-Output "Removing Cache Files..."
+# Clear DNS Cache
+ipconfig /flushdns > $null
 
-function Preperations{
-Write-Output ""
+Clear-BCCache -Force -ErrorAction SilentlyContinue
+# Clear Multiple Cache Foleder
+$path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
+"$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","C:\ProgramData\Package Cache")
+foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
+# Rebuild Performance Couters
+lodctr /r
+}
 
+function Extended_Cleanup{
+# Cleanup Windows Components
+Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
+Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
+Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
+# Maximizes Disk Cleanup settings
+ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
+If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
+New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}
+Start-Process cleanmgr.exe /sagerun:1
+}
+
+function Idle_Tasks{
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'   
+}
+
+function Finish{
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
+# Reg Entry for Toast
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
-New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows_Optimisation_Pack" -Force | Out-Null
 New-Item -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Force | Out-Null
@@ -134,46 +188,8 @@ Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "D
 Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "ShowInSettings" -Value 0 -Type "STRING" -Force | Out-Null
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
-[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null}
-
-function Windows_Cleanup{
-Clear-Host
-Write-Output "Removing Cache Files..."
-ipconfig /flushdns > $null
-ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
-If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
-New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}
-Clear-BCCache -Force -ErrorAction SilentlyContinue
-$path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
-"$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","C:\ProgramData\Package Cache")
-foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
-lodctr /r
-Start-Process cleanmgr.exe /sagerun:1}
-
-function Runtime{
-
-IF(!(Get-Command "winget" -ErrorAction SilentlyContinue)){
-Write-Host " Installing Windows Package Manager"
-Start-BitsTransfer -Source "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Destination "$env:temp\WinGet.msixbundle"
-Add-AppxPackage "$env:temp\WinGet.msixbundle"
-winget source update winget source update --disable-interactivity
-}  
-IF(!(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\DirectX\' -Name 'Version' -ErrorAction SilentlyContinue )){winget install --id=Microsoft.DirectX --exact --accept-source-agreements --no-upgrade --disable-interactivity --silent --nowarn --ignore-warnings}
-winget install --id=Microsoft.VCRedist.2015+.x64 --exact --accept-source-agreements --no-upgrade --disable-interactivity --silent --nowarn --ignore-warnings
-}
-
-function Remove_ASUS{
-Start-BitsTransfer -Source "https://dlcdnets.asus.com/pub/ASUS/mb/14Utilities/Armoury_Crate_Uninstall_Tool.zip?model=Armoury%20Crate" -Destination "$env:temp\Armoury_Crate_Uninstall_Tool.zip"
-Expand-Archive "$env:temp\Armoury_Crate_Uninstall_Tool.zip" "$env:temp" -Force
-Start-Process $env:temp\"Armoury Crate Uninstall Tool *"\"Armoury Crate Uninstall Tool.exe"}
-
-function Autoruns{
-Start-BitsTransfer -Source "https://download.sysinternals.com/files/Autoruns.zip" -Destination "$env:temp\Autoruns.zip"
-Expand-Archive $env:temp\Autoruns.zip  $env:temp
-Start-Process $env:temp\Autoruns64.exe}
-
-function Finish{
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
+[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
+# Toast
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
 <text>Your Windows is now debloated and optimised :)</text></binding></visual>
@@ -186,9 +202,19 @@ $ToastMessage = [Windows.UI.Notifications.ToastNotification]::New($ToastXML)
 exit}
 
 function GUI{
+## GUI 
+
+# GUI Preperations
+$BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
+IF(Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
+IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
+else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
+$Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 IF(!(Test-Path $ScriptFolder\Picture.png)){Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png" -OutFile "$ScriptFolder\Picture.png"}
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
+
+# GUI Checkbox Buttton Handler
 $hash.Exit = $true
 $handler_BUTTON_Start_Click=
 {
@@ -203,11 +229,11 @@ IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}
 IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
 IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
 IF($BOX_Windows_Cleanup.Checked)        {$hash.Windows_Cleanup = $true} 
-IF($BOX_Runtime.Checked)                {$hash.Runtime = $true}   
-IF($BOX_Remove_ASUS.Checked)            {$hash.Remove_ASUS = $true} 
-if($BOX_Autoruns.Checked)               {$hash.Autoruns = $true} 
-$Form.Close()
-}
+IF($BOX_Extended_Cleanup.Checked)       {$hash.Extended_Cleanup = $true}   
+IF($BOX_Idle_Tasks.Checked)             {$hash.Idle_Tasks = $true} 
+
+$Form.Close()}
+
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
@@ -226,9 +252,9 @@ $Titel_Warning = New-Object Windows.Forms.Label
 $Titel_Warning.Size = New-Object Drawing.Point 200,25
 $Titel_Warning.Location = New-Object Drawing.Point 50,422
 $Titel_Warning.ForeColor='#e8272f'
-IF(!($Administrator -eq "True")){$Titel_Warning.text = "PowerShell is not Administrator"}
+IF($Administrator -ne $True){$Titel_Warning.text = "PowerShell is not Administrator"}
 
-##Choice
+## GUI Main
 
 $Text_Info = New-Object Windows.Forms.Label
 $Text_Info.Size = New-Object Drawing.Point 150,150
@@ -236,7 +262,7 @@ $Text_Info.Location = New-Object Drawing.Point 150,215
 $Text_Info.ForeColor='#aaaaaa'
 $Text_Info.text = "
 Pack Version
-$Version
+$Branch $Version
 
 $WindowsVersion
 Build $BuildNumber 
@@ -248,13 +274,13 @@ Administrator Permission
 $Administrator
 "
 $BUTTON_Optimise = New-Object System.Windows.Forms.Button
-$BUTTON_Optimise.Text = "Optimise Windows"
+$BUTTON_Optimise.Text = "Debloat and Optimise"
 $BUTTON_Optimise.Size = New-Object Drawing.Point 169,54
 $BUTTON_Optimise.Location = New-Object Drawing.Point 370,230
 $BUTTON_Optimise.ForeColor='#aaaaaa'
 $BUTTON_Optimise.add_Click{GUI_Optimise}
 $BUTTON_Maintance = New-Object System.Windows.Forms.Button
-$BUTTON_Maintance.Text = "Maintance Windows"
+$BUTTON_Maintance.Text = "Maintance and Drivers"
 $BUTTON_Maintance.Size = New-Object Drawing.Point 169,54
 $BUTTON_Maintance.Location = New-Object Drawing.Point 370,310
 $BUTTON_Maintance.ForeColor='#aaaaaa'
@@ -267,7 +293,7 @@ $BUTTON_Exit.ForeColor='#aaaaaa'
 $BUTTON_Exit.Text = "Exit"
 $BUTTON_Exit.add_Click{$hash.Exit = $true; $Form.Close()}
 
-##Optimisation
+## GUI Optimisation
 $Titel_Essentials = New-Object Windows.Forms.Label
 $Titel_Essentials.Size = New-Object Drawing.Point 135,25
 $Titel_Essentials.Location = New-Object Drawing.Point 50,215
@@ -276,13 +302,20 @@ $Titel_Essentials.ForeColor='#aaaaaa'
 $Titel_Tweaks = New-Object Windows.Forms.Label
 $Titel_Tweaks.Size = New-Object Drawing.Point 135,25
 $Titel_Tweaks.Location = New-Object Drawing.Point 200,215
-$Titel_Tweaks.text = "Advaced Tweaks"
+$Titel_Tweaks.text = "Tweaks"
 $Titel_Tweaks.ForeColor='#aaaaaa'
 $Titel_Extras = New-Object Windows.Forms.Label
 $Titel_Extras.Size = New-Object Drawing.Point 135,25
-$Titel_Extras.Location = New-Object Drawing.Point 373,215
-$Titel_Extras.text = "Extras"
+$Titel_Extras.Location = New-Object Drawing.Point 370,215
+$Titel_Extras.text = "Cleanup"
 $Titel_Extras.ForeColor='#aaaaaa'
+$Titel_Presets = New-Object Windows.Forms.Label
+$Titel_Presets.Size = New-Object Drawing.Point 135,25
+$Titel_Presets.Location = New-Object Drawing.Point 530,215
+$Titel_Presets.text = "Presets"
+$Titel_Presets.ForeColor='#aaaaaa'
+
+# Essentials
 $BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
 $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
 $BOX_SystemPoint.Location = New-Object Drawing.Point 27,248
@@ -309,6 +342,8 @@ $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
 $BOX_ooShutup.Text = "O&&O ShutUp10"
 $BOX_ooShutup.ForeColor='#aaaaaa'
 $BOX_ooShutup.Checked = $true
+
+# Tweaks
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 180,248
@@ -339,30 +374,51 @@ $BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 180,372
 $BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
 $BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
+
+# Extras
 $BOX_Windows_Cleanup = New-Object System.Windows.Forms.CheckBox
 $BOX_Windows_Cleanup.Size = New-Object Drawing.Point 135,25
-$BOX_Windows_Cleanup.Location = New-Object Drawing.Point 353,248
-$BOX_Windows_Cleanup.Text = "Windows Cleanup" 
+$BOX_Windows_Cleanup.Location = New-Object Drawing.Point 350,248
+$BOX_Windows_Cleanup.Text = "Clear Cache" 
 $BOX_Windows_Cleanup.ForeColor='#aaaaaa'
 $BOX_Windows_Cleanup.Checked = $true 
-$BOX_Runtime = New-Object System.Windows.Forms.CheckBox
-$BOX_Runtime.Size = New-Object Drawing.Point 145,25
-$BOX_Runtime.Location = New-Object Drawing.Point 353,279
-$BOX_Runtime.Text = "Runtime Components"
-$BOX_Runtime.ForeColor='#aaaaaa'
-$BOX_Runtime.Checked = $true  
-$BOX_Remove_ASUS = New-Object System.Windows.Forms.CheckBox
-$BOX_Remove_ASUS.Size = New-Object Drawing.Point 135,25
-$BOX_Remove_ASUS.Location = New-Object Drawing.Point 353,310
-$BOX_Remove_ASUS.Text = "Remove Asus Bloat"
-$BOX_Remove_ASUS.ForeColor='#aaaaaa'
-$BOX_Remove_ASUS.Checked = $false
-$BOX_Autoruns = New-Object System.Windows.Forms.CheckBox
-$BOX_Autoruns.Size = New-Object Drawing.Point 135,25
-$BOX_Autoruns.Location = New-Object Drawing.Point 353,341
-$BOX_Autoruns.Text = "Autoruns" 
-$BOX_Autoruns.ForeColor='#aaaaaa'
-$BOX_Autoruns.Checked = $false
+$BOX_Extended_Cleanup = New-Object System.Windows.Forms.CheckBox
+$BOX_Extended_Cleanup.Size = New-Object Drawing.Point 145,25
+$BOX_Extended_Cleanup.Location = New-Object Drawing.Point 350,279
+$BOX_Extended_Cleanup.Text = "Windows Cleanup"
+$BOX_Extended_Cleanup.ForeColor='#aaaaaa'
+$BOX_Extended_Cleanup.Checked = $false  
+$BOX_Idle_Tasks = New-Object System.Windows.Forms.CheckBox
+$BOX_Idle_Tasks.Size = New-Object Drawing.Point 135,25
+$BOX_Idle_Tasks.Location = New-Object Drawing.Point 350,310
+$BOX_Idle_Tasks.Text = "Run Idle Tasks"
+$BOX_Idle_Tasks.ForeColor='#aaaaaa'
+$BOX_Idle_Tasks.Checked = $false
+
+# Presets
+$BUTTON_Preset_Minimal = New-Object System.Windows.Forms.Button
+$BUTTON_Preset_Minimal.Size = New-Object Drawing.Point 110,35
+$BUTTON_Preset_Minimal.Location = New-Object Drawing.Point 507,255
+$BUTTON_Preset_Minimal.ForeColor='#aaaaaa'
+$BUTTON_Preset_Minimal.Text = "Minimal"
+$BUTTON_Preset_Minimal.add_Click{GUI_Optimise_Minimal}
+
+$BUTTON_Preset_Standard = New-Object System.Windows.Forms.Button
+$BUTTON_Preset_Standard.Size = New-Object Drawing.Point 110,35
+$BUTTON_Preset_Standard.Location = New-Object Drawing.Point 507,305
+$BUTTON_Preset_Standard.ForeColor='#aaaaaa'
+$BUTTON_Preset_Standard.Text = "Standard"
+$BUTTON_Preset_Standard.add_Click{GUI_Optimise_Standard}
+
+$BUTTON_Preset_Enhanced = New-Object System.Windows.Forms.Button
+$BUTTON_Preset_Enhanced.Size = New-Object Drawing.Point 110,35
+$BUTTON_Preset_Enhanced.Location = New-Object Drawing.Point 507,355
+$BUTTON_Preset_Enhanced.ForeColor='#aaaaaa'
+$BUTTON_Preset_Enhanced.Text = "Enhanced"
+$BUTTON_Preset_Enhanced.add_Click{GUI_Optimise_Enhanced}
+
+
+# Menu Button
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
@@ -370,12 +426,12 @@ $BUTTON_Start.Location = New-Object Drawing.Point 265,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!($Administrator -eq "True")){$BUTTON_Start.Enabled = $false}
-$BUTTON_Cancel = New-Object System.Windows.Forms.Button
-$BUTTON_Cancel.Size = New-Object Drawing.Point 75,24
-$BUTTON_Cancel.Location = New-Object Drawing.Point 360,422
-$BUTTON_Cancel.ForeColor='#aaaaaa'
-$BUTTON_Cancel.Text = "Cancel"
-$BUTTON_Cancel.add_Click{GUI_Choice}
+$BUTTON_Menu = New-Object System.Windows.Forms.Button
+$BUTTON_Menu.Size = New-Object Drawing.Point 75,24
+$BUTTON_Menu.Location = New-Object Drawing.Point 360,422
+$BUTTON_Menu.ForeColor='#aaaaaa'
+$BUTTON_Menu.Text = "Menu"
+$BUTTON_Menu.add_Click{GUI_Choice}
 
 
 function GUI_Choice
@@ -397,6 +453,7 @@ function GUI_Optimise
     $form.controls.add($Titel_Essentials)
     $form.controls.add($Titel_Tweaks)
     $form.controls.add($Titel_Extras)
+    $form.controls.add($Titel_Presets)
     $form.Controls.Add($BOX_Checks)
     $form.Controls.Add($BOX_SystemPoint)
     $form.Controls.Add($BOX_SophiaScript)
@@ -407,12 +464,61 @@ function GUI_Optimise
     $form.Controls.Add($BOX_WindowsTweaks_Services)
     $form.Controls.Add($BOX_WindowsTweaks_Index)
     $form.Controls.Add($BOX_Windows_Cleanup)
-    $form.Controls.Add($BOX_Runtime)
-    $form.Controls.Add($BOX_Remove_ASUS)
-    $form.Controls.Add($BOX_Autoruns)
+    $form.Controls.Add($BOX_Extended_Cleanup)
+    $form.Controls.Add($BOX_Idle_Tasks)
+    $form.Controls.Add($BUTTON_Preset_Minimal)
+    $form.Controls.Add($BUTTON_Preset_Standard)
+    $form.Controls.Add($BUTTON_Preset_Enhanced)
     $form.Controls.Add($BUTTON_Start)
-    $form.Controls.Add($BUTTON_Cancel)
+    $form.Controls.Add($BUTTON_Menu)
 }
+
+function GUI_Optimise_Minimal
+{
+    $BOX_SophiaScript.Checked = $false
+    $BOX_ooShutup.Checked = $true
+    $BOX_WindowsTweaks_Registry.Checked = $false
+    $BOX_WindowsTweaks_Tasks.Checked = $true
+    $BOX_WindowsTweaks_Features.Checked = $false
+    $BOX_WindowsTweaks_Services.Checked = $true
+    $BOX_WindowsTweaks_Index.Checked = $true
+    $BOX_Windows_Cleanup.Checked = $true
+    $BOX_Extended_Cleanup.Checked = $false
+    $BOX_Idle_Tasks.Checked = $false
+    $form.Refresh
+}
+
+function GUI_Optimise_Standard
+{
+    $BOX_SophiaScript.Checked = $true
+    $BOX_ooShutup.Checked = $true
+    $BOX_WindowsTweaks_Registry.Checked = $true
+    $BOX_WindowsTweaks_Tasks.Checked = $true
+    $BOX_WindowsTweaks_Features.Checked = $false
+    $BOX_WindowsTweaks_Services.Checked = $true
+    $BOX_WindowsTweaks_Index.Checked = $true
+    $BOX_Windows_Cleanup.Checked = $true
+    $BOX_Extended_Cleanup.Checked = $false
+    $BOX_Idle_Tasks.Checked = $false
+    $form.Refresh
+}
+
+function GUI_Optimise_Enhanced
+{
+    $BOX_SophiaScript.Checked = $true
+    $BOX_ooShutup.Checked = $true
+    $BOX_WindowsTweaks_Registry.Checked = $true
+    $BOX_WindowsTweaks_Tasks.Checked = $true
+    $BOX_WindowsTweaks_Features.Checked = $true
+    $BOX_WindowsTweaks_Services.Checked = $true
+    $BOX_WindowsTweaks_Index.Checked = $true
+    $BOX_Windows_Cleanup.Checked = $true
+    $BOX_Extended_Cleanup.Checked = $true
+    $BOX_Idle_Tasks.Checked = $true
+    $form.Refresh
+}
+
+
 
 function GUI_Maintance
 {
@@ -420,8 +526,10 @@ function GUI_Maintance
     $form.controls.add($Image)
 }
 
+
 GUI_Choice
-$form.ShowDialog() | Out-Null }
+$form.ShowDialog() | Out-Null
+}
 
 
 function Choice{ 
@@ -436,11 +544,9 @@ IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks}
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-IF($hash.Advanced_DiskCleanup){Advanced_DiskCleanup}
-IF($hash.Runtime){Runtime}   
-IF($hash.Autoruns){Autoruns}   
-IF($hash.Remove_ASUS){Remove_ASUS}
 IF($hash.Windows_Cleanup){Windows_Cleanup}
+IF($hash.Extended_Cleanup){Extended_Cleanup}   
+IF($hash.Idle_Tasks){Idle_Tasks}
 IF($hash.Driver_Cleaner){Driver_Cleaner}}
 
 GUI
