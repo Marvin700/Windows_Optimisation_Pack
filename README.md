@@ -11,6 +11,7 @@ Beta Release <BR>
 
 
 ## Key Features
+* Presets
 * Windows Cleanup
 * Maintance Windows
 * Remove Windows Bloatware 
