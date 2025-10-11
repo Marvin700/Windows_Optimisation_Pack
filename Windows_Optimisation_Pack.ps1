@@ -5,15 +5,16 @@
 $Branch = "Beta"
 $Version = "2.0"
 
+### Title ###
+$ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700 | windows-optimisation.de"
+
 ### Functions ###
 $hash = [hashtable]::Synchronized(@{})
-$ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
-$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 
 function SystemPoint{
 # Delete all previous restore points when the function is activated
-IF($hash.Windows_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
+IF($hash.Extended_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 # Temporarily modify to create a restore point.
 Enable-ComputerRestore -Drive $env:SystemDrive
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
@@ -27,12 +28,10 @@ Clear-Host
 IF(!([System.Environment]::Is64BitOperatingSystem)){
 Write-Warning " You need an 64-Bit System"
 Start-Sleep 20;exit}
+$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 IF(!($WindowsVersion -like "Microsoft Windows 11*" -Or $WindowsVersion -like "Microsoft Windows 10*")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Start-Sleep 20;exit}
-IF(!(Test-Connection 1.1.1.1 -ErrorAction SilentlyContinue)){
-Write-Warning " No internet connection available"
-Start-Sleep 20}
 IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}}
@@ -145,7 +144,7 @@ Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.
 Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
 
 
-function Windows_Cleanup{
+function Clear_Cache{
 Clear-Host
 Write-Output "Removing Cache Files..."
 # Clear DNS Cache
@@ -204,6 +203,10 @@ exit}
 function GUI{
 ## GUI 
 
+#Funktion um Fenster zu verstecken / anzuzeigen
+Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);' -Name WinAPI -Namespace User32
+$HideWindow = (Get-Process -Id $PID).MainWindowHandle
+
 # GUI Preperations
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
 IF(Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
@@ -213,6 +216,9 @@ $Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.Wind
 IF(!(Test-Path $ScriptFolder\Picture.png)){Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png" -OutFile "$ScriptFolder\Picture.png"}
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
+
+# Hide Window 
+[User32.WinAPI]::ShowWindow($HideWindow, 6)
 
 # GUI Checkbox Buttton Handler
 $hash.Exit = $true
@@ -228,7 +234,7 @@ IF($BOX_WindowsTweaks_Tasks.Checked)    {$hash.WindowsTweaks_Tasks = $true}
 IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}   
 IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
 IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
-IF($BOX_Windows_Cleanup.Checked)        {$hash.Windows_Cleanup = $true} 
+IF($BOX_Clear_Cache.Checked)            {$hash.Clear_Cache = $true} 
 IF($BOX_Extended_Cleanup.Checked)       {$hash.Extended_Cleanup = $true}   
 IF($BOX_Idle_Tasks.Checked)             {$hash.Idle_Tasks = $true} 
 
@@ -279,13 +285,13 @@ $BUTTON_Optimise.Size = New-Object Drawing.Point 169,54
 $BUTTON_Optimise.Location = New-Object Drawing.Point 370,230
 $BUTTON_Optimise.ForeColor='#aaaaaa'
 $BUTTON_Optimise.add_Click{GUI_Optimise}
-$BUTTON_Maintance = New-Object System.Windows.Forms.Button
-$BUTTON_Maintance.Text = "Maintance and Drivers"
-$BUTTON_Maintance.Size = New-Object Drawing.Point 169,54
-$BUTTON_Maintance.Location = New-Object Drawing.Point 370,310
-$BUTTON_Maintance.ForeColor='#aaaaaa'
-$BUTTON_Maintance.Enabled = $false
-$BUTTON_Maintance.add_Click{GUI_Maintance}
+$BUTTON_Maintenance = New-Object System.Windows.Forms.Button
+$BUTTON_Maintenance.Text = "Maintenance and Tools"
+$BUTTON_Maintenance.Size = New-Object Drawing.Point 169,54
+$BUTTON_Maintenance.Location = New-Object Drawing.Point 370,310
+$BUTTON_Maintenance.ForeColor='#aaaaaa'
+$BUTTON_Maintenance.Enabled = $true
+$BUTTON_Maintenance.add_Click{GUI_Maintenance}#
 $BUTTON_Exit = New-Object System.Windows.Forms.Button
 $BUTTON_Exit.Size = New-Object Drawing.Point 113,36
 $BUTTON_Exit.Location = New-Object Drawing.Point 270,410
@@ -376,16 +382,16 @@ $BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
 $BOX_WindowsTweaks_Index.Checked = $true  
 
 # Extras
-$BOX_Windows_Cleanup = New-Object System.Windows.Forms.CheckBox
-$BOX_Windows_Cleanup.Size = New-Object Drawing.Point 135,25
-$BOX_Windows_Cleanup.Location = New-Object Drawing.Point 350,248
-$BOX_Windows_Cleanup.Text = "Clear Cache" 
-$BOX_Windows_Cleanup.ForeColor='#aaaaaa'
-$BOX_Windows_Cleanup.Checked = $true 
+$BOX_Clear_Cache = New-Object System.Windows.Forms.CheckBox
+$BOX_Clear_Cache.Size = New-Object Drawing.Point 135,25
+$BOX_Clear_Cache.Location = New-Object Drawing.Point 350,248
+$BOX_Clear_Cache.Text = "Clear Cache" 
+$BOX_Clear_Cache.ForeColor='#aaaaaa'
+$BOX_Clear_Cache.Checked = $true 
 $BOX_Extended_Cleanup = New-Object System.Windows.Forms.CheckBox
 $BOX_Extended_Cleanup.Size = New-Object Drawing.Point 145,25
 $BOX_Extended_Cleanup.Location = New-Object Drawing.Point 350,279
-$BOX_Extended_Cleanup.Text = "Windows Cleanup"
+$BOX_Extended_Cleanup.Text = "Extended Cleanup"
 $BOX_Extended_Cleanup.ForeColor='#aaaaaa'
 $BOX_Extended_Cleanup.Checked = $false  
 $BOX_Idle_Tasks = New-Object System.Windows.Forms.CheckBox
@@ -419,29 +425,37 @@ $BUTTON_Preset_Enhanced.add_Click{GUI_Optimise_Enhanced}
 
 
 # Menu Button
+$BUTTON_Menu = New-Object System.Windows.Forms.Button
+$BUTTON_Menu.Size = New-Object Drawing.Point 75,24
+$BUTTON_Menu.Location = New-Object Drawing.Point 265,422
+$BUTTON_Menu.ForeColor='#aaaaaa'
+$BUTTON_Menu.Text = "Menu"
+$BUTTON_Menu.add_Click{GUI_Menu}
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
-$BUTTON_Start.Location = New-Object Drawing.Point 265,422
+$BUTTON_Start.Location = New-Object Drawing.Point 360,422
 $BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!($Administrator -eq "True")){$BUTTON_Start.Enabled = $false}
-$BUTTON_Menu = New-Object System.Windows.Forms.Button
-$BUTTON_Menu.Size = New-Object Drawing.Point 75,24
-$BUTTON_Menu.Location = New-Object Drawing.Point 360,422
-$BUTTON_Menu.ForeColor='#aaaaaa'
-$BUTTON_Menu.Text = "Menu"
-$BUTTON_Menu.add_Click{GUI_Choice}
 
+# Maintance
+$Titel_Placeholder = New-Object Windows.Forms.Label
+$Titel_Placeholder.Size = New-Object Drawing.Point 275,75
+$Titel_Placeholder.Location = New-Object Drawing.Point 200,300
+$Titel_Placeholder.text = "Development :)
 
-function GUI_Choice
+use the scripts in the config Folder"
+$Titel_Placeholder.ForeColor='#aaaaaa'
+
+function GUI_Menu
 {
     $form.Controls.Clear()
     $form.controls.add($Image)
     $form.controls.add($Text_Info)
     $form.controls.add($Titel_Warning)
     $form.Controls.add($BUTTON_Optimise)
-    $form.Controls.add($BUTTON_Maintance)
+    $form.Controls.add($BUTTON_Maintenance)
     $form.Controls.add($BUTTON_Exit)
 }
 
@@ -463,7 +477,7 @@ function GUI_Optimise
     $form.Controls.Add($BOX_WindowsTweaks_Features)
     $form.Controls.Add($BOX_WindowsTweaks_Services)
     $form.Controls.Add($BOX_WindowsTweaks_Index)
-    $form.Controls.Add($BOX_Windows_Cleanup)
+    $form.Controls.Add($BOX_Clear_Cache)
     $form.Controls.Add($BOX_Extended_Cleanup)
     $form.Controls.Add($BOX_Idle_Tasks)
     $form.Controls.Add($BUTTON_Preset_Minimal)
@@ -482,7 +496,7 @@ function GUI_Optimise_Minimal
     $BOX_WindowsTweaks_Features.Checked = $false
     $BOX_WindowsTweaks_Services.Checked = $true
     $BOX_WindowsTweaks_Index.Checked = $true
-    $BOX_Windows_Cleanup.Checked = $true
+    $BOX_Clear_Cache.Checked = $true
     $BOX_Extended_Cleanup.Checked = $false
     $BOX_Idle_Tasks.Checked = $false
     $form.Refresh
@@ -497,7 +511,7 @@ function GUI_Optimise_Standard
     $BOX_WindowsTweaks_Features.Checked = $false
     $BOX_WindowsTweaks_Services.Checked = $true
     $BOX_WindowsTweaks_Index.Checked = $true
-    $BOX_Windows_Cleanup.Checked = $true
+    $BOX_Clear_Cache.Checked = $true
     $BOX_Extended_Cleanup.Checked = $false
     $BOX_Idle_Tasks.Checked = $false
     $form.Refresh
@@ -512,7 +526,7 @@ function GUI_Optimise_Enhanced
     $BOX_WindowsTweaks_Features.Checked = $true
     $BOX_WindowsTweaks_Services.Checked = $true
     $BOX_WindowsTweaks_Index.Checked = $true
-    $BOX_Windows_Cleanup.Checked = $true
+    $BOX_Clear_Cache.Checked = $true
     $BOX_Extended_Cleanup.Checked = $true
     $BOX_Idle_Tasks.Checked = $true
     $form.Refresh
@@ -520,19 +534,25 @@ function GUI_Optimise_Enhanced
 
 
 
-function GUI_Maintance
+function GUI_Maintenance
 {
     $form.Controls.Clear()
     $form.controls.add($Image)
+    $form.controls.add($Titel_Placeholder)
+    $form.Controls.Add($BUTTON_Menu)
 }
 
 
-GUI_Choice
+GUI_Menu
 $form.ShowDialog() | Out-Null
+
+#Show Window
+[User32.WinAPI]::ShowWindow($HideWindow, 9)
+
 }
 
 
-function Choice{ 
+function GUI_Menu{ 
 IF($hash.Exit){exit}
 IF($hash.Checks){Checks}
 IF($hash.SystemPoint){SystemPoint}
@@ -544,11 +564,11 @@ IF($hash.WindowsTweaks_Tasks){WindowsTweaks_Tasks}
 IF($hash.WindowsTweaks_Registry){WindowsTweaks_Registry}
 IF($hash.WindowsTweaks_Features){WindowsTweaks_Features}
 IF($hash.WindowsTweaks_Index){WindowsTweaks_Index}
-IF($hash.Windows_Cleanup){Windows_Cleanup}
+IF($hash.Clear_Cache){Clear_Cache}
 IF($hash.Extended_Cleanup){Extended_Cleanup}   
 IF($hash.Idle_Tasks){Idle_Tasks}
 IF($hash.Driver_Cleaner){Driver_Cleaner}}
 
 GUI
-Choice
+GUI_Menu
 Finish
