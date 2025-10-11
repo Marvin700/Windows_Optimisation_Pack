@@ -5,13 +5,9 @@
 $Branch = "Beta"
 $Version = "2.0"
 
-### Title &  ###
+### Title ###
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
-
-### Folder ###
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
-else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 ### Functions ###
 $hash = [hashtable]::Synchronized(@{})
