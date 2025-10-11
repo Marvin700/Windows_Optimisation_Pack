@@ -7,7 +7,7 @@ $Version = "2.0"
 
 ### Title ###
 $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700 | windows-optimisation.de"
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 
 ### Functions ###
 $hash = [hashtable]::Synchronized(@{})
@@ -21,25 +21,20 @@ New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\System
 Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
 Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
 
-function Checks{
+function Checks_and_Preperations{
 # Checks to Run Script
 Clear-Host
  " Compatibility checks and preparation are performed..."
-IF(!([System.Environment]::Is64BitOperatingSystem)){
-Write-Warning " You need an 64-Bit System"
-Start-Sleep 20;exit}
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 IF(!($WindowsVersion -like "Microsoft Windows 11*" -Or $WindowsVersion -like "Microsoft Windows 10*")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Start-Sleep 20;exit}
 IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
 Write-Warning " Reboot Pending !"
-Start-Sleep 20;exit}}
-
-function Preperations{
-Write-Output ""
-# Entry for the Used Version and Later Debugging
-New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null}
+Start-Sleep 20;exit}
+#Regkey for Script
+New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
+}
 
 ### Menu: Optimise Windows ###
 
@@ -208,6 +203,7 @@ Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool 
 $HideWindow = (Get-Process -Id $PID).MainWindowHandle
 
 # GUI Preperations
+$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
 IF(Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
@@ -271,7 +267,7 @@ Pack Version
 $Branch $Version
 
 $WindowsVersion
-Build $BuildNumber 
+Build $BuildNumber
 
 GitHub Connection
 $InternetConnection
@@ -554,9 +550,8 @@ $form.ShowDialog() | Out-Null
 
 function GUI_Menu{ 
 IF($hash.Exit){exit}
-IF($hash.Checks){Checks}
 IF($hash.SystemPoint){SystemPoint}
-IF($hash.Checks){Preperations}
+IF($hash.Checks){Checks_and_Preperations}
 IF($hash.WindowsTweaks_Services){WindowsTweaks_Services}
 IF($hash.ooShutup){ooShutup}
 IF($hash.SophiaScript){SophiaScript}
