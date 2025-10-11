@@ -5,9 +5,13 @@
 $Branch = "Beta"
 $Version = "2.0"
 
-### Title ###
-$ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+### Title &  ###
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
+
+### Folder ###
+$ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
+IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
+else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
 
 ### Functions ###
 $hash = [hashtable]::Synchronized(@{})
@@ -33,11 +37,9 @@ IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based S
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 #Regkey for Script
-New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
-}
+New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null}
 
 ### Menu: Optimise Windows ###
-
 
 function WindowsTweaks_Services{
 # Disable unnecessary tasks
@@ -47,7 +49,6 @@ $services = @("WpcMonSvc","SharedRealitySvc","Fax","autotimesvc","wisvc","SDRSVC
 $services | ForEach-Object {
 Stop-Service $_ -ErrorAction SilentlyContinue
 Set-Service $_ -StartupType Disabled -ErrorAction SilentlyContinue}}
-
 
 function WindowsTweaks_Features{
 # Disable unnecessary Features
@@ -59,7 +60,6 @@ $features | ForEach-Object {dism /Online /Disable-Feature /FeatureName:$_ /NoRes
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
-
 function WindowsTweaks_Tasks{
 # Disable unnecessary Tasks
 schtasks /change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE
@@ -69,7 +69,6 @@ Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement 
 $tasks = @("ProgramDataUpdater","Proxy","Consolidator","Microsoft-Windows-DiskDiagnosticDataCollector","MapsToastTask","MapsUpdateTask","FamilySafetyMonitor"
 "FODCleanupTask","FamilySafetyRefreshTask","XblGameSaveTask","UsbCeip","DmClient","DmClientOnScenarioDownload")
 $tasks | ForEach-Object {Get-ScheduledTask -TaskName $_ -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue}}
-
 
 function WindowsTweaks_Registry{
 # MarkC Mouse Acceleration Fix
@@ -104,8 +103,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multi
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Type "DWORD" -Value 00000000 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Priority" -Type "DWORD" -Value 00000006 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "Scheduling Category" -Value "High" -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force
-}
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force}
             
 function WindowsTweaks_Index{
 # Disable Windows Indexing
@@ -138,21 +136,18 @@ Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\OOSU10.exe"
 Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
 
-
 function Clear_Cache{
 Clear-Host
 Write-Output "Removing Cache Files..."
 # Clear DNS Cache
 ipconfig /flushdns > $null
-
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 # Clear Multiple Cache Foleder
 $path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
 "$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","C:\ProgramData\Package Cache")
 foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
 # Rebuild Performance Couters
-lodctr /r
-}
+lodctr /r}
 
 function Extended_Cleanup{
 # Cleanup Windows Components
@@ -163,12 +158,10 @@ Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
 If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
 New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}
-Start-Process cleanmgr.exe /sagerun:1
-}
+Start-Process cleanmgr.exe /sagerun:1}
 
 function Idle_Tasks{
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'   
-}
+Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
 function Finish{
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
@@ -186,7 +179,7 @@ Set-ItemProperty -Path "HKCR:\AppUserModelId\Windows_Optimisation_Pack" -Name "S
 # Toast
 [xml]$ToastTemplate = @"
 <toast duration="Long"><visual><binding template="ToastGeneric">
-<text>Your Windows is now debloated and optimised :)</text></binding></visual>
+<text>Your Windows is now debloated and optimised</text></binding></visual>
 <audio src="ms-winsoundevent:notification.default" /></toast>
 "@
 $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::New()
