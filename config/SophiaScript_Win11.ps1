@@ -152,6 +152,9 @@ TaskbarWidgets -Hide
 # Combine taskbar buttons and always hide labels
 TaskbarCombine -Always
 
+# Unpin Microsoft Edge, Microsoft Store, and Outlook shortcuts from the taskbar
+UnpinTaskbarShortcuts -Shortcuts Edge, Store, Outlook
+
 # Enable end task in taskbar by right click
 TaskbarEndTask -Enable
 
@@ -215,6 +218,9 @@ PowerPlan -Balanced
 
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
+
+# Use the latest installed .NET runtime for all apps
+LatestInstalled.NET -Enable
 
 # Save screenshots by pressing Win+PrtScr on the Desktop
 WinPrtScrFolder -Desktop
