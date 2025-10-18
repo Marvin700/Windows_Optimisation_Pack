@@ -52,7 +52,6 @@ $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","Microso
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 $features | ForEach-Object {dism /Online /Disable-Feature /FeatureName:$_ /NoRestart}
 
-# Disable unnecessary Features
 $capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting")
 foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
 
@@ -102,12 +101,14 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multi
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Name "SFIO Priority" -Value "High" -Force}
             
 function WindowsTweaks_Index{
-# Disable Windows Indexing
+# Rename C Drive
 Label $env:SystemDrive Windows
+# Disable Windows Indexing
 $drives = Get-WmiObject Win32_LogicalDisk | Select-Object -ExpandProperty DeviceID
 $drives | ForEach-Object{Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$_'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
 
 function SophiaScript{
+$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 # Download Sophia Script Windows 10
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
 IF($WindowsVersion -match "Microsoft Windows 11"){
@@ -187,20 +188,22 @@ exit}
 function GUI{
 ## GUI 
 
-#Funktion um Fenster zu verstecken / anzuzeigen
+# Hide Window
 Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);' -Name WinAPI -Namespace User32
 $HideWindow = (Get-Process -Id $PID).MainWindowHandle
 
 # GUI Preperations
-$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
-$BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
-IF(Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue){$InternetConnection = $True}else{$InternetConnection = $False}
-IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
-else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Picture.png" | Out-Null}
-$Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
-IF(!(Test-Path $ScriptFolder\Picture.png)){Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png" -OutFile "$ScriptFolder\Picture.png"}
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
+
+IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
+else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Logo.png" | Out-Null}
+IF(!(Test-Path $ScriptFolder\Logo.png)){Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png" -OutFile "$ScriptFolder\Logo.png"}
+
+$Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
+$BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
+$InternetConnection = (Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue).StatusDescription
 
 # Hide Window 
 [User32.WinAPI]::ShowWindow($HideWindow, 6)
@@ -234,7 +237,7 @@ $form.BackColor='#212121'
 $form.MinimizeBox = $false
 $form.MaximizeBox = $false
 $Image = new-object Windows.Forms.PictureBox
-$img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Picture.png")
+$img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Logo.png")
 $Image.Width = $img.Size.Width
 $Image.Height = $img.Size.Height
 $Image.Location=New-Object System.Drawing.Point(68,20)
