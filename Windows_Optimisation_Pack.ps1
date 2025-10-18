@@ -203,8 +203,8 @@ Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool 
 $HideWindow = (Get-Process -Id $PID).MainWindowHandle
 
 # Backgroud Color
-$HighlighBackColor = [System.Drawing.Color]::DimGray
 $DefaultBackColor = '#212121'
+$HighlighBackColor = '#333333'
 
 # Logo
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
