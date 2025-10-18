@@ -13,6 +13,8 @@ $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 $hash = [hashtable]::Synchronized(@{})
 
 function SystemPoint{
+Clear-Host
+Write-Output " Create System Restore Point"
 # Delete all previous restore points when the function is activated
 IF($hash.Extended_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 # Temporarily modify to create a restore point.
@@ -24,7 +26,7 @@ Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sy
 function Checks_and_Preperations{
 # Checks to Run Script
 Clear-Host
- " Compatibility checks and preparation are performed..."
+Write-Output " Compatibility checks and preparation are performed..."
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 IF(!($WindowsVersion -like "Microsoft Windows 11*" -Or $WindowsVersion -like "Microsoft Windows 10*")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
@@ -33,7 +35,31 @@ IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based S
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 #Regkey for Script
-New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null}
+New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
+
+Write-Output " Download Github Files..."
+
+# Download ooShutup
+New-Item -Name "ooshutup" -Path "$ScriptFolder\ooshutup" -ItemType Directory | Out-Null
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup\ooshutup.cfg"
+Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\ooshutup\OOSU10.exe"
+
+# Download Sophia Script Windows 10
+$LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
+IF($WindowsVersion -match "Microsoft Windows 11"){
+$LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_11_PowerShell_5_1
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.11.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
+Expand-Archive $env:temp\Sophia.zip $env:temp -force
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
+# Download Sophia Script Windows 11
+IF($WindowsVersion -match "Microsoft Windows 10"){
+$LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_10_PowerShell_5_1
+Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.10.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
+Expand-Archive $env:temp\Sophia.zip $env:temp -force
+Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
+}
 
 
 ########## Menu: Optimise Windows ##########
@@ -109,30 +135,12 @@ $drives = Get-WmiObject Win32_LogicalDisk | Select-Object -ExpandProperty Device
 $drives | ForEach-Object{Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$_'" | Set-WmiInstance -Arguments @{IndexingEnabled=$False}}}
 
 function SophiaScript{
-$WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
-# Download Sophia Script Windows 10
-$LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
-IF($WindowsVersion -match "Microsoft Windows 11"){
-$LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_11_PowerShell_5_1
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.11.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
-Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win11.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
-# Download Sophia Script Windows 11
-IF($WindowsVersion -match "Microsoft Windows 10"){
-$LatestRelease = (Invoke-RestMethod "https://raw.githubusercontent.com/farag2/Sophia-Script-for-Windows/master/sophia_script_versions.json").Sophia_Script_Windows_10_PowerShell_5_1
-Start-BitsTransfer -Source "https://github.com/farag2/Sophia-Script-for-Windows/releases/download/$LatestGitHubRelease/Sophia.Script.for.Windows.10.v$LatestRelease.zip" -Destination "$env:temp\Sophia.zip"
-Expand-Archive $env:temp\Sophia.zip $env:temp -force
-Move-Item -Path $env:temp\"Sophia_Script*" -Destination "$ScriptFolder\Sophia_Script\"
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/SophiaScript_Win10.ps1" -Destination "$ScriptFolder\Sophia_Script\Sophia.ps1"}
 # Start Sophia Script
 Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
 # O&O ShutUp10++
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup.cfg"
-Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\OOSU10.exe"
-Start-Process powershell "Set-Location $ScriptFolder;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
+Start-Process powershell "Set-Location $ScriptFolder\ooshutup;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
 
 function Clear_Cache{
 Clear-Host
