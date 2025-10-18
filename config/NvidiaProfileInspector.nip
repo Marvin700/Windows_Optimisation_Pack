@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfProfile>
+  <Profile>
+    <ProfileName>Base Profile</ProfileName>
+    <Executeables />
+    <Settings>
+      <ProfileSetting>
+        <SettingNameInfo>DLSS Model Preset Profile</SettingNameInfo>
+        <SettingID>6505105</SettingID>
+        <SettingValue>1</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Preferred refresh rate</SettingNameInfo>
+        <SettingID>6600001</SettingID>
+        <SettingValue>1</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override DLSSG multi-frame count</SettingNameInfo>
+        <SettingID>273507943</SettingID>
+        <SettingValue>0</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>VRR requested state</SettingNameInfo>
+        <SettingID>278196727</SettingID>
+        <SettingValue>2</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>G-SYNC</SettingNameInfo>
+        <SettingID>279476687</SettingID>
+        <SettingValue>0</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override DLSS-SR performance mode</SettingNameInfo>
+        <SettingID>279951208</SettingID>
+        <SettingValue>3</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override DLSS-RR performance mode</SettingNameInfo>
+        <SettingID>280859683</SettingID>
+        <SettingValue>3</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override scaling ratio for DLSS-RR</SettingNameInfo>
+        <SettingID>281531554</SettingID>
+        <SettingValue>0</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override DLSS-SR presets</SettingNameInfo>
+        <SettingID>283385331</SettingID>
+        <SettingValue>16777215</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override scaling ratio for DLSS-SR</SettingNameInfo>
+        <SettingID>283385333</SettingID>
+        <SettingValue>0</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Override DLSS-RR preset</SettingNameInfo>
+        <SettingID>283385335</SettingID>
+        <SettingValue>16777215</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Enable DLSS-SR override</SettingNameInfo>
+        <SettingID>283385345</SettingID>
+        <SettingValue>1</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Enable DLSS-RR override</SettingNameInfo>
+        <SettingID>283385346</SettingID>
+        <SettingValue>1</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Enable DLSS-FG override</SettingNameInfo>
+        <SettingID>283385347</SettingID>
+        <SettingValue>1</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+      <ProfileSetting>
+        <SettingNameInfo>Enable G-SYNC globally</SettingNameInfo>
+        <SettingID>294973784</SettingID>
+        <SettingValue>2</SettingValue>
+        <ValueType>Dword</ValueType>
+      </ProfileSetting>
+    </Settings>
+  </Profile>
+</ArrayOfProfile>
