@@ -32,16 +32,16 @@ Windows Script
 irm windows-optimisation.de/beta | iex
   ```
   ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Advanced_Cleanup.ps1 | iex
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/Scripts/Advanced_Cleanup.ps1 | iex
   ```
   ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Windows_Health.ps1 | iex
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/Scripts/Windows_Health.ps1 | iex
   ```
   ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Clean_GPU.ps1 | iex
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/Scripts/Clean_GPU.ps1 | iex
   ```
   ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/config/Nvidia_Settings.ps1 | iex
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/Scripts/Nvidia_Settings.ps1 | iex
   ```
 
 > **Note**: <BR> 
