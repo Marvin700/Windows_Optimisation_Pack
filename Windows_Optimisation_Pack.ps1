@@ -35,7 +35,8 @@ Start-Sleep 20;exit}
 #Regkey for Script
 New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null}
 
-### Menu: Optimise Windows ###
+
+########## Menu: Optimise Windows ##########
 
 function WindowsTweaks_Services{
 # Disable unnecessary tasks
@@ -160,7 +161,11 @@ Start-Process cleanmgr.exe /sagerun:1}
 function Idle_Tasks{
 Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_Pack && mode con cols=40 lines=12 && echo Background tasks are processed... && echo This Step can run up to 1 Hour && echo _ && echo You can continue with your stuff :) && %windir%\system32\rundll32.exe advapi32.dll,ProcessIdleTasks'}
 
+
+########## ###########
+
 function Finish{
+# Reg Entry for Pending Reboot
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
 # Reg Entry for Toast
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
@@ -188,14 +193,20 @@ exit}
 function GUI{
 ## GUI 
 
-# Hide Window
-Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);' -Name WinAPI -Namespace User32
-$HideWindow = (Get-Process -Id $PID).MainWindowHandle
-
 # GUI Preperations
+
 [reflection.assembly]::loadwithpartialname("System.Windows.Forms") | Out-Null
 [reflection.assembly]::loadwithpartialname("System.Drawing") | Out-Null
 
+# Hide Window Function
+Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);' -Name WinAPI -Namespace User32
+$HideWindow = (Get-Process -Id $PID).MainWindowHandle
+
+# Backgroud Color
+$HighlighBackColor = [System.Drawing.Color]::DimGray
+$DefaultBackColor = '#212121'
+
+# Logo
 IF(!(Test-Path $ScriptFolder)){New-Item -Path $ScriptFolder -ItemType Directory | Out-Null}
 else{Get-ChildItem -Path $ScriptFolder -ErrorAction SilentlyContinue | Remove-Item -Recurse -exclude "Logo.png" | Out-Null}
 IF(!(Test-Path $ScriptFolder\Logo.png)){Invoke-WebRequest "https://user-images.githubusercontent.com/98750428/232198728-be7449b4-1d64-4f83-9fb1-2337af52b0c2.png" -OutFile "$ScriptFolder\Logo.png"}
@@ -203,37 +214,38 @@ IF(!(Test-Path $ScriptFolder\Logo.png)){Invoke-WebRequest "https://user-images.g
 $Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
-$InternetConnection = (Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue).StatusDescription
+#$InternetConnection = (Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue).StatusDescription
+$PendingReboot = (Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")
 
 # Hide Window 
 [User32.WinAPI]::ShowWindow($HideWindow, 6)
 
-# GUI Checkbox Buttton Handler
+# GUI Checkbox Buttton Handler (Unverändert)
 $hash.Exit = $true
-$handler_BUTTON_Start_Click=
-{
-$hash.Exit = $false
-IF($BOX_Checks.Checked)                 {$hash.Checks = $true}
-IF($BOX_SystemPoint.Checked)            {$hash.SystemPoint = $true}
-IF($BOX_SophiaScript.Checked)           {$hash.SophiaScript = $true}
-IF($BOX_ooShutup.Checked)               {$hash.ooShutup = $true}    
-IF($BOX_WindowsTweaks_Registry.Checked) {$hash.WindowsTweaks_Registry = $true}    
-IF($BOX_WindowsTweaks_Tasks.Checked)    {$hash.WindowsTweaks_Tasks = $true}   
-IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}   
-IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
-IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
-IF($BOX_Clear_Cache.Checked)            {$hash.Clear_Cache = $true} 
-IF($BOX_Extended_Cleanup.Checked)       {$hash.Extended_Cleanup = $true}   
-IF($BOX_Idle_Tasks.Checked)             {$hash.Idle_Tasks = $true} 
+$handler_BUTTON_Start_Click = {
+    $hash.Exit = $false
+    IF($BOX_Checks.Checked)                 {$hash.Checks = $true}
+    IF($BOX_SystemPoint.Checked)            {$hash.SystemPoint = $true}
+    IF($BOX_SophiaScript.Checked)           {$hash.SophiaScript = $true}
+    IF($BOX_ooShutup.Checked)               {$hash.ooShutup = $true}
+    IF($BOX_WindowsTweaks_Registry.Checked) {$hash.WindowsTweaks_Registry = $true}
+    IF($BOX_WindowsTweaks_Tasks.Checked)    {$hash.WindowsTweaks_Tasks = $true}
+    IF($BOX_WindowsTweaks_Features.Checked) {$hash.WindowsTweaks_Features = $true}
+    IF($BOX_WindowsTweaks_Services.Checked) {$hash.WindowsTweaks_Services = $true}
+    IF($BOX_WindowsTweaks_Index.Checked)    {$hash.WindowsTweaks_Index = $true}
+    IF($BOX_Clear_Cache.Checked)            {$hash.Clear_Cache = $true}
+    IF($BOX_Extended_Cleanup.Checked)       {$hash.Extended_Cleanup = $true}
+    IF($BOX_Idle_Tasks.Checked)             {$hash.Idle_Tasks = $true} 
 
-$Form.Close()}
+    $Form.Close()
+}
 
 $form = New-Object System.Windows.Forms.Form
 $form.Size = New-Object Drawing.Point 710,509
 $form.text = "Windows_Optimisation_Pack | $([char]0x00A9) Marvin700"
 $form.StartPosition = "CenterScreen" 
 $form.ForeColor='#aaaaaa'
-$form.BackColor='#212121'
+$form.BackColor=$DefaultBackColor
 $form.MinimizeBox = $false
 $form.MaximizeBox = $false
 $Image = new-object Windows.Forms.PictureBox
@@ -249,11 +261,9 @@ $Titel_Warning.ForeColor='#e8272f'
 IF($Administrator -ne $True){$Titel_Warning.text = "PowerShell is not Administrator"}
 
 ## GUI Main
-
 $Text_Info = New-Object Windows.Forms.Label
 $Text_Info.Size = New-Object Drawing.Point 150,150
 $Text_Info.Location = New-Object Drawing.Point 150,215
-$Text_Info.ForeColor='#aaaaaa'
 $Text_Info.text = "
 Pack Version
 $Branch $Version
@@ -261,8 +271,8 @@ $Branch $Version
 $WindowsVersion
 Build $BuildNumber
 
-GitHub Connection
-$InternetConnection
+Reboot Pending
+$PendingReboot
 
 Administrator Permission
 $Administrator
@@ -271,19 +281,16 @@ $BUTTON_Optimise = New-Object System.Windows.Forms.Button
 $BUTTON_Optimise.Text = "Debloat and Optimise"
 $BUTTON_Optimise.Size = New-Object Drawing.Point 169,54
 $BUTTON_Optimise.Location = New-Object Drawing.Point 370,230
-$BUTTON_Optimise.ForeColor='#aaaaaa'
 $BUTTON_Optimise.add_Click{GUI_Optimise}
 $BUTTON_Maintenance = New-Object System.Windows.Forms.Button
 $BUTTON_Maintenance.Text = "Maintenance and Tools"
 $BUTTON_Maintenance.Size = New-Object Drawing.Point 169,54
 $BUTTON_Maintenance.Location = New-Object Drawing.Point 370,310
-$BUTTON_Maintenance.ForeColor='#aaaaaa'
 $BUTTON_Maintenance.Enabled = $true
 $BUTTON_Maintenance.add_Click{GUI_Maintenance}#
 $BUTTON_Exit = New-Object System.Windows.Forms.Button
 $BUTTON_Exit.Size = New-Object Drawing.Point 113,36
 $BUTTON_Exit.Location = New-Object Drawing.Point 270,410
-$BUTTON_Exit.ForeColor='#aaaaaa'
 $BUTTON_Exit.Text = "Exit"
 $BUTTON_Exit.add_Click{$hash.Exit = $true; $Form.Close()}
 
@@ -292,122 +299,93 @@ $Titel_Essentials = New-Object Windows.Forms.Label
 $Titel_Essentials.Size = New-Object Drawing.Point 135,25
 $Titel_Essentials.Location = New-Object Drawing.Point 50,215
 $Titel_Essentials.text = "Essentials"
-$Titel_Essentials.ForeColor='#aaaaaa'
 $Titel_Tweaks = New-Object Windows.Forms.Label
 $Titel_Tweaks.Size = New-Object Drawing.Point 135,25
 $Titel_Tweaks.Location = New-Object Drawing.Point 200,215
 $Titel_Tweaks.text = "Tweaks"
-$Titel_Tweaks.ForeColor='#aaaaaa'
 $Titel_Extras = New-Object Windows.Forms.Label
 $Titel_Extras.Size = New-Object Drawing.Point 135,25
 $Titel_Extras.Location = New-Object Drawing.Point 370,215
 $Titel_Extras.text = "Cleanup"
-$Titel_Extras.ForeColor='#aaaaaa'
 $Titel_Presets = New-Object Windows.Forms.Label
 $Titel_Presets.Size = New-Object Drawing.Point 135,25
 $Titel_Presets.Location = New-Object Drawing.Point 530,215
 $Titel_Presets.text = "Presets"
-$Titel_Presets.ForeColor='#aaaaaa'
 
 # Essentials
 $BOX_SystemPoint = New-Object System.Windows.Forms.CheckBox
 $BOX_SystemPoint.Size = New-Object Drawing.Point 135,25
 $BOX_SystemPoint.Location = New-Object Drawing.Point 27,248
 $BOX_SystemPoint.Text = "Restore Point" 
-$BOX_SystemPoint.ForeColor='#aaaaaa'
 $BOX_SystemPoint.Checked = $true 
 $BOX_SystemPoint.Enabled = $false 
 $BOX_Checks = New-Object System.Windows.Forms.CheckBox
 $BOX_Checks.Size = New-Object Drawing.Point 135,25
 $BOX_Checks.Location = New-Object Drawing.Point 27,279
 $BOX_Checks.Text = "System Check"
-$BOX_Checks.ForeColor='#aaaaaa'
 $BOX_Checks.Checked = $true
 $BOX_Checks.Enabled = $false 
 $BOX_SophiaScript = New-Object System.Windows.Forms.CheckBox
 $BOX_SophiaScript.Size = New-Object Drawing.Point 135,25
 $BOX_SophiaScript.Location = New-Object Drawing.Point 27,310
 $BOX_SophiaScript.Text = "Sophia Script" 
-$BOX_SophiaScript.ForeColor='#aaaaaa'
-$BOX_SophiaScript.Checked = $true 
 $BOX_ooShutup = New-Object System.Windows.Forms.CheckBox
 $BOX_ooShutup.Size = New-Object Drawing.Point 135,25
 $BOX_ooShutup.Location = New-Object Drawing.Point 27,341
 $BOX_ooShutup.Text = "O&&O ShutUp10"
-$BOX_ooShutup.ForeColor='#aaaaaa'
-$BOX_ooShutup.Checked = $true
 
 # Tweaks
 $BOX_WindowsTweaks_Registry = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Registry.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Registry.Location = New-Object Drawing.Point 180,248
 $BOX_WindowsTweaks_Registry.Text = "Registry Tweaks"
-$BOX_WindowsTweaks_Registry.ForeColor='#aaaaaa'
-$BOX_WindowsTweaks_Registry.Checked = $true
 $BOX_WindowsTweaks_Tasks = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Tasks.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Tasks.Location = New-Object Drawing.Point 180,279
 $BOX_WindowsTweaks_Tasks.Text = "Deaktivate Tasks"
-$BOX_WindowsTweaks_Tasks.ForeColor='#aaaaaa'
-$BOX_WindowsTweaks_Tasks.Checked = $true
 $BOX_WindowsTweaks_Features = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Features.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Features.Location = New-Object Drawing.Point 180,310
 $BOX_WindowsTweaks_Features.Text = "Disable Features"
-$BOX_WindowsTweaks_Features.ForeColor='#aaaaaa'
-$BOX_WindowsTweaks_Features.Checked = $false
 $BOX_WindowsTweaks_Services = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Services.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Services.Location = New-Object Drawing.Point 180,341
 $BOX_WindowsTweaks_Services.Text = "Disable Services"  
-$BOX_WindowsTweaks_Services.ForeColor='#aaaaaa'
-$BOX_WindowsTweaks_Services.Checked = $true  
 $BOX_WindowsTweaks_Index = New-Object System.Windows.Forms.CheckBox
 $BOX_WindowsTweaks_Index.Size = New-Object Drawing.Point 135,25
 $BOX_WindowsTweaks_Index.Location = New-Object Drawing.Point 180,372
 $BOX_WindowsTweaks_Index.Text = "Disable Indexing"  
-$BOX_WindowsTweaks_Index.ForeColor='#aaaaaa'
-$BOX_WindowsTweaks_Index.Checked = $true  
 
 # Extras
 $BOX_Clear_Cache = New-Object System.Windows.Forms.CheckBox
 $BOX_Clear_Cache.Size = New-Object Drawing.Point 135,25
 $BOX_Clear_Cache.Location = New-Object Drawing.Point 350,248
 $BOX_Clear_Cache.Text = "Clear Cache" 
-$BOX_Clear_Cache.ForeColor='#aaaaaa'
-$BOX_Clear_Cache.Checked = $true 
 $BOX_Extended_Cleanup = New-Object System.Windows.Forms.CheckBox
 $BOX_Extended_Cleanup.Size = New-Object Drawing.Point 145,25
 $BOX_Extended_Cleanup.Location = New-Object Drawing.Point 350,279
 $BOX_Extended_Cleanup.Text = "Extended Cleanup"
-$BOX_Extended_Cleanup.ForeColor='#aaaaaa'
-$BOX_Extended_Cleanup.Checked = $false  
 $BOX_Idle_Tasks = New-Object System.Windows.Forms.CheckBox
 $BOX_Idle_Tasks.Size = New-Object Drawing.Point 135,25
 $BOX_Idle_Tasks.Location = New-Object Drawing.Point 350,310
 $BOX_Idle_Tasks.Text = "Run Idle Tasks"
-$BOX_Idle_Tasks.ForeColor='#aaaaaa'
-$BOX_Idle_Tasks.Checked = $false
 
 # Presets
 $BUTTON_Preset_Minimal = New-Object System.Windows.Forms.Button
 $BUTTON_Preset_Minimal.Size = New-Object Drawing.Point 110,35
-$BUTTON_Preset_Minimal.Location = New-Object Drawing.Point 507,255
-$BUTTON_Preset_Minimal.ForeColor='#aaaaaa'
+$BUTTON_Preset_Minimal.Location = New-Object Drawing.Point 507,250
 $BUTTON_Preset_Minimal.Text = "Minimal"
 $BUTTON_Preset_Minimal.add_Click{GUI_Optimise_Minimal}
 
 $BUTTON_Preset_Standard = New-Object System.Windows.Forms.Button
 $BUTTON_Preset_Standard.Size = New-Object Drawing.Point 110,35
-$BUTTON_Preset_Standard.Location = New-Object Drawing.Point 507,305
-$BUTTON_Preset_Standard.ForeColor='#aaaaaa'
+$BUTTON_Preset_Standard.Location = New-Object Drawing.Point 507,300
 $BUTTON_Preset_Standard.Text = "Standard"
 $BUTTON_Preset_Standard.add_Click{GUI_Optimise_Standard}
 
 $BUTTON_Preset_Enhanced = New-Object System.Windows.Forms.Button
 $BUTTON_Preset_Enhanced.Size = New-Object Drawing.Point 110,35
-$BUTTON_Preset_Enhanced.Location = New-Object Drawing.Point 507,355
-$BUTTON_Preset_Enhanced.ForeColor='#aaaaaa'
+$BUTTON_Preset_Enhanced.Location = New-Object Drawing.Point 507,350
 $BUTTON_Preset_Enhanced.Text = "Enhanced"
 $BUTTON_Preset_Enhanced.add_Click{GUI_Optimise_Enhanced}
 
@@ -416,14 +394,12 @@ $BUTTON_Preset_Enhanced.add_Click{GUI_Optimise_Enhanced}
 $BUTTON_Menu = New-Object System.Windows.Forms.Button
 $BUTTON_Menu.Size = New-Object Drawing.Point 75,24
 $BUTTON_Menu.Location = New-Object Drawing.Point 265,422
-$BUTTON_Menu.ForeColor='#aaaaaa'
 $BUTTON_Menu.Text = "Menu"
 $BUTTON_Menu.add_Click{GUI_Menu}
 $BUTTON_Start = New-Object System.Windows.Forms.Button
 $BUTTON_Start.Text = "Start"
 $BUTTON_Start.Size = New-Object Drawing.Point 75,24
 $BUTTON_Start.Location = New-Object Drawing.Point 360,422
-$BUTTON_Start.ForeColor='#aaaaaa'
 $BUTTON_Start.add_Click($handler_button_Start_Click)
 IF(!($Administrator -eq "True")){$BUTTON_Start.Enabled = $false}
 
@@ -434,7 +410,6 @@ $Titel_Placeholder.Location = New-Object Drawing.Point 200,300
 $Titel_Placeholder.text = "Development :)
 
 use the scripts in the config Folder"
-$Titel_Placeholder.ForeColor='#aaaaaa'
 
 function GUI_Menu
 {
@@ -477,6 +452,10 @@ function GUI_Optimise
 
 function GUI_Optimise_Minimal
 {
+    $BUTTON_Preset_Minimal.BackColor = $HighlighBackColor
+    $BUTTON_Preset_Standard.BackColor = $DefaultBackColor
+    $BUTTON_Preset_Enhanced.BackColor = $DefaultBackColor
+
     $BOX_SophiaScript.Checked = $false
     $BOX_ooShutup.Checked = $true
     $BOX_WindowsTweaks_Registry.Checked = $false
@@ -492,6 +471,10 @@ function GUI_Optimise_Minimal
 
 function GUI_Optimise_Standard
 {
+    $BUTTON_Preset_Standard.BackColor = $HighlighBackColor
+    $BUTTON_Preset_Minimal.BackColor = $DefaultBackColor
+    $BUTTON_Preset_Enhanced.BackColor = $DefaultBackColor
+
     $BOX_SophiaScript.Checked = $true
     $BOX_ooShutup.Checked = $true
     $BOX_WindowsTweaks_Registry.Checked = $true
@@ -501,12 +484,16 @@ function GUI_Optimise_Standard
     $BOX_WindowsTweaks_Index.Checked = $true
     $BOX_Clear_Cache.Checked = $true
     $BOX_Extended_Cleanup.Checked = $false
-    $BOX_Idle_Tasks.Checked = $false
+    $BOX_Idle_Tasks.Checked = $true
     $form.Refresh
 }
 
 function GUI_Optimise_Enhanced
 {
+    $BUTTON_Preset_Enhanced.BackColor = $HighlighBackColor
+    $BUTTON_Preset_Standard.BackColor = $DefaultBackColor
+    $BUTTON_Preset_Minimal.BackColor = $DefaultBackColor
+
     $BOX_SophiaScript.Checked = $true
     $BOX_ooShutup.Checked = $true
     $BOX_WindowsTweaks_Registry.Checked = $true
@@ -532,6 +519,7 @@ function GUI_Maintenance
 
 
 GUI_Menu
+GUI_Optimise_Standard
 $form.ShowDialog() | Out-Null
 
 #Show Window
