@@ -40,7 +40,7 @@ New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 Write-Output " Download Github Files..."
 
 # Download ooShutup
-New-Item -Name "ooshutup" -Path "$ScriptFolder\ooshutup" -ItemType Directory | Out-Null
+New-Item -Path "$ScriptFolder\ooshutup" -ItemType Directory | Out-Null
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\ooshutup\OOSU10.exe"
 
@@ -256,6 +256,8 @@ $form.ForeColor='#aaaaaa'
 $form.BackColor=$DefaultBackColor
 $form.MinimizeBox = $false
 $form.MaximizeBox = $false
+$form.TopMost = $true
+
 $Image = new-object Windows.Forms.PictureBox
 $img = [System.Drawing.Image]::Fromfile("$ScriptFolder\Logo.png")
 $Image.Width = $img.Size.Width
