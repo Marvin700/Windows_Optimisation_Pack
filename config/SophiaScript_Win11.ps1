@@ -2,9 +2,9 @@
 # windows-optimisation.de
 
 <#
-	Version: v6.9.1
+	Version: v7.0.0
 
-	(c) 2014—2025 Team Sophia
+	(c) 2014—2026 Team Sophia
 
 	https://github.com/farag2
 	https://github.com/Inestic
@@ -12,27 +12,14 @@
 
 #>
 
-[CmdletBinding()]
-param
-(
-	[Parameter(Mandatory = $false)]
-	[string[]]
-	$Functions
-)
-
 Clear-Host
 
-$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2025"
-
+$Global:Failed = 0
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force -ErrorAction Stop
-Import-LocalizedData -BindingVariable Global:Localization -UICulture $PSUICulture -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Stop
+Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
+Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
 
-if ($Functions){
-Invoke-Command -ScriptBlock {InitialActions}
-foreach ($Function in $Functions){
-Invoke-Expression -Command $Function}
-exit}
+$Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2026"
 
 # The mandatory checks
 InitialActions
@@ -152,6 +139,9 @@ TaskbarWidgets -Hide
 # Combine taskbar buttons and always hide labels
 TaskbarCombine -Always
 
+# Unpin Microsoft Edge, Microsoft Store, and Outlook shortcuts from the taskbar
+UnpinTaskbarShortcuts -Shortcuts Edge, Store, Outlook
+
 # Enable end task in taskbar by right click
 TaskbarEndTask -Enable
 
@@ -215,6 +205,9 @@ PowerPlan -Balanced
 
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
+
+# Use the latest installed .NET runtime for all apps
+LatestInstalled.NET -Enable
 
 # Save screenshots by pressing Win+PrtScr on the Desktop
 WinPrtScrFolder -Desktop
