@@ -2,9 +2,9 @@
 # windows-optimisation.de
 
 <#
-	Version: 5.21.1
+	Version: 6.0.0
 
-	(c) 2014—2025 Team Sophia
+	(c) 2014—2026 Team Sophia
 
 	https://github.com/farag2
 	https://github.com/Inestic
@@ -12,27 +12,14 @@
 
 #>
 
-[CmdletBinding()]
-param
-(
-	[Parameter(Mandatory = $false)]
-	[string[]]
-	$Functions
-)
-
 Clear-Host
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2025"
 
+$Global:Failed = 0
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force -ErrorAction Stop
-Import-LocalizedData -BindingVariable Global:Localization -UICulture $PSUICulture -BaseDirectory $PSScriptRoot\Localizations -FileName Sophia -ErrorAction Stop
-
-if ($Functions){
-Invoke-Command -ScriptBlock {InitialActions}
-foreach ($Function in $Functions){
-Invoke-Expression -Command $Function}
-exit}
+Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
+Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
 
 # The mandatory checks
 InitialActions
