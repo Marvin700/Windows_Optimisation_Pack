@@ -188,9 +188,6 @@ StorageSense -Enable
 IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}))
 {Hibernation -Disable}
 
-# Disable the Windows 260 characters path limit
-Win32LongPathLimit -Disable
-
 # Turn off Delivery Optimization
 DeliveryOptimization -Disable
 
@@ -214,9 +211,6 @@ WinPrtScrFolder -Desktop
 
 # Run troubleshooter automatically, then notify me
 RecommendedTroubleshooting -Automatically
-
-# Launch folder windows in a separate process
-FoldersLaunchSeparateProcess -Enable
 
 # Disable and delete reserved storage after the next update installation
 ReservedStorage -Disable
