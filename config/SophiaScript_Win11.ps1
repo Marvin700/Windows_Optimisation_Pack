@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v7.0.0
+	Version: v7.0.4
 
 	(c) 2014—2026 Team Sophia
 
@@ -14,7 +14,7 @@
 
 Clear-Host
 
-$Global:Failed = 0
+$Global:Failed = $false
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
 Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
@@ -34,7 +34,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps -ForAllUsers
+Uninstall-UWPApps -ForAllUsers
 
 # Uninstall OneDrive. The OneDrive user folder won't be removed
 OneDrive -Uninstall
@@ -51,12 +51,6 @@ ErrorReporting -Disable
 
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
-
-# Do not show recommendations for tips, shortcuts, new apps, and more in Start menu
-StartRecommendationsTips -Hide
-
-# Do not show Microsoft account-related notifications on Start Menu in Start menu
-StartAccountNotifications -Hide
 
 # Do not use sign-in info to automatically finish setting up device after an update
 SigninInfo -Disable
@@ -172,8 +166,17 @@ PrtScnSnippingTool -Enable
 # Do not use a different input method for each app window
 AppsLanguageSwitch -Disable
 
+# Hide recently added apps in Start
+RecentlyAddedStartApps -Hide
+
 # Remove Recommended section in Start Menu. Not applicable to Home edition
 StartRecommendedSection -Hide
+
+# Do not show recommendations for tips, shortcuts, new apps, and more in Start menu
+StartRecommendationsTips -Hide
+
+# Do not show Microsoft account-related notifications on Start Menu in Start menu
+StartAccountNotifications -Hide
 
 # When I grab a windows's title bar and shake it, minimize all other windows
 AeroShaking -Enable
