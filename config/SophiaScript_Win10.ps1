@@ -237,14 +237,8 @@ ActiveHours -Automatically
 # Restart this device as soon as possible when a restart is required to install an update
 RestartDeviceAfterUpdate -Enable
 
-# Uninstall the "PC Health Check" app and prevent it from installing in the future
-UninstallPCHealthCheck
-
 # List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
 PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
-
-# Hide recently added apps in the Start menu
-RecentlyAddedApps -Hide
 
 # Hide recently added apps on Start
 RecentlyAddedStartApps -Hide
