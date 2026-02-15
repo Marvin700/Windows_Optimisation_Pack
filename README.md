@@ -22,7 +22,7 @@
 * Deactivate Tasks & Components
 * Mouse acceleration Fix
 * More Windows Tweaks
-* Clean install of GPU Driver
+* Clean install of GPU Driver with DDU
 * Winget for Easy Programm Updates
 * Disable Copilot & Windows AI
 
