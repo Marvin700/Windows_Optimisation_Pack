@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v7.0.4
+	Version: v7.1.0
 
 	(c) 2014—2026 Team Sophia
 
@@ -15,6 +15,7 @@
 Clear-Host
 
 $Global:Failed = $false
+Get-ChildItem function: | Where-Object {$_.ScriptBlock.File -match "Sophia_Script_for_Windows"} | Remove-Item -Force
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
 Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
@@ -169,6 +170,9 @@ AppsLanguageSwitch -Disable
 # Hide recently added apps in Start
 RecentlyAddedStartApps -Hide
 
+# Hide most used apps in Start	
+MostUsedStartApps -Hide
+
 # Remove Recommended section in Start Menu. Not applicable to Home edition
 StartRecommendedSection -Hide
 
@@ -254,6 +258,9 @@ PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 # Show more pins on Start (for 22509+ build only)
 StartLayout -ShowMorePins
 
+# Disable Windows AI functions
+WindowsAI -Disable
+
 #Disable Game Bar tips
 XboxGameTips -Disable
 
@@ -278,14 +285,8 @@ NetworkProtection -Enable
 # Enable detection for potentially unwanted applications and block them
 PUAppsDetection -Enable
 
-# Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
-DismissMSAccount
-
-# Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
-DismissSmartScreenFilter
-
-# Enable DNS-over-HTTPS for IPv4
-DNSoverHTTPS -Enable -PrimaryDNS 1.0.0.1 -SecondaryDNS 1.1.1.1
+# Enable DNS-over-HTTPS using Cloudflare DNS
+DNSoverHTTPS -Cloudflare
 
 # Show the "Extract all" item in the Windows Installer (.msi) context menu
 MSIExtractContext -Show

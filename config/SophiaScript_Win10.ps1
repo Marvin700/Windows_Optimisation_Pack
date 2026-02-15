@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: 6.0.0
+	Version: 6.1.1
 
 	(c) 2014—2026 Team Sophia
 
@@ -14,7 +14,8 @@
 
 Clear-Host
 
-$Global:Failed = 0
+$Global:Failed = $false
+Get-ChildItem function: | Where-Object {$_.ScriptBlock.File -match "Sophia_Script_for_Windows"} | Remove-Item -Force
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
 Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
@@ -142,9 +143,6 @@ NewsInterests -Disable
 # View the Control Panel icons by category
 ControlPanelView -Category
 
-#	Enable DNS-over-HTTPS for IPv4
-DNSoverHTTPS -Enable -PrimaryDNS 1.0.0.1 -SecondaryDNS 1.1.1
-
 # Set the default Windows mode to dark
 WindowsColorMode -Dark
 
@@ -215,9 +213,6 @@ WinPrtScrFolder -Desktop
 # Run troubleshooter automatically, then notify me
 RecommendedTroubleshooting -Automatically
 
-# Launch folder windows in a separate process
-FoldersLaunchSeparateProcess -Enable
-
 # Disable and delete reserved storage after the next update installation
 ReservedStorage -Disable
 
@@ -251,6 +246,15 @@ PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 # Hide recently added apps in the Start menu
 RecentlyAddedApps -Hide
 
+# Hide recently added apps on Start
+RecentlyAddedStartApps -Hide
+
+# Hide most used apps in Start (default value)
+MostUsedStartApps -Hide
+
+# Не отображать на начальном экране уведомления, касающиеся учетной записи Microsoft
+StartAccountNotifications -Hide
+
 # Hide app suggestions in the Start menu
 AppSuggestions -Hide
 
@@ -278,11 +282,12 @@ SoftwareDistributionTask -Register
 # Only files older than one day will be deleted. The task runs every 60 days
 TempTask -Register
 
-# Dismiss Microsoft Defender offer in the Windows Security about signing in Microsoft account
-DismissMSAccount
+#region Microsoft Defender & Security
+# Enable Microsoft Defender Exploit Guard network protection
+NetworkProtection -Enable
 
-# Dismiss Microsoft Defender offer in the Windows Security about turning on the SmartScreen filter for Microsoft Edge
-DismissSmartScreenFilter
+# Enable detection for potentially unwanted applications and block them
+PUAppsDetection -Enable
 
 # Show the "Extract all" item in the Windows Installer (.msi) context menu
 MSIExtractContext -Show
