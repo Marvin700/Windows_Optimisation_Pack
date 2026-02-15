@@ -1,22 +1,49 @@
-<img src="https://github.com/Marvin700/Windows_Optimisation_Pack/assets/98750428/07637477-3b97-4e2f-9f24-ad17e48e8fc4">
+<img src="https://github.com/user-attachments/assets/415e9174-9a43-4759-b333-55925274c63e">
+
+
+<BR>
+
+<BR>
+<img src="https://github.com/user-attachments/assets/846cee4e-706c-40b1-941e-a4278c716201">
+
+
+
 
 ## Key Features
-* Disable Windows Spying
-* Remove Windows Bloatware
+* Presets
+* Windows Cleanup
 * Maintance Windows
+* Remove Windows Bloatware 
+* Disable Windows Spying & Enhance Windows Privacy
 * Lower CPU and Ram usage
-* [Sophia Script](https://github.com/farag2/Sophia-Script-for-Windows "Sophia Script Documentation") & [O&OShutUp](https://www.oo-software.com/en/shutup10 "O&OShutUp")
+* Sophia Script & O&OShutUp
 * Remove Cortana and OneDrive
 * Deactivate Windows Indexing 
 * Deactivate Tasks & Components
 * Mouse acceleration Fix
 * More Windows Tweaks
+* Clean install of GPU Driver
+* Winget for Easy Programm Updates
+* Disable Copilot & Windows AI
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
+Windows Script
   ```powershell
-irm windows-optimisation.de | iex
+irm windows-optimisation.de/beta | iex
   ```
-  
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/scripts/Advanced_Cleanup.ps1 | iex
+  ```
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/scripts/Windows_Health.ps1 | iex
+  ```
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/scripts/Clean_GPU.ps1 | iex
+  ```
+  ```powershell
+irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/Beta/scripts/Nvidia_Settings.ps1 | iex
+  ```
+
 > **Note**: <BR> 
 Please update to the latest version of Windows first. <BR>
