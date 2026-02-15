@@ -14,8 +14,7 @@
 * Windows Cleanup
 * Maintance Windows
 * Remove Windows Bloatware 
-* Disable Windows Spying
-* Enhance Windows Privacy
+* Disable Windows Spying & Enhance Windows Privacy
 * Lower CPU and Ram usage
 * Sophia Script & O&OShutUp
 * Remove Cortana and OneDrive
@@ -25,6 +24,7 @@
 * More Windows Tweaks
 * Clean install of GPU Driver
 * Winget for Easy Programm Updates
+* Disable Copilot & Windows AI
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
