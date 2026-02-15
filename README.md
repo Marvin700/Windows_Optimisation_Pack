@@ -30,7 +30,7 @@
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
 Windows Script
   ```powershell
-irm windows-optimisation.de/beta | iex
+irm windows-optimisation.de | iex
   ```
   ```powershell
 irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/scripts/Advanced_Cleanup.ps1 | iex
