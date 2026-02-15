@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 ### Version ###
-$Branch = "Beta"
+$Branch = "main"
 $Version = "2.0"
 
 ### Title ###
