@@ -210,9 +210,6 @@ PowerPlan -Balanced
 # Do not allow the computer to turn off the network adapters to save power
 NetworkAdaptersSavePower -Disable
 
-# Use the latest installed .NET runtime for all apps
-LatestInstalled.NET -Enable
-
 # Save screenshots by pressing Win+PrtScr on the Desktop
 WinPrtScrFolder -Desktop
 
