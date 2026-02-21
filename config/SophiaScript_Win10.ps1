@@ -25,10 +25,6 @@ $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]
 # The mandatory checks
 InitialActions
 
-# Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
-# Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
-DiagTrackService -Disable
-
 # Turn off the diagnostics tracking scheduled tasks
 ScheduledTasks -Disable
 
@@ -39,7 +35,11 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-UninstallUWPApps -ForAllUsers
+Uninstall-UWPApps -ForAllUsers
+
+# Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
+# Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
+DiagTrackService -Disable
 
 # Set the diagnostic data collection to minimum
 DiagnosticDataLevel -Minimal
@@ -50,7 +50,7 @@ ErrorReporting -Disable
 # Change the feedback frequency to "Never"
 FeedbackFrequency -Never
 
-#Expand the File Explorer ribbon
+# Expand the File Explorer ribbon
 FileExplorerRibbon -Expanded
 
 # Do not use sign-in info to automatically finish setting up device and reopen apps after an update or restart
