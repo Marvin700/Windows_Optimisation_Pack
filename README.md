@@ -12,7 +12,7 @@
 ## Key Features
 * Presets
 * Windows Cleanup
-* Maintenance Windows
+* System Maintenance
 * Remove Windows Bloatware 
 * Disable Telemetry & Tracking
 * Enhance Windows Privacy
