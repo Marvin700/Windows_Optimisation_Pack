@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v7.1.0
+	Version: v7.1.4
 
 	(c) 2014—2026 Team Sophia
 
