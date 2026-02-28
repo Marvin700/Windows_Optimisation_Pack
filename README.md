@@ -12,19 +12,20 @@
 ## Key Features
 * Presets
 * Windows Cleanup
-* Maintance Windows
+* Maintenance Windows
 * Remove Windows Bloatware 
-* Disable Windows Spying & Enhance Windows Privacy
+* Disable Telemetry & Tracking
+* Enhance Windows Privacy
 * Lower CPU and Ram usage
-* Sophia Script & O&OShutUp
-* Remove Cortana and OneDrive
 * Deactivate Windows Indexing 
 * Deactivate Tasks & Components
-* Mouse acceleration Fix
-* More Windows Tweaks
-* Clean install of GPU Driver with DDU
-* Winget for Easy Programm Updates
+* Remove Cortana and OneDrive
 * Disable Copilot & Windows AI
+* More Windows Tweaks
+* Mouse acceleration Fix
+* Clean install of GPU Driver with DDU
+
+* Sophia Script & O&OShutUp
 
 ## Download via Powershell
 Run with the **Powershell** / **Windows-Terminal** as **Admin**.
