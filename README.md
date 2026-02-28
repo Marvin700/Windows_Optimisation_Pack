@@ -16,7 +16,7 @@
 * Remove Windows Bloatware 
 * Disable Telemetry & Tracking
 * Enhance Windows Privacy
-* Lower CPU and Ram usage
+* Reduce CPU and Ram usage
 * Deactivate Windows Indexing 
 * Deactivate Tasks & Components
 * Remove Cortana and OneDrive
