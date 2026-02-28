@@ -24,7 +24,6 @@
 * More Windows Tweaks
 * Mouse acceleration Fix
 * Clean install of GPU Driver with DDU
-
 * Sophia Script & O&OShutUp
 
 ## Download via Powershell
