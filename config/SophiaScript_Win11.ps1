@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v7.1.4
+	Version: v7.1.5
 
 	(c) 2014—2026 Team Sophia
 
@@ -251,9 +251,6 @@ DefaultTerminalApp -WindowsTerminal
 
 # List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
 PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
-
-# Show more pins on Start (for 22509+ build only)
-StartLayout -ShowMorePins
 
 # Disable Windows AI functions
 WindowsAI -Disable
