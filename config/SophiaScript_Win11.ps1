@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v7.1.0
+	Version: v7.1.6
 
 	(c) 2014—2026 Team Sophia
 
@@ -36,9 +36,6 @@ WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
 Uninstall-UWPApps -ForAllUsers
-
-# Uninstall OneDrive. The OneDrive user folder won't be removed
-OneDrive -Uninstall
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
@@ -188,6 +185,9 @@ AeroShaking -Enable
 # Do not group files and folder in the Downloads folder
 FolderGroupBy -None
 
+# Uninstall OneDrive. The OneDrive user folder won't be removed
+OneDrive -Uninstall
+
 # Turn on Storage Sense
 StorageSense -Enable
 
@@ -251,9 +251,6 @@ DefaultTerminalApp -WindowsTerminal
 
 # List Microsoft Edge channels to prevent desktop shortcut creation upon its' update
 PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
-
-# Show more pins on Start (for 22509+ build only)
-StartLayout -ShowMorePins
 
 # Disable Windows AI functions
 WindowsAI -Disable
