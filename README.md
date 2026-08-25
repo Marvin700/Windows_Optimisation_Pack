@@ -38,9 +38,6 @@ irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/scripts/Wind
   ```powershell
 irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/scripts/Clean_GPU.ps1 | iex
   ```
-  ```powershell
-irm https://github.com/Marvin700/Windows_Optimisation_Pack/raw/main/scripts/Nvidia_Settings.ps1 | iex
-  ```
 
 > **Note**: <BR> 
 Please update to the latest version of Windows first. <BR>
