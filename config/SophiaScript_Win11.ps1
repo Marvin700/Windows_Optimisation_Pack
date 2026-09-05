@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: v7.1.6
+	Version: v7.3.0
 
 	(c) 2014—2026 Team Sophia
 
@@ -17,7 +17,7 @@ Clear-Host
 $Global:Failed = $false
 Get-ChildItem function: | Where-Object {$_.ScriptBlock.File -match "Sophia_Script_for_Windows"} | Remove-Item -Force
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
+Import-Module -Name $PSScriptRoot\Module\Manifest\SophiaScript.psd1 -PassThru -Force
 Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2026"
@@ -98,9 +98,6 @@ FileExplorerCompactMode -Disable
 # Do not show sync provider notification within File Explorer
 OneDriveFileExplorerAd -Hide
 
-# When I snap a window, do not show what I can snap next to it
-SnapAssist -Disable
-
 # Show the file transfer dialog box in the detailed mode
 FileTransferDialog -Detailed
 
@@ -164,19 +161,22 @@ PrtScnSnippingTool -Enable
 # Do not use a different input method for each app window
 AppsLanguageSwitch -Disable
 
-# Hide recently added apps in Start
+# Hide recently added apps on Start
 RecentlyAddedStartApps -Hide
 
-# Hide most used apps in Start	
+# Use List View for All Apps on Start
+StartAppsView -List
+
+# Hide most used apps on Start	
 MostUsedStartApps -Hide
 
-# Remove Recommended section in Start Menu. Not applicable to Home edition
+# Remove Recommended section on Start Menu. Not applicable to Home edition
 StartRecommendedSection -Hide
 
-# Do not show recommendations for tips, shortcuts, new apps, and more in Start menu
+# Do not show recommendations for tips, shortcuts, new apps, and more on Start menu
 StartRecommendationsTips -Hide
 
-# Do not show Microsoft account-related notifications on Start Menu in Start menu
+# Do not show Microsoft account-related notifications on Start Menu on Start menu
 StartAccountNotifications -Hide
 
 # When I grab a windows's title bar and shake it, minimize all other windows
@@ -288,29 +288,8 @@ MSIExtractContext -Show
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
 
-# Hide the "Edit with Clipchamp" item from the media files context menu
-EditWithClipchampContext -Hide
-
-# Hide the "Edit with Photos" item from the media files context menu
-EditWithPhotosContext -Hide
-
-# Hide the "Edit with Paint" item from the media files context menu
-EditWithPaintContext -Hide
-
-# Hide the "Print" item from the .bat and .cmd context menu
-PrintCMDContext -Hide
-
-# Hide the "Compressed (zipped) Folder" item from the "New" context menu
-CompressedFolderNewContext -Hide
-
-# Enable the "Open", "Print", and "Edit" context menu items for more than 15 items selected
-MultipleInvokeContext -Enable
-
 # Hide the "Look for an app in the Microsoft Store" item in the "Open with" dialog
 UseStoreOpenWith -Hide
-
-# Show the "Open in Windows Terminal" item in the folders context menu
-OpenWindowsTerminalContext -Show
 
 # Open Windows Terminal in context menu as administrator by default
 OpenWindowsTerminalAdminContext -Enable
