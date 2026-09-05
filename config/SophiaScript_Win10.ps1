@@ -2,7 +2,7 @@
 # windows-optimisation.de
 
 <#
-	Version: 6.1.6
+	Version: v6.3.0
 
 	(c) 2014—2026 Team Sophia
 
@@ -17,7 +17,7 @@ Clear-Host
 $Global:Failed = $false
 Get-ChildItem function: | Where-Object {$_.ScriptBlock.File -match "Sophia_Script_for_Windows"} | Remove-Item -Force
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
-Import-Module -Name $PSScriptRoot\Manifest\SophiaScript.psd1 -PassThru -Force
+Import-Module -Name $PSScriptRoot\Module\Manifest\SophiaScript.psd1 -PassThru -Force
 Get-ChildItem -Path $PSScriptRoot\Module\private | Foreach-Object -Process {. $_.FullName}
 
 $Host.UI.RawUI.WindowTitle = "Windows_Optimisation_Pack Sophia Script | $([char]0x00A9) Team Sophia 2014$([char]0x2013)2026"
@@ -243,7 +243,7 @@ PreventEdgeShortcutCreation -Channels Stable, Beta, Dev, Canary
 # Hide recently added apps on Start
 RecentlyAddedStartApps -Hide
 
-# Hide most used apps in Start (default value)
+# Hide most used apps on Start (default value)
 MostUsedStartApps -Hide
 
 # Не отображать на начальном экране уведомления, касающиеся учетной записи Microsoft
@@ -288,30 +288,6 @@ MSIExtractContext -Show
 
 # Show the "Install" item in the Cabinet (.cab) filenames extensions context menu
 CABInstallContext -Show
-
-# Hide the "Share" item from the context menu
-ShareContext -Hide
-
-# Hide the "Edit with Paint 3D" item from the media files context menu
-EditWithPaint3DContext -Hide
-
-# Hide the "Edit" item from the images context menu
-ImagesEditContext -Hide
-
-# Hide the "Print" item from the .bat and .cmd context menu
-PrintCMDContext -Hide
-
-# Hide the "Bitmap image" item from the "New" context menu
-BitmapImageNewContext -Hide
-
-# Hide the "Rich Text Document" item from the "New" context menu
-RichTextDocumentNewContext -Hide
-
-# Hide the "Compressed (zipped) Folder" item from the "New" context menu
-CompressedFolderNewContext -Hide
-
-# Enable the "Open", "Print", and "Edit" context menu items for more than 15 items selected
-MultipleInvokeContext -Enable
 
 # Hide the "Look for an app in the Microsoft Store" item in the "Open with" dialog
 UseStoreOpenWith -Hide
