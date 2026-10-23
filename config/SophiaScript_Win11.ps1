@@ -35,7 +35,7 @@ WindowsFeatures -Disable
 WindowsCapabilities -Uninstall
 
 # Uninstall UWP apps using the pop-up dialog box
-Uninstall-UWPApps -ForAllUsers
+Uninstall-UWPApps -AllUsers
 
 # Disable the "Connected User Experiences and Telemetry" service (DiagTrack), and block the connection for the Unified Telemetry Client Outbound Traffic
 # Disabling the "Connected User Experiences and Telemetry" service (DiagTrack) can cause you not being able to get Xbox achievements anymore
