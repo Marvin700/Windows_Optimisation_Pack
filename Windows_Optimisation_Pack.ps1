@@ -42,7 +42,7 @@ Clear-Host
 Write-Output " Download Github Files..."
 
 # Download ooShutup & Verify Signature
-New-Item -Path "$ScriptFolder\ooshutup" -ItemType Directory -Force | Out-Nul
+New-Item -Path "$ScriptFolder\ooshutup" -ItemType Directory -Force | Out-Null
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\ooshutup\OOSU10.exe"
 $Signature = Get-AuthenticodeSignature "$ScriptFolder\ooshutup\OOSU10.exe" -ErrorAction SilentlyContinue
