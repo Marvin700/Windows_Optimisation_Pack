@@ -186,8 +186,7 @@ OneDrive -Uninstall
 StorageSense -Enable
 
 # Disable hibernation. Do not recommend turning it off on laptops
-IF(!(Get-WmiObject -Class win32_systemenclosure | Where-Object { $_.chassistypes -eq 8 -or $_.chassistypes -eq 9 -or $_.chassistypes -eq 10 -or $_.chassistypes -eq 14 -or $_.chassistypes -eq 30}))
-{Hibernation -Disable}
+if (-not (Get-CimInstance Win32_Battery)) { Hibernation -Disable }
 
 # Disable the Windows 260 characters path limit
 Win32LongPathLimit -Disable
