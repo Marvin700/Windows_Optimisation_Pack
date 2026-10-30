@@ -82,8 +82,9 @@ Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name
 # On next Start, Start DDU
 Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Driver_Cleaner" -Value "Powershell.exe -command `"Set-Location '$ScriptFolder\DDU';& '.\Display Driver Uninstaller.exe' -silent -removemonitors -removephysx -removegfe -removenvbroadcast -cleanallgpus -removenvcp -removeintelcp -removeamdcp -removeamddirs -restart`""
 # On next Start, Show Popup Message to Wait
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value 'powershell.exe -WindowStyle Hidden -command "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.MessageBox]::Show(''Driver is being removed. Please wait, the PC restarts automatically.'',''GPU Cleaner'',''OK'',''Information'')"'
-#Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Driver is Uninstalling. Please Wait... ( Can take up to 10 Min )'"
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value 'powershell.exe -WindowStyle Hidden -command "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.MessageBox]::Show(''Driver is being removed. Please wait, the PC restarts automatically.'',''Windows_Optimisation_Pack GPU Cleaner'',''OK'',''Information'')"'
+# On next Normal Start, Show Info to install new Driver
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "Driver_Info" -Value 'powershell.exe -WindowStyle Hidden -command "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.MessageBox]::Show(''The GPU driver was completely removed. Please install the latest driver for your graphics card now.'',''Windows_Optimisation_Pack GPU Cleaner'',''OK'',''Information'')"'
 Write-Warning "Please Restart PC to execute DDU NOW"
 
 # Ask for Restart
