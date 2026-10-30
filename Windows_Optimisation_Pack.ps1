@@ -12,6 +12,11 @@ $ScriptFolder = "$env:temp\Windows_Optimisation_Pack"
 ### Functions ###
 $hash = [hashtable]::Synchronized(@{})
 
+function Test-PendingReboot{
+(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending") -or
+(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired") -or
+[bool](Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name PendingFileRenameOperations -ErrorAction SilentlyContinue)}
+
 function SystemPoint{
 Clear-Host
 Write-Output " Create System Restore Point"
@@ -32,7 +37,7 @@ $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 IF(!($WindowsVersion -like "Microsoft Windows 11*" -Or $WindowsVersion -like "Microsoft Windows 10*")){
 Write-Warning " No supported operating system! Windows 10 or Windows 11 required"
 Start-Sleep 20;exit}
-IF((Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")){
+IF(Test-PendingReboot){
 Write-Warning " Reboot Pending !"
 Start-Sleep 20;exit}
 #Regkey for Script
@@ -86,8 +91,9 @@ $features = @("TFTP","TelnetClient","WCF-TCP-PortSharing45","SmbDirect","Microso
 "Printing-XPSServices-Features","WorkFolders-Client","MSRDC-Infrastructure","MicrosoftWindowsPowerShellV2")
 $features | ForEach-Object {dism /Online /Disable-Feature /FeatureName:$_ /NoRestart}
 
-$capability = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting*")
-foreach($capability in $capability){Get-WindowsCapability -online | where-object {$_.name -like $capability} | Remove-WindowsCapability -online -ErrorAction SilentlyContinue}}
+$capabilities = @("App.StepsRecorder*","App.Support.QuickAssist*","Browser.InternetExplore*","Hello.Face*","MathRecognizer*","Microsoft.Windows.PowerShell.ISE*","OpenSSH*","Language.Handwriting*")
+$installed = Get-WindowsCapability -Online | Where-Object {$_.State -eq "Installed"}
+foreach($capability in $capabilities){$installed | Where-Object {$_.Name -like $capability} | Remove-WindowsCapability -Online -ErrorAction SilentlyContinue | Out-Null}}
 
 function WindowsTweaks_Tasks{
 # Disable unnecessary Tasks
@@ -188,7 +194,10 @@ Start-Process -FilePath "cmd.exe" -ArgumentList '/c title Windows_Optimisation_P
 
 function Finish{
 # Reg Entry for Pending Reboot
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\" -Name "RebootPending" -Value 1
+Add-Type -Namespace Win32 -Name Kernel32 -MemberDefinition '[DllImport("kernel32.dll", SetLastError=true, CharSet=CharSet.Unicode)] public static extern bool MoveFileEx(string lpExistingFileName, string lpNewFileName, int dwFlags);'
+$RebootFile = "$env:SystemRoot\Temp\Windows_Optimisation_Pack.reboot"
+New-Item -Path $RebootFile -ItemType File -Force | Out-Null
+[Win32.Kernel32]::MoveFileEx($RebootFile, $null, 4) | Out-Null
 # Reg Entry for Toast
 New-PSDrive -Name "HKCR" -PSProvider Registry -Root "HKEY_CLASSES_ROOT" | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack" -Name "Version" -Type "STRING" -Value $Version -Force | Out-Null
@@ -237,7 +246,7 @@ $Administrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.Wind
 $WindowsVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $BuildNumber = (Get-CimInstance -Class CIM_OperatingSystem).BuildNumber
 #$InternetConnection = (Invoke-WebRequest -Uri https://github.com/Marvin700/Windows_Optimisation_Pack -Method Head -ErrorAction SilentlyContinue).StatusDescription
-$PendingReboot = (Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending")
+$PendingReboot = Test-PendingReboot
 
 # Hide Window 
 [User32.WinAPI]::ShowWindow($HideWindow, 6)
