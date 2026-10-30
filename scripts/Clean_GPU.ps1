@@ -81,6 +81,12 @@ cmd.exe /c "bcdedit /set {current} safeboot minimal"
 Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Normal_Boot" -Value 'cmd.exe /c "bcdedit /deletevalue {current} safeboot"'
 # On next Start, Start DDU
 Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Driver_Cleaner" -Value "Powershell.exe -command `"Set-Location '$ScriptFolder\DDU';& '.\Display Driver Uninstaller.exe' -silent -removemonitors -removephysx -removegfe -removenvbroadcast -cleanallgpus -removenvcp -removeintelcp -removeamdcp -removeamddirs -restart`""
-# On next Start, Show Powershell Message to Wait
-Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Driver is Uninstalling. Please Wait... ( Can take up to 10 Min )'"
+# On next Start, Show Popup Message to Wait
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value 'powershell.exe -WindowStyle Hidden -command "Add-Type -AssemblyName System.Windows.Forms;[System.Windows.Forms.MessageBox]::Show(''Driver is being removed. Please wait, the PC restarts automatically.'',''GPU Cleaner'',''OK'',''Information'')"'
+#Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name "*!Uninstall_Message" -Value "c:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command 'Driver is Uninstalling. Please Wait... ( Can take up to 10 Min )'"
 Write-Warning "Please Restart PC to execute DDU NOW"
+
+# Ask for Restart
+Add-Type -AssemblyName System.Windows.Forms
+$Answer = [System.Windows.Forms.MessageBox]::Show("DDU is ready.`n`nThe PC will restart into Safe Mode, remove the GPU driver and restart again automatically.`n`nRestart now?", "Windows_Optimisation_Pack GPU Cleaner", "YesNo", "Question")
+IF($Answer -eq "Yes"){Restart-Computer -Force}else{Write-Warning "Please Restart PC to execute DDU"}
