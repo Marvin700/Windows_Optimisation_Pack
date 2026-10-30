@@ -17,6 +17,13 @@ Clear-Host
 $Global:Failed = $false
 Get-ChildItem -Path function: | Where-Object -FilterScript {$_.ScriptBlock.File -match "Sophia_Script_for_Windows"} | Remove-Item -Force
 Remove-Module -Name SophiaScript -Force -ErrorAction Ignore
+
+# Skip the "preset customized?" question
+$InitialActions = "$PSScriptRoot\Module\Private\InitialActions.ps1"
+$Content = Get-Content -Path $InitialActions -Raw -Encoding UTF8
+$Pattern = 'if \(\(Split-Path -Path \$PresetName -Leaf\) -ne "Import-TabCompletion\.ps1"\)'
+if ($Content -match $Pattern) {($Content -replace $Pattern, 'if ($false)') | Set-Content -Path $InitialActions -Encoding UTF8 -NoNewline}
+
 Import-Module -Name $PSScriptRoot\Module\Manifest\SophiaScript.psd1 -PassThru -Force
 Get-ChildItem -Path $PSScriptRoot\Module\Private | ForEach-Object -Process {. $_.FullName}
 
