@@ -41,10 +41,11 @@ New-Item -Path "HKLM:\SOFTWARE\Windows_Optimisation_Pack\" -Force | Out-Null
 Clear-Host
 Write-Output " Download Github Files..."
 
-# Download ooShutup
-New-Item -Path "$ScriptFolder\ooshutup" -ItemType Directory | Out-Null
+# Download ooShutup & Verify Signature
+New-Item -Path "$ScriptFolder\ooshutup" -ItemType Directory -Force | Out-Nul
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\ooshutup\OOSU10.exe"
+$Signature = Get-AuthenticodeSignature "$ScriptFolder\ooshutup\OOSU10.exe" -ErrorAction SilentlyContinue
 IF(!($Signature.Status -eq 'Valid' -and $Signature.SignerCertificate.Subject -match 'O&O Software')){
 Write-Warning " O&O ShutUp10 signature invalid - skipped"
 Remove-Item "$ScriptFolder\ooshutup\OOSU10.exe" -Force -ErrorAction SilentlyContinue
@@ -163,7 +164,7 @@ lodctr /r}
 
 function Extended_Cleanup{
 # Clear Windows Update download cache
-Stop-Service -Name wuauserv, bits -Force -ErrorAction SilentlyContinue
+Stop-Service -Name wuauserv, bits -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 # Clear Multiple Cache Foleder
 $path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\", "$env:SystemRoot\SoftwareDistribution\Download\")
 foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
