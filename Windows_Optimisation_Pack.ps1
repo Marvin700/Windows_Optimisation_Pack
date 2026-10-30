@@ -20,9 +20,9 @@ IF($hash.Extended_Cleanup){vssadmin delete shadows /all /quiet | Out-Null}
 # Temporarily modify to create a restore point and create Restroepoint
 Enable-ComputerRestore -Drive $env:SystemDrive
 New-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Type "DWORD" -Value 0 -Force | Out-Null
-Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS
-# Remove Temporarily modify
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" | Out-Null}
+try { Checkpoint-Computer -Description "Windows_Optimisation_Pack" -RestorePointType MODIFY_SETTINGS -ErrorAction Stop }
+catch { Write-Warning " Restore Point failed - aborting"; Start-Sleep 10; exit 1 }
+finally { Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -ErrorAction SilentlyContinue } }
 
 function Checks_and_Preperations{
 # Checks to Run Script
@@ -45,6 +45,10 @@ Write-Output " Download Github Files..."
 New-Item -Path "$ScriptFolder\ooshutup" -ItemType Directory | Out-Null
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/Marvin700/Windows_Optimisation_Pack/$Branch/config/ooshutup.cfg" -Destination "$ScriptFolder\ooshutup\ooshutup.cfg"
 Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination "$ScriptFolder\ooshutup\OOSU10.exe"
+IF(!($Signature.Status -eq 'Valid' -and $Signature.SignerCertificate.Subject -match 'O&O Software')){
+Write-Warning " O&O ShutUp10 signature invalid - skipped"
+Remove-Item "$ScriptFolder\ooshutup\OOSU10.exe" -Force -ErrorAction SilentlyContinue
+$hash.ooShutup = $false} 
 
 # Download Sophia Script Windows 10
 $LatestGitHubRelease = (Invoke-RestMethod "https://api.github.com/repos/farag2/Sophia-Script-for-Windows/releases/latest").tag_name
@@ -142,7 +146,7 @@ Powershell.exe -executionpolicy Bypass $ScriptFolder\Sophia_Script\Sophia.ps1}
 
 function ooShutup{
 # O&O ShutUp10++
-Start-Process powershell "Set-Location $ScriptFolder\ooshutup;.\OOSU10.exe ooshutup.cfg /quiet" -WindowStyle Hidden}
+Start-Process powershell "Set-Location $ScriptFolder\ooshutup;.\OOSU10.exe ooshutup.cfg /quiet" -Wait -WindowStyle Hidden}
 
 function Clear_Cache{
 Clear-Host
@@ -151,21 +155,27 @@ Write-Output "Removing Cache Files..."
 ipconfig /flushdns > $null
 Clear-BCCache -Force -ErrorAction SilentlyContinue
 # Clear Multiple Cache Foleder
-$path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\","$env:SystemRoot\SoftwareDistribution\Download\","$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
-"$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\","$env:ProgramData\Package Cache")
+$path = @("$env:ProgramData\Microsoft\Windows\RetailDemo\","$env:LOCALAPPDATA\CrashDumps\","$env:windir\Temp\","$env:temp\"
+"$env:LOCALAPPDATA\NVIDIA\DXCache\","$env:LOCALAPPDATA\NVIDIA\GLCache\","$env:APPDATA\..\locallow\Intel\ShaderCache\","$env:SystemDrive\AMD\","$env:LOCALAPPDATA\AMD\","$env:APPDATA\..\locallow\AMD\")
 foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
 # Rebuild Performance Couters
 lodctr /r}
 
 function Extended_Cleanup{
+# Clear Windows Update download cache
+Stop-Service -Name wuauserv, bits -Force -ErrorAction SilentlyContinue
+# Clear Multiple Cache Foleder
+$path = @("$env:windir\..\MSOCache\","$env:windir\Prefetch\", "$env:SystemRoot\SoftwareDistribution\Download\")
+foreach($path in $path){Get-ChildItem -Path $path -ErrorAction SilentlyContinue | Remove-Item -Recurse -ErrorAction SilentlyContinue}
+Start-Service -Name bits, wuauserv -ErrorAction SilentlyContinue
 # Cleanup Windows Components
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore /NoRestart
 Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart
 Dism.exe /Online /Cleanup-Image /spsuperseded /NoRestart
 # Maximizes Disk Cleanup settings
 ForEach($result in Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches"){
-If(!($result.name -eq "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\DownloadsFolder")){
-New-ItemProperty -Path "'HKLM:' + $result.Name.Substring( 18 )" -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0}}
+If($result.PSChildName -ne "DownloadsFolder"){
+New-ItemProperty -Path $result.PSPath -Name 'StateFlags0001' -Value 2 -PropertyType DWORD -Force -EA 0 | Out-Null}}
 Start-Process cleanmgr.exe /sagerun:1}
 
 # Run WIndows Idle Tasks
